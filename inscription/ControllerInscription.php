@@ -120,12 +120,10 @@ if($enregistrement == 0){
 	// Paramètres de connexion à la base de données
 	$ewo = bdd_connect('ewo');
 	
-	$sql_users = mysql_query("INSERT INTO utilisateurs(id, nom, email, passwd, passwd_forum, date_enregistrement, jabberid, droits, options, codevalidation, session_id) VALUES('','$nom','$email','$pass','$pass_forum','$datetime','$jabberid','0000','','$code_validation', '$session_id')");
+	$sql_users = mysql_query("INSERT INTO utilisateurs(id, nom, email, passwd, passwd_forum, date_enregistrement, droits, options, codevalidation, session_id, bals_speed, template, redirection) VALUES('','$nom','$email','$pass','$pass_forum','$datetime','$jabberid','0000','','$code_validation', '$session_id', '0.5','defaut', '1')");
 	
 	$id_user = mysql_insert_id();
-	
-	mysql_query("INSERT INTO utilisateurs_option (utilisateur_id, bals_speed, template, redirection) VALUES('$id_user','0.5','defaut', '1')");
-	
+		
 	if($sql_users == FALSE){
 		$_SESSION['temp']['error'] = "Echec lors de la cr&eacute;ation, erreur de retour SQL, contacter un administrateur";
 		echo "Echec lors de la cr&eacute;ation, erreur de retour SQL, contacter un administrateur";

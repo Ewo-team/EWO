@@ -147,16 +147,8 @@ function tronquage($chaine, $lg_max){
  * @return $damier_grille true or false en fonction de la réponse
  */
 function grille_damier($id_utilisateur){
-	$damier="SELECT grille FROM utilisateurs_option WHERE utilisateur_id = '".$id_utilisateur."'";
-	$resultat = mysql_query ($damier) or die (mysql_error());
-	$grille = mysql_fetch_array ($resultat);
-
-	if($grille[0] == 1){
-		$damier_grille = true;
-	}else{
-		$damier_grille = false;
-	}
-	return $damier_grille;
+        $compte = new compte\Compte($id_utilisateur);
+        return $compte->grille;
 }
 
 /**
@@ -167,16 +159,8 @@ function grille_damier($id_utilisateur){
  * @return $damier_rose true or false en fonction de la réponse
  */
 function rose_damier($id_utilisateur){
-	$damier="SELECT rose FROM utilisateurs_option WHERE utilisateur_id = '".$id_utilisateur."'";
-	$resultat = mysql_query ($damier) or die (mysql_error());
-	$rose = mysql_fetch_array ($resultat);
-
-	if($rose[0] == 1){
-		$damier_rose = true;
-	}else{
-		$damier_rose = false;
-	}
-	return $damier_rose;
+        $compte = new compte\Compte($id_utilisateur);
+        return $compte->rose;
 }
 
 /**
@@ -185,15 +169,14 @@ function rose_damier($id_utilisateur){
  * @return Retourne le lien aprés redirection
  */
 function redirection_connexion($id_utilisateur){
-	$sql="SELECT redirection FROM utilisateurs_option WHERE utilisateur_id = '".$id_utilisateur."'";
-	$resultat = mysql_query ($sql) or die (mysql_error());
-	$page = mysql_fetch_array ($resultat);
+        $compte = new compte\Compte($id_utilisateur);
+        $page = $compte->redirection;
 
-	if($page[0]==1){
+	if($page==1){
 		$redirec = '';
-	}elseif($page[0]==2){
+	}elseif($page==2){
 		$redirec = '/persos/liste_persos.php';
-	}elseif($page[0]==3){
+	}elseif($page==3){
 		$redirec = '/forum/';
 	}else{
 		$redirec = '';
@@ -382,42 +365,42 @@ function nom_cible($id,$type,$afficheMatricule= false){
  * @return string $nom Retourne le nom d'un personnage
  */
 function nom_perso($id,$afficheMatricule= false, $italique = true){
-        if(isset($id) && is_numeric($id)) {
-            $storage_nom = VariableStorage::Consulte('persos.pseudo.'.$id.'.nom');
-            $storage_titre = VariableStorage::Consulte('persos.pseudo.'.$id.'.titre');
+    if(isset($id) && is_numeric($id)) {
+	$storage_nom = VariableStorage::Consulte('persos.pseudo.'.$id.'.nom');
+	$storage_titre = VariableStorage::Consulte('persos.pseudo.'.$id.'.titre');
 
-            if(!$storage_nom) {
-                    $noms = "SELECT nom, titre FROM persos WHERE id=".$id."";
-                    $resultat = mysql_query ($noms) or die(mysql_error());
-                    $nom = mysql_fetch_array ($resultat);
-                    //apc_store('persos.pseudo.'.$id.'.nom', $nom['nom'], 60*60);
-                    //apc_store('persos.pseudo.'.$id.'.titre', $nom['titre'], 60*60);
-            } else {
-                    $nom['nom'] = $storage_nom;
-                    $nom['titre'] = $storage_titre;
-            }
+	if(!$storage_nom) {
+		$noms = "SELECT nom, titre FROM persos WHERE id=".$id."";
+		$resultat = mysql_query ($noms) or die(mysql_error());
+		$nom = mysql_fetch_array ($resultat);
+		//apc_store('persos.pseudo.'.$id.'.nom', $nom['nom'], 60*60);
+		//apc_store('persos.pseudo.'.$id.'.titre', $nom['titre'], 60*60);
+	} else {
+		$nom['nom'] = $storage_nom;
+		$nom['titre'] = $storage_titre;
+	}
 
-            $it1 = $it2 = '';
+	$it1 = $it2 = '';
 
-            if($italique) {
-                    $it1 = '<i>';
-                    $it2 = '</i>';
-            }
+	if($italique) {
+		$it1 = '<i>';
+		$it2 = '</i>';
+	}
 
-            if(isset($nom['titre'])) {
-                    $pseudo = $nom['nom'] . ' - ' . $it1 . $nom['titre'] . $it2;
-            } else {
-                    $pseudo = $nom['nom'];
-            }
+	if(isset($nom['titre'])) {
+		$pseudo = $nom['nom'] . ' - ' . $it1 . $nom['titre'] . $it2;
+	} else {
+		$pseudo = $nom['nom'];
+	}
 
-            if ($afficheMatricule){
-                    return $pseudo."[".$id."]";
-            }else{
-                    return $pseudo;
-            }
-        }
-        
-        return '(personnage supprimé)';
+	if ($afficheMatricule){
+		return $pseudo."[".$id."]";
+	}else{
+		return $pseudo;
+	}
+    }
+
+    return '(personnage supprimé)';        
 }
 
 /**
@@ -1041,40 +1024,5 @@ function maj_record($type, $perso_id, $valeur){
 	}
 	$resultat = mysql_query($sql) or die(mysql_error());
 }
-
-/**
- * Retourne le statut Vacances de l'utilisateur
- * @param $id_utlisateur ID de l'utilisateur
- * @return Statut des vacances
- */
-function statutVacances($id_utilisateur){
-
-	//Récupération du statut actuel
-	$sql = 'SELECT * FROM utilisateurs_vacances WHERE utilisateur_id = '.$id_utilisateur;
-
-	$res = mysql_query($sql);
-	if(false === $res){
-		//Erreur SQL
-		return false;
-	}
-	elseif(mysql_num_rows($res) == 0){
-		//Pas de demande en vacances en cours
-		return 'jeu';
-	}
-	else{
-		$row = mysql_fetch_assoc($res);
-		if($row['date_retour'] != '0000-00-00 00:00:00'){
-			//Le retour est programmé
-			return 'retour';
-		}
-		elseif($row['date_depart'] == '0000-00-00 00:00:00'){
-			return 'depart';
-		}
-		else{
-			return 'vacances';
-		}
-	}
-}
-
 
 ?>

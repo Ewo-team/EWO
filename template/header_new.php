@@ -12,12 +12,11 @@
 include("template_fonction.php");
 
 if(isset($_SESSION['utilisateur']['id'])){
-	$sqltpl = "SELECT utilisateur_id, template FROM utilisateurs_option WHERE utilisateur_id = ".$_SESSION['utilisateur']['id']."";
-	$resultattpl = mysql_query($sqltpl);
-	$templ = mysql_fetch_array ($resultattpl);
+        $compte = new compte\Compte($_SESSION['utilisateur']['id']);
 
-	if(!empty($templ['utilisateur_id'])){
-		$theme_tpl = $templ['template'];
+
+	if(!empty($compte->template)){
+		$theme_tpl = $compte->template;
 	}else{
 		$theme_tpl = 'Vanilla';
 	}

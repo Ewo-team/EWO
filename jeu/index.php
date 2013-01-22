@@ -15,8 +15,10 @@ $ewo = bdd_connect('ewo');
 /*-- Connexion basic requise --*/
 ControleAcces('utilisateur',1);
 /*-----------------------------*/
+$compte = new compte\Compte($_SESSION['utilisateur']['id']);
 
-$statut_vacances = statutVacances($_SESSION['utilisateur']['id']);
+$statut_vacances = $compte->statutVacances();
+
 if ($statut_vacances == 'vacances' || $statut_vacances == 'retour') {
 	$titre = "Modification de compte";
 	$text = "Vous ne pouvez pas accéder à cette page car vous êtes en vacances.";

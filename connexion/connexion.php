@@ -44,9 +44,8 @@ if($ok){
 
 // Paramètres de connexion à la base de données
 
-	$sql="SELECT id,nom,passwd,passwd_forum,email,droits,jabberid,utilisateurs_ticket.*,utilisateurs_option.* 
+	$sql="SELECT utilisateurs.*,utilisateurs_ticket.* 
 	FROM utilisateurs 
-	LEFT JOIN utilisateurs_option ON (utilisateurs_option.utilisateur_id = utilisateurs.id) 
 	LEFT JOIN utilisateurs_ticket ON (utilisateurs_ticket.utilisateur_id = utilisateurs.id AND utilisateurs_ticket.ticket='$ticket') 
 	WHERE nom = '$utilisateur'";
 	$resultat = mysql_query ($sql) or die (mysql_error());

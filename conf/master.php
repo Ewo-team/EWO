@@ -6,22 +6,31 @@
  * @version 1.0
  * @package conf
  */
- 
+
+
 date_default_timezone_set("Europe/Paris");
 
+include_once 'constant.php';
+
 // Requis pour la connexion a la bdd
-include_once($root_url."/conf/connect.conf.php");
+include_once(SERVER_ROOT."/conf/connect.conf.php");
 
 // Declaration du controle de connexion
-include_once ($root_url."/connexion/controle_connexion.php");
+include_once (SERVER_ROOT."/connexion/controle_connexion.php");
 
 // Fonctions du site
-include_once($root_url."/conf/fonctions.php");
+include_once(SERVER_ROOT."/conf/fonctions.php");
 
 // Fonctions du forum
-include_once($root_url."/lib_tier/forum/forum.connect.php");
+include_once(SERVER_ROOT."/lib_tier/forum/forum.connect.php");
 
 // Magasin de variable
 include_once("VariableStorage.php");
+
+// Helpers
+include_once("Helpers.php");
+
+// Autoloader
+include_once('autoloader.php');
 
 ?>

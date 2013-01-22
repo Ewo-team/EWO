@@ -64,9 +64,6 @@ $resultat = mysql_query ($sql) or die (mysql_error());
 //-- Supression dans : LOGS > utilisateur_id
 	mysql_query("DELETE FROM logs WHERE utilisateur_id = '$id_utilisateur'") or die (mysql_error());	
 	
-//-- Suppression dans : UTILISATEURS_OPTION > utilisateur_id
-	mysql_query("DELETE FROM utilisateurs_option WHERE utilisateur_id='$id_utilisateur'") or die (mysql_error());
-	
 	mysql_close();	
 		$titre = "Suppression";
 		$text = "Suppression total de l'utilisateur et de ses personnages effectué'.";
