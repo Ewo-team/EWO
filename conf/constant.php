@@ -1,5 +1,5 @@
 <?php
 
-define("SERVER_ROOT","D:/wamp/www/EWO");
+define("SERVER_ROOT","/usr/local/www/EWO/current");
 
 ?>
