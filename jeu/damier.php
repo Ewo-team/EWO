@@ -175,17 +175,13 @@ echo '<table class="damier_corps" CELLPADDING="0" CELLSPACING="0" border="0">';
 					
 				if($pos_y_case == $y_max+1){
 						if($pos_x_case == $x_max+1){
-							echo '<td width="45" height="39" class="damier_hd" align="center">';
-							echo "<div><img style='width:45px;height:39px;' src='".$root_url."/images/transparent.png' /></div>";
-							echo '</td>';
+							echo '<td></td>';
 						}elseif($pos_x_case != $x_min-1){
 							echo '<td width="45" height="39" class="damier_case" align="center">';
 							echo "<div>$pos_x_case</div>";
 							echo '</td>';
 						}else{
-							echo '<td width="45" height="39" class="damier_hg" align="center">';
-							echo "<div><img style='width:30px;height:39px;' src='".$root_url."/images/transparent.png' /></div>";
-							echo '</td>';
+							echo '<td></td>';
 							}
 				}elseif($pos_x_case == $x_max+1 && $pos_y_case != $y_min-1){
 						echo '<td width="45" height="39" class="damier_case" align="center">';
@@ -233,13 +229,7 @@ echo '<table class="damier_corps" CELLPADDING="0" CELLSPACING="0" border="0">';
 						$class = 'int_normal';
 					}
 						
-						if($pos_y_case == $pos_y_perso+1 && $pos_x_case == $pos_x_perso && $damier_grille=="damier_grille")
-							echo '<td width="45" height="39" class="damier_'.$get_plan.' '.$class.' '.$damier_grille.'_perso_haut">';
-							elseif($pos_y_case == $pos_y_perso && $pos_x_case == $pos_x_perso-1 && $damier_grille=="damier_grille")
-							echo '<td width="45" height="39" class="damier_'.$get_plan.' '.$class.' '.$damier_grille.'_perso_gauche">';
-							elseif($pos_y_case == $pos_y_perso && $pos_x_case == $pos_x_perso && $damier_grille=="damier_grille")
-							echo '<td width="45" height="39" class="damier_'.$get_plan.' '.$class.' '.$damier_grille.'_perso"><a name="perso" />';
-							else echo '<td width="45" height="39" class="damier_'.$get_plan.' '.$class.' '.$damier_grille.'">';
+						echo '<td width="45" height="39" class="damier_'.$get_plan.' '.$class.' '.$damier_grille.'">';
 
 						if(isset($deplacement)){
                                                     echo '<a href="'.$liendeplacement.'"><div id="'.$position.'-case" class="case deplacement">';

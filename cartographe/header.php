@@ -124,6 +124,7 @@ if(isset($_SESSION['cartographe']['raw'])) {
              <li><a href="ressources.php">Ressources</a></li>
              <li><?php if($palette) { echo '<a href="edition_palette.php">Palette</a>'; } else { echo '<span class="desactive">Palette</span>'; }?></li>
              <li><?php if($carte) { echo '<a href="edition_carte.php">Carte</a>'; } else { echo '<span class="desactive">Carte</span>'; }?></li>
+             <li><?php if($objets) { echo '<a href="objets.php">Objets</a>'; } else { echo '<span class="desactive">Objets</span>'; }?></li>             
              <li><?php if($export) { echo '<a href="export.php">Export</a>'; } else { echo '<span class="desactive">Export</span>'; }?></li>
              <li><?php if($attribution) { echo '<a href="attribution_map.php">Attribution</a>'; } else { echo '<span class="desactive">Attribution</span>'; }?></li>
              <li><?php if($projet) { echo $projet; } else { echo '<i>Pas de ressource choisie</i>'; }?></li>

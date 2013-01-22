@@ -2,7 +2,7 @@
 //-- Header --
 $root_url = "..";
 
-$css_files = 'editeur';
+$css_files = 'listeperso';
 
 include($root_url."/template/header_new.php");
 /*-- Connexion basic requise --*/

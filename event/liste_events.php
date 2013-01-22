@@ -1,7 +1,7 @@
 <?php
 //-- Header --
 $root_url = "..";
-$css_files = 'medailles';
+$css_files = 'profil';
 include_once($root_url."/template/header_new.php");
 include_once($root_url."/event/eventFormatter.php");
 
@@ -17,40 +17,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])){
 }else{$perso_id = -1;}
 
 /*-----------------------------*/
-?>
-<style type="text/css">
-#tbody_event tr td {
-	border-bottom: 1px solid #E9E6C3;
-	border-right: 1px solid #E9E6C3;
-	text-align: left;
-}
-
-#tbody_event td.bottom {
-	border-bottom: 1px dashed #000000;
-}
-
-#tbody_event td.bottomleft {
-	border-bottom: 1px dashed #000000;
-	border-right: 1px dashed #000000;
-}
-
-#tbody_event td.left {
-	border-right: 1px dashed #000000;
-}
-
-.mort th{
-	background-color: #C3B689;
-	color: #634F18;
-	padding: 5px;
-	padding-left:30px;
-}
-
-.mort tr{
-	margin: 1px;
-}
-</style>
-
-<?php
 
 $js->addScript('events');
 $js->addVariables('nomPerso',nom_perso($perso_id, false, false));
