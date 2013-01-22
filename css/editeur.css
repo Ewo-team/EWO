@@ -1,0 +1,59 @@
+/* CSS Document */
+
+/* palettes pour les couleurs ou les choix d'icones */
+.palette {
+	border:solid thin;
+	visibility:hidden;
+	position:absolute;
+	background-color:#FFFFFF;
+}
+.encadre {
+	border:solid thin;
+	background-color:#FFFFFF;
+}
+
+/* menu de l'éditeur */
+div.menu , div.sous_menu {
+	background:#FFFFFF;
+}
+
+div.menu { z-index:0; width:155px; }
+div.sous_menu {
+	width:150px;
+	position:absolute;
+	visibility:hidden;
+	border:solid thin;
+	z-index:10;
+}
+
+/* les liens de l'éditeur */
+div#editeur a {
+	text-decoration:none;
+	font-family:"Times New Roman", Times, serif;
+	font-weight:bold;
+	font-size:14px;
+	color:#0000FF;
+}
+div#editeur a:hover {
+	color:#FF0000;
+}
+/* mise en forme de l'erreur */
+.error {
+	color:#FF0000;
+	font-weight:bold;
+	text-align:center;
+}
+
+/* barre d'outil et palette de l'éditeur */
+.barre_outil , .barre_edit {
+	border: solid thin;
+	background:#CCCCCC;
+	overflow:auto;
+}
+.barre_edit{ 	width:150px; position:absolute; visibility:hidden;z-index:15; }
+.palette_outil{	
+	width:200px;
+	border: solid thin;
+	background:#CCCCCC;
+	overflow:auto;
+}

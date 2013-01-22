@@ -1,0 +1,57 @@
+.ui-autocomplete {
+    max-height: 100px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+    /* add padding to account for vertical scrollbar */
+    padding-right: 20px;
+}
+.ui-autocomplete {
+    height: 100px;
+}
+
+#affiBoard, #anim_tools{
+    text-align: center;
+}
+#affiBoard a, #anim_tools a, #affiBoard strong, #anim_tools strong{
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.affiHr{
+    border	: 0px;
+    height	: 1px;
+    background	: -moz-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%);
+    background	: -webkit-gradient(linear, left center, right center,
+        color-stop(0,black),
+        color-stop(0.8,transparent));
+    background	: -webkit-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%);
+    background	: linear-gradient(left, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%);
+}
+
+#legion table{
+    margin: auto;
+    border-collapse: collapse;
+}
+
+#legion td, #legion th{
+    border : 1px solid black;
+    padding : 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#legion th{
+    text-align : center;
+}
+
+#legion tbody tr:hover{
+    background-color : white;
+}
+
+#legion .table-noStyle, #legion .table-noStyle td, #legion .table-noStyle th, #legion .table-noStyle tr:hover{
+    border : none;
+    text-align : left;
+    background-color: transparent;
+}
+

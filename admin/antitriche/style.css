@@ -1,0 +1,180 @@
+html, body{
+	width		: 100%;
+	margin		: 0px;
+	padding		: 0px;
+}
+
+body{
+	background-color	: #F0F0F0;
+	background-image 	: url(views/rouge.png), url(views/bleu.png);
+	background-repeat	: no-repeat,no-repeat;
+	background-position	: bottom left, bottom right;
+	background-attachment:fixed;
+}
+
+header nav{
+	width		: 100%;
+	color		: white;
+	height		: 40px;
+	
+	position	: fixed;
+	top			: 0px;
+	left		: 0px;
+	z-index		: 100;
+	
+	font-weight	: bold;
+}
+
+header nav ul{
+	list-style 			: none; 
+	line-height			: 21px;
+	margin				: 0px;
+	padding				: 5px;
+	z-index				: 101;
+	
+	background-color	: #414141;
+	
+	border-radius		: 5px;
+	box-shadow			: 0px 0px 20px #414141;
+}
+
+header nav{
+	background-image: -moz-linear-gradient(
+		center bottom,
+		rgba(15,0,15,0) 0%,
+		rgb(65,65,65) 27%
+	);
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, rgba(0,0,0,0)),
+		color-stop(0.27, rgb(65,65,65))
+	);
+	
+	
+}
+
+header nav li {
+	float			: left;
+	margin-right	: 50px;
+	cursor			: pointer;
+}
+
+header nav ul li:hover >ul{
+	display	: block;
+}
+
+header nav ul li:hover{
+}
+
+header nav ul li ul li:hover{
+	background-color	: #616161;
+}
+
+header nav ul li ul{
+	display		: none;
+	position	: absolute;
+	padding		: 0px;
+}
+
+header nav ul li ul li{
+	float			: none;
+	cursor			: default;
+	width			: auto;
+	padding			: 5px;
+	padding-left	: 10px;
+	padding-right	: 10px;
+	margin-right	: 0px;
+	
+	border-bottom-right-radius	: 5px;
+	border-bottom-left-radius	: 5px;
+}
+
+header nav a{
+	text-decoration	: none;
+	color			: white;
+	font-weight		: normal;
+}
+
+.spacer{
+	clear	: both;
+}
+
+section{
+	margin-top	: 50px;
+	padding		: 15px;
+}
+
+section table{
+	border-collapse		: collapse;
+	width				: 95%;
+	margin				: auto;
+	table-layout		: fixed;
+	background-color	: rgba(255,255,255,0.8);
+}
+
+section table td{
+	border	: 1px solid #414141;
+	padding	: 2px;
+}
+
+section table th{
+	background-color	: #616161;
+	border				: 1px solid #414141;
+	color				: white;
+}
+
+#main section{
+	border			: 1px solid #414141;
+	border-radius	: 5px;
+	float			: left;
+	padding			: 0px;
+	margin-left		: 20px;
+	margin-top		: 0px;
+	
+	box-shadow		: 0px 0px 20px #414141;
+	
+	background-color	: rgba(255,255,255,0.8);
+}
+
+#main section header{
+	background-color	: #616161;
+	color				: white;
+	padding				: 10px;
+	padding-left		: 20px;
+	padding-right		: 20px;
+	font-weight			: bold;
+	text-align			: center;
+	border-bottom		: 1px solid #414141;
+}
+
+#main section div{
+	padding	: 5px;
+}
+
+.link{
+	cursor	: pointer;
+}
+
+a{
+	text-decoration	: none;
+	color			: black;
+	cursor			: pointer;
+}
+
+.link:hover, .link:hover, .link:hover, a:hover{
+	text-decoration	: underline;
+}
+
+.redSection .link:hover,.redSection a:hover{
+	
+	color			: #bf1e2d;
+}
+.blueSection .link:hover,.blueSection a:hover{
+	color			: #01aded;
+}
+
+.greenSection .link:hover,.greenSection a:hover{
+	color			: #01ad2a;
+}

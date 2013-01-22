@@ -1,0 +1,75 @@
+/*---------------------------------- DIV Bordure --------------------*/
+div#frame{
+	margin:0px;
+	padding:0px;
+	text-align: left;
+	
+}
+/*----------------------------------------------------------------------------*/
+
+/*---------------------------------- LAYOUT:CONTAINER ------------------------*/
+#event_mouvement{
+  
+  background-color:#FFFFFF;
+  text-align: center;
+}
+
+#event_attaque{
+  
+  background-color:#DDDDDD;
+  text-align: center;
+}
+
+#event_esquive{
+  
+  background-color:#CCCCCC;
+  text-align: center;
+}
+#event_meurtre{
+  
+  background-color:#FFCCCC;
+  text-align: center;
+}
+#event_mort{
+  
+  background-color:#FFAAAA;
+  text-align: center;
+}
+#event_sort{
+  
+  background-color:#99CCCC;
+  text-align: center;
+}
+#event_esquive_sort{
+  
+  background-color:#CCCCDD;
+  text-align: center;
+}
+#event_suicide{
+  
+  background-color:#FF8888;
+  text-align: center;
+}
+#event_entrainement{
+  
+  background-color:#CCDDCC;
+  text-align: center;
+}
+#event_grade_up{
+  
+  background-color:#DDDDCC;
+  text-align: center;
+}
+#event_grade_down{
+  
+  background-color:#CCFFCC;
+  text-align: center;
+}
+#event_sprint{
+  background-color:#ACDCCC;
+  text-align: center;
+}
+#event_destruction{
+  background-color:#FF9999;
+  text-align: center;
+}

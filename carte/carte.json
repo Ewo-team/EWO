@@ -1,0 +1,44 @@
+<?php
+/* Structure de l'arbre Json des données de la map. */
+/*
+        -> Plan : id; nom; couleur_fond; image_fond;
+                 - Mes persos : id; nom; race; grade; couleur; coord X; Coord Y;
+                 - Persos : id; nom; race; grade; couleur; coord X; coord Y;
+                 - Elements : type:[porte,bouclier,autre]; id; nom;
+*/
+session_start();
+
+//include("../conf/master.php");
+//include("../persos/fonctions.php");
+//include("../jeu/fonctions.php");
+
+//header('Cache-Control: no-cache, must-revalidate');
+//header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+//header('Content-type: application/json');
+
+$arbre_json = array (
+        'plan' => array (
+                'id' => '1', 'nom' => 'Terre', 'minX' => ''
+        ),
+        'Mes_persos' => array (
+                '1' => array('id' =>'11', 'nom'=>'Aigle', 'race'=>'Ange', 'grade'=>'2', 'couleur'=>'#65165', 'coordX'=>'10', 'coordY'=>'20'),
+                '2' => array('id' =>'12', 'nom'=>'Neo', 'race'=>'Ange', 'grade'=>'3', 'couleur'=>'', 'coordX'=>'45', 'coordY'=>'15'),
+                '3' => array('id' =>'13', 'nom'=>'Pegaze', 'race'=>'Ange', 'grade'=>'4', 'couleur'=>'', 'coordX'=>'5', 'coordY'=>'12')
+        ),      
+        'Persos' => array ( 
+                '1' => array('id' =>'12', 'nom'=>'Neo', 'race'=>'Ange', 'grade'=>'3', 'couleur'=>'', 'coordX'=>'45', 'coordY'=>'15'),
+                '2' => array('id' =>'12', 'nom'=>'Neo', 'race'=>'Ange', 'grade'=>'3', 'couleur'=>'', 'coordX'=>'45', 'coordY'=>'15'),
+                '3' => array('id' =>'12', 'nom'=>'Neo', 'race'=>'Ange', 'grade'=>'3', 'couleur'=>'', 'coordX'=>'45', 'coordY'=>'15')
+        ),      
+        'Elements' => array( 
+                '1' => array ('type'=> 'Porte', 'id'=>'12', 'Nom'=>'Arengule'),
+                '2' => array ('type'=> 'Bouclier', 'id'=>'13', 'Nom'=>'Marmontte')
+                )
+        );
+
+$tab_map = json_encode($arbre_json);
+
+echo $tab_map;
+
+?>
+
