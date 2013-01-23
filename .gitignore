@@ -1,2 +1,7 @@
+# Eclipse gitignore
+.project
+.metadata
+.settings/
 
+# Global
 /forum
