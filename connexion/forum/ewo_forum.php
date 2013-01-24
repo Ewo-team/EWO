@@ -71,8 +71,28 @@ class EwoForum {
         
     }
     
-    public  function isBlank($pseudo) {
+    public function isBlank($pseudo) {
         return $this->forum->isBlankPassword($pseudo);
+    }
+    
+    public function createLegion($legionName) {
+        
+    }
+    
+    public function removeLegion($legionName) {
+        
+    }
+
+    public function addMemberLegion($mat, $legionName) {
+        
+    }
+    
+    public function removeMemberLegion($mat, $legionName) {
+        
+    }
+
+    public function setRankMemberLegion($mat, $legionName, $rank) {
+        
     }
         
     
