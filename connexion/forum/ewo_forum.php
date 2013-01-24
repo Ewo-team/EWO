@@ -33,30 +33,50 @@ class EwoForum {
     }
 
     
-    public function createPerso($pseudo,$password) {
+    public function createPerso($pseudo, $password, $mail) {
         
+        $pass = phpbb_hash($password);
+        $email_hash = phpbb_email_hash($mail);
+        $clean = utf8_clean_string($pseudo);
+        
+        $this->forum->addPerso($pseudo, $clean, $pass, $mail, $email_hash);
     }
     
-    public function setRace($pseudo,$race) {
+    public function setRaceGrade($pseudo,$race,$grade,$galon) {
         
-    }
-    
-    public function setRank($perso_id) {
+        $clean = utf8_clean_string($pseudo);
         
-        /*global $groupes;
+        $id = $this->forum->selectPerso($clean);
         
-        $forum_officier = 0;
-        $forum_sousofficier = 0;
+        $grp_list = array();
         
-        if($grade == 5) {
-            $forum_officier = true;
-        }
+        global $groupes;
         
-        if($grade >= 4 || ($grade == 3 && $galon == 2)) {
-            $forum_sousofficier = true;
-        }
+        foreach($groupes as $race) {  
+            foreach($race as $groupe) {  
+                $grp_list = $groupe;
+            }           
+        }        
         
-        if($forum_officier);*/
+        $this->forum->removeGroup($id, implode(",", $grp_list));
+        
+        $this->forum->addGroup($id,$groupes[$race]["Base"]);
+        
+        if($grade >= 4) {
+            
+            if(isset($groupes[$race]["Officier"])) {
+                $this->forum->addGroup($id,$groupes[$race]["Officier"]);
+            }            
+            
+            if(isset($groupes[$race]["Chef"])) {
+                $this->forum->addGroup($id,$groupes[$race]["Chef"]);
+            }
+        } else if($grade >= 3 && $galon >= 2) {
+            
+            if(isset($groupes[$race]["Officier"])) {
+                $this->forum->addGroup($id,$groupes[$race]["Officier"]);
+            }
+        }        
     }
     
     public function changePasswords($password) {
@@ -68,7 +88,7 @@ class EwoForum {
     }
     
     public function emptyPassword() {
-        
+        throw new Exception("Undefined method");
     }
     
     public function isBlank($pseudo) {
@@ -76,23 +96,55 @@ class EwoForum {
     }
     
     public function createLegion($legionName) {
-        
+        //throw new Exception("Undefined method");        
     }
     
     public function removeLegion($legionName) {
-        
+        //throw new Exception("Undefined method");       
     }
 
-    public function addMemberLegion($mat, $legionName) {
-        
+    public function addMemberLegion($mat, $legionName, $rank) {
+        //$this->setRankMemberLegion($mat, $legionName, $rank);
     }
     
     public function removeMemberLegion($mat, $legionName) {
-        
+        //throw new Exception("Undefined method");        
     }
 
-    public function setRankMemberLegion($mat, $legionName, $rank) {
+    public function setRankMemberLegion($pseudo, $legionName, $rank) {
+   /*     
+        $pseudo = utf8_clean_string($pseudo);
+        $legion = utf8_clean_string($legionName);        
         
+        $id = $this->forum->selectPerso($pseudo);
+        $legion = $this->forum->selectLegions($legion);
+        
+        $grp_list = array();
+        
+        
+        foreach($legion as $groupe) {  
+                    $grp_list = $groupe[0];
+        }        
+        
+        $this->forum->removeGroup($id, implode(",", $grp_list));
+        
+        $this->forum->addGroup($id,$groupes[$race]["Base"]);
+        
+        if($grade >= 4) {
+            
+            if(isset($groupes[$race]["Officier"])) {
+                $this->forum->addGroup($id,$groupes[$race]["Officier"]);
+            }            
+            
+            if(isset($groupes[$race]["Chef"])) {
+                $this->forum->addGroup($id,$groupes[$race]["Chef"]);
+            }
+        } else if($grade >= 3 && $galon >= 2) {
+            
+            if(isset($groupes[$race]["Officier"])) {
+                $this->forum->addGroup($id,$groupes[$race]["Officier"]);
+            }
+        }   */                 
     }
         
     

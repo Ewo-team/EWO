@@ -20,9 +20,6 @@ if(isset($_SESSION['temp']['error'])){
 	$msg_error = $_SESSION['temp']['error'];
 }
 
-//-- vérifier que le nombre d'inscription ne soit pas supérieur a 10 comptes
-$nb_compte = mysql_query("SELECT COUNT(*) FROM utilisateurs");
-$nb_compte = mysql_result($nb_compte,0); 
 ?>
 
 <div id='inscription' align="center">
@@ -78,11 +75,6 @@ $nb_compte = mysql_result($nb_compte,0);
 			<tr>
 				<td colspan="3">&nbsp;</td>
 			</tr>
-			<tr>
-				<th scope="row" align="right">Jabber ID* : </th>
-				<td align="center"><input name="jabberid" type="text" maxlength="64" /></td>
-			<td></td>
-			</tr>
 		<?php
 			if($_TICKET == 1){
 		?>
@@ -95,7 +87,7 @@ $nb_compte = mysql_result($nb_compte,0);
 			}
 		?>
 			<tr>
-				<td colspan="3" align="center"><p>[<a>Charte d'inscription</a>]</p></td>
+				<td colspan="3" align="center"><p>[<a href="http://wiki.ewo-le-monde.com/doku.php?id=jeu:presentation_d_ewo">Charte d'inscription</a>]</p></td>
 			</tr>
 			<tr>
 				<td colspan="3" align="center"><input type="submit" value="Valider" class="bouton" /></td>
