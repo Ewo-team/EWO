@@ -724,7 +724,7 @@ CREATE TABLE IF NOT EXISTS `classement` (
   `meurtre` smallint(6) NOT NULL,
   `mort` smallint(6) NOT NULL,
   `joueur` int(10) unsigned NOT NULL,
-  `nom_race` VARCHAR( 100 ) NULL DEFAULT NULL
+  `nom_race` VARCHAR( 100 ) NULL DEFAULT NULL,
   PRIMARY KEY (`date`,`mat`),
   KEY `classement_cache_xp` (`xp`),
   KEY `classement_cache_mort` (`meurtre`),
@@ -1014,10 +1014,14 @@ CREATE TABLE IF NOT EXISTS `factions` (
   `site_url` tinytext COLLATE utf8_unicode_ci COMMENT 'URL du site de la faction si il y a lieu',
   `logo_url` tinytext COLLATE utf8_unicode_ci COMMENT 'Image du logo de la faction',
   `nature` enum('LEGION','ORDRE') COLLATE utf8_unicode_ci NOT NULL,
+  `link1` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `link2` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `link3` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `link4` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `link5` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_Factions_Camps` (`race`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 -- --------------------------------------------------------
 
 --

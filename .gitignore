@@ -2,6 +2,10 @@
 .project
 .metadata
 .settings/
+.buildpath
 
 # Global
 /forum
+
+#css compiled
+template/themes/*/css/generate

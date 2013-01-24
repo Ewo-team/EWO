@@ -117,7 +117,7 @@ Vous avez reçu une invitation dans la légion '.$legion->getNom();
         $js->addVariables('getRace',$legion->getRace());
         
         echo '
-
+        
         <link rel="stylesheet" href="js/jquery-ui-1.8.17.custom.css" type="text/css" />
         <style>
 	.ui-autocomplete {
@@ -132,7 +132,7 @@ Vous avez reçu une invitation dans la légion '.$legion->getNom();
 		height: 100px;
 	}
 	</style>
-
+        
         <table class="legionPresTable" style="width:90%;margin:auto;">
             <tr>
                 <td valign="top" style="text-align:left;">
@@ -149,23 +149,23 @@ Vous avez reçu une invitation dans la légion '.$legion->getNom();
                     <h3>Demandes de la l&eacute;gion</h3>
                     <ul>
                         ';
-                    foreach($demandesLegion->getDemandes() as $demande){
-                        echo '
+        foreach($demandesLegion->getDemandes() as $demande){
+        	echo '
                         <li>',$demande->getPersoNom(),' (',$demande->getPersoId(),'):
                         <a href="index.php?p=1&amp;mat='.$_GET['mat'].'&amp;s='.$_GET['s'].'&amp;an=',$demande->getPersoId(),'&amp;t=0">
                             annuler
                         </a>
                         </li>';
-                    }
-
-                        echo '
+        }
+        
+        echo '
                     </ul>
                 </td>
                 <td valign="top"  style="text-align:left;">
                     <h3>Demandes externes</h3>
                     <ul>';
-                    foreach($demandesUtilisateurs->getDemandes() as $demande){
-                        echo '
+        foreach($demandesUtilisateurs->getDemandes() as $demande){
+        	echo '
                         <li>',$demande->getPersoNom(),' (',$demande->getPersoId(),') :
                         <a href="index.php?p=1&amp;mat='.$_GET['mat'].'&amp;s='.$_GET['s'].'&amp;ac=',$demande->getPersoId(),'">
                             accepter
@@ -175,11 +175,11 @@ Vous avez reçu une invitation dans la légion '.$legion->getNom();
                             refuser
                         </a>
                         </li>';
-                    }
-                    echo '
+        }
+        echo '
                     </ul>
                 </td>
             </tr>
         </table>
         ';
-?>
+        

@@ -12,12 +12,6 @@
 $root_url = '..';
 include($root_url.'/conf/master.php');
 
-/*
-echo '<pre>';
-foreach($_SESSION['utilisateur']['races'] as $race){
-	var_dump($legions = $factory->get(LegionConfig::raceFromIdBdd($race)));
-}
-echo '</pre>';*/
 
 echo '
 		<div style="margin-bottom : 5px;">

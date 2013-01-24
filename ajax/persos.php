@@ -43,7 +43,7 @@ session_start();
     else
         $query_alter .= 'p.nom LIKE  "%'.stripslashes ($q).'%"';
 
-    $stmt = $sql->query($query_alter.';');
+    $stmt = $sql->query($query_alter.';') or die();
 
     $items = array();
     while($entree = $sql->fetch($stmt,\PDO::FETCH_OBJ)){

@@ -59,7 +59,7 @@ if(isset($_POST['name']) && isset($_POST['race']) && isset($_POST['type']) && is
                 (1,:legion_id,"Chef","","11111111"),
                 (2,:legion_id,"Bras droit","","01111111"),
                 (3,:legion_id,"Vieux Membre","","00101111"),
-                (1,:legion_id,"Membre &agrave; l\'essai","","00000001");
+                (4,:legion_id,"Membre &agrave; l\'essai","","00000001");
         INSERT INTO `faction_membres`
             (`perso_id`,`faction_id`,`faction_grade_id`)
             VALUES
@@ -281,12 +281,12 @@ else if(isset($_POST['editId']) && isset($_POST['editType']) && isset($_POST['ed
     $js->addLib('ckeditor/adapters/jquery');
     $js->addLib('ckeditor/sample');
     $js->addScript('legion/admin');
-    $liste_races = '';
-        foreach($races as $key => $val) {
-            $liste_races .= 'races['.$key.'] = "'.$val.'";';    
-        }
     
-    $js->addVariables('races',$liste_races);
+
+    $js->addVariables('races','new Array()', true);
+        foreach($races as $key => $val) {
+            $js->setVariables('races['.$key.']', $val);    
+        }
     $js->addVariables('is_admin',$admin);
 
 ?>
