@@ -20,18 +20,26 @@ class Legion{
 	private $type;
 	private $alignement;
 	private $creationDate;
-	private $siteUrl;
+	private $link1;
+	private $link2;
+	private $link3;
+	private $link4;
+	private $link5;
 	private $logoUrl;
 
 	public function __construct($id, $nom = null, $descr = null, $race = null, $type = null,
-			$alignement = null, $creationDate = null, $siteUrl = null, $logoUrl = null){
+			$alignement = null, $creationDate = null,
+			$link1 = null, $link2 = null, $link3 = null, $link4 = null, $link5 = null,
+			$logoUrl = null){
 		if(is_object($id)) //Si on lui passe un objet qui vient d'un retour sql
 			$this->constructObj($id);
 		else //Les valeurs sont uniques
-			$this->constructAll($id, $nom, $descr, $race, $type, $alignement, $creationDate, $siteUrl, $logoUrl);
+			$this->constructAll($id, $nom, $descr, $race, $type, $alignement, $creationDate,
+					 $link1, $link2, $link3, $link4, $link5, $logoUrl);
 	}
 
-	private function constructAll($id, $nom, $descr, $race, $type, $alignement, $creationDate, $siteUrl, $logoUrl){
+	private function constructAll($id, $nom, $descr, $race, $type, $alignement, $creationDate,
+			 $link1, $link2, $link3, $link4, $link5, $logoUrl){
 		$this->setId($id);
 		$this->setNom($nom);
 		$this->setDescr($descr);
@@ -41,6 +49,11 @@ class Legion{
 		$this->setCreationDate($creationDate);
 		$this->setSiteUrl($siteUrl);
 		$this->setLogoUrl($logoUrl);
+		$this->setLink1($link1);
+		$this->setLink2($link2);
+		$this->setLink3($link3);
+		$this->setLink4($link4);
+		$this->setLink5($link5);
 	}
 
 	private function constructObj($obj){
@@ -51,8 +64,12 @@ class Legion{
 		$this->setType($obj->type);
 		$this->setAlignement($obj->alignement);
 		$this->setCreationDate($obj->creationDate);
-		$this->setSiteUrl($obj->siteUrl);
 		$this->setLogoUrl($obj->logoUrl);
+		$this->setLink1($obj->link1);
+		$this->setLink2($obj->link2);
+		$this->setLink3($obj->link3);
+		$this->setLink4($obj->link4);
+		$this->setLink5($obj->link5);
 	}
 
 
@@ -191,11 +208,39 @@ class Legion{
 		return $this->creationDate = $creationDate;
 	}
 
-	public function getSiteUrl(){
-		return $this->siteUrl;
+	public function getLink1(){
+		return $this->link1;
 	}
-	public function setSiteUrl($siteUrl){
-		return $this->siteUrl = $siteUrl;
+	public function setLink1($link){
+		return $this->link1 = $link;
+	}
+
+	public function getLink2(){
+		return $this->link2;
+	}
+	public function setLink2($link){
+		return $this->link2 = $link;
+	}
+
+	public function getLink3(){
+		return $this->link3;
+	}
+	public function setLink3($link){
+		return $this->link3 = $link;
+	}
+
+	public function getLink4(){
+		return $this->link4;
+	}
+	public function setLink4($link){
+		return $this->link4 = $link;
+	}
+
+	public function getLink5(){
+		return $this->link5;
+	}
+	public function setLink5($link){
+		return $this->link5 = $link;
 	}
 
 	public function getLogoUrl(){

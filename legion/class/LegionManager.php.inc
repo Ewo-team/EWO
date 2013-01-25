@@ -31,7 +31,11 @@ require_once($root_url.'legion/class/LegionDAO.php.inc');
 					type			as type,
 					alignement		as alignement,
 					creation_date	as creationDate,
-					site_url		as siteUrl,
+					link1			as link1,
+					link2			as link2,
+					link3			as link3,
+					link4			as link4,
+					link5			as link5,
 					logo_url		as logoUrl
 				FROM factions
 				WHERE nature = "LEGION" ';

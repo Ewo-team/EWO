@@ -9,3 +9,6 @@
 
 #css compiled
 template/themes/*/css/generate
+
+#uploaded images for legions
+legions/blasons/*.png
