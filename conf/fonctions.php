@@ -645,42 +645,6 @@ function galon_persos($id){
 }
 
 /**
- * Connexion d'un personne au forum.
- * @param $nom_personnage Nom du personnage.
- */
-function connexion_forum($nom_personnage){
-
-	$pass = $_SESSION['utilisateur']['passwd_forum'];
-
-	//-- Code phpBB pour la gestion du pass et du login
-	define('IN_PHPBB', true);
-	$phpEx = substr(strrchr(__FILE__, '.'), 1);
-	$phpbb_root_path = '../forum/';
-	require('../forum/common.php');
-	require('../forum/includes/functions_user.php');
-
-	//-- Kill des sessions possible deja existante.
-	$user->session_kill();
-	$user->session_begin();
-
-	$user->session_begin();
-
-	//-- Definition des vars pour le forum phpbb
-	//$username = $_SESSION['persos']['nom'][1];
-	$autologin = false;
-	$viewonline = 1;
-	$admin = 0;
-
-	$result = $auth->login($nom_personnage, $pass, $autologin, $viewonline, $admin);
-	if ($result['status'] != LOGIN_SUCCESS){
-		echo 'Erreur de login du personnage sur le forum';exit;
-	}else{
-		$auth->acl($user->data);
-		//echo 'Connexion du premier personnage sur le forum';exit;
-	}
-}
-
-/**
  * Selection de l'icone d'un personnage.
  * @param $id_perso ID du personnage.
  * @return $carac Lien de l'icone du personnage

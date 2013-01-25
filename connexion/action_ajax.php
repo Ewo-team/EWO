@@ -13,7 +13,7 @@ session_start();
 $root_url = "..";
 
 include("../conf/master.php");
-
+/*
 if ((isset($_GET['perso_nom'])) AND (isset($_GET['action']))){
 
 $nom_personnage = $_GET['perso_nom'];
@@ -58,5 +58,5 @@ if(ControleAcces('utilisateur',0)){
 	}else{
 		echo "Veuillez vous connecter au jeu.";exit;
 		}
-}
+}*/
 ?>
