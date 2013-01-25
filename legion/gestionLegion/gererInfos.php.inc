@@ -166,8 +166,8 @@ if(isset($_POST['new_site']) &&
     if ($legion->getLogoUrl() != '') {
         echo '<br /><img src="', $legion->getLogoUrl(), '" alt="image legion"/>';
     }
-    else if (file_exists('imgs/' . $legion->getId() . '.png')) {
-        echo '<br /><img src="imgs/' , $legion->getId() , '.png" alt="image legion"/>';
+    else if (file_exists('blasons/' . $legion->getId() . '.png')) {
+        echo '<br /><img src="blasons/' , $legion->getId() , '.png" alt="image legion"/>';
     }
 echo '
     <form method ="post" action="index.php?p=', $_GET['p'], '&amp;mat=', $_GET['mat'], '&amp;s=', $_GET['s'], '"
