@@ -1363,7 +1363,7 @@ function respawn($id, $type='', $cible_spawn='') {
 		//Les humain peuvent choisir de tenter de respawn
 		//dans une zone précise sur terre, dans ce cas
 		//leur probabilité de le faire augmente.
-		case 1 :
+		/*case 1 :
 			$ok=false;
 			while (!$ok) {
 				$sql = '
@@ -1428,7 +1428,7 @@ function respawn($id, $type='', $cible_spawn='') {
 			//n'importe où, mais à plus de 15 case
 			//d'un autre de leurs persos.
 			break;
-
+*/
 		default :
 			$sql="SELECT damier_spawn.id AS id FROM damier_spawn
 				INNER JOIN camps ON camps.carte_id = damier_spawn.carte_id

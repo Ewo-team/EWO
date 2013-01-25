@@ -127,10 +127,13 @@ $js->addScript('ajax');
 $js->addScript('jeu');
 $js->addCore('lib/jquery');
 $js->addLib('jquery-ui');
-$js->addLib('jquery.countdown');
 $js->addVariables('root_url', $root_url);
-$js->addScript('special/countdown');
 
+if(date("d") == 25) {
+    $js->addLib('jquery.countdown');
+
+    $js->addScript('special/countdown');
+}
 // Gestionnaire d'autologin
 include($root_url."/autologin.php");
 
