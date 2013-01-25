@@ -146,14 +146,18 @@ echo '
 ?>
 </fieldset>
 <fieldset>
-    <legend>Site web</legend>
+    <legend>Liens</legend>
 <?php
 
 echo '
     <form method ="post" action="index.php?p=', $_GET['p'], '&amp;mat=', $_GET['mat'], '&amp;s=', $_GET['s'], '">
-        ',$legion->getSiteUrl(),' <br /> <br />
-        <br />
-        Changer : <input type="text" name="new_site" size="50"/> <input type="submit" value="modifier"/>
+        <label for="link1">Lien 1</label> : <input type="text" name="link1" id="link1" size="50"/> <br />
+		<label for="link2">Lien 2</label> : <input type="text" name="link2" id="link2" size="50"/> <br />
+		<label for="link3">Lien 3</label> : <input type="text" name="link3" id="link3" size="50"/> <br />
+		<label for="link4">Lien 4</label> : <input type="text" name="link4" id="link4" size="50"/> <br />
+		<label for="link5">Lien 5</label> : <input type="text" name="link5" id="link5" size="50"/> <br />
+		<br />
+		<input type="submit" value="modifier"/>
     </form>
         ';
 ?>
