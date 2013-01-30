@@ -1,12 +1,6 @@
 <?php
-//local
-define("ROOT","d:/wamp/www/ewo/");
-define("ROOT_HTTP","http://127.0.0.1/EWO/");
 
-//serveur
-//define("ROOT","/kunden/homepages/38/d145888978/htdocs/ewo/ewo/");
-//define("ROOT_HTTP","http://cv-france.info/ewo/ewo/");
+//define("SERVER_ROOT","/usr/local/www/ewo/current");
+define("SERVER_ROOT","d:/wamp/www/ewo");
 
-//partout
-define("REP_IMAGE","images/");
 ?>
