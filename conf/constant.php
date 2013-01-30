@@ -1,5 +1,5 @@
 <?php
 
-define("SERVER_ROOT","/usr/local/www/ewo/current");
+define("SERVER_ROOT",substr(__DIR__, 0, -5));
 
 ?>

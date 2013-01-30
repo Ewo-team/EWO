@@ -14,7 +14,6 @@ include_once 'constant.php';
 
 // Requis pour la connexion a la bdd
 include_once(SERVER_ROOT."/conf/connect.conf.php");
-$_URL = 'recette.ewo-le-monde.com';
 
 // Declaration du controle de connexion
 include_once (SERVER_ROOT."/connexion/controle_connexion.php");
