@@ -1,6 +1,6 @@
 <?php
 
-require_once ("../AdminDAO.php");
+require_once "../AdminDAO.php";
 
 class Actions {
 	public $id = 'nouveau';
@@ -13,12 +13,12 @@ class Actions {
 	public $grade = -2; // 0 a 5 ou -2
 	public $galon = 0; // 0 a 4
 	public $zone = 0; // si plus grand que 0, zone autour de la cible, si plus petit, zone autour du lanceur. Si 0, c'est le lanceur la cible
-	public $cible = 1; // Centré sur la cible ou non
+	public $cible = 1; // CentrÃ© sur la cible ou non
 	public $lanceur = 1; // prendre en compte le lanceur (?)
 	public $effetsLanceur = array();
 	public $effetsCible = array();
 	public $type_cible = 'both'; // "allie", "ennemi", "both", "choix", "none"
-	public $type_action = 'sort'; // "attaque", "entrainement", "sort", "suicide", "sprint", "reparation". "sort" par défaut!
+	public $type_action = 'sort'; // "attaque", "entrainement", "sort", "suicide", "sprint", "reparation". "sort" par dÃ©faut!
 	
 	public function creerActions($tableau) {
 		$conn = AdminDAO::getInstance();
