@@ -1,5 +1,7 @@
 <?php
 
+namespace compte\inscription;
+
 /**
  * Inscription - Validation du lien d'activation
  *
@@ -11,13 +13,12 @@
  * @package inscription
  */
 session_start();
-$root_url = "..";
-include ($root_url . "/conf/master.php");
+include '../../conf/master.php';
 
 if (isset($_GET['code']) && isset($_GET['nom']) && isset($_GET['email'])) {
 
 // Paramètres de connexion à la base de données
-    $dao = \inscription\InscriptionDAO::getInstance();
+    $dao = InscriptionDAO::getInstance();
 
     $code_validation = (ctype_alnum($_GET['code'])) ? $_GET['code'] : 'null';
     $nom = ucfirst(htmlspecialchars(strip_tags($_GET['nom']), ENT_COMPAT, 'UTF-8'));

@@ -1,14 +1,16 @@
 <?php
 
+namespace compte;
+
 session_start();
 //-- Header --
 $root_url = "..";
-include($root_url . "/conf/master.php");
+include("../conf/master.php");
 /* -- Connexion basic requise -- */
 ControleAcces('utilisateur', 1);
 
 $utilisateur_id = $_SESSION['utilisateur']['id'];
-$compte = new compte\Compte($utilisateur_id);
+$compte = new Compte($utilisateur_id);
 
 if (isset($_GET['action'])) {
     $action = $_GET['action'];

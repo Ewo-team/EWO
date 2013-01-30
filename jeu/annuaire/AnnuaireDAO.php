@@ -7,7 +7,7 @@
  * @package annuaire
  * @category dao
  */
-require_once ("../conf/ConnecteurDAO.php");
+use \conf\ConnecteurDAO as ConnecteurDAO;
 
 class AnnuaireDAO extends ConnecteurDAO {
 				

@@ -1,7 +1,9 @@
 <?php
 
+use \conf\ConnecteurDAO as ConnecteurDAO;
+
 include ("tableau_medaille.php");
-require_once ($root_url . "/conf/ConnecteurDAO.php");
+
 
 function ajouteMedaille($id,$mat) {
 	$conn = ConnecteurDAO::getInstance();

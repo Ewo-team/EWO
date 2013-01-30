@@ -1,6 +1,6 @@
 <?php
 
-require_once ($root_url."/conf/ConnecteurDAO.php");
+use \conf\ConnecteurDAO as ConnecteurDAO;
 
 class EwoForumDAO extends ConnecteurDAO {
     

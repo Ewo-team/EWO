@@ -1,5 +1,6 @@
 <?php
 
+namespace compte\inscription;
 /**
  * Inscription - Controle de l'inscription
  *
@@ -11,8 +12,8 @@
  * @package inscription
  */
 session_start();
-$root_url = '..';
-include ($root_url . "/conf/master.php");
+
+include '../../conf/master.php';
 
 // paramètres de connexion à la base de données
 $ewo = bdd_connect('ewo');

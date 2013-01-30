@@ -1,14 +1,16 @@
 <?php
+
+namespace site\contact;
+
 /**
  * Conact - script d'envoie du mail du formulaire de contact a l'équipe de ewo
  *
  * @author Simonet Fabrice <aigleblanc@ewo.fr>
  * @version 1.0
- * @package contact
+ * @package site\contact
  */
-session_start();
-$root_url = "..";
-include ($root_url."/conf/master.php");
+
+require_once __DIR__ . '/../../conf/master.php';
 
 //-- envoie du formulaire à l'email de l'admin.
 
@@ -37,15 +39,13 @@ if (!empty($mail) && !empty($sujet) && !empty($auteur) && !empty($text)){
 							</body></html>";
 
 	if(mail($admin_mail, '[Ewo] Formulaire de contact', $message, $headers)){
-		$root_url = "..";
-		include($root_url."/template/header_new.php");
+		include(SERVER_ROOT . "template/header_new.php");
 			echo '<p>Votre message vient d\'être envoyé, les administrateurs du site feront au plus vite pour vous apporter une réponse.</p>';
-		include("../template/footer_new.php");
+		include(SERVER_ROOT . "/template/footer_new.php");
 	}else{	
-		$root_url = "..";
-		include($root_url."/template/header_new.php");
+		include(SERVER_ROOT."/template/header_new.php");
 			echo '<p>Le message n\'a pu être envoyé</p>';
-		include("../template/footer_new.php");
+		include(SERVER_ROOT . "/template/footer_new.php");
 	}
 }else{
 		$titre = "Erreur dans le message";

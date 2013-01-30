@@ -1,17 +1,21 @@
 <?php
+
+namespace site\contact;
+
 /**
  * Conact - Index du formulaire de contact a l'équipe de ewo
  *
  * @author Simonet Fabrice <aigleblanc@ewo.fr>
  * @version 1.0
- * @package contact
+ * @package site\contact
  */
  
-//-- Header --
-$root_url = "..";
+require_once __DIR__ . '/../../conf/master.php';
+
 $header['title'] = "Contact";
 $header['desc'] = "Pour contacter l'équipe de gestion du projet Ewo";
-include($root_url."/template/header_new.php");
+
+include(SERVER_ROOT."/template/header_new.php");
 //------------
 ?>
 
@@ -27,7 +31,7 @@ include($root_url."/template/header_new.php");
 <div id='contact' align="center">
 	<table>
 		<tr>
-			<td width='150'><img src='../images/site/mail.png' alt='mail'></td>
+			<td width='150'><img src='<?php echo SERVER_URL; ?>/images/site/mail.png' alt='mail'></td>
 			<td width='300'>
 					<form name='contact' action="send_contact.php" method="post">
 					Nom :<br />
@@ -54,6 +58,6 @@ include($root_url."/template/header_new.php");
 
 <?php
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT."/template/footer_new.php");
 //------------
 ?>

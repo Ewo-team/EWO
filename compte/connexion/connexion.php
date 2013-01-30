@@ -9,19 +9,12 @@
  * @package connexion
  */
  
-ini_set('session.gc_maxlifetime', 86400);
-session_start();
-$root_url = "..";
-include ($root_url."/conf/master.php");
-include ($root_url."/persos/fonctions.php");
-include ($root_url."/admin/antitriche/class/ConnexionLogger.php.inc");
+//ini_set('session.gc_maxlifetime', 86400);
 
-if($_SSL == 1){
-	if($_SERVER["HTTPS"] != "on") {
-		 header("Location: https://" . $_URL . $_SERVER["REQUEST_URI"]);
-		 exit();
-	}
-}
+require_once __DIR__ . '/../../conf/master.php';
+
+include (SERVER_ROOT."/persos/fonctions.php");
+include (SERVER_ROOT."/admin/antitriche/class/ConnexionLogger.php.inc");
 
 $ok = false;
 
@@ -208,7 +201,7 @@ if($ok){
 			$admin = 0;
 			
                         try {
-                            include('forum/connect.php');
+                            include(SERVER_ROOT . '/lib/forum/connect.php');
                         } catch(Exception $e) {
                             echo $e->getMessage();
                         }
@@ -244,7 +237,7 @@ if($ok){
 		$navigateur = $_SERVER['HTTP_USER_AGENT'];
 		
 		//-- recupere l'host
-		include("../conf/proxy.php");		
+		include(SERVER_ROOT . "/conf/proxy.php");		
 		$infos_user = ProxyGetInfo();
 		$host = $infos_user['VId'];
 	
@@ -273,7 +266,7 @@ if($ok){
 			//mysql_query("UPDATE utilisateurs SET ticket=null WHERE id = '$utilisateur_id' LIMIT 1");
 		}
 		
-		header("location:http://".$_URL.$redirec);
+		header("location:".SERVER_URL . $redirec);
 
 		}else{
 			$titre = "Erreur de connexion";

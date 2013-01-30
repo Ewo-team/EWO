@@ -1,4 +1,6 @@
 <?php
+
+namespace compte\inscription;
 /**
  * Inscription - Page du formulaire d'inscription
  *
@@ -10,10 +12,11 @@
  */
 
 //-- Header --
-$root_url = "..";
+include '../../conf/master.php';
+
 $header['title'] = "Inscription";
 $header['desc'] = "Pour vous inscrire sur Ewo, cette page est la page obligatoire !";
-include($root_url."/template/header_new.php");
+include(SERVER_ROOT . "/template/header_new.php");
 //------------
 
 if(isset($_SESSION['temp']['error'])){
@@ -76,7 +79,7 @@ if(isset($_SESSION['temp']['error'])){
 				<td colspan="3">&nbsp;</td>
 			</tr>
 		<?php
-			if($_TICKET == 1){
+			if(TICKET == 1){
 		?>
 			<tr>
 				<th scope="row" align="right">Ticket d'invitation : </th>
@@ -115,6 +118,6 @@ if(isset($_SESSION['temp']['error'])){
 <?php
 session_destroy();
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT . "/template/footer_new.php");
 //------------
 ?>

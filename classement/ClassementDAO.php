@@ -7,7 +7,7 @@
  * @package classement
  * @category dao
  */
-require_once ("../conf/ConnecteurDAO.php");
+use \conf\ConnecteurDAO as ConnecteurDAO;
 
 abstract class ClassementDAO extends ConnecteurDAO {
 	

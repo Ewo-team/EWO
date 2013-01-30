@@ -8,9 +8,11 @@
  */
 //-- Header --
 $root_url = "..";
+include '../../conf/master.php';
+
 $header['title'] = "Récupération mot de passe";
 $header['desc'] = "Si par la plus grande mégarde vous avez égaré le bout de papier avec votre mot de passe dessus, c'est ici que ça se passe.";
-include($root_url."/template/header_new.php");
+include(SERVER_ROOT . "/template/header_new.php");
 //------------
 ?>
 
@@ -32,7 +34,7 @@ include($root_url."/template/header_new.php");
 		<td><input type="submit" value="Envoyer" class="bouton" /></td>
 	</tr>
 	<tr>
-		<td colspan="3">Un email avec un nouveau mot de passe vous a été envoyé.</td>
+		<td colspan="3">Un email avec un nouveau mot de passe vous sera envoyé.</td>
 	</tr>
 </table>
 </form>
@@ -48,6 +50,6 @@ include($root_url."/template/header_new.php");
 
 <?php
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT . "/template/footer_new.php");
 //------------
 ?>

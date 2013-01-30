@@ -8,9 +8,9 @@
  */
  
 session_start();
-$root_url = '..';
-include($root_url."/conf/master.php");
-include ($root_url."/conf/generation_pass.php");
+
+include("../../conf/master.php");
+include (SERVER_ROOT."/conf/generation_pass.php");
 
 if (isset($_POST['email'])){
 

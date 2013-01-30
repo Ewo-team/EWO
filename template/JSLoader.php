@@ -10,7 +10,7 @@
  *
  * @author Leo
  */
-class JSLoader implements Iterator, Countable {
+class JSLoader implements \Iterator, \Countable {
     
     private $core = array();
     private $lib = array();
@@ -98,7 +98,7 @@ class JSLoader implements Iterator, Countable {
             }
         }        
         
-        echo '</script><script type="text/javascript" src="'.$this->url.'/js/require.min.js"></script>';
+        echo '</script><script type="text/javascript" src="'.SERVER_URL.'/js/require.min.js"></script>';
 
         $this->prepare();
 
@@ -114,12 +114,12 @@ class JSLoader implements Iterator, Countable {
             foreach ($this as $load) {
                 if(file_exists($this->url . '/js/' . $load['js'] . '.min.js')) {
                     $time = filemtime($this->url . '/js/' . $load['js'] . '.min.js');
-                    echo 'requirejs(["'.$this->url.'/js/'.$load['js'].'.min.js?v='.$time.'"], function() {' . PHP_EOL;
+                    echo 'requirejs(["'.SERVER_URL.'/js/'.$load['js'].'.min.js?v='.$time.'"], function() {' . PHP_EOL;
 
                     $i++;
                 } elseif(file_exists($this->url . '/js/' . $load['js'] . '.js')) {
                     $time = filemtime($this->url . '/js/' . $load['js'] . '.js');
-                    echo 'requirejs(["'.$this->url.'/js/'.$load['js'].'.js?v='.$time.'"], function() {' . PHP_EOL;
+                    echo 'requirejs(["'.SERVER_URL.'/js/'.$load['js'].'.js?v='.$time.'"], function() {' . PHP_EOL;
 
                     $i++;
                 } /*else {

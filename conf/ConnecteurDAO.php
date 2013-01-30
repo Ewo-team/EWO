@@ -1,4 +1,9 @@
 <?php
+
+namespace conf;
+use \PDO as PDO, 
+    \Exception as Exception;
+
 /**
  * Configuration DAO
  *

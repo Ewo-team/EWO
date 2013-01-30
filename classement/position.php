@@ -6,7 +6,7 @@
  * @version 1.0
  * @package classement
  */
-require_once ("../conf/ConnecteurDAO.php");
+use \conf\ConnecteurDAO as ConnecteurDAO;
 
 $ewobdd = ConnecteurDAO::getInstance()->getConn();
 

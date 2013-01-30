@@ -8,10 +8,10 @@
  */
  
 //-- Header --
-$root_url = "..";
+include '../../conf/master.php';
 $header['title'] = "Connexion au site Ewo";
 $header['desc'] = "Pour pouvoir vous connecter sur notre jeu, il faut que vous utilisiez cette page.";
-include($root_url."/template/header_new.php");
+include(SERVER_ROOT . "/template/header_new.php");
 //------------
 ?>
 <div id="page_connexion">
@@ -28,11 +28,7 @@ include($root_url."/template/header_new.php");
 	if (!isset($_SESSION['utilisateur']['id'])) { ?>
 		<div align='center'>	
 			<?php
-				if($_SSL == 1){
-					echo "<form method='post' action='https://".$_URL."/connexion/connexion.php'>";
-				}else{
-					echo "<form method='post' action='connexion.php'>";	
-				}
+				echo "<form method='post' action='".SERVER_URL."/compte/connexion/connexion.php'>";
 			?>
 			<table width="50%" border="0">
 				<tr align="center">
@@ -48,13 +44,13 @@ include($root_url."/template/header_new.php");
                                         <td style="text-align:center;"><input type="checkbox" name="autologin"></td>
 				</tr>
                                 <tr>
-					<td style="text-align:center;"><a href='<?php echo $root_url; ?>/inscription/'>S'inscrire</a></td>
-					<td style="text-align:center;"><a href='<?php echo $root_url; ?>/inscription/renvoiActivation.php'>Renvoi du mail d'activation</a></td>
+					<td style="text-align:center;"><a href='<?php echo SERVER_URL; ?>/compte/inscription/'>S'inscrire</a></td>
+					<td style="text-align:center;"><a href='<?php echo SERVER_URL; ?>/compte/inscription/renvoiActivation.php'>Renvoi du mail d'activation</a></td>
 				</tr>  
 				<tr>
 					<td style="text-align:center;"><a href="recuperation.php">Mot de passe oublié ?</a></td>
 					<td style="text-align:center;"><input class="bouton" type="submit" value="Connexion" />
-						<img src="<?php echo $root_url; ?>/images/site/ssl.png" alt='certificat ssl'>
+						<img src="<?php echo SERVER_URL; ?>/images/site/ssl.png" alt='certificat ssl'>
 					</td>
 				</tr>                                
 		  </table>
@@ -67,13 +63,7 @@ include($root_url."/template/header_new.php");
 			<tr><td style="text-align:center;">Vous êtes loggué en tant que :</td></tr>
 			<tr><td style="text-align:center;"><b><?php echo $_SESSION['utilisateur']['nom']; ?></b></td></tr>
 	<?php
-		// Test pour la page d'admin...
-		if (isset ($_SESSION['utilisateur']['rang']) && ($_SESSION['utilisateur']['rang'] == 'admin')) {
-	?>
-			<tr><td style="text-align:center;"><a href='?page=admin_admin'>[ Admin ]</a></td></tr>
-	<?php
-		}
-			echo"<tr><td style='text-align:center;'><a href='".$root_url."/session.php'>[ Déconnexion ]</a></td></tr>
+			echo"<tr><td style='text-align:center;'><a href='".SERVER_URL."/session.php'>[ Déconnexion ]</a></td></tr>
 					 </table></div>";
 	}
 ?>
@@ -87,6 +77,6 @@ include($root_url."/template/header_new.php");
 <!-- Fin du coin -->
 <?php
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT."/template/footer_new.php");
 //------------
 ?>

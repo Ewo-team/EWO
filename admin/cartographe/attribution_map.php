@@ -1,5 +1,7 @@
 <?php
 
+use \conf\ConnecteurDAO as ConnecteurDAO;
+
 include 'header.php';
 include '../conf/ConnecteurDAO.php';
 

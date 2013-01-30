@@ -1,4 +1,7 @@
 <?php
+
+namespace site\chat;
+
 /**
  * IRC - Mibbit
  *
@@ -6,13 +9,14 @@
  *
  * @author Simonet Fabrice <aigleblanc@ewo.fr>
  * @version 1.0
- * @package irc
+ * @package site\chat
  */
 
 //-- Header --
-$root_url = "..";
+require_once __DIR__ . '/../../conf/master.php';
+
 $header['title'] = "Chat irc";
-include($root_url."/template/header_new.php");
+include(SERVER_ROOT."/template/header_new.php");
 //------------
 ?>
 
@@ -32,6 +36,6 @@ if (isset($_SESSION['utilisateur']['id'])){
 
 <?php
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT."/template/footer_new.php");
 //------------
 ?>

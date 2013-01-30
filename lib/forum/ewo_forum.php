@@ -1,19 +1,16 @@
 <?php
 
-if(!isset($root_urlt)) {
-    //$root_url = '../..';
-}
 
 if(!defined('IN_PHPBB')) {
     define('IN_PHPBB', true);
 }
 
 $phpEx = 'php';
-$phpbb_root_path = $root_url.'/forum/';
+$phpbb_root_path = SERVER_ROOT . '/forum/';
 
 if(isset($include_forum)) {
 
-    require_once($root_url.'/forum/common.php');
+    require_once(SERVER_ROOT . '/forum/common.php');
 
 }
 

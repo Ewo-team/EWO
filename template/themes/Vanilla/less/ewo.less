@@ -1,10 +1,15 @@
 
 @import "couleurs.less";
+@import "fontface.less";
 
+@fonttext: DejaVuSerifBook;
+@fonttextB: DejaVuSerifBold;
+@fonttextI: DejaVuSerifOblique;
+@fonttextBI: DejaVuSerifBoldOblique;
 
 body {
 	margin: 0;
-  font: 0.8em "Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif;
+  font: 0.8em @fonttext;
 }
 
 img {	border:0;}
@@ -21,7 +26,7 @@ ul {list-style-type: none}
 
 .curspointer {cursor: pointer;}
 .underline {text-decoration: underline;}
-.bold {font-weight:bold;}
+.bold {font-family:@fonttextB;}
 
 .lien {
 	font-size:0.8em;
@@ -31,7 +36,7 @@ ul {list-style-type: none}
 .lien_carte{
 	color:#68551F;
 	text-decoration: none;
-	font-weight:bold;
+        font-family:@fonttextB;
 }
 
 #content h2 {color:#933a25;font-size:1.5em;text-align: center;}
@@ -443,6 +448,7 @@ p#warning {	color : red; }
 /* main level link */
 #menuDeroulant a {
 	font-weight: bold;
+        font-family: @fonttextB;
 	color: #e7e5e5;
 	text-decoration: none;
 	display: block;
@@ -515,7 +521,7 @@ p#warning {	color : red; }
 }
 
 #menuDeroulant ul a {
-	font-weight: normal;
+	/*font-weight: normal;*/
 }
 
 /* level 3+ list */
@@ -725,8 +731,7 @@ p#warning {	color : red; }
 	float: left; /* positionnement de la lettrine dans le conteneur*/ 
 	font-size: 3em; /* 3 hauteurs de lignes pour la lettrine*/ 
 	 
-	font-weight: bold; 
-	font-family: Georgia, Times New Roman, Times, serif; 
+	font-family: @fonttextB;
 	color: #64C7B5; 
 	border: 1px solid #64C7B5; /* définition d'une bordure autour de la lettrine*/ 
 	background-color: #FFFFCC;
@@ -739,8 +744,8 @@ p#warning {	color : red; }
 	float: left; /* positionnement de la lettrine dans le conteneur*/ 
 	font-size: 3em; /* 3 hauteurs de lignes pour la lettrine*/ 
 	 
-	font-weight: bold; 
-	font-family: Georgia, Times New Roman, Times, serif; 
+
+	font-family: @fonttextB;
 	color: #EF3B42; 
 	border: 1px solid #EF3B42; /* définition d'une bordure autour de la lettrine*/ 
 	background-color: #FFFFCC;
@@ -753,8 +758,7 @@ p#warning {	color : red; }
 	float: left; /* positionnement de la lettrine dans le conteneur*/ 
 	font-size: 3em; /* 3 hauteurs de lignes pour la lettrine*/ 
 	 
-	font-weight: bold; 
-	font-family: Georgia, Times New Roman, Times, serif; 
+	font-family: @fonttextB; 
 	color: #4D7F27; 
 	border: 1px solid #4D7F27; /* définition d'une bordure autour de la lettrine*/ 
 	background-color: #FFFFCC;
@@ -1008,7 +1012,7 @@ p#warning {	color : red; }
 
 
 
-a.dropdown { font-weight: bold; }
+a.dropdown { font-family: @fonttextB; }
 
 #connection { line-height:12px; }
 #connection #perdu {

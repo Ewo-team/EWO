@@ -2,7 +2,8 @@
 //-- Header --
 $root_url = ".";
 //$pagetype = 'accueil';
-include($root_url."/template/header_new.php");
+include 'conf/master.php';
+include(SERVER_ROOT."/template/header_new.php");
 //------------
 
 $js->addScript('konami/konami');
@@ -60,6 +61,6 @@ $js->addScript('konami/katawa');
 -->
 <?php
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT."/template/footer_new.php");
 //------------
 ?>

@@ -26,7 +26,7 @@ if(isset($_SESSION['utilisateur']['id'])){
 
 //$theme_tpl = 'colonne';
 //-- Lien des fichiers dans le theme
-$template_url = $root_url."/template/themes/".$theme_tpl;
+$template_url = "/template/themes/".$theme_tpl;
 
 /*
 echo '<div style="background: url(\'wave.jpg\') no-repeat; width: 800px; height: 600px; text-align: right; margin: auto; ">
@@ -36,5 +36,5 @@ echo '<div style="background: url(\'wave.jpg\') no-repeat; width: 800px; height:
 exit;*/
 
 //-- Inclusion du header
-include($template_url."/header.php");
+include(SERVER_ROOT . $template_url . "/header.php");
 ?>

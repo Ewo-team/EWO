@@ -13,16 +13,6 @@ if(!defined("CONNECT.CONF")) {
 define("CONNECT.CONF", true);
 	
 		
-// url ou est le site
-$_URL = $_SERVER['HTTP_HOST'];
-
-// Gestion des ticket d'inscription
-// 0 : Non ; 1 : Oui
-$_TICKET = 0;
-
-// Login SSL
-// 0 : Non ; 1 : Oui
-$_SSL = 0;
 
 
 /**
@@ -68,10 +58,5 @@ function info_connect($i){
 	return $conf;
   }
 }
-/*
-$XMPP_SERVER = 'jabber.linux-experience.fr';
-$XMPP_PORT = 5222;
-$XMPP_NOM = 'ewo';
-$XMPP_PASS = 'maman24';
-*/
+
 ?>

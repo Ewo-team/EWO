@@ -1,5 +1,7 @@
 <?php
 
+namespace compte\inscription;
+
 /**
  * Inscription - Renvoie du lien d'activation
  *
@@ -8,13 +10,13 @@
  * @package inscription
  */
 session_start();
-$root_url = "..";
+include '../../conf/master.php';
 //-- Header --
-include($root_url . "/template/header_new.php");
+include(SERVER_ROOT . "/template/header_new.php");
 
 //------------
 
-$dao = \inscription\InscriptionDAO::getInstance();
+$dao = InscriptionDAO::getInstance();
 
 if (isset($_POST['email'])) {
 
@@ -65,7 +67,7 @@ if (isset($_POST['email'])) {
                 echo "<div class='page_centre'><h2>Inscription</h2>
 				<p>Vous allez recevoir un email de confirmation pour effectuer la validation de votre compte utilisateur.</p>
 				<p>Le message a bien &eacute;t&eacute; envoy&eacute; sur " . $email . "</p>
-				<p>[<a href='" . $root_url . "/'>Retour</a>]</p></div>";
+				<p>[<a href='" . SERVER_URL . "/'>Retour</a>]</p></div>";
             } else {
                 // Probl�me de mail
                 $titre = "Erreur d'envoi'";
@@ -140,5 +142,5 @@ HEREDOC;
 }
 
 //-- Footer --
-include($root_url . "/template/footer_new.php");
+include(SERVER_ROOT . "/template/footer_new.php");
 ?>

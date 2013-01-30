@@ -1,6 +1,7 @@
 <?php
 
-namespace inscription;
+namespace compte\inscription;
+use \compte\CompteDAO as CompteDAO;
 
 /*
  * To change this template, choose Tools | Templates
@@ -12,9 +13,8 @@ namespace inscription;
  *
  * @author Leo
  */
-require_once ( SERVER_ROOT .  "/conf/ConnecteurDAO.php");
 
-class InscriptionDAO extends \ConnecteurDAO {
+class InscriptionDAO extends CompteDAO {
 
     /**
      * Retourne true si un utilisateur avec le nom $name existe

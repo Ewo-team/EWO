@@ -1,4 +1,7 @@
 <?php
+
+namespace compte;
+
 /**
  * Compte, Options avancées
  *

@@ -3,10 +3,10 @@
 define('IN_PHPBB', true);
 
 $phpEx = 'php';
-$phpbb_root_path = $root_url.'/forum/';
+$phpbb_root_path = SERVER_ROOT . '/forum/';
 
-require_once($root_url.'/forum/common.php');
-require_once($root_url.'/forum/includes/functions_user.php');
+require_once(SERVER_ROOT . '/forum/common.php');
+require_once(SERVER_ROOT . '/forum/includes/functions_user.php');
 
 $user->session_begin();
 $auth->acl($user->data);

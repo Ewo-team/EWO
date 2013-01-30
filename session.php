@@ -1,9 +1,8 @@
 <?php
 // destruction des sessions active
-session_start();
-$root_url = ".";
 
-include ('connexion/forum/logoff.php');
+require_once __DIR__ . '/conf/master.php';
+include (SERVER_ROOT . '/lib/forum/logoff.php');
 
 //-- Code phpBB pour la gestion du pass et du login
 //define('IN_PHPBB', true);
@@ -30,5 +29,5 @@ session_start();
 $_SESSION['autologin']["unlogin"] = true;
 
 // redirection
-header("location:index.php");
+header("location:".SERVER_URL."/index.php");
 ?>

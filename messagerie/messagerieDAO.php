@@ -8,7 +8,7 @@
  * @category dao
  */
 
-require_once ("../conf/ConnecteurDAO.php");
+use \conf\ConnecteurDAO as ConnecteurDAO;
 
 class messagerieDAO extends ConnecteurDAO {
 

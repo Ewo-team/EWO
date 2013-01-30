@@ -1,4 +1,5 @@
 <?php
+use \conf\ConnecteurDAO as ConnecteurDAO;
 
 include ("./couleurs.php");
 

@@ -1,6 +1,7 @@
 <?php
 
-use \compte\Compte as Compte;
+namespace compte;
+use conf\Helpers as Helpers;
 
 /**
  * Compte, Index
@@ -12,9 +13,9 @@ use \compte\Compte as Compte;
  * @package compte
  */
 //-- Header --
-$root_url = "..";
-include $root_url . '/conf/master.php';
-include($root_url . "/template/header_new.php");
+
+include '../conf/master.php';
+include(SERVER_ROOT . "/template/header_new.php");
 //------------
 
 $id_utilisateur = $_SESSION['utilisateur']['id'];

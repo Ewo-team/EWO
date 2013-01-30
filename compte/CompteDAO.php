@@ -1,6 +1,7 @@
 <?php
 
 namespace compte;
+use \conf\ConnecteurDAO as ConnecteurDAO;
 
 /**
  * Connecteur DAO pour le compte
@@ -10,9 +11,8 @@ namespace compte;
  * @package compte
  * @category dao
  */
-require_once ( SERVER_ROOT .  "/conf/ConnecteurDAO.php");
 
-class CompteDAO extends \ConnecteurDAO {
+class CompteDAO extends ConnecteurDAO {
 
     public function SelectKeys($id) {
         $sql = "SELECT * FROM api_key WHERE utilisateur_id = ?";

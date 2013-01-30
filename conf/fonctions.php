@@ -1,4 +1,7 @@
 <?php
+
+use conf\VariableStorage as VariableStorage;
+
 /**
  * Fonction général pour ewo
  *

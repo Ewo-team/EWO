@@ -7,7 +7,7 @@
  * @param valeur valeur a mettre sous forme de tableau sérialisé
  */
 
-include_once($root_url.'/persos/medailles.php');
+include_once(SERVER_ROOT . '/persos/medailles.php');
 
 function maj_esq_mag($perso_id, $maj, $force_raz){
 $sql = "SELECT date_tour, date_esquivemagique FROM persos WHERE id = '".$perso_id."'";

@@ -1,4 +1,7 @@
 <?php
+
+namespace conf;
+
 /**
  * Include de toutes les fonctions principale du jeux
  *
@@ -7,22 +10,23 @@
  * @package conf
  */
 
+session_start();
 
 date_default_timezone_set("Europe/Paris");
 
-include_once 'constant.php';
+include_once 'config.php';
 
 // Requis pour la connexion a la bdd
 include_once(SERVER_ROOT."/conf/connect.conf.php");
 
 // Declaration du controle de connexion
-include_once (SERVER_ROOT."/connexion/controle_connexion.php");
+include_once (SERVER_ROOT."/conf/controle_connexion.php");
 
 // Fonctions du site
 include_once(SERVER_ROOT."/conf/fonctions.php");
 
 // Fonctions du forum
-include_once(SERVER_ROOT."/lib_tier/forum/forum.connect.php");
+include_once(SERVER_ROOT."/lib/forum/forum.connect.php");
 
 // Magasin de variable
 include_once("VariableStorage.php");

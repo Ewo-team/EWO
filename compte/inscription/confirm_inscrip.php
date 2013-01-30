@@ -1,4 +1,6 @@
 <?php
+
+namespace compte\inscription;
 /**
  * Inscription - Confirmation de l'inscription
  *
@@ -10,8 +12,8 @@
  */
  
 //-- Header --
-$root_url = "..";
-include($root_url."/template/header_new.php");
+include '../../conf/master.php';
+include(SERVER_ROOT . "/template/header_new.php");
 //------------
 
 // Si la variable  $_SESSION['temp']['error'] est définie, alors stocke sa valeur dans la variable $msg_error .
@@ -55,12 +57,12 @@ include($root_url."/template/header_new.php");
        echo "<div class='page_centre'><h2>Inscription</h2>
        <p>Vous allez recevoir un email de confirmation pour effectuer la validation de votre compte utilisateur.</p>
        <p>Le message a bien &eacute;t&eacute; envoy&eacute; sur ".$email."</p>
-       <p>[<a href='".$root_url."/'>Retour</a>]</p></div>";
+       <p>[<a href='".SERVER_URL."/'>Retour</a>]</p></div>";
      }else{
         echo "<div class='page_centre'><h2>Inscription</h2><p>Le message n'a pas pu être envoyé.</p>
-		  <p>[<a href='".$root_url."/'>Retour</a>]</p></div>";
+		  <p>[<a href='".SERVER_URL."/'>Retour</a>]</p></div>";
      }
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT . "/template/footer_new.php");
 //------------
 ?>
