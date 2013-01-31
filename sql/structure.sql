@@ -1519,23 +1519,6 @@ CREATE TABLE IF NOT EXISTS `utilisateurs_ban` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `utilisateurs_option`
---
-
-CREATE TABLE IF NOT EXISTS `utilisateurs_option` (
-  `utilisateur_id` int(10) unsigned NOT NULL,
-  `bals_speed` float NOT NULL DEFAULT '0.5',
-  `template` varchar(150) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'defaut',
-  `icones_pack` varchar(20) COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `grille` int(1) NOT NULL DEFAULT '0' COMMENT '0 non 1 oui',
-  `rose` tinyint(4) NOT NULL DEFAULT '1',
-  `redirection` int(11) NOT NULL DEFAULT '1' COMMENT '1:defaut',
-  PRIMARY KEY (`utilisateur_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `utilisateurs_ticket`
 --
 

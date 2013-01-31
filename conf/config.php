@@ -9,8 +9,8 @@ define('TICKET', 0);
 define('SSL', 0);
 
 
-define('WEB_DOMAIN', $_SERVER["SERVER_NAME"]);
-define('WEB_SUBFOLDER', '/ewo');
+define('WEB_DOMAIN', $_SERVER["HTTP_HOST"]);
+define('WEB_SUBFOLDER', '');
 
 $protocol = (SSL == 1) ? 'https' : 'http';
 

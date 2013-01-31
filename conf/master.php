@@ -12,6 +12,8 @@ namespace conf;
 
 session_start();
 
+ini_set('display_error', '1');
+
 date_default_timezone_set("Europe/Paris");
 
 include_once 'config.php';
