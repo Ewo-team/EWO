@@ -12,7 +12,7 @@ namespace compte\inscription;
  */
 
 //-- Header --
-include '../../conf/master.php';
+require_once __DIR__ . '/../../conf/master.php';
 
 $header['title'] = "Inscription";
 $header['desc'] = "Pour vous inscrire sur Ewo, cette page est la page obligatoire !";

@@ -1,4 +1,7 @@
 <?php
+
+namespace persos\annuaire;
+
 /**
  * Menu d'ajout dans le repertoire
  * 
@@ -7,11 +10,10 @@
  * @package annuaire
  */
 //-- Header --
-$root_url = "..";
-include($root_url."/template/header_new.php");
-include ("AnnuaireDAO.php");
+require_once __DIR__ . '/../../conf/master.php';
 /*-- Connexion basic requise --*/
 ControleAcces('utilisateur',1);
+include(SERVER_ROOT . '/template/header_new.php');
 /*-----------------------------*/
 
 $pseudo =	$_SESSION['rechercher']['pseudo'];
@@ -46,6 +48,6 @@ $_SESSION['temps']['lien'] = "/annuaire/";
 
 <?php		
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT."/template/footer_new.php");
 //------------
 ?>

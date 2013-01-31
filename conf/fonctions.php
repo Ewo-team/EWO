@@ -611,7 +611,7 @@ function gestion_erreur($titre, $text, $root, $lien, $redirec = 0){
 	$_SESSION['message']['lien'] =  $lien;
 
 	if($redirec == 0){
-		header("location:".$root."/msg/message.php");exit;
+		header("location:".SERVER_URL."/msg/message.php");exit;
 	}else{
 		echo "<script language='javascript' type='text/javascript' >document.location='".$root."/msg/message.php'</script>";exit;
 	}

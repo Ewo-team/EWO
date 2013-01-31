@@ -6,7 +6,6 @@
  * @version 1.0
  * @package template
  */
-@session_start();
 
 //-- Fonction inhérente à l'entete EWO
 include("template_fonction.php");

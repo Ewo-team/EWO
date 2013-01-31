@@ -14,7 +14,7 @@ echo '<h2>Annuaire des personnages EwOiens</h2>
 			<td colspan="3" align="center" style="background-color:', $couleur , '; color:#fff;"><b><a href="../event/liste_events.php?id=', $mat, '">', nom_perso($mat), ' (Mat. ', $mat, ')</a></b></td>
 		</tr>
 		<tr>
-			<td colspan="3" align="center"><img src="', $root_url, '/images/', $url, '" alt="avatar"></td>
+			<td colspan="3" align="center"><img src="', SERVER_URL, '/images/', $url, '" alt="avatar"></td>
 		</tr>
 		<tr>
 			<td colspan="3" align="center">Matricule : ', $mat, '</td>
@@ -32,7 +32,7 @@ if (isset($_SESSION['utilisateur']['id'])){
 		</tr>';
  }
 echo '</table>
-	<p>[<a href="', $root_url, '/annuaire/">Retour</a>]</p>
+	<p>[<a href="', SERVER_URL, '/annuaire/">Retour</a>]</p>
 </div>';
 
 ?>

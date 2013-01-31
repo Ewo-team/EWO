@@ -1,4 +1,7 @@
 <?php
+
+namespace persos\annuaire;
+
 /**
  * Fonction de recherche en fonction du nom du personnage
  * 
@@ -7,13 +10,13 @@
  * @package annuaire
  */
 //-- Header --
-$root_url = "..";
-include($root_url."/template/header_new.php");
-include ("AnnuaireDAO.php");
+require_once __DIR__ . '/../../conf/master.php';
+
+include(SERVER_ROOT."/template/header_new.php");
 	
 //------------
 if (isset($_POST['matricule']) AND is_numeric($_POST['matricule'])){
-$mat = mysql_real_escape_string($_POST['matricule']);
+$mat = $_POST['matricule'];
 
 	$conn = AnnuaireDAO::getInstance();
 	
@@ -36,7 +39,7 @@ $mat = mysql_real_escape_string($_POST['matricule']);
 		
 		include ("affiche_resultat.php");
 		
-		include($root_url."/template/footer_new.php");exit;
+		include( SERVER_ROOT ."/template/footer_new.php");exit;
 	}else{
 		$titre = "Erreur de matricule";
 		$text = "Ce matricule n'existe pas, ou erreur de matricule.";

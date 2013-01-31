@@ -12,8 +12,7 @@ namespace compte\inscription;
  * @version 1.0
  * @package inscription
  */
-session_start();
-include '../../conf/master.php';
+require_once __DIR__ . '/../../conf/master.php';
 
 if (isset($_GET['code']) && isset($_GET['nom']) && isset($_GET['email'])) {
 

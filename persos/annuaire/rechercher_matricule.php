@@ -1,4 +1,7 @@
 <?php
+
+namespace persos\annuaire;
+
 /**
  * Fonction de recherche en focntion du matricule
  * 
@@ -7,12 +10,15 @@
  * @package annuaire
  */
 //-- Header --
-$root_url = "..";
-include($root_url."/template/header_new.php");
-include ("AnnuaireDAO.php");
+
+require_once __DIR__ . '/../../conf/master.php';
+
+include(SERVER_ROOT."/template/header_new.php");
+
+//include 'AnnuaireDAO.php';
 //------------
 if (!empty($_POST['personnage'])){
-$pseudo = mysql_real_escape_string($_POST['personnage']);
+$pseudo = $_POST['personnage'];
 
 	$conn = AnnuaireDAO::getInstance();
 	
@@ -32,7 +38,7 @@ $pseudo = mysql_real_escape_string($_POST['personnage']);
 		$_SESSION['rechercher']['matricule'] = $mat;
 	
 		include ("affiche_resultat.php");
-		include($root_url."/template/footer_new.php");
+		include(SERVER_ROOT."/template/footer_new.php");
 	}else{
 		$titre = "Erreur de pseudo";
 		$text = "Ce personnage n'existe pas, ou erreur de pseudo.";

@@ -1,4 +1,7 @@
 <?php
+
+namespace persos\annuaire;
+
 /**
  * Ajoute un contact a l'annuaire
  * 
@@ -6,11 +9,9 @@
  * @version 
  * @package annuaire
  */
-session_start();
+
 //-- Header --
-$root_url = "..";
-include($root_url."/conf/master.php");
-include ("AnnuaireDAO.php");
+require_once __DIR__ . '/../../conf/master.php';
 /*-- Connexion basic requise --*/
 ControleAcces('utilisateur',1);
 /*-----------------------------*/
@@ -21,8 +22,8 @@ $conn = AnnuaireDAO::getInstance();
 
 if (isset($_POST['contact']) AND isset($_POST['personnage'])){
 
-	$perso = mysql_real_escape_string($_POST['personnage']);
-	$contact = mysql_real_escape_string($_POST['contact']);
+	$perso = $_POST['personnage'];
+	$contact = $_POST['contact'];
 
 	$exist = $conn->persoExist($contact);
 
@@ -53,8 +54,8 @@ if (isset($_POST['contact']) AND isset($_POST['personnage'])){
 
 } else if(isset($_GET['id_contact']) AND isset($_GET['id_perso'])) {
 
-	$perso = mysql_real_escape_string($_GET['id_perso']);
-	$contact = mysql_real_escape_string($_GET['id_contact']);
+	$perso = $_GET['id_perso'];
+	$contact = $_GET['id_contact'];
 	
 	$exist = $conn->persoExist($contact);
 

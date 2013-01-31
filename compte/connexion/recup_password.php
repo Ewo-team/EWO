@@ -7,9 +7,8 @@
  * @package connexion
  */
  
-session_start();
+require_once __DIR__ . '/../conf/master.php';
 
-include("../../conf/master.php");
 include (SERVER_ROOT."/conf/generation_pass.php");
 
 if (isset($_POST['email'])){

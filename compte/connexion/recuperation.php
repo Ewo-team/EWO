@@ -7,8 +7,8 @@
  * @package connexion
  */
 //-- Header --
-$root_url = "..";
-include '../../conf/master.php';
+
+require_once __DIR__ . '/../../conf/master.php';
 
 $header['title'] = "Récupération mot de passe";
 $header['desc'] = "Si par la plus grande mégarde vous avez égaré le bout de papier avec votre mot de passe dessus, c'est ici que ça se passe.";

@@ -5,8 +5,8 @@ define('IN_PHPBB', true);
 $phpEx = 'php';
 $phpbb_root_path = SERVER_ROOT . '/forum/';
 
-require_once(SERVER_ROOT.'/forum/common.php');
-require_once(SERVER_ROOT.'/forum/includes/functions_user.php');
+include_once(SERVER_ROOT.'/forum/common.php');
+include_once(SERVER_ROOT.'/forum/includes/functions_user.php');
 
 $include_forum = true;
 require('ewo_forum.php');

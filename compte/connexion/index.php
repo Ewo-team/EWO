@@ -8,7 +8,7 @@
  */
  
 //-- Header --
-include '../../conf/master.php';
+require_once __DIR__ . '/../../conf/master.php';
 $header['title'] = "Connexion au site Ewo";
 $header['desc'] = "Pour pouvoir vous connecter sur notre jeu, il faut que vous utilisiez cette page.";
 include(SERVER_ROOT . "/template/header_new.php");

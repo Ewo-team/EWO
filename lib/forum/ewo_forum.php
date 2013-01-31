@@ -10,7 +10,7 @@ $phpbb_root_path = SERVER_ROOT . '/forum/';
 
 if(isset($include_forum)) {
 
-    require_once(SERVER_ROOT . '/forum/common.php');
+    include_once(SERVER_ROOT . '/forum/common.php');
 
 }
 
