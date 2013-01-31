@@ -33,6 +33,41 @@ if (isset($_POST['descr'])) {
 
     $legion->setDescr($_POST['descr']);
 }
+else if(isset($_POST['link1']) && isset($_POST['link2']) && isset($_POST['link3']) && 
+		isset($_POST['link4']) && isset($_POST['link5'])){
+	$err = false;
+	$urls = array(1=>'', '', '','','');
+	for($u = 1; $u <= 5; ++$u){
+		$url = trim($_POST['link'.$u]);
+		if(strlen($url) ==  0)
+			continue;
+		if(strncmp($url, 'http://',7) != 0)
+			$url = 'http://'.$url;
+		if(!filter_var($url, FILTER_VALIDATE_URL)){
+			$err = true;
+			echo '"'.$url.'" n\'est pas une URL valide.';
+			break;
+		}
+		$urls[$u] = $url;
+	}
+	if(!$err){
+		$query_alter = '
+        UPDATE `factions`
+        SET link1 = ?, link2 = ?, link3 = ?, link4 = ?, link5 = ?
+        WHERE
+            id = ' . $legion->getId();
+		$sql = LegionDAO::getInstance();
+		$sql->prepare($query_alter);
+		
+		$sql->executePreparedStatement(null, array($urls[1], $urls[2], $urls[3], $urls[4], $urls[5]));
+		
+		$legion->setLink1($urls[1]);
+		$legion->setLink2($urls[2]);
+		$legion->setLink3($urls[3]);
+		$legion->setLink4($urls[4]);
+		$legion->setLink5($urls[5]);
+	}
+}
 $extensions_valides = array('jpg', 'jpeg', 'gif', 'png');
 if (isset($_FILES['new_img']) && $_FILES['new_img']['error'] == 0) {
 
@@ -57,7 +92,7 @@ if (isset($_FILES['new_img']) && $_FILES['new_img']['error'] == 0) {
         imagecopyresampled($destination, $source,
         0, 0, 0, 0,
         $image_sizes[0]*$coef, $image_sizes[1]*$coef, $image_sizes[0], $image_sizes[1]);
-        imagepng($destination, 'imgs/'.$legion->getId().'.png');
+        imagepng($destination, 'blasons/'.$legion->getId().'.png');
 
         $query_alter = '
                 UPDATE `factions`
@@ -131,8 +166,8 @@ if(isset($_POST['new_site']) &&
     if ($legion->getLogoUrl() != '') {
         echo '<br /><img src="', $legion->getLogoUrl(), '" alt="image legion"/>';
     }
-    else if (file_exists('imgs/' . $legion->getId() . '.png')) {
-        echo '<br /><img src="imgs/' , $legion->getId() , '.png" alt="image legion"/>';
+    else if (file_exists('blasons/' . $legion->getId() . '.png')) {
+        echo '<br /><img src="blasons/' , $legion->getId() , '.png" alt="image legion"/>';
     }
 echo '
     <form method ="post" action="index.php?p=', $_GET['p'], '&amp;mat=', $_GET['mat'], '&amp;s=', $_GET['s'], '"
@@ -146,14 +181,22 @@ echo '
 ?>
 </fieldset>
 <fieldset>
-    <legend>Site web</legend>
+    <legend>Liens</legend>
 <?php
-
 echo '
     <form method ="post" action="index.php?p=', $_GET['p'], '&amp;mat=', $_GET['mat'], '&amp;s=', $_GET['s'], '">
-        ',$legion->getSiteUrl(),' <br /> <br />
-        <br />
-        Changer : <input type="text" name="new_site" size="50"/> <input type="submit" value="modifier"/>
+        <label for="link1">Lien 1</label> : 
+			<input type="text" name="link1" id="link1" size="50" value="'.$legion->getLink1().'"/> <br />
+		<label for="link2">Lien 2</label> : 
+			<input type="text" name="link2" id="link2" size="50" value="'.$legion->getLink2().'"/> <br />
+		<label for="link3">Lien 3</label> : 
+			<input type="text" name="link3" id="link3" size="50" value="'.$legion->getLink3().'"/> <br />
+		<label for="link4">Lien 4</label> : 
+			<input type="text" name="link4" id="link4" size="50" value="'.$legion->getLink4().'"/> <br />
+		<label for="link5">Lien 5</label> : 
+			<input type="text" name="link5" id="link5" size="50" value="'.$legion->getLink5().'"/> <br />
+		<br />
+		<input type="submit" value="modifier"/>
     </form>
         ';
 ?>
