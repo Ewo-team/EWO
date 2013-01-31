@@ -9,3 +9,6 @@
 
 #css compiled
 template/themes/*/css/generate
+
+# IIS7 (oui, je sais...)
+web.config
