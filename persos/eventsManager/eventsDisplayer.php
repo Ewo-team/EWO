@@ -1,5 +1,7 @@
 <?php
 
+namespace persos\eventsManager;
+
 /** 
  * Cette classe ne durera peut être pas.
  * L'idée c'est d'utiliser un objet pour afficher les évènements

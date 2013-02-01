@@ -6,19 +6,19 @@
  * @version 1.0
  * @package carte
  */
-session_start();
-
-
 $root_url = "..";
 
-$cache_url = '/usr/local/www/ewo/cache/svg_althian.cache';
+$cache_url = __DIR__ . '/../../cache/svg_althian.cache';
 //$cache_url = 'D:/wamp/www/cache/svg_althian.cache';
+
+require_once __DIR__ . "/../../conf/master.php";
+
 
 include("Carte.php");
 include("CarteDAO.php");
-include("../conf/master.php");
-include("../persos/fonctions.php");
-include("../jeu/fonctions.php");
+
+include(SERVER_ROOT . "/persos/fonctions.php");
+include(SERVER_ROOT . "/jeu/fonctions.php");
 // Paramètres de connexion à la base de données
 $ewo_bdd = bdd_connect('ewo');
 

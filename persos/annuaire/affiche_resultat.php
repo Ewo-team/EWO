@@ -22,13 +22,13 @@ echo '<h2>Annuaire des personnages EwOiens</h2>
 if (isset($_SESSION['utilisateur']['id'])){
 		echo '<tr>';
 		if(isset($_SESSION['persos']['current_id'])) {
-			echo '<td align="center">[ <a href="../messagerie/index.php?id=', $_SESSION['persos']['current_id'], '&dest=', $mat, '">Envoyer un message</a> ]</td>';
+			echo '<td align="center">[ <a href="',SERVER_URL,'/messagerie/index.php?id=', $_SESSION['persos']['current_id'], '&dest=', $mat, '">Envoyer un message</a> ]</td>';
 		} else {
 			echo '<td></td>';
 		}
 			
 		echo'	<td align="center">[ <a href="ajout_repertoire.php">Ajouter à mon répertoire</a> ]</td>
-			<td align="center">[ <a href="../classement/position.php?mat=', $mat,'">Voir le classement</a> ]</td>
+			<td align="center">[ <a href="',SERVER_URL,'/jeu/classement/position.php?mat=', $mat,'">Voir le classement</a> ]</td>
 		</tr>';
  }
 echo '</table>

@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\classement;
+
 /**
  * ClassementDAO
  *
@@ -7,7 +10,6 @@
  * @package classement
  * @category dao
  */
-include ("ClassementDAO.php");
 
 class ClassementListeDAO extends ClassementDAO {
 	

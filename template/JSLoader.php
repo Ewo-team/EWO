@@ -108,17 +108,18 @@ class JSLoader implements \Iterator, \Countable {
         echo "<script type='text/javascript'>";        
         
 
-
+		
         if(count($this) > 0) {
             $i = 0;
             foreach ($this as $load) {
-                if(file_exists($this->url . '/js/' . $load['js'] . '.min.js')) {
-                    $time = filemtime($this->url . '/js/' . $load['js'] . '.min.js');
+					
+                if(file_exists(SERVER_ROOT . '/js/' . $load['js'] . '.min.js')) {
+                    $time = filemtime(SERVER_ROOT . '/js/' . $load['js'] . '.min.js');
                     echo 'requirejs(["'.SERVER_URL.'/js/'.$load['js'].'.min.js?v='.$time.'"], function() {' . PHP_EOL;
 
                     $i++;
-                } elseif(file_exists($this->url . '/js/' . $load['js'] . '.js')) {
-                    $time = filemtime($this->url . '/js/' . $load['js'] . '.js');
+                } elseif(file_exists(SERVER_ROOT . '/js/' . $load['js'] . '.js')) {
+                    $time = filemtime(SERVER_ROOT . '/js/' . $load['js'] . '.js');
                     echo 'requirejs(["'.SERVER_URL.'/js/'.$load['js'].'.js?v='.$time.'"], function() {' . PHP_EOL;
 
                     $i++;

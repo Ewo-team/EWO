@@ -1,4 +1,7 @@
 <?php
+
+namespace messagerie;
+
 /**
  * Supprime une bal
  * 
@@ -6,10 +9,8 @@
  * @version 2.1
  * @package messagerie
  */
-session_start();
-$root_url = "..";
-include ($root_url."/conf/master.php");
-include ("messagerieDAO.php");
+require_once __DIR__ . '/../conf/master.php';
+
 /*-- Connexion requise --*/
 if (ControleAcces('utilisateur',0) == false){
 	echo "acces denied";exit;

@@ -1,4 +1,7 @@
 <?php
+
+namespace messagerie;
+
 /**
  * Messagerie DAO, requete pour construire la messagerie
  * 
@@ -175,14 +178,14 @@ class messagerieDAO extends ConnecteurDAO {
 	 * Prépare une requête d'insertion de bal
 	*/
 	public function PrepareInsertBal($table) {
-		return $this->prepare("INSERT INTO bals (id, perso_src_id, perso_dest_id, corps_id, flag_lu, flag_envoye, flag_archive) VALUES ('', ?, ?, ?, ?, ?, ?)");
+		return $this->prepare("INSERT INTO bals (perso_src_id, perso_dest_id, corps_id, flag_lu, flag_envoye, flag_archive) VALUES (?, ?, ?, ?, ?, ?)");
 	}
 	
 	/**
 	 * Insertion du corps d'une BAL (retourne l'identifiant)
 	*/
 	public function InsertCorpsBal($titre, $corps, $mats, $liste) {
-		$sql = "INSERT INTO bals_corps(id, date, titre, corps, liste_mats, liste) VALUES ('', NOW(), ?, ?, ?, ?)";	
+		$sql = "INSERT INTO bals_corps(date, titre, corps, liste_mats, liste) VALUES (NOW(), ?, ?, ?, ?)";	
 		$this->prepare($sql);
 		$this->executePreparedStatement(null, array($titre, $corps, $mats, $liste));				
 		return $this->_conn->lastInsertId();
@@ -199,8 +202,8 @@ class messagerieDAO extends ConnecteurDAO {
 	 * Insertion des bal dans la table bals_send
 	*/	
 	public function InsertBalSend($expediteur, $liste, $titre, $corps, $flag, $img, $liste_bal) {
-		$sql = "INSERT INTO bals_send (id, perso_src_id, perso_dest_id, titre, corps, date, flag_lu, flag_exp, liste_bal) 
-												VALUES ('', ?, ?, ?, ?, NOW(), ?, ?, ?)";
+		$sql = "INSERT INTO bals_send (perso_src_id, perso_dest_id, titre, corps, date, flag_lu, flag_exp, liste_bal) 
+												VALUES (?, ?, ?, ?, NOW(), ?, ?, ?)";
 		$this->prepare($sql);
 		return $this->executePreparedStatement(null, array($expediteur, $liste, $titre, $corps, $flag, $img, $liste_bal));													
 	}	

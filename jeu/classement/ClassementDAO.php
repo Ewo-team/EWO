@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\classement;
+
 /**
  * ClassementDAO
  *

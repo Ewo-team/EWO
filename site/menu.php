@@ -102,7 +102,7 @@ if (isset($template_on)) {
         //$menu['utilisateur'][] = array('url' => SERVER_URL.'/persos/liste_persos.php', 'nom' => 'Mes personnages');
         $menu['utilisateur'][] = array('url' => SERVER_URL . '/event/liste_events.php', 'nom' => 'Mes &eacute;v&eacute;nements');
         $menu['utilisateur'][] = array('url' => SERVER_URL . '/persos/affiliation/', 'nom' => 'Affiliations ' . $nom_aff);
-        $menu['jeu'][] = array('url' => SERVER_URL . '/persos/classement/classement.php', 'nom' => 'Classement');
+        $menu['utilisateur'][] = array('url' => SERVER_URL . '/jeu/classement/classement.php', 'nom' => 'Classement');
 
         $creerperso = false;
         $nbperso = @$_SESSION['persos']['inc'];

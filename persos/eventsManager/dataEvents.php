@@ -2,7 +2,8 @@
 /**
  * Couche data de la gestion des évènements.
  */
-
+ 
+namespace persos\eventsManager;
 
 class DataEvents{
 

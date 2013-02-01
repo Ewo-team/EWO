@@ -4,12 +4,7 @@
  * Classe de gestion pour la création d'evenements
  */
 
-if(!isset($root_url)){
-	$root_url = '..';
-}
-
-require_once($root_url.'/event/event.php');
-require_once($root_url.'/conf/fonctions.php');
+namespace persos\event;
 
 class eventManager {
 

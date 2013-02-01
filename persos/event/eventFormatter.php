@@ -1,9 +1,7 @@
 <?php
-if(!isset($root_url)){
-	$root_url = '..';
-}
-include_once($root_url.'/event/event.php');
-include_once($root_url.'/event/tools.php');
+
+namespace persos\event;
+
 
 class eventFormatter extends tools {
 

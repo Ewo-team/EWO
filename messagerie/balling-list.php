@@ -1,9 +1,8 @@
 <?php
 
-
-    $root_url= '../';
-    include_once($root_url.'legion/class/LegionDroits.php.inc');
-    include_once($root_url.'legion/class/Legion.php.inc');
+	$root_url = SERVER_ROOT . '/';
+    include_once(SERVER_ROOT . '/legion/class/LegionDroits.php.inc');
+    include_once(SERVER_ROOT . '/legion/class/Legion.php.inc');
 
     use legions\LegionDroits    as LegionDroits;
     use legions\Legion          as Legion;

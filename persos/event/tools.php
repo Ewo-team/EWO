@@ -1,4 +1,7 @@
 <?php
+
+namespace persos\event;
+
 class tools {
 	protected static function checkPrivate($mat){
 		$persos = (isset($_SESSION['persos']['id']))?$_SESSION['persos']['id']:array();

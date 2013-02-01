@@ -1,6 +1,6 @@
 <?php
 
-include_once('dataEvents.php');
+namespace persos\eventsManager;
 
 //Fonction de sérialisation
 

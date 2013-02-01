@@ -1,4 +1,7 @@
 <?php
+
+namespace messagerie;
+
 /**
  * Affiche les bals recus
  * 
@@ -8,9 +11,10 @@
  */
  
 //-- Header --
-$root_url = "..";
-include($root_url."/template/header_new.php");
-include ("messagerieDAO.php"); 
+require_once __DIR__ . '/../conf/master.php';
+
+include(SERVER_ROOT . '/template/header_new.php');
+
 /*-- Connexion basic requise --*/
 ControleAcces('utilisateur',1);
 /*-----------------------------*/
@@ -171,16 +175,16 @@ $id_courant = array_search($id_perso, $_SESSION['persos']['id']);
 				
 			} else {
 				echo "<h2>Vous ne possédez pas cette liste</h2><div align='center'><img src='/images/site/erreur.png' alt='erreur'><p>Veuillez vous loguer ou ne pas abuser de la bal, Merci.</p></div>";
-				include($root_url."/template/footer_new.php");exit;			
+				include(SERVER_ROOT."/template/footer_new.php");exit;			
 			}
 		}
 	}else{
 		echo "<h2>Vous ne possédez pas ce personnage</h2><div align='center'><img src='/images/site/erreur.png' alt='erreur'><p>Veuillez vous loguer ou ne pas abuser de la bal, Merci.</p></div>";
-		include($root_url."/template/footer_new.php");exit;
+		include(SERVER_ROOT."/template/footer_new.php");exit;
 	}
 
 
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT."/template/footer_new.php");
 //------------
 ?>

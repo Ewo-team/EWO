@@ -87,8 +87,8 @@ $_SESSION['utilisateur']['template_mage']=true;
             try {  
             $compiled = $less->compile($import);
             
-            if(substr(decoct( fileperms('css/generate/') ), 2) != 777) {
-                chmod('css/generate/', 777);
+            if(substr(decoct( fileperms(SERVER_ROOT . $template_url.'/css/generate/') ), 2) != 777) {
+                chmod(SERVER_ROOT . $template_url.'/css/generate/', 777);
             }
             
             file_put_contents(SERVER_ROOT . $template_url.'/css/generate/'.$nom.'.css', $compiled);

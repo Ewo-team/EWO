@@ -1,18 +1,10 @@
 <?php
-$root = '..';
-if(isset($root_url)){
-	$root = $root_url;
-}
-include_once($root.'/event/eventFormatter.php');
+
+namespace persos\event;
 
 function eventautoload($name){
-	if(isset($root_url)){
-		$root = $root_url;
-	}else{
-		$root = '..';
-	}
-	if(file_exists($root."/event/formatter/$name.php")){
-		require_once($root."/event/formatter/$name.php");
+	if(file_exists(SERVER_ROOT."/persos/event/formatter/$name.php")){
+		require_once(SERVER_ROOT."/persos/event/formatter/$name.php");
 	}
 }
 

@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\classement;
+
 /**
  * Classement new format
  *
@@ -7,10 +10,12 @@
  * @package classement
  */
 //-- Header --
-$root_url = "..";
-include($root_url."/template/header_new.php");
 
-include($root_url."/persos/fonctions.php");
+require_once __DIR__ . '/../../conf/master.php';
+
+include(SERVER_ROOT . "/template/header_new.php");
+
+include(SERVER_ROOT . "/persos/fonctions.php");
 
 include ('ClassementListeDAO.php');
 include ('ClassementVUE.php');
@@ -215,24 +220,30 @@ if(isset($_POST['highlight'])) {
 			
 			// Recherche du matricule
 			if(isset($_GET['search'])) {
-				if(is_numeric($_GET['search'])) {
-					$highlight = $_GET['search'];
-					$rang = $classement->cherchePositionMat($highlight);
-					
-				} else {
-					$highlight = $classement->SelectPersoIdByName($_GET['search']);
-					$rang = $classement->cherchePositionMat($highlight);
-				}
+			
+				$highlight = $_GET['search'];
+				$persos = \persos\PersosDAO::getInstance();	
+
+				if(!is_numeric($_POST['search'])) {
+					$p = $persos->SelectPersoByName($_GET['search']);
+					$highlight = $p['id'];
+
+				}		
+				
+				$rang = $classement->cherchePositionMat($highlight);
+
 				//$param['page'] = $rang;
 			} 
 			if(isset($_POST['search'])) {
-				if(is_numeric($_POST['search'])) {
-					$param['highlight'] = $_POST['search'];
-					$classement->cherchePositionMat($param['highlight']);
-				} else {
-					$param['highlight'] = $classement->SelectPersoIdByName($_POST['search']);
-					$classement->cherchePositionMat($param['highlight']);
+				$param['highlight'] = $_POST['search'];
+				$persos = \persos\PersosDAO::getInstance();
+				if(!is_numeric($_POST['search'])) {
+					$p = $persos->SelectPersoByName($_POST['search']);
+					if($p) {
+						$param['highlight'] = $p['id'];
+					}
 				}
+				$classement->cherchePositionMat($param['highlight']);
 				//$param['page'] = $rang;
 			}		
 				
@@ -258,6 +269,6 @@ if(isset($_POST['highlight'])) {
 			
 
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT."/template/footer_new.php");
 //------------
 ?>

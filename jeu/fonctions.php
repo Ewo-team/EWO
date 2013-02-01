@@ -1,17 +1,19 @@
 <?php
+
+use \persos\event\eventManager as eventManager;
+
 // On include la classe processingEvents
 if (!isset($root_url)) {
 	$root_url ='./..';
 }
-include_once($root_url.'/eventsManager/eventsManager.php');
-include_once($root_url.'/event/eventManager.php');
-include_once($root_url.'/event/special.php');
-include_once($root_url.'/persos/medailles.php');
-include_once($root_url.'/jeu/gainsxp.php');
-include_once($root_url.'/connexion/forum/ewo_forum.php');
+
+include_once(SERVER_ROOT.'/persos/event/special.php');
+include_once(SERVER_ROOT.'/persos/medailles.php');
+include_once(SERVER_ROOT.'/jeu/gainsxp.php');
+include_once(SERVER_ROOT.'/lib/forum/ewo_forum.php');
 
 //Inlcude des fonction de controle des interactions
-include_once($root_url.'/admin/antitriche/class/InterGeoLogger.php.inc');
+include_once(SERVER_ROOT.'/admin/antitriche/class/InterGeoLogger.php.inc');
 
 // Fonction de recuperation des infos de plan
 function recup_carte_info($plan) {
@@ -2219,12 +2221,7 @@ function applique_effet($tableau, $effet_id, $cible, $cible2=array(0,'',''), $rt
 
 		case 'event_mouv' :
 			if ($cible[1]=='allie' || $cible[1]=='ennemi' || $cible[1]=='both' || $cible[1]=='persos') {
-				/*$eventManager = new EventsManager($cible[0],'mouvement');
-				$eventManager->addEvent('x',0);
-				$eventManager->addEvent('y',0);
-				$eventManager->addEvent('field',0);
-				$eventManager->commitEvent();*/
-				
+			
 				$em = new eventManager();
 				$ev1 = $em->createEvent('mouv');
 				$ev1->setSource($cible[0], 'perso');

@@ -67,7 +67,8 @@ class VariableStorage {
 
 //Fallback if apc in not present
 if(!function_exists('apc_fetch')){
-	function apc_fetch($p1=null,$p2=null,$p3=null){
+	function apc_fetch($p1=null,&$p2=null,$p3=null){
+		$p2 = false;
 		return false;
 	}
 	function apc_add($p1=null,$p2=null,$p3=null){
