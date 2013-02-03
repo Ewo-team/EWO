@@ -6,5 +6,5 @@
  * @version 1.0
  * @package template
  */
-include($template_url."/index_jeux.php");
+include(SERVER_ROOT . $template_url."/index_jeux.php");
 ?>

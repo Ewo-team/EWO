@@ -48,8 +48,11 @@ class eventManager {
 	}
 
 	public function createEvent($name='basic'){
-		$ref = new event($this->date, $name);
+           
+		$ref = new \persos\event\event($this->date, $name);
+
 		$this->events[] = $ref;
+                
 		return $ref;
 	}
 	public function addToCV($perso_id, $mat_vic, $nom_vic, $type=0, $plan=1){

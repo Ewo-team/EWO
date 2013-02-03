@@ -1,6 +1,6 @@
 <?php
 
-use \persos\event\eventManager as eventManager;
+//use \persos\event\eventManager as eventManager;
 
 // On include la classe processingEvents
 if (!isset($root_url)) {
@@ -1275,8 +1275,7 @@ function getCaseDecors($id, $x, $y) {
 	$carte = mysql_fetch_array ($resultat);
 
 	if($carte['nom_decors'] != null) {
-			include_once ('../carte/carte.class.php'); 
-			$decors = Carte::prepareCarte($carte['nom_decors']);
+			$decors = \jeu\decors\Decors::prepareDecors($carte['nom_decors']);
 			
 			if($decors) {
 					return $decors->getCase($x,$y);
@@ -1483,8 +1482,8 @@ function respawn($id, $type='', $cible_spawn='') {
 
 
 function maj_pos($inc, $caracs) {
-	if ((isset($_SESSION['persos']['mouv_en_cours'][$inc]) && !$_SESSION['persos']['mouv_en_cours'][$inc]) || !isset($_SESSION['persos']['mouv_en_cours'][$inc])) {
-		$_SESSION['persos']['mouv_en_cours'][$inc]=true;
+    	if ((isset($_SESSION['persos']['mouv_en_cours'][$inc]) && !$_SESSION['persos']['mouv_en_cours'][$inc]) || !isset($_SESSION['persos']['mouv_en_cours'][$inc])) {
+            $_SESSION['persos']['mouv_en_cours'][$inc]=true;
 		$perso_id = $_SESSION['persos']['id'][$inc];
 		$pos_x_perso = $_SESSION['persos']['pos_x'][$inc];
 		$pos_y_perso = $_SESSION['persos']['pos_y'][$inc];
@@ -1546,6 +1545,8 @@ function maj_pos($inc, $caracs) {
 						}
 					}
 					else $pos_x_perso_new = $pos_x_perso;
+                                        
+                                        
 					// Le personnage est hors carte si la nouvelle position dépasse la taille maximale de la carte
 					// et si la carte n'est pas infinie sur le côté concerné.
 					$hors_carte = (($pos_x_perso_new<$x_min_carte) && !$carte['infini'][0]);
@@ -1581,6 +1582,7 @@ function maj_pos($inc, $caracs) {
 						$pos_x_perso=$pos['pos_x'];
 						$pos_y_perso=$pos['pos_y'];
 						$carte_pos=$pos['plan'];
+                                                
 						if ($pos['reussite'] == true) {
 
 							$ok=false;
@@ -1618,7 +1620,7 @@ function maj_pos($inc, $caracs) {
 							if($case == 'lave') {
 								$events = SPECIAL_EVENT::$INDEX;
 								$cout_pv = 40;		
-								$em = new eventManager();
+								$em = new persos\event\eventManager();
 								$ev1 = $em->createEvent('special');
 								$ev1->setSource($perso_id, 'perso');
 								$ev1->infos->addPublicInfo('m',$events['lave']);
@@ -1635,9 +1637,12 @@ function maj_pos($inc, $caracs) {
 
 							// On log le déplacement dans les évènements.
 
-							$em = new eventManager();
+							$em = new \persos\event\eventManager();
+                                                        echo 'ici';
 							$ev1 = $em->createEvent('mouv');
+                                                        
 							$ev1->setSource($perso_id, 'perso');
+                                                        
 							$ev1->infos->addPrivateInfo('x',$pos_x_perso);
 							$ev1->infos->addPrivateInfo('y',$pos_y_perso);
 							$ev1->infos->addPrivateInfo('p',$carte['nom']);
@@ -2222,7 +2227,7 @@ function applique_effet($tableau, $effet_id, $cible, $cible2=array(0,'',''), $rt
 		case 'event_mouv' :
 			if ($cible[1]=='allie' || $cible[1]=='ennemi' || $cible[1]=='both' || $cible[1]=='persos') {
 			
-				$em = new eventManager();
+				$em = new persos\event\eventManager();
 				$ev1 = $em->createEvent('mouv');
 				$ev1->setSource($cible[0], 'perso');
 				$ev1->infos->addPrivateInfo('x',0);
@@ -2680,8 +2685,10 @@ function activ_tour($id, $force_activ=false) {
                     change_galon($perso_id, 1);
                 }
 
-                $ef = new EwoForum($_SESSION['utilisateur']['id']);
-                $ef->setRank($perso_id);
+                //@TODO
+                //$ef = new EwoForum($_SESSION['utilisateur']['id']);
+                //$ef->setRank($perso_id);
+                //$ef->setRaceGrade($pseudo,$race,$grade,$galon_id);
 
 		//-- Calcule de la recup des pv / tour
 		$recup_pv = $caracs['recup_pv'] ;

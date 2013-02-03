@@ -19,7 +19,14 @@ class Loader {
         else
             echo $file;
     }
+    
+    public static function eventautoload($name){
+            if(file_exists(SERVER_ROOT."/persos/event/formatter/$name.php")){
+                include (SERVER_ROOT."/persos/event/formatter/$name.php");
+            }
+    }
 }
 
 Loader::registerAutoload("baseloaderClass");
+Loader::registerAutoload("eventautoload");
 ?>

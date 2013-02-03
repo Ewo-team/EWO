@@ -1,4 +1,6 @@
 <?php
+namespace jeu\carte;
+
 use \conf\ConnecteurDAO as ConnecteurDAO;
 
 include ("./couleurs.php");

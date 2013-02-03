@@ -5,7 +5,7 @@ if(!isset($root_url)){
 
 include_once($root_url.'/event/tools.php');
 include_once($root_url.'/jeu/fonctions.php');
-include_once($root_url.'/event/special.php');
+include_once(SERVER_ROOT.'/persos/event/special.php');
 
 class formatter extends tools{
 
