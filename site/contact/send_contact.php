@@ -19,6 +19,12 @@ $sujet = $_POST['sujet'];
 $auteur = $_POST['nom'];
 $text = $_POST['text'];
 
+$utilisateur = 'Utilisateur non-logué';
+
+if(isset($_SESSION['utilisateur']['nom'])) {
+	$utilisateur = $_SESSION['utilisateur']['nom'];
+}
+
 $ip = $_SERVER["REMOTE_ADDR"];
 
 $admin_mail = 'staff@ewo.fr';
@@ -32,6 +38,7 @@ if (!empty($mail) && !empty($sujet) && !empty($auteur) && !empty($text)){
 							<p>Sujet : $sujet</p>
 							<p>Auteur : $auteur</p>
 							<p>Mail : $email</p>
+							<p>Utilisateur : $utilisateur</p>
 							<p>Ip : $ip</p>
 							<p>Message : $text</p>
 							</body></html>";
@@ -41,6 +48,7 @@ if (!empty($mail) && !empty($sujet) && !empty($auteur) && !empty($text)){
 							Sujet : $sujet\n
 							Auteur : $auteur\n
 							Mail : $email\n
+							Utilisateur : $utilisateur\n
 							Ip : $ip\n
 							Message : $text\n";							
 
@@ -50,9 +58,9 @@ if (!empty($mail) && !empty($sujet) && !empty($auteur) && !empty($text)){
 	$mail->FromName = "Ewo";
 	$mail->From = $email;
 	$mail->Reply = $email;
-	$mail->Cc = $email;
+	$mail->AddCc($email);
 	
-	$mail->AddTo(admin_mail);
+	$mail->AddTo($admin_mail);
 	$mail->Subject = '[Ewo] Formulaire de contact';
 	
 	if($mail->Send()) {
