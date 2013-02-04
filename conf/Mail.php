@@ -162,7 +162,6 @@ class Mail {
 		);		
 		
 		$string_headers = implode("\n", $headers). "\n" . $emails .  implode("\n", $returns);
-		var_dump($string_headers);
-		return ;
+		return $string_headers;
 	}
 }
