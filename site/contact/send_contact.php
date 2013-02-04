@@ -53,15 +53,17 @@ if (!empty($mail) && !empty($sujet) && !empty($auteur) && !empty($text)){
 							
 	$mail->FromName = "Ewo";
 	$mail->From = $email;
-	$mail->AddTo('leomaradan@gmail.com', 'Ganesh')
+	$mail->AddTo('leomaradan@gmail.com', 'Ganesh');
 	$mail->AddBcc($email);
 	$mail->Subject = '[Ewo] Formulaire de contact';
 	
 	if($mail->Send()) {
-		echo 'OK';
+		echo 'OK<br><pre>';
 	} else {
-		print_r($mail->Log());
+		echo 'nok<br><pre>';
 	}
+	
+	print_r($mail);
 	
 	/*if(mail($admin_mail, '', $message, $headers)){
 		include(SERVER_ROOT . "template/header_new.php");
