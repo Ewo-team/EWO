@@ -19,7 +19,7 @@ use legions\LegionConfig as LegionConfig;
 use legions\NameManager as NameManager;
 use legions\DemandeUtilisateur as DemandeUtilisateur;
 
-$txt = '<strong>Cette faction n\'existe pas</strong>';
+$txt = '<strong>Cette l&eacute; n\'existe pas</strong>';
 
 if (isset($_GET['id'])) {
 
@@ -91,13 +91,23 @@ if (isset($_GET['id'])) {
                                  if ($legion->getLogoUrl() != '') {
                                     $txt .= '<img src="'. $legion->getLogoUrl(). '" alt="image legion" class="legionLogo"/>';
                                 }
-                                else if (file_exists('imgs/' . $legion->getId() . '.png')) {
-                                    $txt .= '<img src="imgs/' . $legion->getId() . '.png" alt="image legion" class="legionLogo"/>';
+                                else if (file_exists('blasons/' . $legion->getId() . '.png')) {
+                                    $txt .= '<img src="blasons/' . $legion->getId() . '.png" alt="image legion" class="legionLogo"/>';
                                 }
                                    $txt .=  '
                                 <p>
                                     '.nl2br(stripslashes($legion->getDescr())) . '
-				</p><br />
+                                    		
+                <ul>
+                	';
+                    for($l = 1;$l <= 5;++$l){
+                    	$link = 'getLink'.$l;
+                    	if(strlen($legion->$link()) > 0)
+                    		$txt .= '<li><a href="'.$legion->$link().')">'.$legion->$link().'</a></li>';
+                    }
+                	$txt .= '
+                </ul>
+				</p>
 				<hr class="legionHr"/><br />
 				<table class="legionPresTable"  style="width:90%;margin:auto;">
 					<tr>
