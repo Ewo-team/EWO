@@ -4,9 +4,9 @@ namespace conf;
 
 class Mail {
 
-	public $Bcc = array();
-	public $Cc = array();
-	public $To = array();
+	private $Bcc = array();
+	private $Cc = array();
+	private $To = array();
 	public $From;
 	public $FromName;
 	public $Reply;
@@ -22,6 +22,30 @@ class Mail {
 		$this->Separator = '-----=' . md5(uniqid(mt_rand())); 
 	}
 
+	public function AddTo($param1, $param2 = null) {
+		if($param2 == null) {
+			$this->To[] = $param1;
+		} else {
+			$this->To[$param2] = $param1;
+		}
+	}
+	
+	public function AddCc($param1, $param2 = null) {
+		if($param2 == null) {
+			$this->Cc[] = $param1;
+		} else {
+			$this->Cc[$param2] = $param1;
+		}	
+	}		
+	
+	public function AddBcc($param1, $param2 = null) {
+		if($param2 == null) {
+			$this->Bcc[] = $param1;
+		} else {
+			$this->Bcc[$param2] = $param1;
+		}	
+	}	
+	
 	public function Send() {
 	
 		if($this->validation()) {

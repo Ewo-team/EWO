@@ -53,8 +53,8 @@ if (!empty($mail) && !empty($sujet) && !empty($auteur) && !empty($text)){
 							
 	$mail->FromName = "Ewo";
 	$mail->From = $email;
-	$mail->To = 'leomaradan@gmail.com';
-	$mail->ToName = 'Ganesh';
+	$mail->AddTo('leomaradan@gmail.com', 'Ganesh')
+	$mail->AddBcc($email);
 	$mail->Subject = '[Ewo] Formulaire de contact';
 	
 	if($mail->Send()) {
