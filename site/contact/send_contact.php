@@ -35,7 +35,7 @@ if (!empty($mail) && !empty($sujet) && !empty($auteur) && !empty($text)){
 							<p>Message venant du formulaire de contact</p>
 							<p>Sujet : $sujet</p>
 							<p>Auteur : $auteur</p>
-							<p>Mail : $mail</p>
+							<p>Mail : $email</p>
 							<p>Ip : $ip</p>
 							<p>Message : $text</p>
 							</body></html>";
@@ -44,10 +44,13 @@ if (!empty($mail) && !empty($sujet) && !empty($auteur) && !empty($text)){
 							Message venant du formulaire de contact\n
 							Sujet : $sujet\n
 							Auteur : $auteur\n
-							Mail : $mail\n
+							Mail : $email\n
 							Ip : $ip\n
 							Message : $text\n";							
 
+	$mail->MessageHtml = $messageHtml;
+	$mail->MessageText = $messageText;
+							
 	$mail->FromName = "Ewo";
 	$mail->From = $email;
 	$mail->To = 'leomaradan@gmail.com';
