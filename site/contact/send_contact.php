@@ -26,10 +26,6 @@ $admin_mail = 'staff@ewo.fr';
 $mail = new \conf\Mail();
 
 if (!empty($mail) && !empty($sujet) && !empty($auteur) && !empty($text)){
-	/*$headers ="From: Ewo<".$mail.">"."\n";
-	$headers .="Reply-To: ".$mail."\n";
-	$headers .='Content-Type: text/html; charset="iso-8859-1"'."\n"; 
-	$headers .='Content-Transfer-Encoding: 8bit';*/
 			
 	$messageHtml = "<h1>EWO</h1>
 							<p>Message venant du formulaire de contact</p>
@@ -53,27 +49,25 @@ if (!empty($mail) && !empty($sujet) && !empty($auteur) && !empty($text)){
 							
 	$mail->FromName = "Ewo";
 	$mail->From = $email;
-	$mail->AddTo('leomaradan@gmail.com', 'Ganesh');
-	$mail->AddBcc($email);
+	$mail->Reply = $email;
+	$mail->Cc = $email;
+	
+	$mail->AddTo(admin_mail);
 	$mail->Subject = '[Ewo] Formulaire de contact';
 	
 	if($mail->Send()) {
-		echo 'OK<br><pre>';
+		$titre = "Message envoyé";
+		$text = "Votre message vient d\'être envoyé, les administrateurs du site feront au plus vite pour vous apporter une réponse.";
+		$root = "..";
+		$lien = "..";
+		gestion_erreur($titre, $text, $root, $lien);		
 	} else {
-		echo 'nok<br><pre>';
+		$titre = "Message non envoyé";
+		$text = "En raison d\'un problème technique, le message n\'a pu être envoyé.";
+		$root = "..";
+		$lien = "..";
+		gestion_erreur($titre, $text, $root, $lien);	
 	}
-	
-	print_r($mail);
-	
-	/*if(mail($admin_mail, '', $message, $headers)){
-		include(SERVER_ROOT . "template/header_new.php");
-			echo '<p>Votre message vient d\'être envoyé, les administrateurs du site feront au plus vite pour vous apporter une réponse.</p>';
-		include(SERVER_ROOT . "/template/footer_new.php");
-	}else{	
-		include(SERVER_ROOT."/template/header_new.php");
-			echo '<p>Le message n\'a pu être envoyé</p>';
-		include(SERVER_ROOT . "/template/footer_new.php");
-	}*/
 }else{
 		$titre = "Erreur dans le message";
 		$text = "Il faut remplir les champs avant d'envoyer !";

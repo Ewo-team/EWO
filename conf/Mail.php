@@ -15,10 +15,6 @@ class Mail {
 	public $MessageText;
 	public $MessageHtml;
 	private $Separator;
-	
-	private $String_To;	
-	private $String_Headers;	
-	private $String_Msg;	
 
 	public function __construct() {
 		$this->Separator = '-----=' . md5(uniqid(mt_rand())); 
@@ -54,20 +50,16 @@ class Mail {
 			$to = '';
 			
 			foreach($this->To as $key => $value) {
-				$to .= is_numeric($key) ? $value : '"' . mb_encode_mimeheader($key) . '" <' . $value . '>,';
+				$to .= is_numeric($key) ? $value.',' : '"' . mb_encode_mimeheader($key) . '" <' . $value . '>,';
 			}
 			
 			$to = substr($to,0,-1);
-			
-			$this->String_To = $to;
+
 
 			$headers = $this->getHeaders();
 			
 			$msg = $this->getMessageText();
 			$msg .= $this->getMessageHtml();
-			
-			$this->String_Headers = $headers;
-			$this->String_Msg = $msg;
 			
 			$send = mail($to, '=?UTF-8?B?' . base64_encode($this->Subject) . '?=', $msg, $headers);		
 			
@@ -114,7 +106,7 @@ class Mail {
 	
 	private function getMessageHtml() {
 		$message = '--'.$this->Separator."\n";
-		$message .= 'Content-Type: text/html; charset="iso-8859-1"'."\n"; 
+		$message .= 'Content-Type: text/html; charset="UTF-8"'."\n"; 
 		$message .= 'Content-Transfer-Encoding: 8bit'."\n\n"; 
 		$message .= $this->MessageHtml."\n\n"; 
 		$message .= '--'.$this->Separator."\n"; 	
@@ -125,7 +117,7 @@ class Mail {
 	private function getHeaders() {
 	
 		$from        = empty($this->FromName) ? $this->From : '"' . mb_encode_mimeheader($this->FromName) . '" <' . $this->From . '>';	
-	
+		
 		if(isset($this->Reply)) {
 			$reply        = empty($this->ReplyName) ? $this->Reply : '"' . mb_encode_mimeheader($this->ReplyName) . '" <' . $this->Reply . '>';			
 		} else {
@@ -139,20 +131,20 @@ class Mail {
 			$cc = '';
 			
 			foreach($this->Cc as $key => $value) {
-				$cc .= is_numeric($key) ? $value : '"' . mb_encode_mimeheader($key) . '" <' . $value . '>,';
+				$cc .= is_numeric($key) ? $value.',' : '"' . mb_encode_mimeheader($key) . '" <' . $value . '>,';
 			}
 			
-			$emails .= 'Cc: '.substr($cc,0,-1);
+			$emails .= 'Cc: '.substr($cc,0,-1). "\n";
 		}
 		
 		if(count($this->Bcc) > 0) {
 			$bcc = '';
 			
 			foreach($this->Bcc as $key => $value) {
-				$bcc .= is_numeric($key) ? $value : '"' . mb_encode_mimeheader($key) . '" <' . $value . '>,';
+				$bcc .= is_numeric($key) ? $value.',' : '"' . mb_encode_mimeheader($key) . '" <' . $value . '>,';
 			}
 			
-			$emails .= 'Bcc: ' . substr($bcc,0,-1);			
+			$emails .= 'Bcc: ' . substr($bcc,0,-1). "\n";			
 		}
 		
 		$headers    = array
@@ -168,7 +160,9 @@ class Mail {
 			'Return-Path: ' . $from, 
 			'X-Originating-IP: ' . $_SERVER['SERVER_ADDR']
 		);		
-
-		return implode("\n", $headers) . $emails .  implode("\n", $returns);
+		
+		$string_headers = implode("\n", $headers). "\n" . $emails .  implode("\n", $returns);
+		var_dump($string_headers);
+		return ;
 	}
 }
