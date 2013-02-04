@@ -48,8 +48,6 @@ global $root_url;
 		}
 }
 function annonce_mixtes($nb) {
-    
-        global $root_url;
         
 	$tableau = array();
 
@@ -71,11 +69,10 @@ function annonce_mixtes($nb) {
 				$jour = $year[2];
 				$lienblog = $annee.'/'.$mois.'/'.$jour;			
 				$time = strtotime($ligne['post_date']);
-                                $tableau[$time] = "<fieldset>
-                                <legend><b>".$ligne['post_title']."</b></legend><br />
-                                <p>".nl2br(tronquage($ligne['post_content'],300))."</p>
-                                <a href='http://blog.ewo-le-monde.com/$lienblog/".$ligne['post_name']."'>Suite</a>
-                                </fieldset>";
+                                $tableau[$time] = array();
+                                $tableau[$time]['titre'] = $ligne['post_title'];
+                                $tableau[$time]['corps'] = nl2br(tronquage($ligne['post_content'],300));
+                                $tableau[$time]['lien'] = "http://blog.ewo-le-monde.com/$lienblog/".$ligne['post_name'];
 		}
 		mysql_close($ewo_blog);
 		
@@ -104,27 +101,37 @@ function annonce_mixtes($nb) {
 
 			$time = $ligne['topic_time'];
 			
-			$tableau[$time] = "<fieldset>
-						<legend><b>".$ligne['topic_title']."</b></legend><br />
-						<p>".tronquage($texte,500)."</p>
-                                                <a href='".$root_url."/forum/viewtopic.php?f=2&t=".$ligne['topic_id']."'>Suite</a>
-						</fieldset>";
+                        $tableau[$time] = array();
+                        $tableau[$time]['titre'] = $ligne['topic_title'];
+                        $tableau[$time]['corps'] = tronquage($texte,500);
+                        $tableau[$time]['lien'] = SERVER_URL . "/forum/viewtopic.php?f=2&t=".$ligne['topic_id'];                        
 		}
 		mysql_close($ewo_forumannonce);
 		
 		$ewo_bdd = bdd_connect('ewo');	
 		
-		krsort($tableau);
+                krsort($tableau);
 		reset($tableau);
+                
+                return $tableau;
+                
+		/*
 		
 		for($i = 0; $i < $nb; $i++)
 		{
-			$ligne = current($tableau);
-			
-			echo $ligne;
-			
+                    $ligne = current($tableau);
+                    
+                    if($i < $vedette) {
+                        
+                    } else {
+                        echo "<fieldset>
+                            <legend><b>".$ligne['titre']."</b></legend><br />
+                            <p>".$ligne['corps']."</p>
+                            <a href='".$ligne['lien']."'>Suite</a>
+                            </fieldset>";    
+                    }			
 			next($tableau);
-		}
+		}*/
 		
 }
 /**

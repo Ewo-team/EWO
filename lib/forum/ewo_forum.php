@@ -39,9 +39,15 @@ class EwoForum {
         $this->forum->addPerso($pseudo, $clean, $pass, $mail, $email_hash);
     }
     
-    public function setRaceGrade($pseudo,$race,$grade,$galon) {
+    public function setRaceGrade($id,$race,$grade,$galon) {
         
-        $clean = utf8_clean_string($pseudo);
+        if(is_numeric($id)) {
+            
+        } else {
+            $clean = utf8_clean_string(id);
+        }
+        
+        
         
         $id = $this->forum->selectPerso($clean);
         

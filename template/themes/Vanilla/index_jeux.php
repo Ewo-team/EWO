@@ -14,7 +14,7 @@ $page_jeu = "1";
 <div id='carac'>
 <?php
 	//-- Carac entete du personnage	
-	include("carac.php");
+	include(SERVER_ROOT . "/jeu/carac.php");
 ?>
 </div>	
 
@@ -24,12 +24,12 @@ $page_jeu = "1";
 	<?php	
 		if($rose == 0) {
                     //-- Rose des vents	
-                    include("panel_mouvement.php");
+                    include(SERVER_ROOT . "/jeu/panel_mouvement.php");
                 }
 		//-- Dés de jeux
-		include("infos.php");
+		include(SERVER_ROOT . "/jeu/infos.php");
 		//-- Caracteristique du personnage
-		include("info_carac.php");
+		include(SERVER_ROOT . "/jeu/info_carac.php");
 
       
 	?>	
@@ -38,7 +38,7 @@ $page_jeu = "1";
 	<?php	
 
 		//-- Damier du jeux
-		include("damier.php");
+		include(SERVER_ROOT . "/jeu/damier.php");
 
 	?>		
 	</div>

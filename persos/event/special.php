@@ -1,5 +1,7 @@
 <?php
 
+namespace persos\event;
+
 class SPECIAL_EVENT {
 	public static $TEXT = array(
 		1 => 'a pris un bain de lave</b>',

@@ -1,13 +1,12 @@
 <?php
-session_start();
 
-$root_url = "..";
+use persos\event\eventFormatter as eventFormatter;
+require_once __DIR__ . '/../conf/master.php';
 
-include_once($root_url."/conf/master.php");
-include_once($root_url."/persos/fonctions.php");
-include_once("./fonctions.php");
-include_once($root_url.'/event/eventManager.php');
-include_once($root_url.'/event/eventFormatter.php');
+
+include_once(SERVER_ROOT . '/persos/fonctions.php');
+include_once(SERVER_ROOT . '/jeu/fonctions.php');
+
 
 // Paramètres de connexion à la base de données
 $ewo_bdd = bdd_connect('ewo');
@@ -685,7 +684,7 @@ if(isset($action_id)){
 					$cible_des_def    = carac_max ($cible_info['race_id'], $cible_info['grade_id'], 'des', $cible_caracs['niv_des'], $cible_id) - $cible_caracs['des_attaque'];
 
 					//Lancé des jets d'attaque et de défense
-					$des = ewo_dice($caracs['des_attaque'], $cible_des_def);
+					$des = \conf\Helpers::Dice($caracs['des_attaque'], $cible_des_def);
 					$perso_jet        = $des[0] + $caracs['att'];
 					$cible_jet        = $des[1] + $cible_caracs['def'] - $cible_caracs['malus_def'];
 
@@ -961,7 +960,7 @@ if(isset($action_id)){
 	 * GESTION DES EVENEMENTS
 	 * ========================================================================= */
 
-	$evman = new EventManager();
+	$evman = new persos\event\eventManager();
 
 	//$_SESSION['debug_event0'] = $_SESSION;
 if(!isset($_SESSION['gain_xp']['att']))

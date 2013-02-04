@@ -2,14 +2,7 @@
 
 namespace persos\event;
 
-function eventautoload($name){
-	if(file_exists(SERVER_ROOT."/persos/event/formatter/$name.php")){
-		require_once(SERVER_ROOT."/persos/event/formatter/$name.php");
-	}
-}
 
-// Enregistre la fonction comme chargeur automatique de classe
-spl_autoload_register('eventautoload');
 
 class eventInfos {
 
@@ -61,7 +54,8 @@ class event {
 	private $type = NULL, $master = NULL, $date = NULL;
 	public $infos = NULL;
 
-	function __construct($date, $type, $public=null, $private=null){
+	public function __construct($date, $type, $public=null, $private=null){
+            echo "ici: $date $type";
 		$this->type = $type;
 		$this->date = $date;
 		$this->infos = new eventInfos($public, $private);

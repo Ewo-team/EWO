@@ -1,21 +1,25 @@
 <?php
-session_start();
+
+namespace jeu;
+use \compte\Compte as Compte;
+
+require_once(__DIR__ .'/../conf/master.php');
+
 if (!isset($_SESSION['utilisateur']['id'])) {
-	header("location:../index.php");
+    header("location:../index.php");
 }
 $template_mage = false;
 $jeu = true;
-$root_url = "..";
 
 $css_files = 'decors,damier';
 
-require_once($root_url.'/conf/master.php');
+
 $ewo = bdd_connect('ewo');
 
 /*-- Connexion basic requise --*/
 ControleAcces('utilisateur',1);
 /*-----------------------------*/
-$compte = new compte\Compte($_SESSION['utilisateur']['id']);
+$compte = new Compte($_SESSION['utilisateur']['id']);
 
 $statut_vacances = $compte->statutVacances();
 
@@ -50,8 +54,8 @@ if (isset($_GET['perso_id'])) {
 	exit;
 }
 
-include("./../persos/fonctions.php");
-include("./fonctions.php");
+include(SERVER_ROOT . '/persos/fonctions.php');
+include(SERVER_ROOT . '/jeu/fonctions.php');
 
 $caracs		= calcul_caracs();
 $vision = max(1,$caracs["perception"]);
@@ -87,7 +91,7 @@ if (isset($template_mage) && $template_mage == true) {
 	$width__ = "";
 }
 
-include($root_url."/template/header_new.php");
+include(SERVER_ROOT."/template/header_new.php");
 
 // Recupération des infos issues de la dernière action effectuée.
 if (isset($_SESSION['temp']['info_action'])) {
@@ -227,6 +231,7 @@ if ($is_spawn) {
 
 	$icone_perso = icone_persos($perso_id);
 }
+
 // Récupération de toutes les infos nécéssaires au fonctionnement des module damier et action.
 // infos.php, damier.php et panel_actions.php peuvent ainsi être inclus dans n'importe quel ordre.
 include("infos_damier.php");
@@ -256,10 +261,9 @@ if (isset($_POST['maj_des'])) {
 $caracs = calcul_caracs();
 
 //-- Index jeux --
-include($root_url."/template/index_jeux.php");
+include(SERVER_ROOT."/template/index_jeux.php");
 //------------
-
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT."/template/footer_new.php");
 //------------
 ?>

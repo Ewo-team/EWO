@@ -1,4 +1,9 @@
-<!-- Debut contour -->
+<?php 
+
+namespace jeu;
+use jeu\decors\Decors as Decors;
+
+?><!-- Debut contour -->
 <div class="block conteneur" id="block-7" style="z-index:800">
 <div class='conteneur_titre'>Damier</div>
 <!-- conteneur -->
@@ -8,7 +13,7 @@ $l_allie="";
 $l_ennemi="";
 $l_tous="";
 
-$image_loc = "./../images/";
+$image_loc = SERVER_URL . "/images/";
 $perso_x = $_SESSION['persos']['pos_x'][$id];
 $perso_y = $_SESSION['persos']['pos_y'][$id];
 
@@ -47,23 +52,23 @@ if($is_spawn){
         }
     }
 
-        if($l_allie!="" && $bal_percept){?>
-	<span class="tab_list_perso"><a href="../messagerie/index.php?id=<?php echo $perso_id ?>&dest=<?php echo $l_allie ?>#reponse">Message aux alli&eacute;s visibles</a></span> 
-	<?php }
-		if($l_ennemi!="" && $bal_percept){?>
-	<span class="tab_list_perso"><a href="../messagerie/index.php?id=<?php echo $perso_id ?>&dest=<?php echo $l_ennemi ?>#reponse">Message aux ennemis visibles</a></span> 
-	<?php }
-		if($l_tous!="" && $bal_percept){?>
-	<span class="tab_list_perso"><a href="../messagerie/index.php?id=<?php echo $perso_id ?>&dest=<?php echo $l_tous ?>#reponse">Message &agrave; tous</a></span> 
-	<?php }    
- 
-    
+    if ($l_allie != "" && $bal_percept) {
+        echo '<span class="tab_list_perso"><a href="' . SERVER_URL . '/messagerie/index.php?id=' . $perso_id . '&dest=<?php echo ' . $l_allie . '#reponse">Message aux alli&eacute;s visibles</a></span>';
+    }
+    if ($l_ennemi != "" && $bal_percept) {
+        echo '<span class="tab_list_perso"><a href="' . SERVER_URL . '/messagerie/index.php?id=' . $perso_id . '&dest' . $l_ennemi . '#reponse">Message aux ennemis visibles</a></span>';
+    }
+    if ($l_tous != "" && $bal_percept) {
+        echo '<span class="tab_list_perso"><a href="' . SERVER_URL . '/messagerie/index.php?id=' . $perso_id . '&dest=' . $l_tous . '#reponse">Message &agrave; tous</a></span>';
+    }
+
+
 // Chargement de la classe Carte, uniquement pour Althian pour le moment
 $decors = null;
 if($nom_decors != null) {
-	include ('../carte/carte.class.php'); 
-	$decors = Carte::prepareCarte($nom_decors);
+	$decors = Decors::prepareDecors($nom_decors);
 }
+
 //--------- Damier ---------//
 $zindex = 5000;
 echo '<table class="damier_corps" CELLPADDING="0" CELLSPACING="0" border="0">';

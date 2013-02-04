@@ -1,20 +1,16 @@
 <?php
 
-session_start();
+require_once __DIR__ . '/conf/master.php';
+
 if(!isset($_SESSION['utilisateur']['id'])){
 	header("location:../index.php");
 }
 
-//-- Header --
-require('ref.php.inc');
-
-require_once($root_url.'/conf/master.php');
-
 /*-- Connexion basic requise --*/
 ControleAcces('utilisateur',1);
 
-include("./../persos/fonctions.php");
-include("./../jeu/fonctions.php");
+include SERVER_ROOT . '/persos/fonctions.php';
+include SERVER_ROOT . '/jeu/fonctions.php';
 
 $id_utilisateur = $_SESSION['utilisateur']['id'];
 //print_r($_SESSION);

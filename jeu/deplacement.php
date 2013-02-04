@@ -1,31 +1,31 @@
 <?php
-session_start();
+
+namespace jeu;
+use persos\event\eventManager as eventManager;
+use persos\event\SPECIAL_EVENT as SPECIAL_EVENT;
+
+
+require_once __DIR__ . '/../conf/master.php';
 
 $id = $_SESSION['persos']['id'][0];
 
 $lock = rand();
 $_SESSION['persos']['mouv_lock'][$id] = $lock;
 
-$root_url = "..";
-include ($root_url."/conf/master.php");
 
-include_once($root_url.'/eventsManager/eventsManager.php');
-include_once($root_url.'/event/eventManager.php');
-include_once($root_url.'/event/special.php');
+include_once(SERVER_ROOT.'/persos/event/special.php');
 
 /*-- Connexion requise --*/
 ControleAcces('utilisateur',1);
 /*-----------------------*/
 
-
-include("../persos/fonctions.php");
-include("./fonctions.php");
+include_once(SERVER_ROOT.'/persos/fonctions.php');
+include_once(SERVER_ROOT.'/jeu/fonctions.php');
 
 // Param�tres de connexion � la base de donn�es
 $ewo_bdd_connect = bdd_connect('ewo');
 
 $perso_id = $_SESSION['persos']['current_id'];
-
 
 $is_spawn=false;
 
@@ -43,7 +43,7 @@ if($pos = mysql_fetch_array ($resultat)){
 if($is_spawn){
 	activ_tour($_SESSION['persos']['id'][0]);
 
-
+        
 
 
 	mysql_query('SET autocommit=0;');
@@ -54,9 +54,12 @@ if($is_spawn){
 	$_SESSION['persos']['carte'][$id] = $pos["carte_id"];
 	if($caracs['mouv'] > 0){
 		if($lock == $_SESSION['persos']['mouv_lock'][$id]) {
+                        unset($_SESSION['persos']['mouv_en_cours'][$id]);
 			maj_pos($id, $caracs);
+                        
 		}
 	}
+        
 	$caracs = calcul_caracs($_SESSION['persos']['current_id']);
 	if ($caracs['pv'] <=0) {
 		$events = SPECIAL_EVENT::$INDEX;
@@ -70,6 +73,7 @@ if($is_spawn){
 	mysql_query('SET autocommit=1;');
 	mysql_close();
 }
+
 //print_r($_SESSION);
 unset($_SESSION['persos']['mouv_lock'][$id]);
 header("location:./index.php?perso_id=".$id."#p");

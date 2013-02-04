@@ -1,7 +1,8 @@
 <?php
 
+namespace jeu\decors;
 
-class Carte {
+class Decors {
 
 	private $taillecarte;
 	private $carte;
@@ -9,21 +10,21 @@ class Carte {
 
 	private function __construct($carte) {
 	
-		// Vérifie si la carte existe. ATTENTION, pas de traitement de vérification:
+		// Vï¿½rifie si la carte existe. ATTENTION, pas de traitement de vï¿½rification:
 		include('../images/cartes/maps/'.$carte.'.php');
 		
 		$this->taillecarte = $carte_taille;
 		$this->carte = $carte;
 		$this->chargement = array();
 		
-		//echo "Création d'une map $carte d'offset $carte_taille";
+		//echo "Crï¿½ation d'une map $carte d'offset $carte_taille";
 	}
 	
 	public function getCase($x, $y) {
 	
 		static $carte;
 		static $chargement = array();
-		//verifie si la map à été chargée
+		//verifie si la map ï¿½ ï¿½tï¿½ chargï¿½e
 		$nom = $this->carte.'_'.ceil($x/$this->taillecarte).'_'.ceil($y/$this->taillecarte);
 		//print_r($chargement);
 		if(!in_array('MAP_'.strtoupper($nom),$chargement)) {
@@ -38,11 +39,11 @@ class Carte {
 		}
 	}
 	
-	public static function prepareCarte($carte) {
+	public static function prepareDecors($carte) {
 		//echo " - preparation de la carte $carte";
 		if(file_exists('../images/cartes/maps/'.$carte.'.php')) {
 			//echo " - elle existe!";
-			return new Carte($carte);			
+			return new Decors($carte);			
 		}
 		//echo " - on renvoie la carte";
 		return null;
