@@ -1,9 +1,9 @@
 <?php
 
-require_once __DIR__ . '/conf/master.php';
+require_once __DIR__ . '/../conf/master.php';
 
 if(!isset($_SESSION['utilisateur']['id'])){
-	header("location:../index.php");
+	exit;
 }
 
 /*-- Connexion basic requise --*/

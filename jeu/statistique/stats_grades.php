@@ -1,7 +1,8 @@
 <?php
 //-- Header --
-$root_url = "..";
-include($root_url."/template/header_new.php");
+require_once __DIR__ . '/../../conf/master.php';
+
+include(SERVER_ROOT . "/template/header_new.php");
 /*-- Connexion requise --*/
 ControleAcces('anim;admin',1);
 /*-----------------------*/
@@ -103,6 +104,6 @@ ControleAcces('anim;admin',1);
 </div>
 <?php
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT."/template/footer_new.php");
 //------------
 ?>

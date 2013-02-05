@@ -41,8 +41,7 @@ class CompteDAO extends ConnecteurDAO {
     }
 
     public function SelectUser($id) {
-        $sql = 'SELECT `nom`, `email`, `passwd`, `passwd_forum`, `date_enregistrement`, `droits`, `options`, `codevalidation`, `template`, `icones_pack`, `grille`, `rose`, `redirection` 
-                    FROM `utilisateurs` WHERE id = ?';
+        $sql = 'SELECT * FROM `utilisateurs` WHERE id = ?';
         $this->prepare($sql);
         $this->executePreparedStatement(null, array($id));
         $fetch = $this->fetchAll_assoc();
@@ -51,6 +50,13 @@ class CompteDAO extends ConnecteurDAO {
         }
         return null;
     }
+	
+	public function SelectUserIdByMat($mat) {
+		$sql = 'SELECT utilisateur_id FROM persos WHERE id = ?';
+        $this->prepare($sql);
+        $this->executePreparedStatement(null, array($mat));
+        return $this->fetch_array();   		
+	}
     
     public function SelectUserVacancies($id) {
         $sql = 'SELECT * FROM utilisateurs_vacances WHERE utilisateur_id = ?'; 

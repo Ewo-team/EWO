@@ -1,11 +1,13 @@
 <?php
 //-- Header --
-$root_url = "..";
+
 $header['title'] = "Statistiques de jeu";
-//$header['desc'] = "";
-include($root_url."/template/header_new.php");
+require_once __DIR__ . '/../../conf/master.php';
+
+include(SERVER_ROOT . "/template/header_new.php");
+
 //------------
-include ($root_url."/statistique/echantillon.php");
+include (SERVER_ROOT."/jeu/statistique/echantillon.php");
 
 if(isset($_SESSION['stat']['default']) AND $_SESSION['stat']['default'] == 'ok'){
 	$ret_date_fin = $_SESSION['stat']['ret_date_fin'];
@@ -49,6 +51,6 @@ $liste_perso = liste_personnage($ret_date_debut, $ret_date_fin, 'total');
 		<div id="contain" style="width: 800px; height: 400px; margin: 0 auto"></div>		
 <?php
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT."/template/footer_new.php");
 //------------
 ?>

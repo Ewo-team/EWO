@@ -7,8 +7,8 @@
  * @package affiliation
  */
     //-- Header --
-    $root_url = "..";
-    include($root_url."/template/header_new.php");
+    require __DIR__ . '/../../conf/master.php';
+    include(SERVER_ROOT."/template/header_new.php");
 
     //Il faut être connecté
     ControleAcces('utilisateur',1);
@@ -66,7 +66,7 @@
         $links  = '<div id="affiBoard">'.$links.'</div><hr class="affiHr"/>';
     }
     echo '
-	<link rel="stylesheet" href="',$root_url,'/affiliation/style.css" type="text/css" />
+	<link rel="stylesheet" href="',SERVER_ROOT,'/affiliation/style.css" type="text/css" />
         '.$links.'
         <div id="legion">
     ';
@@ -77,6 +77,6 @@
         ';
 
     //-- Footer --
-    include($root_url."/template/footer_new.php");
+    include(SERVER_ROOT."/template/footer_new.php");
     //------------
 ?>

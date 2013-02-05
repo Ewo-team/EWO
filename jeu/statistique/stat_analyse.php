@@ -1,7 +1,5 @@
 <?php
-session_start();
-$root_url = "..";
-include ($root_url."/conf/master.php");
+require_once __DIR__ . '/../../conf/master.php';
 
 if(!empty($_POST['debut_date']) AND !empty($_POST['fin_date'])){
 	// Paramètres de connexion à la base de données

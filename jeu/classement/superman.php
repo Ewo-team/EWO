@@ -7,10 +7,11 @@
  * @package classement
  */
 //-- Header --
-$root_url = "..";
-include($root_url."/template/header_new.php");
+require_once __DIR__ . '/../../conf/master.php';
 
-include($root_url."/persos/fonctions.php");
+include(SERVER_ROOT . "/template/header_new.php");
+
+include(SERVER_ROOT . "/persos/fonctions.php");
 
 ControleAcces('utilisateur',1);
 
@@ -99,14 +100,14 @@ for ($inc=1; $inc<=4; $inc++)
 
 	<table class='tab_list_perso'>
 		<tr>
-			<td class='tab_td_icone'><img src='<?php echo $root_url; ?>/images/<?php echo $url; ?>' alt='avatar' title='Avatar de <?php echo $name; ?>' /></td>
+			<td class='tab_td_icone'><img src='<?php echo SERVER_URL; ?>/images/<?php echo $url; ?>' alt='avatar' title='Avatar de <?php echo $name; ?>' /></td>
 			<td class='tab_td'><?php echo $name; ?></td>
 		</tr>
 		<tr>
 			<td colspan='2'>
 				<table class='tab_list_perso_carac'>
 					<tr class='tab_tr_ligne_titre'>
-						<td colspan='2'><img class='tab_puce' src='<?php echo $root_url; ?>/images/transparent.png' alt='puce' /> Caract&eacute;ristique du joueur :</td>
+						<td colspan='2'><img class='tab_puce' src='<?php echo SERVER_URL; ?>/images/transparent.png' alt='puce' /> Caract&eacute;ristique du joueur :</td>
 					</tr>		
 					<tr class='tab_tr_ligne0'>
 						<td>Point de vie : </td>
@@ -152,6 +153,6 @@ for ($inc=1; $inc<=4; $inc++)
 <?php	
 
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT."/template/footer_new.php");
 //------------
 ?>

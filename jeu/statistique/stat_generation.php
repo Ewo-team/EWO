@@ -1,7 +1,5 @@
 <?php
-session_start();
-include ("/usr/local/www/ewo/current/conf/connect.conf.php");
-include ("/usr/local/www/ewo/current/conf/fonctions.php");
+require_once __DIR__ . '/../../conf/master.php';
 
 $ewo = bdd_connect('ewo');
 

@@ -6,7 +6,11 @@
  * @author Herbomez Benjamin <benjamin.herbomez@gmail.com>
  * @version 1.0
  */
-session_start();
+require_once __DIR__ . '/../conf/master.php';
+
+if(!isset($_SESSION['utilisateur']['id'])){
+	exit;
+}
 
 /**
  * Les posts utilisés :
@@ -19,15 +23,12 @@ session_start();
             !isset($_POST['value']) || !is_numeric($_POST['value']))
         die();
 
-
-    require('ref.php.inc');
-
-    include_once($root_url . 'legion/class/LegionConfig.php.inc');
-    include_once($root_url . 'legion/class/LegionConfig.php.inc');
-    include_once($root_url . 'legion/class/ManagerFactory.php.inc');
-    include_once($root_url . 'legion/class/DroitManager.php.inc');
-    require_once($root_url . 'legion/class/LegionDAO.php.inc');
-    require_once($root_url . 'legion/class/LegionDroits.php.inc');
+    include_once(SERVER_ROOT . '/legion/class/LegionConfig.php.inc');
+    include_once(SERVER_ROOT . '/legion/class/LegionConfig.php.inc');
+    include_once(SERVER_ROOT . '/legion/class/ManagerFactory.php.inc');
+    include_once(SERVER_ROOT . '/legion/class/DroitManager.php.inc');
+    require_once(SERVER_ROOT . '/legion/class/LegionDAO.php.inc');
+    require_once(SERVER_ROOT . '/legion/class/LegionDroits.php.inc');
 
     use legions\LegionDAO       as LegionDAO;
     use legions\ManagerFactory  as ManagerFactory;

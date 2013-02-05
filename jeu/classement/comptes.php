@@ -7,11 +7,12 @@
  * @package classement
  */
 //-- Header --
-$root_url = "..";
-include($root_url."/template/header_new.php");
+require_once __DIR__ . '/../../conf/master.php';
 
-include($root_url."/persos/fonctions.php");
-include("./fonctions.php");
+include(SERVER_ROOT . "/template/header_new.php");
+
+include(SERVER_ROOT . "/persos/fonctions.php");
+include(SERVER_ROOT . "/jeu/classement/fonctions.php");
 
 ControleAcces('utilisateur',1);
 
@@ -114,11 +115,11 @@ switch($race) {
 			
 		?>
 		<div align="center">
-		<?php 	echo "<a href='$root_url/classement/comptes.php?jour=".$time_m."&nb_jours=$nb_jours'><= </a>";
+		<?php 	echo "<a href='".SERVER_URL."/classement/comptes.php?jour=".$time_m."&nb_jours=$nb_jours'><= </a>";
 				echo $time;
 				$now = date('d-m-Y',time());
 				if ($time_p <= $now)
-					echo "<a href='$root_url/classement/comptes.php?jour=".$time_p."&nb_jours=$nb_jours'> =></a><br/>";
+					echo "<a href='".SERVER_URL."/classement/comptes.php?jour=".$time_p."&nb_jours=$nb_jours'> =></a><br/>";
 		?>				
 		</div>
 				
@@ -268,6 +269,6 @@ Au total les Humains ont fièrement décimé <b><?php echo $nb_kill ?></b> perso
 </div>
 <?php
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT."/template/footer_new.php");
 //------------
 ?>

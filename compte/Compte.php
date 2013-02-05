@@ -145,7 +145,14 @@ function departVacances(){
                             return 'vacances';
                     }
             }
-    }    
+    }
+
+    public static function getCompteByUserId($id) {
+		$dao = CompteDAO::getInstance();
+		$uid = $dao->SelectUserIdByMat($id);
+		
+		return new Compte($uid[0]);		
+	}
 
 }
 

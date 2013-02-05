@@ -5,11 +5,13 @@
 * @author Herbomez Benjamin <benjamin.herbomez@gmail.com>
 * @version 1.0
 */
-session_start();
+require_once __DIR__ . '/../conf/master.php';
 
-    require('ref.php.inc');
+if(!isset($_SESSION['utilisateur']['id'])){
+	exit;
+}
 
-    require_once($root_url.'affiliation/class/AffiliationDAO.php.inc');
+    require_once(SERVER_ROOT . '/jeu/affiliation/class/AffiliationDAO.php.inc');
 
 
 

@@ -7,11 +7,12 @@
  * @package classement
  */
 //-- Header --
-$root_url = "..";
-include($root_url."/template/header_new.php");
+require_once __DIR__ . '/../../conf/master.php';
 
-include($root_url."/persos/fonctions.php");
-include("./fonctions.php");
+include(SERVER_ROOT . "/template/header_new.php");
+
+include(SERVER_ROOT . "/persos/fonctions.php");
+include(SERVER_ROOT . "/jeu/classement/fonctions.php");
 
 ControleAcces('utilisateur',1);
 
@@ -163,7 +164,6 @@ switch($race){
 		  <option value="30" <?php if($nb_jours==30){echo 'selected="selected"';}?>>30</option>
 		  <option value="45" <?php if($nb_jours==45){echo 'selected="selected"';}?>>45</option>
 	</select>
-	<input type="hidden" name="perso_id" value="<?php echo $id; ?>" />
 	<input type="hidden" name="jour" value="<?php echo $time; ?>" />
 	<input type="submit" value="Filtrer" /> <br/><br/>
 	</form>
@@ -188,18 +188,18 @@ switch($race){
 			
 		?>
 		<div align="center">
-		<?php 	echo "<a href='$root_url/classement/necro.php?croissant=$croissant&race=$race&nb_el=$nb_el&grade=$grade&jour=".$time_m."&nb_jours=$nb_jours'><=</a>";
+		<?php 	echo "<a href='".SERVER_URL."/jeu/classement/necro.php?croissant=$croissant&race=$race&nb_el=$nb_el&grade=$grade&jour=".$time_m."&nb_jours=$nb_jours'><=</a>";
 							echo $time;
-				echo "<a href='$root_url/classement/necro.php?croissant=$croissant&race=$race&nb_el=$nb_el&grade=$grade&jour=".$time_p."&nb_jours=$nb_jours'>=></a><br/>";
+				echo "<a href='".SERVER_URL."/jeu/classement/necro.php?croissant=$croissant&race=$race&nb_el=$nb_el&grade=$grade&jour=".$time_p."&nb_jours=$nb_jours'>=></a><br/>";
 							
 				if($page!=1){ 
-							echo "<a href='$root_url/classement/necro.php?page=".max(1,$page-1)."&croissant=$croissant&race=$race&nb_el=$nb_el&grade=$grade&jour=$time&nb_jours=$nb_jours'><</a>";
+							echo "<a href='".SERVER_URL."/jeu/classement/necro.php?page=".max(1,$page-1)."&croissant=$croissant&race=$race&nb_el=$nb_el&grade=$grade&jour=$time&nb_jours=$nb_jours'><</a>";
 							};
 				if($page_max!=0){
 					echo " Page ".$page." ";
 					};
 				if($page_max!=$page && $page_max!=0){
-							echo "<a href='$root_url/classement/necro.php?page=".min($page_max,$page+1)."&croissant=$croissant&race=$race&nb_el=$nb_el&grade=$grade&jour=$time&nb_jours=$nb_jours'>></a>"; 
+							echo "<a href='".SERVER_URL."/jeu/classement/necro.php?page=".min($page_max,$page+1)."&croissant=$croissant&race=$race&nb_el=$nb_el&grade=$grade&jour=$time&nb_jours=$nb_jours'>></a>"; 
 							}
 		?>				
 		</div>
@@ -248,9 +248,9 @@ switch($race){
 
 					echo "<tr class='$color winner$n'>";
 						echo "<td align='center'>".$type."</td>
-									<td align='center'><img src='../images/$url' alt='avatar'/><br/>".$nom." [<a href='../event/liste_events.php?id=$id_victime'>$id_victime</a>]</td>";
+									<td align='center'><img src='".SERVER_URL."/images/$url' alt='avatar'/><br/>".$nom." [<a href='../persos/event/liste_events.php?id=$id_victime'>$id_victime</a>]</td>";
 									if($type!='Destruction'){
-									echo "<td align='center'><img src='../images/$url_tueur' alt='avatar'/><br/>".nom_perso($id_perso)." [<a href='../event/liste_events.php?id=$id_perso'>$id_perso</a>]</td>";
+									echo "<td align='center'><img src='".SERVER_URL."/images/$url_tueur' alt='avatar'/><br/>".nom_perso($id_perso)." [<a href='../persos/event/liste_events.php?id=$id_perso'>$id_perso</a>]</td>";
 									}else {
 										echo "<td align='center'>".nom_cible($id_perso,'',true)."</td>";
 										}
@@ -261,19 +261,19 @@ switch($race){
 		</table>
 			<div align="center">
 		<?php 	if($page!=1){ 
-							echo "<a href='$root_url/classement/necro.php?page=".max(1,$page-1)."&croissant=$croissant&race=$race&nb_el=$nb_el'><</a>";
+							echo "<a href='".SERVER_URL."/jeu/classement/necro.php?page=".max(1,$page-1)."&croissant=$croissant&race=$race&nb_el=$nb_el'><</a>";
 							};
 				if($page_max!=0){
 					echo " Page ".$page." ";
 					};
 				if($page_max!=$page && $page_max!=0){
-							echo "<a href='$root_url/classement/necro.php?page=".min($page_max,$page+1)."&croissant=$croissant&race=$race&nb_el=$nb_el'>></a>"; 
+							echo "<a href='".SERVER_URL."/jeu/classement/necro.php?page=".min($page_max,$page+1)."&croissant=$croissant&race=$race&nb_el=$nb_el'>></a>"; 
 							}
 		?>					
 			</div>
 </div>
 <?php
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT."/template/footer_new.php");
 //------------
 ?>
