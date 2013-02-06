@@ -6,6 +6,9 @@
  * @version 1.0
  * @package template-defaut
  */
+
+require_once __DIR__ . '/../../../conf/master.php';
+
 $template_vanilla = true;
 $_SESSION['utilisateur']['template_mage']=true;
 
@@ -28,8 +31,6 @@ $_SESSION['utilisateur']['template_mage']=true;
 ?>
 
 <meta name="author" content="Ewo Team" />
-<meta name="copyright" content="Janvier 2010" />
-<meta name="contact" content="aigleblanc@gmail.com" />
 <meta name="google-site-verification" content="rZADXCyuEh8aaWXfEkxQxz4uSd_X0k7Ksfw0Td7gimQ" />
 
 <?php
@@ -39,7 +40,7 @@ $_SESSION['utilisateur']['template_mage']=true;
 	//error_reporting(E_ALL);
         
     include(SERVER_ROOT.'/template/less/lessc.inc.php');
-    try {
+    //try {
         $less = new lessc();
 
         $less->addImportDir(SERVER_ROOT . $template_url.'/less');
@@ -50,10 +51,12 @@ $_SESSION['utilisateur']['template_mage']=true;
         "template" => "'..'"
         ));
 
-        $less->checkedCompile(SERVER_ROOT . $template_url.'/less/ewo.less', SERVER_ROOT . $template_url.'/css/ewo.css');    
-    } catch (Exception $e) {
+        
+        $less->compileFile(SERVER_ROOT . $template_url.'/less/ewo.less', SERVER_ROOT . $template_url.'/css/ewo.css'); 
+        //$less->checkedCompile(SERVER_ROOT . $template_url.'/less/ewo.less', SERVER_ROOT . $template_url.'/css/ewo.css');    
+    //} catch (Exception $e) {
         // Nothing to do here
-    }
+    //}
     echo '<link rel="stylesheet" href="'. SERVER_URL . $template_url.'/css/ewo.css?v='.filemtime( SERVER_ROOT . $template_url.'/css/ewo.css').'" type="text/css" />';
     
     // Fichiers CSS supplémentaires
@@ -63,11 +66,11 @@ $_SESSION['utilisateur']['template_mage']=true;
 
         
 
-        if(file_exists(SERVER_ROOT . $template_url.'/css/generate/'.$nom.'.css')) {
-        $time_gen = filemtime(SERVER_ROOT . $template_url.'/css/generate/'.$nom.'.css');
-        } else {
+        //if(file_exists(SERVER_ROOT . $template_url.'/css/generate/'.$nom.'.css')) {
+       // $time_gen = filemtime(SERVER_ROOT . $template_url.'/css/generate/'.$nom.'.css');
+        //} else {
            $time_gen = 0; 
-        }
+        //}
         $compile = false;
         $import = '@import url(couleurs.less);';
 

@@ -1,11 +1,12 @@
 <?php
-$root_url = "..";
-if(isset($admin_mode)){
-	$root_url = "../..";
-}
-include($root_url."/persos/fonctions.php");
 
-include($root_url."/template/header_new.php");
+if(!defined('CREATION')) {
+    exit;
+}
+
+include(SERVER_ROOT. "/persos/fonctions.php");
+
+include(SERVER_ROOT."/template/header_new.php");
 /*-- Connexion basic requise --*/
 ControleAcces('utilisateur',1);
 if(isset($admin_mode)) {
@@ -13,7 +14,7 @@ if(isset($admin_mode)) {
 }
 /*-----------------------------*/
 if(!isset($admin_mode)) {
-	include($root_url."/inscription/controle_persos.php");
+	include(SERVER_ROOT."/persos/creation/controle_persos.php");
 	} else {
 	$ange = '';
 	$demon = '';
@@ -31,7 +32,7 @@ $js->addLib('ckeditor/sample');
 
 ?>
 
-<link href="<?php echo $root_url; ?>/js/ckeditor/sample.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo SERVER_URL; ?>/js/ckeditor/sample.css" rel="stylesheet" type="text/css" />
 
 <div id="page_persos">  
 	<form action="ajout_perso.php" method="post" name="personnage">
@@ -83,8 +84,8 @@ if ($peutCreer) { //DEBUT PEUTCREER ?>
 			<label for="type">Type de gameplay :
 				<select name='type' title='Choisissez le gameplay de votre personnage'>
 					<?php
-					if ($restantT3 >= 1 || isset($admin_mode)) echo "<option value='3'>3 cases indépendantes</option>";
-					if ($restantT4 >= 1 || isset($admin_mode)) echo "<option value='4'>4 cases solidaires</option>";
+					if ($t1 >= 1 || isset($admin_mode)) echo "<option value='3'>3 cases indépendantes</option>";
+					if ($t4 < 1 || isset($admin_mode)) echo "<option value='4'>4 cases solidaires</option>";
 					?>
 				</select>
 			</label>
@@ -102,9 +103,9 @@ if ($peutCreer) { //DEBUT PEUTCREER ?>
 			</td>
 		</tr>
 		<tr align="center">
-			<td><img src="<?php echo $root_url; ?>/images/races/race_a.gif" alt="Race Ange" width="100" height="100"></td>
-			<td><img src="<?php echo $root_url; ?>/images/races/race_h.gif" alt="Race Humain" width="100" height="100"></td>
-			<td><img src="<?php echo $root_url; ?>/images/races/race_d.gif" alt="Race Demon" width="100" height="100"></td>
+			<td><img src="<?php echo SERVER_URL; ?>/images/races/race_a.gif" alt="Race Ange" width="100" height="100"></td>
+			<td><img src="<?php echo SERVER_URL; ?>/images/races/race_h.gif" alt="Race Humain" width="100" height="100"></td>
+			<td><img src="<?php echo SERVER_URL; ?>/images/races/race_d.gif" alt="Race Demon" width="100" height="100"></td>
 		</tr>
 		<tr align="center">
 			<td><input type="radio" name="race" value="3" title="Vous allez choisir de devenir un Ange" <?php echo $ange; ?> /></td>

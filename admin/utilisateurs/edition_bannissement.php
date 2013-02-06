@@ -1,7 +1,5 @@
 <?php
-session_start();
-$root_url = "../..";
-include ($root_url."/conf/master.php");
+require_once __DIR__ . '/../../conf/master.php';
 //-- Paramètres de connexion à la base de données
 bdd_connect('ewo');
 /*-- Connexion basic requise --*/

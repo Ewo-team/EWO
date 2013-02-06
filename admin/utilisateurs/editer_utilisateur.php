@@ -1,7 +1,8 @@
 <?php
 //-- Header --
-$root_url = "./../..";
-include($root_url."/template/header_new.php");
+require_once __DIR__ . '/../../conf/master.php';
+
+include(SERVER_ROOT."/template/header_new.php");
 /*-- Connexion basic requise --*/
 ControleAcces('admin',1);
 /*-----------------------------*/
@@ -24,7 +25,7 @@ $info1 = "SELECT*FROM utilisateurs_ban WHERE utilisateur_id = '$id'";
 $resultat1 = mysql_query ($info1) or die (mysql_error());
 $infos1 = mysql_fetch_array ($resultat1);
 
-$_SESSION['temps']['page'] = "./../../admin/utilisateurs/editer_utilisateur.php?id=$id";
+$_SESSION['temps']['page'] = SERVER_URL . "/admin/utilisateurs/editer_utilisateur.php?id=$id";
 
 if(!empty($infos1['date'])){
 $debut = $infos1['date'];
@@ -57,13 +58,10 @@ $ban_jours = '';
 				<tr>
 					<td>Nom : </td>
 					<td><input name="nom" type="text" value='<?php echo $infos['nom']; ?>' /></td>
-				</tr>				<tr>
-					<td>Mail : </td>
-					<td><input name="mail" type="text" value='<?php echo $infos['email']; ?>' /></td>
 				</tr>
 				<tr>
-					<td>JabberId : </td>
-					<td><input name="jabberid" type="text" value='<?php echo $infos['jabberid']; ?>' /></td>
+					<td>Mail : </td>
+					<td><input name="mail" type="text" value='<?php echo $infos['email']; ?>' /></td>
 				</tr>
 				<tr>
 					<td><hr/></td>
@@ -87,17 +85,6 @@ $ban_jours = '';
 					<td><hr/></td>
 				</tr>
 				<tr>
-					<td>T&eacute;l&eacute;phone : </td>
-					<td><input name="telephone" type="text" value='<?php echo $infos['telephone']; ?>' /></td>
-				</tr>
-				<tr>
-					<td>Sms : </td>
-					<td><input name="sms" type="text" value='<?php echo $infos['sms']; ?>' /></td>
-				</tr>
-				<tr>
-					<td><hr/></td>
-				</tr>
-				<tr>
 					<td>Liste personnage : </td>
 					<td>
 						<ul>
@@ -105,7 +92,7 @@ $ban_jours = '';
 									$persos = "SELECT*FROM persos WHERE utilisateur_id = '$id'";							
 									$resultat = mysql_query ($persos) or die (mysql_error());
 									while ($perso = mysql_fetch_array ($resultat)){
-										echo "<li><a href='./../../admin/persos/editer_perso.php?id=".$perso['id']."'>".$perso['nom']."</a></li>";
+										echo "<li><a href='".SERVER_URL."/admin/persos/editer_perso.php?id=".$perso['id']."'>".$perso['nom']."</a></li>";
 									}
 								?>
 						</ul>
@@ -164,6 +151,6 @@ $ban_jours = '';
 }
 
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT."/template/footer_new.php");
 //------------
 ?>

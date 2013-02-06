@@ -1,6 +1,6 @@
 <?php
 //-- Header --
-//$pagetype = 'accueil';
+$pagetype = 'accueil';
 include __DIR__ . '/conf/master.php';
 include(SERVER_ROOT."/template/header_new.php");
 //------------
@@ -17,12 +17,6 @@ $js->addScript('konami/katawa');
 	-->
 </div>
 <style>
-    
-    #main {
-        min-width: 800px;
-        max-width: 1000px;
-        margin: auto;
-    }
     
     #zone_mid {
         width: 600px;
@@ -81,7 +75,7 @@ $js->addScript('konami/katawa');
     }    
     
 </style>
-<div id="main">
+
     <div id="zone_sup">
         <div>
             <img src="images/site/logo.png" style="height: 175px; width: 254px; padding-right: 30px; float: left;">
@@ -139,7 +133,7 @@ $js->addScript('konami/katawa');
             <li>27 janvier : le skipper français François Gabart remporte le Vendée Globe dans le temps record de 78 jours, 2 heures et 16 minutes.</li>
         </ul>-->
     </div>
-</div>
+
 <!--
 <div id="head_index">
 

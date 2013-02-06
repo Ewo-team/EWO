@@ -1,6 +1,7 @@
 <?php
 
-namespace inscription;
+namespace persos\creation;
+
 use \conf\ConnecteurDAO as ConnecteurDAO;
 
 /*
@@ -14,7 +15,7 @@ use \conf\ConnecteurDAO as ConnecteurDAO;
  * @author Leo
  */
 
-class InscriptionDAO extends ConnecteurDAO {
+class CreationPersoDAO extends ConnecteurDAO {
 
     /**
      * Retourne true si un utilisateur avec le nom $name existe

@@ -1,7 +1,7 @@
 <?php
-$root_url = "./../..";
-//-- Header --
-include($root_url."/template/header_new.php");
+require_once __DIR__ . '/../../conf/master.php';
+
+include(SERVER_ROOT."/template/header_new.php");
 /*-- Connexion at ou admin requise --*/
 ControleAcces('admin',1);
 /*-----------------------------*/
@@ -37,7 +37,7 @@ $grade = $infos['grade_id'];
 $race = $infos['race_id'];
 
 //-- Caracs personnages
-include($root_url."/persos/fonctions.php");
+include(SERVER_ROOT."/persos/fonctions.php");
 
 $carac_brute = calcul_caracs_no_alter($id);
 
@@ -760,6 +760,6 @@ include("./inventaire.php");
 	echo "Vous n'êtes pas autorisés à effectuer cette action.";
 }
 //-- Footer --
-		include($root_url."/template/footer_new.php");
+		include(SERVER_ROOT."/template/footer_new.php");
 //------------
 ?>

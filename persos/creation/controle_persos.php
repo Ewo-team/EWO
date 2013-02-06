@@ -1,4 +1,9 @@
 <?php
+
+if(!defined('CREATION')) {
+    exit;
+}
+
 $sql = "SELECT races.camp_id, races.type FROM persos, races WHERE (persos.race_id = races.race_id AND races.grade_id = -2) AND persos.utilisateur_id = $utilisateur_id";
 $resultat = mysql_query ($sql) or die (mysql_error());
 
@@ -26,37 +31,42 @@ Camp ailés : 1 à 2 gros, 1 groupe de 4 petits OU 3 gros.
 3 Ange
 4 Demon
 */
-if ($camp == 1) {
-	$restantT3 = 1 - $t3;
-	$restantT4 = 8 - $t4;
-	$groupeT4 = true;
+
+if($t4 > 0) {
+    $creationT4 = false;
 } else {
-	// On regarde le type de gameplay choisi (= si l'utilisateur a fait un t4)
-	if ($t4 >= 1) {
-		$restantT3 = 2 - $t3;
-		$restantT4 = 4 - $t4;
-		$groupeT4 = true;
-	} else {
-		$restantT3 = 3 - $t3;
-		if ($restantT3 >= 1)
-			$restantT4 = 4;
-		else
-			$restantT4 = 0;
-		$groupeT4 = false;
-	}
+    $creationT4 = true;
 }
+
+if(($t4 > 0 && $t3 < 2) || ($t4 == 0 && $t3 < 3)) {
+    $creationT3 = true;
+    
+    if($t4 > 0) {
+        $groupeT4 = true;
+    } else {
+        $groupeT4 = false;
+    }
+} else {
+    $creationT3 = false;
+}
+
 
 // Texte à afficher sur la page de création de personnages
 // et savoir si on peut créer des perso encore.
-if ($restantT3 == 0 && $restantT4 == 0) {
+if (!$creationT3 && !$creationT4) {
 	$texte = "Vous ne pouvez plus créer de personnage.";
 	$peutCreer = false;
 } else {
-	if ($groupeT4) {
-		$texte = 'Vous pouvez encore créer '.$restantT3.' T3 et '.$restantT4.' T4.';
-	} else {
+    $restantT3 = 3 - $t3;
+    $alternative = 2 - $t3;
+	if ($creationT3 && !$creationT4) {
+                
+		$texte = 'Vous pouvez encore créer '.$restantT3.' case(s) indépendante(s)';
+	} elseif(!$creationT3 && $creationT4) {
+		$texte = 'Vous pouvez encore créer 4 T4';            
+        } else {
 		$alternative = $restantT3 - 1;
-		$texte = 'Vous pouvez encore créer '.$alternative.' T3 et '.$restantT4.' T4 ou '.$restantT3.' T3.';
+		$texte = 'Vous pouvez encore créer '.$alternative.' case(s) indépendante(s) et un groupe de 4 cases solidaires,<br> ou '.$restantT3.' case(s) indépendante(s).';
 	}
 	$peutCreer = true;
 }
