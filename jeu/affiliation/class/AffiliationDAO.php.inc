@@ -9,7 +9,7 @@ use \conf\ConnecteurDAO as ConnecteurDAO;
 
     require_once('BonusAffiManager.php.inc');
     require_once($root_url.'/messagerie/messagerieDAO.php');
-    require_once($root_url.'/event/eventManager.php');
+    require_once($root_url.'/persos/event/eventManager.php');
     require_once($root_url.'/jeu/grille_gainsxp.php');
 
     class AffiliationDAO extends ConnecteurDAO {

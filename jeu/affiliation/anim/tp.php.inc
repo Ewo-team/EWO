@@ -5,7 +5,7 @@
  * @author Benjamin Herbomez <benjamin.herbomez@gmail.com>
  */
 
-require_once($root_url.'/affiliation/class/AffiliationDAO.php.inc');
+require_once($root_url.'/jeu/affiliation/class/AffiliationDAO.php.inc');
 require_once($root_url.'/persos/fonctions.php');
 
 

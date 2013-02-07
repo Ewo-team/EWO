@@ -9,8 +9,8 @@
  */
 
 
-require_once($root_url . '/affiliation/class/Demande.php.inc');
-require_once($root_url . '/affiliation/class/AffiliationDAO.php.inc');
+require_once($root_url . '/jeu/affiliation/class/Demande.php.inc');
+require_once($root_url . '/jeu/affiliation/class/AffiliationDAO.php.inc');
 
 abstract class DemandeManager {
 

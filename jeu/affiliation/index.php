@@ -10,6 +10,7 @@
     require __DIR__ . '/../../conf/master.php';
     include(SERVER_ROOT."/template/header_new.php");
 
+    $root_url = '../..';
     //Il faut être connecté
     ControleAcces('utilisateur',1);
     require_once('config.php.inc');
