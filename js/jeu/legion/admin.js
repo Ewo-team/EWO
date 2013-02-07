@@ -2,16 +2,11 @@ var idSel = 0;
 var races = new Array();
 
 function changeRace() {
-	jQuery("#chef").autocomplete({
-		source : "../ajax/persos.php?race=" + jQuery('#race').val(),
-		delay : 0,
-		select : function(event, ui) {
-			if (ui.item) {
-				idSel = ui.item.id;
-				jQuery("#chef_mat").val(idSel);
-			}
-		}
-	});
+
+	jQuery("#chef").autocomplete(
+		"option",
+		"source", "../../ajax/persos.php?race=" + jQuery('#race').val()
+	);
 }
 
 jQuery(window).ready(function() {
@@ -24,7 +19,17 @@ jQuery(window).ready(function() {
 		jQuery("#confirmDel").slideToggle();
 	});
 
-	changeRace();
+	jQuery("#chef").autocomplete({
+		source : "../../ajax/persos.php?race=" + jQuery('#race').val(),
+		delay : 0,
+		minLength : 0,
+		select : function(event, ui) {
+			if (ui.item) {
+				idSel = ui.item.id;
+				jQuery("#chef_mat").val(idSel);
+			}
+		}
+	});
 	jQuery('#race').change(function(){
 		changeRace();
 	});
@@ -35,10 +40,10 @@ jQuery(window).ready(function() {
 	});
 	// Recherche Légion
 	jQuery('#search').autocomplete({
-		source : "ajax/legion.php",
+		source : "../../ajax/legion.php",
 		delay : 0,
 		source : function(request, response) {
-			jQuery.getJSON("../ajax/legion.php", {
+			jQuery.getJSON("../../ajax/legion.php", {
 				term : request.term
 			}, function(data) {
 				response(jQuery.map(data, function(item) {
@@ -59,7 +64,7 @@ jQuery(window).ready(function() {
 					jQuery("#editName").html(ui.item.model.nom);
 				}
 				jQuery('#editId').val(ui.item.model.id);
-				alert(ui.item.model.race);
+
 				jQuery("#editRace").html(races[ui.item.model.race]);
 				jQuery('#editDescr').val(ui.item.model.descr);
 				jQuery('#editType option').filter(function() {
