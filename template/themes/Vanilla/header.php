@@ -110,7 +110,17 @@ $_SESSION['utilisateur']['template_mage']=true;
 <script src="<?php echo SERVER_URL; ?>/js/lib/prefixfree.min.js" type="text/javascript"></script>
 <script src="<?php echo SERVER_URL; ?>/js/jeu/autologin.js" type="text/javascript"></script>
 
-
+<style>
+#countdown {
+	text-align: center;
+	font-family: 'Arial Black', sans-serif;
+	line-height: 1em;
+	color: #ffffff;
+	font-weight:bold;
+	font-size: 47px;
+	text-shadow:0px 0px 0 rgb(235,235,235),1px 1px 0 rgb(226,226,226),2px 2px 0 rgb(216,216,216),3px 3px 0 rgb(206,206,206),4px 4px 0 rgb(197,197,197),5px 5px 0 rgb(187,187,187),6px 6px 0 rgb(177,177,177),7px 7px 0 rgb(168,168,168),8px 8px 0 rgb(158,158,158), 9px 9px 0 rgb(148,148,148),10px 10px 9px rgba(0,0,0,0.55),10px 10px 1px rgba(0,0,0,0.5),0px 0px 9px rgba(0,0,0,.2);
+}
+</style>
 <?php
 
 require(SERVER_ROOT . '/template/JSLoader.php');
@@ -123,6 +133,11 @@ $js->addCore('lib/jquery');
 $js->addLib('jquery-ui');
 $js->addVariables('root_url', SERVER_URL);
 
+if(date("d") == 25) {
+    $js->addLib('jquery.countdown');
+
+    $js->addScript('special/countdown');
+}
 // Gestionnaire d'autologin
 include(SERVER_ROOT."/autologin.php");
 
@@ -138,3 +153,5 @@ include(SERVER_ROOT."/site/menu.php"); ?>
 <?php 
 detect_sidebar("header");
 ?>
+
+<div id="countdown"></div>
