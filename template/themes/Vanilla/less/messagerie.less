@@ -7,23 +7,27 @@
 }
 /*-- Bal new --*/
 .bal_tab {
-	background-color: #E9E6C3;
+        background-color: @couleur2;
 	border-style:solid;
-	border-color:#DFDBB5;
+	border-color:@couleur3;
 	border-width:2px;
 	border-collapse: collapse
 }
 
+.bal_tab tr:nth-child(4n-6) {
+	background-color: @couleur1;
+}
+
+
 .bal_titre_lu td {
-   /*background-color: #fff*/
-	border-bottom-color:#DFDBB5;
+	border-bottom-color:@couleur3;
 	border-bottom-width:2px;
 }
 
 .bal_titre_nonlu td {
    background-color: #fff;
 	border-bottom-style:solid;
-	border-bottom-color:#DFDBB5;
+	border-bottom-color:@couleur3;
 	border-bottom-width:2px;
 }
 
@@ -44,18 +48,18 @@
 }
 
 .bal_input_titre {
-	border: 2px solid #DFDBB5;
+	border: 2px solid @couleur3;
 }
 
 .bal_repertoire{
-	border: 2px solid #DFDBB5;
+	border: 2px solid @couleur3;
 	border-collapse: collapse
 }
 
 .bal_titre_td{
 	background-color: #fff;
 	border-bottom-style:solid;
-	border-bottom-color:#DFDBB5;
+	border-bottom-color:@couleur3;
 	border-bottom-width:2px;	
 }
 
@@ -72,7 +76,7 @@
 }
 
 .bal_button{
-	border: 2px solid #DFDBB5;
+	border: 2px solid @couleur3;
 }
 
 .bal_infobulle{

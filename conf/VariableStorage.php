@@ -1,5 +1,7 @@
 <?php
 
+namespace conf;
+
 if(!function_exists('apc_exists')){
 	function apc_exists($keys){
 		$r;
@@ -10,11 +12,11 @@ if(!function_exists('apc_exists')){
 
 class VariableStorage {
 
-	// Durée de vie d'un lock. 60 secondes
+	// DurÃ©e de vie d'un lock. 60 secondes
 	private static $ttl = 60;
 
 	static function Charge($uri, $ssid) {
-		// Boucle tant que la variable est locké
+		// Boucle tant que la variable est lockÃ©
 		while(apc_add('_'.$uri, $ssid, static::$ttl)) {
 			return apc_fetch($uri);
 		}
@@ -23,16 +25,16 @@ class VariableStorage {
 	static function Sauve($uri, $variable, $ssid) {
 		$curi = '_'.$uri;
 		if(!apc_add($curi, $ssid, static::$ttl)) {
-			// il y a un lock, on vérifie qu'on en est le propriétaire, 
+			// il y a un lock, on vï¿½rifie qu'on en est le propriï¿½taire, 
 			if(apc_fetch($curi) === $ssid) {
-				// sauvegarde, et libère le lock
+				// sauvegarde, et libï¿½re le lock
 				apc_store($uri, $variable);
 				apc_delete($curi);
 				return true;
 			}
-			// On n'est pas le propriétaire, il y a un problème
+			// On n'est pas le propriï¿½taire, il y a un problï¿½me
 		} else {
-			// Il n'y avais pas de lock, il y a donc un problème
+			// Il n'y avais pas de lock, il y a donc un problï¿½me
 			apc_delete($curi);
 		}
 
@@ -54,8 +56,8 @@ class VariableStorage {
 			$refresh = 1;
 		}
 		
-		// Si la variable a été ajouté (et donc n'existait pas), 
-		// c'est que le cache à expiré, ou n'a jamais existé.
+		// Si la variable a ï¿½tï¿½ ajoutï¿½ (et donc n'existait pas), 
+		// c'est que le cache ï¿½ expirï¿½, ou n'a jamais existï¿½.
 		if($refresh) {
 			return 1;		
 		}	
@@ -65,7 +67,8 @@ class VariableStorage {
 
 //Fallback if apc in not present
 if(!function_exists('apc_fetch')){
-	function apc_fetch($p1=null,$p2=null,$p3=null){
+	function apc_fetch($p1=null,&$p2=null,$p3=null){
+		$p2 = false;
 		return false;
 	}
 	function apc_add($p1=null,$p2=null,$p3=null){

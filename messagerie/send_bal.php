@@ -1,4 +1,7 @@
 <?php
+
+namespace messagerie;
+
 /**
  * Envoie un bal
  * 
@@ -7,11 +10,10 @@
  * @version 2.1
  * @package messagerie
  */
-session_start();
-$root_url = "..";
-include ($root_url."/conf/master.php");
-include($root_url."/mail/mail.php");
-include ("messagerieDAO.php");
+require_once __DIR__ . '/../conf/master.php';
+
+//include(SERVER_ROOT."/mail/mail.php");
+
 /*-- Connexion requise --*/
 if (ControleAcces('utilisateur',0) == false){
 	echo "acces denied";exit;
@@ -164,7 +166,20 @@ if ((!empty($_POST['mat']) || !empty($_POST['liste'])) AND !empty($_POST['text']
 		
 		$corps_id = $conn->InsertCorpsBal($titre, $corps, $liste_bal, $maillinglist);
 		
-		$sql_query = $conn->PrepareInsertBal('bals');		
+		$sql_query = $conn->PrepareInsertBal('bals');	
+
+		$mail = new \conf\Mail();
+		
+		$mail_nom = nom_perso($expediteur,true);
+		//$subject = "[Ewo] Vous avez reçu un bal de ".$mail_nom;		
+
+		$mail->ParseTitle = $titre;
+		$mail->ParseCorps = $corps;
+								
+		$mail->FromName = "Ewo ($mail_nom)";
+		$mail->From = 'no-reply@ewo.fr';
+		$mail->Subject .= $titre;
+		
 		foreach ($matricule as $mat){
 
 			if(empty($titre)){
@@ -184,6 +199,18 @@ if ((!empty($_POST['mat']) || !empty($_POST['liste'])) AND !empty($_POST['text']
 				//-- Envoie de la bal a son destinataire
 				$sql_bal = $conn->InsertBalPrepare($sql_query, $parametres);
 			}
+			
+			$compte = \compte\Compte::getCompteByUserId($mat);
+			
+			if($compte->mail_bal == 1) {
+				
+				$mail->AddBcc($compte->email, $compte->nom);
+
+				
+				//$message = "Vous avez recu un message venant de <a href='http://www.ewo-le-monde.com/messagerie/index.php?id=".$expediteur."'>".$mail_nom."</a><hr />";
+			}
+			
+			
 			/*
 			$baltest = mail_defaut($mat);
 			if($baltest['mail'] == 'true'){
@@ -192,10 +219,9 @@ if ((!empty($_POST['mat']) || !empty($_POST['liste'])) AND !empty($_POST['text']
 				//-- Gestion de l'envoi des mails
 				$id_dest = id_utilisateur ($mat);
 				$mail = array(mail_utilisateur($id_dest));
-				$mail_nom = nom_perso($expediteur,true);
-				$subject = "[Ewo] Vous avez reçu un bal de ".$mail_nom;
 
-				//include($root_url."/mail/mail.php");
+
+				//include(SERVER_ROOT."/mail/mail.php");
 
 				if($type=='html'){
 					$corps_s = "Vous avez recu un message venant de <a href='http://www.ewo-le-monde.com/messagerie/index.php?id=".$mat."'>".$mail_nom."</a><hr />".$corps;
@@ -205,6 +231,9 @@ if ((!empty($_POST['mat']) || !empty($_POST['liste'])) AND !empty($_POST['text']
 				send_mail($mail,$subject,$corps_s,$type);
 			}	*/
 		}
+		
+		$mail->Parse();
+		$mail->Send();
 
 		//echo "ok"; //message bien envoyé
 	} else {

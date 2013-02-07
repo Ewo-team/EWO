@@ -1,7 +1,8 @@
 <?php
-//-- Header --
-$root_url = "./../..";
-include($root_url."/template/header_new.php");
+
+require_once __DIR__ . '/../../conf/master.php';
+
+include(SERVER_ROOT."/template/header_new.php");
 /*-- Connexion basic requise --*/
 ControleAcces('admin',1);
 /*-----------------------------*/
@@ -44,6 +45,6 @@ $persos = "SELECT*FROM utilisateurs WHERE nom LIKE '".$alpha."%' ORDER BY nom AS
 </div>
 <?php
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT."/template/footer_new.php");
 //------------
 ?>

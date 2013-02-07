@@ -1,5 +1,7 @@
 <?php
 
+use \conf\ConnecteurDAO as ConnecteurDAO;
+
 define('CALL_FROM_CRON', true);
 
 $path = realpath(dirname($_SERVER['SCRIPT_FILENAME']));

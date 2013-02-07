@@ -48,7 +48,7 @@ namespace legions;
                 //Justice
                 if($ac == LegionDroits::PASSER_TRAITRE &&
                         !(
-                            $this->legion->getType() == 4 ||
+                            $this->legion->getType() == 4 &&
                             $_SESSION['persos']['grade'][$this->perso_id] >= 3 &&
                             $_SESSION['persos']['galon'][$this->perso_id] >= 2
                         )

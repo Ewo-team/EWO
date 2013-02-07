@@ -7,14 +7,17 @@
 * @version 1.0
 */
 
-session_start();
-    require('ref.php.inc');
+require_once __DIR__ . '/../conf/master.php';
 
-    require_once($root_url.'legion/class/LegionDAO.php.inc');
-    require_once($root_url.'legion/class/DroitManager.php.inc');
-    require_once($root_url.'legion/class/LegionDroits.php.inc');
-    require_once($root_url.'legion/class/LegionConfig.php.inc');
-    require_once($root_url.'legion/class/ManagerFactory.php.inc');
+if(!isset($_SESSION['utilisateur']['id'])){
+	exit;
+}
+
+    require_once(SERVER_ROOT.'/legion/class/LegionDAO.php.inc');
+    require_once(SERVER_ROOT.'/legion/class/DroitManager.php.inc');
+    require_once(SERVER_ROOT.'/legion/class/LegionDroits.php.inc');
+    require_once(SERVER_ROOT.'/legion/class/LegionConfig.php.inc');
+    require_once(SERVER_ROOT.'/legion/class/ManagerFactory.php.inc');
 
     use legions\LegionDAO       as LegionDAO;
     use legions\DroitManager    as DroitManager;

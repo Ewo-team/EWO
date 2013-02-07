@@ -7,7 +7,7 @@
  * @package conf
  */
 
-
+namespace conf;
 
 	require_once ("ConnecteurDAO.php");
 

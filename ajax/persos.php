@@ -5,11 +5,13 @@
 * @author Herbomez Benjamin <benjamin.herbomez@gmail.com>
 * @version 1.0
 */
-session_start();
+require_once __DIR__ . '/../conf/master.php';
 
-    require('ref.php.inc');
-
-    require_once($root_url.'legion/class/LegionDAO.php.inc');
+if(!isset($_SESSION['utilisateur']['id'])){
+	exit;
+}
+	$root_url = '../';
+    require_once($root_url.'/jeu/legion/class/LegionDAO.php.inc');
 
     use legions\LegionDAO as LegionDAO;
 
@@ -43,7 +45,7 @@ session_start();
     else
         $query_alter .= 'p.nom LIKE  "%'.stripslashes ($q).'%"';
 
-    $stmt = $sql->query($query_alter.';');
+    $stmt = $sql->query($query_alter.';') or die();
 
     $items = array();
     while($entree = $sql->fetch($stmt,\PDO::FETCH_OBJ)){

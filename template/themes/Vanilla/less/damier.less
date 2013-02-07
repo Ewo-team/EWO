@@ -70,7 +70,7 @@
 	width:45px;
 	height:39px;
 }
-
+/*
 .damier_case {
 	width:45px;
 	height:39px;
@@ -100,7 +100,7 @@
 	height:39px;
 	background : url(../../images/coin_bg_damier.png) no-repeat 100% 100%;
 }
-
+*/
 .int_damier_hd {
 	-moz-border-radius-topright:10px;
 	-webkit-border-top-right-radius:10px;
@@ -126,7 +126,9 @@
 .damier_corps{
 	margin-right: auto;
 	margin-left: auto;
-	border-collapse:collapse;
+        background-color: @couleur2;
+        border: 1px solid @couleur3;
+        border-radius: 10px;
 }
 
 
@@ -134,7 +136,9 @@
 .damier_grille{
 	border-style:solid;
 	border-width:1px;
-	border-color:#E9E6C3;
+	border-color:@couleur5;
+        width: 45px;
+        height: 39px;
 }
 
 .damier_grille_perso{
@@ -311,18 +315,5 @@
 
 .form_infobulle {width:100%;}
 
-input[type="button"] {
-    box-shadow: 0 1px;
-    border-color: transparent;
-    border-radius: 5px;
-    background-color: @couleur3;
-    color: @texte3;
-}
-
-input[type="button"]:hover {
-    box-shadow: 0px 0px 5px blue;
-    border-bottom: 1px solid rgba(0,0,0,0.5);
-    margin: 2px;
-}
 
     

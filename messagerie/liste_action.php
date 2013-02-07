@@ -1,4 +1,7 @@
 <?php
+
+namespace messagerie;
+
 /**
  * Exécute une action sur une liste
  * 
@@ -7,10 +10,8 @@
  * @version 2.1
  * @package messagerie
  */
-session_start();
-$root_url = "..";
-include ($root_url."/conf/master.php");
-include ("messagerieDAO.php");
+ 
+require_once __DIR__ . '/../conf/master.php';
 
 
 if(isset($_POST['mat'])){

@@ -1,4 +1,9 @@
-<!-- Debut contour -->
+<?php 
+
+namespace jeu;
+use jeu\decors\Decors as Decors;
+
+?><!-- Debut contour -->
 <div class="block conteneur" id="block-7" style="z-index:800">
 <div class='conteneur_titre'>Damier</div>
 <!-- conteneur -->
@@ -8,7 +13,7 @@ $l_allie="";
 $l_ennemi="";
 $l_tous="";
 
-$image_loc = "./../images/";
+$image_loc = SERVER_URL . "/images/";
 $perso_x = $_SESSION['persos']['pos_x'][$id];
 $perso_y = $_SESSION['persos']['pos_y'][$id];
 
@@ -47,23 +52,23 @@ if($is_spawn){
         }
     }
 
-        if($l_allie!="" && $bal_percept){?>
-	<span class="tab_list_perso"><a href="../messagerie/index.php?id=<?php echo $perso_id ?>&dest=<?php echo $l_allie ?>#reponse">Message aux alli&eacute;s visibles</a></span> 
-	<?php }
-		if($l_ennemi!="" && $bal_percept){?>
-	<span class="tab_list_perso"><a href="../messagerie/index.php?id=<?php echo $perso_id ?>&dest=<?php echo $l_ennemi ?>#reponse">Message aux ennemis visibles</a></span> 
-	<?php }
-		if($l_tous!="" && $bal_percept){?>
-	<span class="tab_list_perso"><a href="../messagerie/index.php?id=<?php echo $perso_id ?>&dest=<?php echo $l_tous ?>#reponse">Message &agrave; tous</a></span> 
-	<?php }    
- 
-    
+    if ($l_allie != "" && $bal_percept) {
+        echo '<span class="tab_list_perso"><a href="' . SERVER_URL . '/messagerie/index.php?id=' . $perso_id . '&dest=<?php echo ' . $l_allie . '#reponse">Message aux alli&eacute;s visibles</a></span>';
+    }
+    if ($l_ennemi != "" && $bal_percept) {
+        echo '<span class="tab_list_perso"><a href="' . SERVER_URL . '/messagerie/index.php?id=' . $perso_id . '&dest' . $l_ennemi . '#reponse">Message aux ennemis visibles</a></span>';
+    }
+    if ($l_tous != "" && $bal_percept) {
+        echo '<span class="tab_list_perso"><a href="' . SERVER_URL . '/messagerie/index.php?id=' . $perso_id . '&dest=' . $l_tous . '#reponse">Message &agrave; tous</a></span>';
+    }
+
+
 // Chargement de la classe Carte, uniquement pour Althian pour le moment
 $decors = null;
 if($nom_decors != null) {
-	include ('../carte/carte.class.php'); 
-	$decors = Carte::prepareCarte($nom_decors);
+	$decors = Decors::prepareDecors($nom_decors);
 }
+
 //--------- Damier ---------//
 $zindex = 5000;
 echo '<table class="damier_corps" CELLPADDING="0" CELLSPACING="0" border="0">';
@@ -175,17 +180,13 @@ echo '<table class="damier_corps" CELLPADDING="0" CELLSPACING="0" border="0">';
 					
 				if($pos_y_case == $y_max+1){
 						if($pos_x_case == $x_max+1){
-							echo '<td width="45" height="39" class="damier_hd" align="center">';
-							echo "<div><img style='width:45px;height:39px;' src='".$root_url."/images/transparent.png' /></div>";
-							echo '</td>';
+							echo '<td></td>';
 						}elseif($pos_x_case != $x_min-1){
 							echo '<td width="45" height="39" class="damier_case" align="center">';
 							echo "<div>$pos_x_case</div>";
 							echo '</td>';
 						}else{
-							echo '<td width="45" height="39" class="damier_hg" align="center">';
-							echo "<div><img style='width:30px;height:39px;' src='".$root_url."/images/transparent.png' /></div>";
-							echo '</td>';
+							echo '<td></td>';
 							}
 				}elseif($pos_x_case == $x_max+1 && $pos_y_case != $y_min-1){
 						echo '<td width="45" height="39" class="damier_case" align="center">';
@@ -233,13 +234,7 @@ echo '<table class="damier_corps" CELLPADDING="0" CELLSPACING="0" border="0">';
 						$class = 'int_normal';
 					}
 						
-						if($pos_y_case == $pos_y_perso+1 && $pos_x_case == $pos_x_perso && $damier_grille=="damier_grille")
-							echo '<td width="45" height="39" class="damier_'.$get_plan.' '.$class.' '.$damier_grille.'_perso_haut">';
-							elseif($pos_y_case == $pos_y_perso && $pos_x_case == $pos_x_perso-1 && $damier_grille=="damier_grille")
-							echo '<td width="45" height="39" class="damier_'.$get_plan.' '.$class.' '.$damier_grille.'_perso_gauche">';
-							elseif($pos_y_case == $pos_y_perso && $pos_x_case == $pos_x_perso && $damier_grille=="damier_grille")
-							echo '<td width="45" height="39" class="damier_'.$get_plan.' '.$class.' '.$damier_grille.'_perso"><a name="perso" />';
-							else echo '<td width="45" height="39" class="damier_'.$get_plan.' '.$class.' '.$damier_grille.'">';
+						echo '<td width="45" height="39" class="damier_'.$get_plan.' '.$class.' '.$damier_grille.'">';
 
 						if(isset($deplacement)){
                                                     echo '<a href="'.$liendeplacement.'"><div id="'.$position.'-case" class="case deplacement">';

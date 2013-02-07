@@ -2,11 +2,13 @@
 //-- Header --
 $root_url = "..";
 
-$css_files = 'editeur';
+$css_files = 'listeperso';
 
-include($root_url."/template/header_new.php");
+require_once __DIR__ . '/../conf/master.php';
 /*-- Connexion basic requise --*/
 ControleAcces('utilisateur',1);
+include(SERVER_ROOT . "/template/header_new.php");
+
 /*-----------------------------*/
 ?>
 <h2>Liste de vos personnages</h2>
@@ -15,7 +17,7 @@ ControleAcces('utilisateur',1);
 
 <?php
 
-include("".$root_url."/persos/fonctions.php");
+include( SERVER_ROOT ."/persos/fonctions.php");
 
 $utilisateur_id = $_SESSION['utilisateur']['id'];
 
@@ -48,7 +50,7 @@ if ($_SESSION['persos']['inc']!=0){
 		$resultat1	= mysql_query ($sql1) or die (mysql_error());
 		$carac		= mysql_fetch_array ($resultat1);
 
-		echo lignePerso($perso,$carac,$root_url,++$inc);
+		echo lignePerso($perso,$carac,SERVER_URL,++$inc);
 		if($display_traitres === false){
 			$galon_grade	= recup_race_grade($id);
 			$galon			= $galon_grade['galon_id'];
@@ -72,6 +74,6 @@ if ($_SESSION['persos']['inc']!=0){
 </div>
 <?php
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include( SERVER_ROOT ."/template/footer_new.php");
 //------------
 ?>

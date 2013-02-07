@@ -1,5 +1,6 @@
 <?php
 
+
 class Effet {
 	public $type;
 	public $valeur;

@@ -1,7 +1,5 @@
 <?php
-session_start();
-$root_url = "../..";
-include ($root_url."/conf/master.php");
+require_once __DIR__ . '/../../conf/master.php';
 /*-- Connexion at ou admin requise --*/
 ControleAcces('admin',1);
 /*-----------------------------*/
@@ -63,9 +61,6 @@ $resultat = mysql_query ($sql) or die (mysql_error());
 
 //-- Supression dans : LOGS > utilisateur_id
 	mysql_query("DELETE FROM logs WHERE utilisateur_id = '$id_utilisateur'") or die (mysql_error());	
-	
-//-- Suppression dans : UTILISATEURS_OPTION > utilisateur_id
-	mysql_query("DELETE FROM utilisateurs_option WHERE utilisateur_id='$id_utilisateur'") or die (mysql_error());
 	
 	mysql_close();	
 		$titre = "Suppression";

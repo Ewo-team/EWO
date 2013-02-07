@@ -1,7 +1,9 @@
 <?php
 //-- Header --
-$root_url = "..";
-include($root_url."/template/header_new.php");
+require_once __DIR__ . '/../conf/master.php';
+
+include(SERVER_ROOT . '/template/header_new.php');
+
 //------------
 ?>
 <h2><?php if(isset($_SESSION['message']['titre'])){ echo $_SESSION['message']['titre'];}else{ echo "Une erreur s'est produite";} ?></h2>
@@ -23,6 +25,6 @@ include($root_url."/template/header_new.php");
 
 <?php
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT."/template/footer_new.php");
 //------------
 ?>

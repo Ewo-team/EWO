@@ -7,11 +7,8 @@ function autologin() {
             var ticket = localStorage.loginticket,
 			login = localStorage.login,
 			urlConnection;
-            if (https) {
-                urlConnection = "https://" + url + "/connexion/connexion.php?login=" + login + "&ticket=" + ticket;
-            } else {
-                urlConnection = "http://" + url + "/connexion/connexion.php?login=" + login + "&ticket=" + ticket;
-            }
+                urlConnection = url + "/compte/connexion/connexion.php?login=" + login + "&ticket=" + ticket;
+
             // charger la page de login en envoyant le ticket
             document.location = urlConnection;
         } else {

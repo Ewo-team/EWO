@@ -19,8 +19,7 @@ if (!isset($_SESSION['utilisateur']['id'])) {
 		
 		?>
 		<script type="text/javascript">
-			var url = "<?php echo $_URL; ?>";
-			var https = <?php echo $_SSL; ?>;
+			var url = "<?php echo SERVER_URL; ?>";
 			autologin();
 		</script>
 		<?php

@@ -1,5 +1,6 @@
 <?php
 
+use \conf\ConnecteurDAO as ConnecteurDAO;
 
 include_once($root_url."/conf/master.php");
 include_once($root_url."/conf/config.php");

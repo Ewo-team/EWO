@@ -3,8 +3,11 @@
  * Récupérer les grades/galons d'un perso
  * @author benjamin herbomez <benjamin.herbomez@gmail.com>
  */
-require('ref.php.inc');
-require_once($root_url.'conf/master.php');
+require_once __DIR__ . '/../conf/master.php';
+
+if(!isset($_SESSION['utilisateur']['id'])){
+	exit;
+}
 
 bdd_connect('ewo');
     

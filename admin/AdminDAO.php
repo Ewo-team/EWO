@@ -1,8 +1,6 @@
 <?php
 
-
-
-	require_once ("../../conf/ConnecteurDAO.php");
+use \conf\ConnecteurDAO as ConnecteurDAO;
 
 	class AdminDAO extends ConnecteurDAO {
 					

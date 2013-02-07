@@ -9,11 +9,11 @@
  */
 
 namespace legions;
+use \conf\ConnecteurDAO as ConnecteurDAO;
 
-require_once ($root_url.'conf/ConnecteurDAO.php');
 include_once ($root_url.'legion/class/LegionManager.php.inc');
 
-class LegionDAO extends \ConnecteurDAO {
+class LegionDAO extends ConnecteurDAO {
 
     /**
      * sendInvitation

@@ -5,10 +5,13 @@
 * @author Herbomez Benjamin <benjamin.herbomez@gmail.com>
 * @version 1.0
 */
-session_start();
-    require('ref.php.inc');
+require_once __DIR__ . '/../conf/master.php';
 
-    require_once($root_url.'legion/class/LegionDAO.php.inc');
+if(!isset($_SESSION['utilisateur']['id'])){
+	exit;
+}
+	$root_url = '../';
+    require_once(SERVER_ROOT.'/jeu/legion/class/LegionDAO.php.inc');
 
     use legions\LegionDAO as LegionDAO;
 

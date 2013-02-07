@@ -1,9 +1,5 @@
 <?php
-session_start(); 
-$root_url = "./../..";
-$admin_mode = 1;
-//-- Header --
-include($root_url."/conf/master.php");
+require_once __DIR__ . '/../../conf/master.php';
 /*-- Connexion at ou admin requise --*/
 ControleAcces('admin',1);
 /*-----------------------------*/

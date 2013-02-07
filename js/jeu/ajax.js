@@ -307,46 +307,6 @@ function action(perso_id, ActionID, Cible1ID, Cible1Type, Cible1Nom, Cible1_X, C
 				return xhr;
 }
 
-function renew_forum_link(perso_nom){
-				var xhr = getXhr()
-				
-				xhr.onreadystatechange = function(){
-				if(xhr.readyState == 4 && xhr.status == 200){			
-						if(xhr.responseText != 'null'){
-							document.getElementById("fofo_cookie").href=xhr.responseText;
-							return false;
-							}
-						}
-					}
-
-				xhr.open("GET","../connexion/action_ajax.php?perso_nom="+perso_nom+"&action=renew_link",true);
-				xhr.send(null);	
-}
-
-
-/**
-* Modifie la session de personnage chargé sur le forum
-*/
-function forum_switch(perso_nom){
-				var xhr = getXhr()
-				
-				// On défini ce qu'on va faire quand on aura la réponse
-				xhr.onreadystatechange = function(){
-				// On ne fait quelque chose que si on a tout reçu et que le serveur est ok
-				if(xhr.readyState == 4 && xhr.status == 200){			
-						if(xhr.responseText != 'null'){
-							renew_forum_link(perso_nom);
-							new Effect.Highlight('forum_con', { startcolor: '#fffff', endcolor: '#00000' }); 
-							return false;
-							}
-						}
-					}
-
-				// Envoi en GET
-				xhr.open("GET","../connexion/action_ajax.php?perso_nom="+perso_nom+"&action=switch",true);
-				xhr.send(null);		
-}
-
 /**
 * Reinit le drop
 */

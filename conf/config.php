@@ -1,12 +1,20 @@
 <?php
-//local
-define("ROOT","d:/wamp/www/ewo/");
-define("ROOT_HTTP","http://127.0.0.1/EWO/");
 
-//serveur
-//define("ROOT","/kunden/homepages/38/d145888978/htdocs/ewo/ewo/");
-//define("ROOT_HTTP","http://cv-france.info/ewo/ewo/");
+// Gestion des ticket d'inscription
+// 0 : Non ; 1 : Oui
+define('TICKET', 0);
 
-//partout
-define("REP_IMAGE","images/");
+// Login SSL
+// 0 : Non ; 1 : Oui
+define('SSL', 0);
+
+
+define('WEB_DOMAIN', $_SERVER["HTTP_HOST"]);
+define('WEB_SUBFOLDER', '');
+
+$protocol = (SSL == 1) ? 'https' : 'http';
+
+define('SERVER_URL' , $protocol . '://' . WEB_DOMAIN . WEB_SUBFOLDER);
+define("SERVER_ROOT", substr(__DIR__, 0, -5));
+
 ?>

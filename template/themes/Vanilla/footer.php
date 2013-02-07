@@ -9,7 +9,7 @@
 detect_sidebar("footer");
 
 // On affiche les CSS supplémentaires liés aux pages
-
+/*
 ?>
 <!-- End Content -->
 
@@ -41,7 +41,7 @@ detect_sidebar("footer");
 	</script><noscript><p><img src="http://piwik.ewo.fr/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript>
 	<!-- End Piwik Tag -->
 <?php 
-
+*/
 $js->exportLoad();
 
 ?>

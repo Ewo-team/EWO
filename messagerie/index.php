@@ -1,4 +1,7 @@
 <?php
+
+namespace messagerie;
+
 /**
  * Affiche les bals recus
  * 
@@ -7,12 +10,14 @@
  * @package messagerie
  */
 //-- Header --
-$root_url = "..";
+
+require_once __DIR__ . '/../conf/master.php';
 
 $css_files = 'messagerie';
 
-include($root_url."/template/header_new.php");
-include ("messagerieDAO.php");
+
+include(SERVER_ROOT . "/template/header_new.php");
+
 /*-- Connexion basic requise --*/
 ControleAcces('utilisateur',1);
 /*-----------------------------*/
@@ -316,11 +321,11 @@ $js->addScript('wysiwyg');
 <?php
 	}else{
 		echo "<h2>Vous ne possédez pas ce personnage</h2><div align='center'><img src='/images/site/erreur.png' alt='erreur'><p>Veuillez vous loguer ou ne pas abuser de la bal, Merci.</p></div>";
-		include($root_url."/template/footer_new.php");exit;
+		include(SERVER_ROOT."/template/footer_new.php");exit;
 	}
 
 
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT."/template/footer_new.php");
 //------------
 ?>

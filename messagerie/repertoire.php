@@ -1,4 +1,7 @@
 <?php
+
+namespace messagerie;
+
 /**
  * Affiche le repertoire des contactes pour la messagerie
  * 

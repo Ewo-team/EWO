@@ -1,7 +1,7 @@
 
 function updateGrade(mat, id, v){
     $.post(
-        '../ajax/membres.php',
+        '../../ajax/membres.php',
         {
             'mat':mat,
             'id':id,
@@ -10,7 +10,7 @@ function updateGrade(mat, id, v){
 }
 
 $(window).ready(function(){
-    $("#listeMembres").columnizeList({cols: 4});
+    $("#listeMembres").columnizeList({cols: 2});
 });
 
 function virer(mat, nom){

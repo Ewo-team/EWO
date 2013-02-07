@@ -11,12 +11,11 @@
  * Detection du navigateur grace a Browscap
  */
 function navigateur(){
-	global $root_url;
 	// Loads the class
-	require $root_url.'/lib_tier/browscap/Browscap.php';
+	require SERVER_ROOT.'/lib/browscap/Browscap.php';
 
 	// Creates a new Browscap object (loads or creates the cache)
-	$bc = new Browscap($root_url.'/lib_tier/browscap/cache');
+	$bc = new Browscap(SERVER_ROOT.'/lib/browscap/cache');
 
 	// Gets information about the current browser's user agent
 	$current_browser = $bc->getBrowser(null, true);
