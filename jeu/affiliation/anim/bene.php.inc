@@ -1,7 +1,7 @@
 <?php
 
-include_once($root_url.'/event/eventManager.php');
-include_once($root_url.'/event/eventFormatter.php');
+include_once($root_url.'/persos/event/eventManager.php');
+include_once($root_url.'/persos/event/eventFormatter.php');
 require_once($root_url.'/persos/fonctions.php');
 /**
  *

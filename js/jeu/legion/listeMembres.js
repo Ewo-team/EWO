@@ -1,7 +1,7 @@
 
 function updateGrade(mat, id, v){
     $.post(
-        '../ajax/membres.php',
+        '../../ajax/membres.php',
         {
             'mat':mat,
             'id':id,

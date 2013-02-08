@@ -5,8 +5,8 @@
  * @author Benjamin Herbomez <benjamin.herbomez@gmail.com>
  */
 
-require_once($root_url.'/affiliation/class/Superieurs.php.inc');
-require_once($root_url.'/affiliation/class/DemandeSup.php.inc');
+require_once($root_url.'/jeu/affiliation/class/Superieurs.php.inc');
+require_once($root_url.'/jeu/affiliation/class/DemandeSup.php.inc');
 
 $sups   =   Superieurs::getAvailableSup($_SESSION['persos']['camp'][$id]);
 $sup    =   $sups[$_GET['mat']];

@@ -42,7 +42,7 @@ function valideModif(div,cVar){
     var id = id.substring(1);
 
     $.post(
-        '../ajax/grade.php',
+        '../../ajax/grade.php',
         {
             c:cVar,
             i:id,

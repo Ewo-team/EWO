@@ -6,7 +6,7 @@
  */
 
     require_once('AffiliationDAO.php.inc');
-    require_once($root_url.'/affiliation/class/Superieurs.php.inc');
+    require_once($root_url.'/jeu/affiliation/class/Superieurs.php.inc');
 
 require_once($root_url.'/persos/fonctions.php');
 
