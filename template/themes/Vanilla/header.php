@@ -48,7 +48,8 @@ $_SESSION['utilisateur']['template_mage']=true;
         //$less->setFormatter("compressed");
 
         $less->setVariables(array(
-        "template" => "'..'"
+        "template" => "'..'",
+		"root" => "'".SERVER_URL."'"
         ));
 
         

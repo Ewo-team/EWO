@@ -9,23 +9,6 @@ include(SERVER_ROOT. "/persos/fonctions.php");
 include(SERVER_ROOT."/template/header_new.php");
 /*-- Connexion basic requise --*/
 ControleAcces('utilisateur',1);
-if(isset($admin_mode)) {
-	ControleAcces('admin',1);
-}
-/*-----------------------------*/
-if(!isset($admin_mode)) {
-	include(SERVER_ROOT."/persos/creation/controle_persos.php");
-	} else {
-	$ange = '';
-	$demon = '';
-	$humain = '';
-	$user_id = '';
-	$texte = '';
-	$peutCreer = true;
-	if(isset($_GET['user_id'])) {
-		$user_id=$_GET['user_id'];
-	}
-}
 
 $js->addLib('ckeditor/ckeditor');
 $js->addLib('ckeditor/sample');
@@ -36,61 +19,29 @@ $js->addLib('ckeditor/sample');
 
 <div id="page_persos">  
 	<form action="ajout_perso.php" method="post" name="personnage">
-	<h2>Informations n&eacute;cessaires &agrave; la cr&eacute;ation de votre personnage. </h2>
-<?php
-if (isset($camp)) {
-	if($camp != NULL) echo '<h3>'.$texte.'</h3>';
-}
+	<h2>Informations n&eacute;cessaires &agrave; la cr&eacute;ation de votre/vos personnage(s). </h2>
 
-if ($peutCreer) { //DEBUT PEUTCREER ?>
 <!-- Debut du coin -->
 <div class="upperleft" id='coin_75'>
 	<div class="upperright">
 		<div class="lowerleft">
-			<div class="lowerright">
+			<div class="lowerright creation_<?php echo $_SESSION['CreationPerso']['Race'];?>">
 			<!-- conteneur -->
-
-	<table width="600px" border="0">
+	<?php if($_SESSION['CreationPerso']['Gameplay'] == 'T3') { ?>
+	<table width="100%" border="0">
 		<tr>
-			<td colspan="3" align="right">
-					<?php if(isset($_SESSION['erreur']['perso'])){echo $_SESSION['erreur']['perso'];} ?> <br />
-				<?php
-				if(isset($admin_mode)) {
-				?>
-				<label for="user_id">Id de l'utilisateur auquel associer le personnage :
-				<input name="utilisateur_id" type="text" value="<?php echo $user_id; ?>" maxlengh='32' />
-				</label>
+			<td colspan="3" align="left">
+				<?php if(isset($_SESSION['erreur']['perso'])){echo $_SESSION['erreur']['perso'];} ?> <br />
+				<a class="button" href="annuler.php">Annuler</a>
 			</td>
 		</tr>
 		<tr>
-			<td td colspan="3" align="right">
-			<label for="user_id">Matricule du personnage :
-			<input name="matricule" type="text" value="Pas encore disponible" disabled  maxlengh='32' />
-			</label>
-			</td>
-		</tr>
-		<tr>
-			<td td colspan="3" align="right">
-			<?php 
-			}
-			?>
+			<td colspan="3">
 			<label for="nom_perso">Nom du personnage :
 				<input name="nom" type="text" value="" maxlengh='64' />
 			</label>
 			</td>
-		</tr>
-		<tr>
-			<td td colspan="3" align="right">
-			<label for="type">Type de gameplay :
-				<select name='type' title='Choisissez le gameplay de votre personnage'>
-					<?php
-					if ($t1 >= 1 || isset($admin_mode)) echo "<option value='3'>3 cases indépendantes</option>";
-					if ($t4 < 1 || isset($admin_mode)) echo "<option value='4'>4 cases solidaires</option>";
-					?>
-				</select>
-			</label>
-			</td>
-		</tr>
+		</tr>		
 		<tr>
 			<td></td>
 			<td></td>
@@ -103,24 +54,15 @@ if ($peutCreer) { //DEBUT PEUTCREER ?>
 			</td>
 		</tr>
 		<tr align="center">
-			<td><img src="<?php echo SERVER_URL; ?>/images/races/race_a.gif" alt="Race Ange" width="100" height="100"></td>
-			<td><img src="<?php echo SERVER_URL; ?>/images/races/race_h.gif" alt="Race Humain" width="100" height="100"></td>
-			<td><img src="<?php echo SERVER_URL; ?>/images/races/race_d.gif" alt="Race Demon" width="100" height="100"></td>
-		</tr>
-		<tr align="center">
-			<td><input type="radio" name="race" value="3" title="Vous allez choisir de devenir un Ange" <?php echo $ange; ?> /></td>
-			<td><input type="radio" name="race" value="1" title="Vous allez choisir de devenir un Humain" <?php echo $humain; ?> /></td>
-			<td><input type="radio" name="race" value="4" title="Vous allez choisir de devenir un Démon" <?php echo $demon; ?> /></td>
-		</tr>
-		<tr align="center">
-			<td class="anges">Ange</td>
-			<td class="humains">Humain</td>
-			<td class="demons">D&eacute;mon</td>
-		</tr>
-		<tr align="center">
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
+			<td colspan="3">
+				<table>
+					<tr>
+						<th></th>
+						<th></th>
+						<th></th>
+					</tr>
+				</table>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="3" align="right">
@@ -136,6 +78,7 @@ if ($peutCreer) { //DEBUT PEUTCREER ?>
 			</td>
 		</tr>
 	</table>
+	<?php } ?>
 	</form>
 				<!-- fin conteneur -->
 			</div>
@@ -148,9 +91,9 @@ if ($peutCreer) { //DEBUT PEUTCREER ?>
 </div>
 
 <?php
-} // FIN PEUTCREER
+
 if(isset($_SESSION['erreur']['perso'])){$_SESSION['erreur']['perso'] = '';}
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT."/template/footer_new.php");
 //------------
 ?>

@@ -1,17 +1,69 @@
 <?php
-session_start();
-$root_url = "..";
-if(isset($admin_mode)) {
-	$root_url = "../..";
-}
-include($root_url."/conf/master.php");
-/*-- Connexion basic requise --*/
-ControleAcces('utilisateur',1);
-if(isset($admin_mode)) {
-	ControleAcces('admin',1);
-}
-/*-----------------------------*/
 
+require __DIR__ . '/../../conf/master.php';
+
+include(SERVER_ROOT. "/persos/fonctions.php");
+
+include_once(SERVER_ROOT."/persos/creation/controle_persos.php");
+
+ControleAcces('utilisateur',1);
+
+if(!isset($_SESSION['CreationPerso']['Etape'])) {
+	exit;
+}
+
+$controle = controleCreationPerso($utilisateur_id);
+$etape = $_SESSION['CreationPerso']['Etape'];
+
+if($etape >= 1) {
+	// Verification de l'étape 1
+	if(!isset($_POST['gameplay'])) {
+		$_SESSION['erreur']['perso'] = "Veuiller choisir un gameplay.";
+		header("location: .");		
+	}
+	
+	if(!isset($_POST['race'])) {
+		$_SESSION['erreur']['perso'] = "Veuiller choisir un camp.";
+		header("location: .");		
+	}	
+	
+	if($_POST['race'] != $controle['camp'] && $controle['camp'] != "") {
+		$_SESSION['erreur']['perso'] = "Multicamps interdit!";
+		header("location: .");				
+	}
+	
+	if($_POST['race'] != 'ange' || $_POST['race'] != 'demon' || $_POST['race'] != 'humain') {
+		$_SESSION['erreur']['perso'] = "Gest lost, kthxbyebbq.";
+		header("location: .");		
+	}
+	
+	if($_POST['gameplay'] == 'T3' && !$controle['creationT3']) {
+		$_SESSION['erreur']['perso'] = "Vous ne pouvez plus créer de perso type T1!";
+		header("location: .");		
+	}
+	
+	if($_POST['gameplay'] == 'T41' && !$controle['creationT4']) {
+		$_SESSION['erreur']['perso'] = "Vous ne pouvez plus créer de perso type T4!";
+		header("location: .");		
+	}	
+	
+	if($_POST['gameplay'] != 'T3' && $_POST['gameplay'] != 'T41') {
+		$_SESSION['erreur']['perso'] = "Veuillez, monsieur, cesser de magouiller les variables du formulaire";
+		header("location: .");		
+	}	
+	
+	if(!$controle['peutCreer']) {
+		$_SESSION['erreur']['perso'] = "La limite du nombre de persos sert à limiter le nombre de persos";
+		header("location: .");		
+	}
+
+	$gameplay = $_POST['gameplay'];
+	$race 	  = $_POST['race'];
+	$_SESSION['CreationPerso']['Gameplay'] = $gameplay;
+	$_SESSION['CreationPerso']['Race'] = $race;
+	$_SESSION['CreationPerso']['Etape'] = 2;
+}
+/*
 if (empty($_POST['nom']) OR empty($_POST['race'])) {
 	$_SESSION['erreur']['perso'] = "Veuiller entrer un nom.";
 	header("location:creation_perso.php");
@@ -337,4 +389,8 @@ if($sql_perso_design == FALSE) {
 
 	echo "<script language='javascript' type='text/javascript' >document.location='../persos/apercu_perso.php'</script>";exit;
 }
+*/
+
+header("location: .");
+
 ?>

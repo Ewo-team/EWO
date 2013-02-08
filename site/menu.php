@@ -14,6 +14,8 @@ namespace site;
 
 require_once __DIR__ . '/../conf/master.php';
 
+include_once(SERVER_ROOT."/persos/creation/controle_persos.php");
+
 if (isset($template_on)) {
 
 
@@ -104,56 +106,17 @@ if (isset($template_on)) {
         $menu['utilisateur'][] = array('url' => SERVER_URL . '/persos/affiliation/', 'nom' => 'Affiliations ' . $nom_aff);
         $menu['utilisateur'][] = array('url' => SERVER_URL . '/jeu/classement/classement.php', 'nom' => 'Classement');
 
-        $creerperso = false;
-        $nbperso = @$_SESSION['persos']['inc'];
-
-// Savoir si l'utilisateur peut encore créer des persos.
-        $creerperso = false;
-        $camp_utilisateur = NULL;
-        $nbperso = @$_SESSION['persos']['inc'];
-        $nbPersoT3 = $nbPersoT4 = 0;
-
-        if ($nbperso == NULL) {
-            $creerperso = true;
-        } else {
-            for ($numPerso = 1; $numPerso <= $nbperso; $numPerso++) {
-                if (!$camp_utilisateur && $_SESSION['persos']['camp'][$numPerso] != 2 && $_SESSION['persos']['camp'][$numPerso] != 5 && $_SESSION['persos']['camp'][$numPerso] != 6) {
-                    $camp_utilisateur = $_SESSION['persos']['camp'][$numPerso];
-                }
-
-                if ($_SESSION['persos']['type'][$numPerso] == 4)
-                    $nbPersoT4++;
-                else
-                    $nbPersoT3++;
-            }
-        }
-
-        if ($camp_utilisateur == 1) {
-            $nbPersoRestantT3 = 1 - $nbPersoT3;
-            $nbPersoRestantT4 = 8 - $nbPersoT4;
-        } else {
-            if ($nbPersoT4 >= 1) {
-                $nbPersoRestantT3 = 2 - $nbPersoT3;
-                $nbPersoRestantT4 = 4 - $nbPersoT4;
-            } else {
-                $nbPersoRestantT3 = 3 - $nbPersoT3;
-                if ($nbPersoRestantT3 >= 1)
-                    $nbPersoRestantT4 = 4;
-                else
-                    $nbPersoRestantT4 = 0;
-            }
-        }
-
-        if ($nbPersoRestantT3 >= 1 || $nbPersoRestantT4 >= 1)
-            $creerperso = true;
+		$nbperso = @$_SESSION['persos']['inc'];
+		$creation = controleCreationPerso($utilisateur_id);
+        
 // Fin "Savoir si l'utilisateur peut encore créer des persos."
         //$menu['utilisateur'][] = array('url' => SERVER_URL.'/affiliation/liste_persos.php', 'nom' => 'Affiliation personnages'.$nom_aff);
         $menu['utilisateur'][] = array('url' => SERVER_URL . '/jeu/legion/', 'nom' => 'Légions personnages' . $nom_fac);
 
         $menu['persos'][] = array('url' => SERVER_URL . '/persos/liste_persos.php', 'nom' => 'Pages de jeu');
 
-        if ($creerperso) {
-            $menu['persos'][] = array('url' => SERVER_URL . '/persos/creation/creation_perso.php', 'nom' => '<i>Créer un personnage</i>');
+        if ($creation['peutCreer']) {
+            $menu['persos'][] = array('url' => SERVER_URL . '/persos/creation/', 'nom' => '<i>Créer un personnage</i>');
         }
 
         $tot_bal = 0;

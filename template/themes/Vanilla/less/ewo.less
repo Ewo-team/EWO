@@ -133,14 +133,7 @@ body {
         background-repeat: no-repeat;
 		background-size: cover;*/
         //background-color: #988f7e;  
-        //background-color: @fond;
-background: rgb(178,225,255); /* Old browsers */
-background: -moz-linear-gradient(top, rgba(178,225,255,1) 0%, rgba(102,182,252,1) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(178,225,255,1)), color-stop(100%,rgba(102,182,252,1))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top, rgba(178,225,255,1) 0%,rgba(102,182,252,1) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top, rgba(178,225,255,1) 0%,rgba(102,182,252,1) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top, rgba(178,225,255,1) 0%,rgba(102,182,252,1) 100%); /* IE10+ */
-background: linear-gradient(to bottom, rgba(178,225,255,1) 0%,rgba(102,182,252,1) 100%); /* W3C */
+        background-color: @fond;
 }
 
 .footer-0{
@@ -226,7 +219,9 @@ background: linear-gradient(to bottom, rgba(178,225,255,1) 0%,rgba(102,182,252,1
     max-width: 1000px;
     margin: auto;
     padding: 30px;
-    background-color: rgba(255,255,255,0.3);
+    background-color: white !important;
+	border-radius: 5px;
+	box-shadow: 0px 5px 15px 5px rgba(146, 121, 96, 0.5);	
 }
 
 #corps {
@@ -1064,7 +1059,7 @@ a.dropdown { font-family: @fonttextB; }
 	background-image:none;
 }
 
-input[type="button"] {
+input[type="button"], .button {
     box-shadow: 0 1px;
     border-color: transparent;
     border-radius: 5px;
@@ -1072,8 +1067,12 @@ input[type="button"] {
     color: @texte3;
 }
 
-input[type="button"]:hover {
-    box-shadow: 0px 0px 5px blue;
+input[type="button"]:hover, .button:hover, .button_selected {
+    box-shadow: 0px 0px 5px blue !important;
     border-bottom: 1px solid rgba(0,0,0,0.5);
     margin: 2px;
+}
+
+.button {
+	padding: 5px;
 }

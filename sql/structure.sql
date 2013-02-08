@@ -826,6 +826,20 @@ CREATE TABLE IF NOT EXISTS `classement_view` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `classes`
+--
+DROP TABLE IF EXISTS `classes`;
+CREATE TABLE IF NOT EXISTS `classes` (
+  `Id` varchar(2) NOT NULL,
+  `Camps` tinyint(3) unsigned NOT NULL,
+  `Position` tinyint(1) NOT NULL,
+  `Titre` varchar(40) NOT NULL,
+  `Sub` varchar(50) NOT NULL,
+  `Description` varchar(250) NOT NULL DEFAULT '''''',
+  PRIMARY KEY (`Id`,`Camps`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- --------------------------------------------------------
+--
 -- Structure de la table `damier_artefact`
 --
 

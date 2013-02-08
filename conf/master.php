@@ -41,4 +41,8 @@ include_once("VariableStorage.php");
 // Autoloader
 include_once('autoloader.php');
 
+if(isset($_SESSION['utilisateur']['id'])) {
+	$utilisateur_id = $_SESSION['utilisateur']['id'];
+}
+
 ?>
