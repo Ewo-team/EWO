@@ -1,12 +1,15 @@
 <?php
 //-- Header --
 $pagetype = 'accueil';
+$css_files = 'accueil';
 include __DIR__ . '/conf/master.php';
 include(SERVER_ROOT."/template/header_new.php");
 //------------
 
 $js->addScript('konami/konami');
 $js->addScript('konami/katawa');
+
+
 
 ?>
 <div id='divK'
@@ -16,65 +19,6 @@ $js->addScript('konami/katawa');
 	id="flashK" width="70%" height="70%" style="margin-left:15%;margin-top:10%;box-shadow: 0px 0px 200px black;border:1px solid black;"/>
 	-->
 </div>
-<style>
-    
-    #zone_mid {
-        width: 600px;
-        height: 200px;        
-    }
-    
-    #carousel {
-        overflow:hidden;    
-        width: 100%;
-        position:relative;        
-    }
-    
-    #carousel ul {
-        list-style:none;
-        position:relative;        
-        width: 500%; 
-        overflow:hidden;
-        padding-left: 0px;
-        
-        -moz-animation:carousel 30s infinite;
-        -webkit-animation:carousel 30s infinite;
-        animation:carousel 30s infinite;        
-    }
-    
-    #carousel ul > li{
-        position:relative;
-        float:left;
-        width: 20%;
-    }   
-    
-    #carousel ul > li div {
-        width: 550px;        
-    }
-        
-    
-    #zone_inf {
-	column-count: 3;
-	column-gap: 20px;           
-    	column-rule-color: black;
-	column-rule-style: solid;
-	column-rule-width: 1px;
-    }
-    
-    @keyframes carousel{
-        0%    { left:0; }
-        17.6%   { left:0; }
-        20% { left:-100%; }
-        37.6% { left:-100%; }
-        40%   { left:-200%; }
-        57.6%   { left:-200%; }
-        60% { left:-300%; }
-        77.6% { left:-300%; }
-        80%   { left:-400%; }
-        97.6%   { left:-400%; }
-        100% { left:0; }
-    }    
-    
-</style>
 
     <div id="zone_sup">
         <div>
@@ -85,18 +29,36 @@ $js->addScript('konami/katawa');
             <p>Prenez quelques Anges que vous mélangez à des Démons, rajoutez quelques Humains et secouez le tout : vous obtiendrez des <b>batailles épiques</b>, des <b>histoires fantastiques</b>, des <b>dénouements comiques</b> et des <b>escargots alcooliques</b> ! Rien que ça. Alors rejoignez-les dans <b>le Monde d'EWO</b> !</p>        
             </div>
     </div>
-    <div id="zone_mid">
+	<div id="zone_mid_right">
+		<b>Message du jour</b>
+		<blockquote cite="<?php echo SERVER_URL; ?>/persos/event/liste_events.php?id=131"><p>Zut! Je voulais lui faire<br />le coup du<br />&quot;Touché!&quot;<br />mais il est tombé comme<br />une larve. Dommage...</p></blockquote>
+		<a href="<?php echo SERVER_URL; ?>/persos/event/liste_events.php?id=131">StratiX</a>
+	</div>	
+    <div id="zone_mid_left">
         <div id="carousel"><ul>
         <?php
-        $annonces = annonce_mixtes(15);
+        //$annonces = annonce_mixtes(15);
         
+		include(SERVER_ROOT . '/lib/syndexport/ewo.php');
+		
+		$annonces = getAnnonces(15);
+		
         for($i = 0; $i < 5; $i++)
         {
             $ligne = current($annonces);
+			
+			if(!empty($ligne['auteur'])) {
+				echo "<li><div><b>".$ligne['titre']."</b>
+					<p>".$ligne['corps']."</p>
+					<p>par ".$ligne['auteur']." (<a href='".$ligne['lien']."'>Suite</a>)</p></div>
+				</li>";    			
+			} else {
+				echo "<li><div><b>".$ligne['titre']."</b>
+					<p>".$ligne['corps']."</p>
+					<p><a href='".$ligne['lien']."'>Suite</a></p></div>
+				</li>";    			
+			}
 
-            echo "<li><div><b>".$ligne['titre']."</b>
-                <p>".$ligne['corps']."</p>
-                <a href='".$ligne['lien']."'>Suite</a></div></li>";    
             
             next($annonces);
         }         
@@ -114,7 +76,7 @@ $js->addScript('konami/katawa');
     <div id="zone_inf"><ul>
         <?php
         
-        for($i = 5; $i < 15; $i++)
+        for($i = 0; $i < 15; $i++)
         {
             $ligne = current($annonces);
 

@@ -847,15 +847,13 @@ function detect_sidebar($location) {
                 echo "<!-- End Header -->
                                                             <div id='page' $width_page>
                                                                     <!-- Start Content -->
-                                                                    <div id='content_bg_jeu' $width>
-                                                                            <div id='corps_jeu' $width>
-                                                                                    <div id='content_jeu' $width_content_jeu>";
+                                                                    <div id='content_bg_jeu' $width_content_jeu>
+";
             } else {
                 echo "<!-- FIN DE CODE -->
                                             <div class='separation'></div>
                                             <div class='clear'></div>
-                                    </div>
-                            </div>
+
                     </div>";
             }
         }
