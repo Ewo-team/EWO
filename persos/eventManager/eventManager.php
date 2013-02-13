@@ -49,7 +49,7 @@ class eventManager {
 
 	public function createEvent($name='basic'){
            
-		$ref = new \persos\event\event($this->date, $name);
+		$ref = new \persos\eventManager\event($this->date, $name);
 
 		$this->events[] = $ref;
                 

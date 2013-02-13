@@ -1,20 +1,23 @@
 <?php
-session_start();
-$root_url = "./../..";
-include ($root_url."/conf/master.php");
+//-- Header --
+require_once __DIR__ . '/../conf/master.php';
+
 /*-- Connexion basic requise --*/
 ControleAcces('utilisateur',1);
-/*-----------------------------*/
 
-include($root_url."/persos/fonctions.php");
-include($root_url."/jeu/fonctions.php");
+if(isset($admin_mode))	{
+	ControleAcces('admin',1);
+}
+
+include(SERVER_ROOT . '/persos/fonctions.php');
+include(SERVER_ROOT . '/jeu/fonctions.php');
 
 
 if(!isset($_POST['pvUp']) || !is_numeric($_POST['pvUp']) || !isset($_POST['recupPvUp']) || !is_numeric($_POST['recupPvUp']) || !isset($_POST['paUp']) || !is_numeric($_POST['paUp']) || !isset($_POST['mouvUp']) || !is_numeric($_POST['mouvUp']) || !isset($_POST['desUp']) || !is_numeric($_POST['desUp']) || !isset($_POST['forceUp']) || !is_numeric($_POST['forceUp']) || !isset($_POST['percUp']) || !is_numeric($_POST['percUp']) || !isset($_POST['nvMagUp']) || !is_numeric($_POST['nvMagUp'])){
 	$titre = "Erreur d'update";
 	$text = "Donn&eacute;es manaquantes";
-	$root = $root_url;
-	$lien = "./../../persos/upgrades/upgrades.php";
+	$root = SERVER_URL;
+	$lien = "./../../persos/upgrades/";
 	gestion_erreur($titre, $text, $root, $lien);
 }
 

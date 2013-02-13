@@ -116,7 +116,49 @@ body {
 }
 body {
   margin: 0;
-  font: 0.8em DejaVuSerifBook;
+  font: 0.8em DejaVuSansBook;
+  color: #333;
+}
+b {
+  font-family: DejaVuSansBold;
+}
+i,
+a {
+  font-family: DejaVuSansOblique;
+}
+b i,
+i b {
+  font-family: DejaVuSansBoldOblique;
+}
+h1,
+h2,
+h3 {
+  text-shadow: 0 1px 0 #ffffff;
+  font-family: DejaVuSerifBook;
+}
+h1 {
+  font-size: 2em;
+}
+h1 b,
+h2 b,
+h3 b {
+  font-family: ;
+}
+h1 i,
+h2 i,
+h3 i,
+h1 a,
+h2 a,
+h3 a {
+  font-family: DejaVuSerifOblique;
+}
+h1 b i,
+h2 b i,
+h3 b i,
+h1 i b,
+h2 i b,
+h3 i b {
+  font-family: ;
 }
 img {
   border: 0;
@@ -147,7 +189,7 @@ ul {
   text-decoration: underline;
 }
 .bold {
-  font-family: DejaVuSerifBold;
+  font-family: DejaVuSansBold;
 }
 .lien {
   font-size: 0.8em;
@@ -156,7 +198,7 @@ ul {
 .lien_carte {
   color: #68551F;
   text-decoration: none;
-  font-family: DejaVuSerifBold;
+  font-family: DejaVuSansBold;
 }
 #content h2 {
   color: #933a25;
@@ -486,8 +528,7 @@ p#warning {
   list-style: none;
 }
 #menuDeroulant a {
-  font-weight: bold;
-  font-family: DejaVuSerifBold;
+  font-family: DejaVuSansBold;
   color: #2c2a2e;
   text-decoration: none;
   display: block;
@@ -707,7 +748,7 @@ p#warning {
 .lettrineange {
   float: left;
   font-size: 3em;
-  font-family: DejaVuSerifBold;
+  font-family: DejaVuSansBold;
   color: #64C7B5;
   border: 1px solid #64C7B5;
   background-color: #FFFFCC;
@@ -718,7 +759,7 @@ p#warning {
 .lettrinedemon {
   float: left;
   font-size: 3em;
-  font-family: DejaVuSerifBold;
+  font-family: DejaVuSansBold;
   color: #EF3B42;
   border: 1px solid #EF3B42;
   background-color: #FFFFCC;
@@ -729,7 +770,7 @@ p#warning {
 .lettrinehumain {
   float: left;
   font-size: 3em;
-  font-family: DejaVuSerifBold;
+  font-family: DejaVuSansBold;
   color: #4D7F27;
   border: 1px solid #4D7F27;
   background-color: #FFFFCC;
@@ -924,7 +965,7 @@ p#warning {
   padding-bottom: 10px;
 }
 a.dropdown {
-  font-family: DejaVuSerifBold;
+  font-family: DejaVuSansBold;
 }
 #connection {
   line-height: 12px;

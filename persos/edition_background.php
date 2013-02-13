@@ -1,7 +1,6 @@
 <?php	
-session_start();
-$root_url = "..";
-include ($root_url."/conf/master.php");
+require_once __DIR__ . '/../conf/master.php';
+
 /*-- Connexion basic requise --*/
 ControleAcces('utilisateur',1);
 /*-----------------------------*/

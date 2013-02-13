@@ -2,7 +2,7 @@
 
 use \conf\ConnecteurDAO as ConnecteurDAO;
 
-include ("tableau_medaille.php");
+include (SERVER_ROOT . "/conf/tableau_medaille.php");
 
 
 function ajouteMedaille($id,$mat) {

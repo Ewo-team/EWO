@@ -18,7 +18,7 @@ foreach($result as $ligne) {
 
 $content .= PHP_EOL . '?>';
 
-$filename = $root_url."/persos/tableau_medaille.php";
+$filename = $root_url."/conf/tableau_medaille.php";
 
 //if (is_writable($filename)) {
 

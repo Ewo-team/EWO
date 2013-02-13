@@ -50,5 +50,5 @@ if(isset($_POST['val_raison'])) {
 	$pa_r = 250;
 }
 
-include("./../../persos/upgrades/upgrades.php");
+include("./../../persos/upgrades/index.php");
 ?>

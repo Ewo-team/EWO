@@ -1,8 +1,10 @@
 <?php
 //-- Header --
-$root_url = "./../..";
-include($root_url."/template/header_new.php");
-include($root_url."/persos/fonctions.php");
+require_once __DIR__ . '/../../conf/master.php';
+
+include(SERVER_ROOT . "/template/header_new.php");
+
+include(SERVER_ROOT ."/persos/fonctions.php");
 /*-- Connexion basic requise --*/
 ControleAcces('admin',1);
 /*-----------------------------*/
@@ -63,9 +65,9 @@ $persos = "SELECT*FROM persos WHERE nom LIKE '".$alpha."%' ORDER BY nom ASC";
     $js->addLib('jquery-ui');
     $js->addScript('autocomplete');
  ?>
-<link rel="stylesheet" href="<?php echo $root_url ?>/css/pepper-grinder/jquery-ui-1.8.23.custom.css" type="text/css" media="all" />
+<link rel="stylesheet" href="<?php echo SERVER_URL ?>/css/pepper-grinder/jquery-ui-1.8.23.custom.css" type="text/css" media="all" />
 <?php
 //-- Footer --
-		include($root_url."/template/footer_new.php");
+		include(SERVER_ROOT."/template/footer_new.php");
 //------------
 ?>

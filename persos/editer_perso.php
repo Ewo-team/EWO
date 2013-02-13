@@ -1,7 +1,9 @@
 <?php
 //-- Header --
-$root_url = "..";
-include($root_url."/template/header_new.php");
+require_once __DIR__ . '/../conf/master.php';
+/*-- Connexion basic requise --*/
+ControleAcces('utilisateur',1);
+include(SERVER_ROOT . "/template/header_new.php");
 /*-- Connexion basic requise --*/
 ControleAcces('utilisateur',1);
 /*-----------------------------*/
@@ -11,7 +13,7 @@ if (isset($_GET['id'])){
 $id = mysql_real_escape_string($_GET['id']);
 
 $id_utilisateur = $_SESSION['utilisateur']['id'];
-$info = "SELECT* FROM persos WHERE utilisateur_id = '$id_utilisateur' AND id = '$id'";
+$info = "SELECT * FROM persos WHERE utilisateur_id = '$id_utilisateur' AND id = '$id'";
 																								
 $resultat = mysql_query ($info) or die (mysql_error());
 $infos = mysql_fetch_array ($resultat);
@@ -23,15 +25,16 @@ if(!isset($infos['id'])){
 	$lien = "..";
 	gestion_erreur($titre, $text, $root, $lien, 1);	
 }
-$signature = $infos['options'][0];
-$bal_reception = $infos['options'][3];
-$bal_htmltxt = $infos['options'][4];
+
+$signature = isset($infos['options'][0]) ? $infos['options'][0] : 0;
+$bal_reception = isset($infos['options'][3]) ? $infos['options'][3] : 0;
+$bal_htmltxt = isset($infos['options'][4]) ? $infos['options'][4] : 0;
 
 $_SESSION['temps']['page'] = "../persos/editer_perso.php?id=$id";
 
 ?>
 
-<link href="../js/ckeditor/sample.css" rel="stylesheet" type="text/css" />
+<link href="../js/lib/ckeditor/sample.css" rel="stylesheet" type="text/css" />
 
 <div align='center' id='contact'>
 <h2>Edition de votre personnage</h2>
@@ -47,9 +50,9 @@ $_SESSION['temps']['page'] = "../persos/editer_perso.php?id=$id";
 				<p><b>Avatar :</b>
 				<?php
 					if($infos['avatar_url'] == ''){
-					echo "<p><img src='".$root_url."/images/avatar/no_avatar.png' alt='gravatar'></p>";	
+					echo "<p><img src='".SERVER_URL."/images/avatar/no_avatar.png' alt='gravatar'></p>";	
 					}else{
-					echo "<p><img src='".$root_url."/images/avatar/".$infos['avatar_url']."' alt='avatar'></p>";
+					echo "<p><img src='".SERVER_URL."/images/avatar/".$infos['avatar_url']."' alt='avatar'></p>";
 
 					}
 				?></p>
@@ -153,6 +156,6 @@ $_SESSION['temps']['page'] = "../persos/editer_perso.php?id=$id";
 }
 
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT."/template/footer_new.php");
 //------------
 ?>

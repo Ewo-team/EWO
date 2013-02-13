@@ -16,7 +16,7 @@ include(SERVER_ROOT . "/template/header_new.php");
 
 <?php
 
-include( SERVER_ROOT ."/persos/fonctions.php");
+include( SERVER_ROOT . "/persos/fonctions.php");
 
 $utilisateur_id = $_SESSION['utilisateur']['id'];
 
@@ -49,15 +49,15 @@ if ($_SESSION['persos']['inc']!=0){
 		$resultat1	= mysql_query ($sql1) or die (mysql_error());
 		$carac		= mysql_fetch_array ($resultat1);
 
-		echo lignePerso($perso,$carac,SERVER_URL,++$inc);
+		echo lignePerso($perso,$carac,++$inc);
 		if($display_traitres === false){
 			$galon_grade	= recup_race_grade($id);
 			$galon			= $galon_grade['galon_id'];
 			$grade			= $galon_grade['grade_id'];
 
-			if($grade>=3 && $galon>=2){
+			/*if($grade>=3 && $galon>=2){
 				$display_traitres = '<a href="../faction/traitres.php?perso_id='.$id.'">Liste des personnes pouvant &ecirc;tre pass&eacute;es tra&icirc;tre</a>';
-			}
+			}*/
 		}
 	}
 	echo '</table>';

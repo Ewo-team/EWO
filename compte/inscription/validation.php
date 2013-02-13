@@ -39,49 +39,36 @@ if (isset($_GET['code']) && isset($_GET['nom']) && isset($_GET['email'])) {
 
     $dao->ActiveCompte($code_validation);
 
-    //mail de confirmation
-    $headers = 'From: "EwoManager"<ewomanager@ewo.fr>' . "\n";
-    $headers .='Reply-To: ewomanager@ewo.fr' . "\n";
-    $headers .='Content-Type: text/html; charset="iso-8859-1"' . "\n";
-    $headers .='Content-Transfer-Encoding: 8bit';
 
-    $message = "<html><head><title>EWO</title></head><body>
-<table width='800px'>
-	<tr style='background-color:#B0B0B0'>
-		<td colspan='3'><img src='http://" . $_URL . "/images/site/ewo_logo_mini.png'></td>
-	</tr>
-	<tr>
-		<td width='15px' style='background-color:#B0B0B0'></td>
-		<td>
-			<table width='100%' height='200px'>
-				<tr>
-					<td align='center' style='background: url(http://" . $_URL . "/images/site/ewo_transparant.png) no-repeat 50% 50%'>
+		$mail = \conf\Mail();
+		
+		$mail->Subject .= 'Votre compte est valide';
+
+		
+		$mail->AddTo($email, $nom);
+					
+		$mail->ParseTitle = "EWO";			
+		$mail->ParseCorps = "<table width='100%' height='200px'>
+							<tr>
+								<td align='center' style='background: url(" . SERVER_URL . "/images/site/ewo_transparant.png) no-repeat 50% 50%'>
 								<p>Votre compte $nom est &agrave; pr&eacute;sent actif</p>
 								<p>Vous pouvez d&eacute;sormais jouer en vous connectant sur : </p>
-								<a href='http://" . $_URL . "/'>Ewo le monde</a>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td colspan='3' align='center'  style='background-color:#B0B0B0;font-size:0.8em;'>[Ewo] " . $_URL . " &copy; </td>
-	</tr>
-</body></html>";
+								<a href='" . SERVER_URL . "/'>Ewo le monde</a>
+								</td>
+							</tr>
+				</table>";
+				
+		$mail->Parse();
 
-    if (mail($email, '[Ewo] Votre compte est valide', $message, $headers)) {
+		$mail->Send();		
+
+
         $titre = "Compte actif";
         $text = "Votre compte est d&eacute;sormais actif, un mail de confirmation vient de vous parvenir sur " . $email;
         $root = "..";
         $lien = "../";
         gestion_erreur($titre, $text, $root, $lien);
-    } else {
-        $titre = "Erreur d'envoi'";
-        $text = "Le message n'a pas pu etre envoy&eacute;'.";
-        $root = "..";
-        $lien = "..";
-        gestion_erreur($titre, $text, $root, $lien);
-    }
+
 } else {
     $titre = "Op&eacute;ration non comprise";
     $text = "Op&eacute;ration non comprise, il nous est impossible de valider votre compte utilisateur.";

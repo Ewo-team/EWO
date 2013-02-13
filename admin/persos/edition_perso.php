@@ -7,9 +7,9 @@ ControleAcces('admin',1);
 //-- Paramètres de connexion à la base de données
 $ewo = bdd_connect('ewo');
 
-include("../../persos/fonctions.php");
-include("../../jeu/fonctions.php");
-include("./../../admin/logs/fonctions.php");
+include(SERVER_ROOT . "/persos/fonctions.php");
+include(SERVER_ROOT . "/jeu/fonctions.php");
+include(SERVER_ROOT . "/admin/logs/fonctions.php");
 
 $id_perso = mysql_real_escape_string($_POST['id_perso']);
 

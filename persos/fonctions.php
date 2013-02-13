@@ -848,8 +848,8 @@ function change_race_grade($id_perso, $new_race, $new_grade){
 		$em = new persos\eventManager\eventManager();
 		$ev1 = $em->createEvent('grade');
 		$ev1->setSource($id_perso, 'perso');
-		$ev1->infos->addPrivateInfo('i',$old_grade);
-		$ev1->infos->addPrivateInfo('f',$new_grade);	
+		$ev1->infos->addPublicInfo('i',$old_grade);
+		$ev1->infos->addPublicInfo('f',$new_grade);	
 	}
 	
 	renew_caracs($id_perso, $new_race, $new_grade);

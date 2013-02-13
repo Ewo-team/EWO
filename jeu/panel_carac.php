@@ -4,7 +4,7 @@
 <!-- conteneur --><input type="hidden" id="perso_id" value="<?php echo $_SESSION['persos']['id'][0]; ?>">
 			<table width='100%'>		
 				<tr>
-					<td id="carac_xp"><a href="../persos/upgrades/upgrades.php">
+					<td id="carac_xp"><a href="../persos/upgrades/">
 					<?php	echo "Px ".$caracs['px']." | Pi ".$caracs['pi'].""; ?>
                                         </a></td>
                                         <td><span>(Rang <?php echo $perso_rang; ?>)</span></td>

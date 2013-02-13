@@ -2,10 +2,15 @@
 @import "couleurs.less";
 @import "fontface.less";
 
-@fonttext: DejaVuSerifBook;
-@fonttextB: DejaVuSerifBold;
-@fonttextI: DejaVuSerifOblique;
-@fonttextBI: DejaVuSerifBoldOblique;
+@fonttext: DejaVuSansBook;
+@fonttextB: DejaVuSansBold;
+@fonttextI: DejaVuSansOblique;
+@fonttextBI: DejaVuSansBoldOblique;
+
+@fonttitle: DejaVuSerifBook;
+@fonttitletB: DejaVuSerifBold;
+@fonttitleI: DejaVuSerifOblique;
+@fonttitleBI: DejaVuSerifBoldOblique;
 
 html, body {
     height: 100%;
@@ -14,6 +19,42 @@ html, body {
 body {
 	margin: 0;
   font: 0.8em @fonttext;
+  color: #333;
+}
+
+b {
+	font-family: @fonttextB;
+}
+
+i, a {
+	font-family: @fonttextI;
+}
+
+b i, i b {
+	font-family: @fonttextBI;
+}
+
+h1, h2, h3 {
+	text-shadow: 0 1px 0 #ffffff;
+	font-family: @fonttitle;
+}
+
+h1 {
+	font-size: 2em;
+}
+
+h1 b, h2 b, h3 b {
+	font-family: @fonttitleB;
+}
+
+h1 i, h2 i, h3 i,
+h1 a, h2 a, h3 a {
+	font-family: @fonttitleI;
+}
+
+h1 b i, h2 b i, h3 b i, 
+h1 i b, h2 i b, h3 i b {
+	font-family: @fonttitletBI;
 }
 
 img {	border:0;}
@@ -459,8 +500,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9acbf6', end
 
 /* main level link */
 	#menuDeroulant a {
-	font-weight: bold;
-	font-family: DejaVuSerifBold;
+	font-family: @fonttextB;
 	color: rgb(44, 42, 46);
 	text-decoration: none;
 	display: block;

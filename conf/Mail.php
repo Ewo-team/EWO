@@ -116,6 +116,16 @@ class Mail {
 			
 			$msg = $this->getMessageText();
 			$msg .= $this->getMessageHtml();
+			
+			$dao = ConnecteurDAO::getInstance();
+			
+			$dao->prepare('INSERT INTO emails (to_email, title, message, headers) VALUES (:to, :title, :msg, :headers)');
+			
+			$dao->executePreparedStatement(null, array(
+				':to' => base64_encode($to),
+				':title' => base64_encode($this->Subject),
+				':msg' => base64_encode($msg),
+				':headers' => base64_encode($headers)));
 						
 			$send = mail($to, '=?UTF-8?B?' . base64_encode($this->Subject) . '?=', $msg, $headers);		
 			

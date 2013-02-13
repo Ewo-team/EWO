@@ -4,7 +4,7 @@ include_once('formatter.php');
 class grade extends formatter{
 	public function printPublic(&$bdd){
 		$public = parent::getEvent()->infos->getPublicInfos();
-		return getText($public['s'], $public['c']);
+		return $this->getText($public['i'], $public['f']);
 	}
 	// nom + race
 	public function printPrivate(&$bdd){
