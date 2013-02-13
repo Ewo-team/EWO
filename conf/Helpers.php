@@ -34,21 +34,41 @@ class Helpers {
     }
     
     public static function Dice($valeur1,$valeur2) {
-	$max = mt_getrandmax()+1.0;
+		$max = mt_getrandmax()+1.0;
 
-	$u = sqrt(-2*log(mt_rand()/$max));
-	$v = 2*M_PI*mt_rand()/$max;
+		$u = sqrt(-2*log(mt_rand()/$max));
+		$v = 2*M_PI*mt_rand()/$max;
 
-	$a = round(sqrt(2.0*$valeur1/3.0)*$u*cos($v)+2.0*$valeur1);
-	$b = round(sqrt(2.0*$valeur2/3.0)*$u*sin($v)+2.0*$valeur2);
+		$a = round(sqrt(2.0*$valeur1/3.0)*$u*cos($v)+2.0*$valeur1);
+		$b = round(sqrt(2.0*$valeur2/3.0)*$u*sin($v)+2.0*$valeur2);
 
-	$x = min(max($valeur1,$a),3*$valeur1);
-	$y = min(max($valeur2,$b),3*$valeur2);
+		$x = min(max($valeur1,$a),3*$valeur1);
+		$y = min(max($valeur2,$b),3*$valeur2);
 
-	$dices = array($x,$y);
+		$dices = array($x,$y);
 
-	return $dices;
+		return $dices;
     }
+	
+	/**
+	 * Génération d'un nouveau mot de passe
+	 * @param $length Par defaut 9 sinon celui passé en param
+	 * @return $password Mot de passe retourné par la fonction de la taille demandé
+	 */
+	public static function generatePassword ($length = 9)
+	{
+	  $password = "";
+	  $possible = "0123456789abcdefghjkmnpqrstuvwxyzABCDFGHJKMNOPQRSTVWXYZ"; 
+	  $i = 0; 
+	  while ($i < $length) { 
+		$char = substr($possible, mt_rand(0, strlen($possible)-1), 1);
+		if (!strstr($password, $char)) { 
+		  $password .= $char;
+		  $i++;
+		}
+	  }
+		return $password;
+	}
 }
 
 ?>

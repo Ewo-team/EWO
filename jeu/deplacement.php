@@ -1,8 +1,8 @@
 <?php
 
 namespace jeu;
-use persos\event\eventManager as eventManager;
-use persos\event\SPECIAL_EVENT as SPECIAL_EVENT;
+use persos\eventManager\eventManager as eventManager;
+use persos\eventManager\SPECIAL_EVENT as SPECIAL_EVENT;
 
 
 require_once __DIR__ . '/../conf/master.php';
@@ -13,7 +13,7 @@ $lock = rand();
 $_SESSION['persos']['mouv_lock'][$id] = $lock;
 
 
-include_once(SERVER_ROOT.'/persos/event/special.php');
+include_once(SERVER_ROOT.'/persos/eventManager/special.php');
 
 /*-- Connexion requise --*/
 ControleAcces('utilisateur',1);

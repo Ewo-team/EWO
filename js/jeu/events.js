@@ -35,7 +35,7 @@ function showTarget(event, info, nb, mat) {
                 }
             }
         };
-        xhr.open("GET", "../event/subEvent.php?key=" + encodeURIComponent(info) + "&mat=" + mat, true);
+        xhr.open("GET", "../persos/event/subEvent.php?key=" + encodeURIComponent(info) + "&mat=" + mat, true);
         xhr.send(null);
     } else {
         var tbody = document.getElementById('tbody_event');

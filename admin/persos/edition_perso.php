@@ -86,10 +86,6 @@ if (isset($_POST['grade'])){
 	$new_grade= $_POST['grade'];
 	change_race_grade($id_perso, $new_race, $new_grade);
 	
-	$event_grade_up = new EventsManager($id_perso,"grade_up");
-  $event_grade_up->addEvent('grade',$new_grade);
-  $event_grade_up->commitEvent();
-	
 	echo "<script language='javascript' type='text/javascript' >document.location='".$_SESSION['temps']['page']."'</script>";
 	exit;	
 }

@@ -1,12 +1,9 @@
 <?php
-session_start();
-$root_url = "..";
-include_once($root_url."/conf/master.php");
-include_once($root_url."/event/eventFormatter.php");
-if (ControleAcces('utilisateur',0) == false){
-	echo "null";
-	exit;
-}elseif(isset($_GET['mat']) && is_numeric($_GET['mat'])){
+use persos\eventManager\eventFormatter as eventFormatter;
+
+require __DIR__ . '/../../conf/master.php';
+
+if(isset($_GET['mat']) && is_numeric($_GET['mat'])){
 
 	function cmp($a, $b)
 	{
@@ -79,10 +76,10 @@ if (ControleAcces('utilisateur',0) == false){
 <table class="tab_list_perso" style="width: 49%;">
 	<tr>
 		<td class='tab_td_icone'><img
-			src='<?php echo eventFormatter::getIcone($icone, $bdd, $mat); ?>'
+			src='<?php echo SERVER_URL.'/images/'.icone_persos($mat); ?>'
 			alt='avatar' /></td>
 		<td class='tab_td'><strong><?php echo $perso['nom']; ?> (<a
-			href='../event/liste_events.php?id=<?php echo $mat;?>'><?php echo $mat; ?></a>)</strong></td>
+			href='../event/?id=<?php echo $mat;?>'><?php echo $mat; ?></a>)</strong></td>
 	</tr>
 	<tr>
 		<td colspan='2'>
@@ -106,8 +103,7 @@ if (ControleAcces('utilisateur',0) == false){
 			</tr>	
 			<?php } ?>
 			<tr class='tab_tr_ligne_titre'>
-				<td colspan='2'><img class='tab_puce'
-					src='../images/transparent.png' alt='puce' /> Message du jour :</td>
+				<td colspan='2'>Message du jour :</td>
 			</tr>
 
 			<tr class='tab_tr_ligne0'>

@@ -19,8 +19,8 @@ array_pop($root_url);
 $root_url = join('/',$root_url);
 
 require_once('config_vacances.php');
-include_once($root_url.'/event/eventManager.php');
-include_once($root_url.'/event/eventFormatter.php');
+include_once($root_url.'/persos/eventManager/eventManager.php');
+include_once($root_url.'/persos/eventManager/eventFormatter.php');
 	
 
 

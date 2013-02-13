@@ -14,7 +14,7 @@ $page_jeu = "1";
 <div id='carac'>
 <?php
 	//-- Carac entete du personnage	
-	include(SERVER_ROOT . "/jeu/carac.php");
+	include(SERVER_ROOT . "/jeu/panel_entete.php");
 ?>
 </div>	
 
@@ -27,9 +27,9 @@ $page_jeu = "1";
                     include(SERVER_ROOT . "/jeu/panel_mouvement.php");
                 }
 		//-- Dés de jeux
-		include(SERVER_ROOT . "/jeu/infos.php");
+		include(SERVER_ROOT . "/jeu/panel_actions.php");
 		//-- Caracteristique du personnage
-		include(SERVER_ROOT . "/jeu/info_carac.php");
+		include(SERVER_ROOT . "/jeu/panel_carac.php");
 
       
 	?>	

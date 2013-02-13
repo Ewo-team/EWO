@@ -8,7 +8,7 @@
  * @version 1.0
  * @package jeu/inventaire
  */
-
+/*
 session_start();
 $root_url = "../..";
 include ($root_url."/conf/master.php");
@@ -16,11 +16,11 @@ include ($root_url."/jeu/fonctions.php");
 /*-- Connexion requise --*/
 if (ControleAcces('utilisateur',0) == false){
 	echo "null";exit;
-}
+}*/
 /*-----------------------*/
 
 // Paramètres de connexion à la base de données
-bdd_connect('ewo');
+/*bdd_connect('ewo');
 
 	$cenPos['pos_x'] = $_SESSION['inventaire']['pos_x'];
 	$cenPos['pos_y'] = $_SESSION['inventaire']['pos_y'];
@@ -68,7 +68,7 @@ if($position != NULL){
 }else{
 	echo 'null';
 }
-
+*/
 
 /**
  * Fonction renvoyant une position aléatoire libre
@@ -78,7 +78,7 @@ if($position != NULL){
  * @param array $censPos Position de l'utilisateur sur un plan
  */
 function dropPos ($cenPos){
-
+/*
 $nb_valid_pos = 0;
 
 $pos_x_perso = $cenPos['pos_x'];
@@ -171,6 +171,6 @@ $y_max_carte = $carte['y_max'];
 		//return $retour['pos_x'].":".$retour['pos_y'];
 		return $retour;
 		}
-		else return NULL;
+		else return NULL;*/
 }
 ?>

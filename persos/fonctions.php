@@ -842,7 +842,16 @@ function change_race_grade($id_perso, $new_race, $new_grade){
 
 	if($old_grade==5){
 		desaffil_all($id_perso);
-		}
+	}
+	
+	if($old_grade != $new_grade) {
+		$em = new persos\eventManager\eventManager();
+		$ev1 = $em->createEvent('grade');
+		$ev1->setSource($id_perso, 'perso');
+		$ev1->infos->addPrivateInfo('i',$old_grade);
+		$ev1->infos->addPrivateInfo('f',$new_grade);	
+	}
+	
 	renew_caracs($id_perso, $new_race, $new_grade);
 
 	mysql_query("UPDATE persos SET grade_id = $new_grade
@@ -892,30 +901,6 @@ switch($perso_race){
 return $effet;
 }
 
-/*
-function grade_up_xp($perso_id,$race,$grade,$rang,$new_rang){
-if($grade < 2 && $grade>=0){
-    if($new_rang>$rang && $new_rang>=2){
-      change_race_grade($perso_id, $race, $grade + 1);
-
-      $event_grade_up = new EventsManager($perso_id,"grade_up");
-      $event_grade_up->addEvent('grade',$grade+1);
-      $event_grade_up->commitEvent();
-
-	  $ok=0;
-	  for($inci=1; $inci<=$_SESSION['persos']['inc']; $inci++){
-		if($_SESSION['persos']['id'][$inci]==$perso_id){
-			$ok=1;
-			$id=$inci;
-			}
-		}
-	  if($ok){
-		$_SESSION['persos']['grade'][$id]+=1;
-		}
-      }
-   }
-}
-*/
 function grade_up_xp($perso_id,$race,$grade,$xp){
 
 	if(($grade == 0 && $xp > 500) || ($grade == 1 && $xp > 1000)){
@@ -924,10 +909,6 @@ function grade_up_xp($perso_id,$race,$grade,$xp){
 		} else {
 			change_race_grade($perso_id, $race, $grade + 1);
 		}
-
-		$event_grade_up = new EventsManager($perso_id,"grade_up");
-		$event_grade_up->addEvent('grade',$grade+1);
-		$event_grade_up->commitEvent();
 
 		$ok=0;
 		for($inci=1; $inci<=$_SESSION['persos']['inc']; $inci++){
@@ -977,10 +958,6 @@ function grade_kill($perso_id, $cible_id, $perso_race, $cible_race, $perso_type,
 			change_race_grade($perso_id, $perso_race, $perso_grade + 1);
 			change_galon($perso_id,max(1, $perso_galon-2));
 
-			$event_grade_up = new EventsManager($perso_id,"grade_up");
-			$event_grade_up->addEvent('grade',$perso_grade+1);
-			$event_grade_up->commitEvent();
-
 			$id	= $_SESSION['persos']['id'][0];
 			$_SESSION['persos']['grade'][$id] = $perso_grade + 1;
 		}
@@ -990,68 +967,10 @@ function grade_kill($perso_id, $cible_id, $perso_race, $cible_race, $perso_type,
 		if($perte>=lance_ndp(1,100)){
 			change_race_grade($cible_id, $cible_race, $cible_grade - 1);
 			change_galon($cible_id,$cible_galon);
-
-			$event_grade_down = new EventsManager($cible_id,"grade_down");
-			$event_grade_down->addEvent('grade',$cible_grade-1);
-			$event_grade_down->commitEvent();
 		}
 	}
 
 }
-
-/*
- * Ancienne fonction de grade au kill
-function grade_up_kill($perso_id,$cible_id,$perso_race,$cible_race,$perso_grade,$cible_grade){
-//Calcul de la proba de gain de grade de l'assassin et lancé de dé
-        $val=$cible_grade-$perso_grade;
-        switch($val){
-
-        case 1 :
-                $gain   = 60;
-                $perte  = 1;
-                break;
-        case 2 :
-                $gain   = 75;
-                $perte  = 10;
-                break;
-        case 3 :
-                $gain   = 90;
-                $perte  = 50;
-                break;
-        case 4 :
-        case 5 :
-                $gain   = 100;
-                $perte  = 99;
-                break;
-        default :
-                $gain   = 0;
-                $perte  = 0;
-                }
-        //Test perso
-        if($perso_grade>=0 && $perso_race!=1 && $perso_race!=2){
-                if($gain>=lance_ndp(1,100)){
-                        change_race_grade($perso_id, $perso_race, $perso_grade + 1);
-                        change_galon($perso_id,1);
-                        $event_grade_up = new EventsManager($perso_id,"grade_up");
-                        $event_grade_up->addEvent('grade',$perso_grade+1);
-                        $event_grade_up->commitEvent();
-
-						$id	= $_SESSION['persos']['id'][0];
-                        $_SESSION['persos']['grade'][$id] = $perso_grade + 1;
-                        }
-                }
-        // Test cible
-        if($cible_grade>0 && $cible_race!=1 && $cible_race!=2){
-                if($perte>=lance_ndp(1,100)){
-                        change_race_grade($cible_id, $cible_race, $cible_grade - 1);
-                        $event_grade_down = new EventsManager($cible_id,"grade_down");
-                        $event_grade_down->addEvent('grade',$cible_grade-1);
-                        $event_grade_down->commitEvent();
-                        }
-                }
-}
-
-*/
 
 function select_caracs_alter_mag($perso_id) {
 	$sql="SELECT perso_id,
@@ -1365,7 +1284,7 @@ function raz_all(){
 * Retourne une ligne du tableau de la liste des persos
 **/
 
-function lignePerso($perso,$carac,$root_url,$inc){
+function lignePerso($perso,$carac,$inc){
 
 	$id			= $perso['id_perso'];
 	$caracs		= calcul_caracs($id);
@@ -1423,9 +1342,9 @@ function lignePerso($perso,$carac,$root_url,$inc){
             $retour[]	= '<tr>';
         }
 	//Icone
-	$retour[]	= '<td class="tab_td_icone"><img src="'.$root_url.'/images/'.$url.'" alt="avatar" title="Avatar de '.$nom.'" /><span id="'.$id.'"></span></td>';
+	$retour[]	= '<td class="tab_td_icone"><img src="'.SERVER_URL.'/images/'.$url.'" alt="avatar" title="Avatar de '.$nom.'" /></td>';
 	//Nom et matricule (avec lien sur la page d'évènement
-	$retour[]	= '<td class="tab_td_nom"><a href="'.$root_url.'/event/liste_events.php?id='.$id.'">'.$nom.'</a> (<a href="'.$root_url.'/persos/editer_perso.php?id='.$id.'">'.$id.'</a>)</td>';
+	$retour[]	= '<td class="tab_td_nom"><a href="'.SERVER_URL.'/persos/event/?id='.$id.'">'.$nom.' ('.$id.')</a> <a href="'.SERVER_URL.'/persos/editer_perso.php?id='.$id.'"><img src="'.SERVER_URL.'/images/site/reply.png"</a></td>';
 	//Points de vie (restants et total)
 	$retour[]	= persoCaracCase($pv,'fonce',$pv_max,1);
 	//Mouvements (restants et total)
@@ -1497,7 +1416,7 @@ function lignePerso($perso,$carac,$root_url,$inc){
 	else{
 		$class = '';
 	}
-	$retour[]	= '<td class="tab_td_tour"><a class="'.$class.'" href="'.$root_url.'/jeu/index.php?perso_id='.$inc.'">'.$date_tour.'</a></td>';
+	$retour[]	= '<td class="tab_td_tour"><a class="'.$class.'" href="'.SERVER_URL.'/jeu/index.php?perso_id='.$inc.'">'.$date_tour.'</a></td>';
 	$retour[]	= '</tr>';
 	return join(PHP_EOL,$retour);
 }

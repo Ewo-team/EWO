@@ -1,7 +1,6 @@
 <?php	
 //-- Header --
-$root_url = "..";
-include($root_url."/template/header_new.php");
+require_once __DIR__ . '/../conf/master.php';
 /*-- Connexion basic requise --*/
 ControleAcces('utilisateur',1);
 /*-----------------------------*/
@@ -29,7 +28,7 @@ $utilisateur_id = $_SESSION['utilisateur']['id'];
   echo "<script language='javascript' type='text/javascript' >document.location='".$_SESSION['temps']['page']."'</script>";exit;	
 }else{
 		echo "<h2>Modification de votre personnage</h2><p align='center'>Vous n'êtes pas autorisé à effectuer cette action.</p><p align='center'>[<a href='".$_SESSION['temps']['page']."'>Retour</a>]</p>";
-	include($root_url."/template/footer_new.php");exit;
+	include(SERVER_ROOT ."/template/footer_new.php");exit;
 }
 
 ?>

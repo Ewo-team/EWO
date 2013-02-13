@@ -1,9 +1,8 @@
 <?php
-session_start();
-$root_url = "..";
-include_once($root_url."/conf/master.php");
-include_once($root_url."/event/event.php");
-include_once($root_url."/event/eventFormatter.php");
+use persos\eventManager\eventFormatter as eventFormatter;
+
+require __DIR__ . '/../../conf/master.php';
+
 /*-- Connexion requise --*/
 if (ControleAcces('utilisateur',0) == false){
 	echo "null";

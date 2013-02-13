@@ -14,7 +14,7 @@
  *  @param redirec = 0 return false or true; 1 redirection au root
  */
 function ControleAcces($acces,$redirec){
-global $template_on, $root_url;
+global $template_on;
 
 // Param�tres de connexion � la base de donn�es
 $ewo_bdd = bdd_connect('ewo');
@@ -124,9 +124,11 @@ $ewo_bdd = bdd_connect('ewo');
 			return true;
 		}else{
 			if(isset($template_on)){
-				echo "<script language='javascript' type='text/javascript' >document.location='./$root_url/'</script>";exit;
+				echo "<script language='javascript' type='text/javascript' >document.location='".SERVER_URL."'</script>";
+				exit;
 			}else{
-				header("location:./$root_url/");exit;
+				header("location: ".SERVER_URL);
+				exit;
 			}
 		}
 	}

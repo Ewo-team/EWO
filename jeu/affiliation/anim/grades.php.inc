@@ -36,12 +36,6 @@ if(isset($_POST['mat']) && isset($_POST['grade_perso']) && isset($_POST['galon_p
         
 	change_race_grade($_POST['mat'], $race, $grade);
         change_galon($_POST['mat'], $galon);
-        
-	$event_grade_up = new EventsManager($_POST['mat'],"grade_up");
-        $event_grade_up->addEvent('grade',$grade);
-        $event_grade_up->commitEvent();
-        $sql->updateGradeGalon($_POST['mat'], $grade, $galon);
-        $notifMsg = 'Vous avez bien chang&eacute; le grade et le galon de ce perso';
     }
     else{
         $errMsg = 'Ce personnage n\'est pas votre affili&eacute;';

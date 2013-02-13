@@ -1,6 +1,5 @@
 <?php
 //-- Header --
-$root_url = "..";
 
 $css_files = 'listeperso';
 

@@ -1,9 +1,5 @@
 <?php
-// On include la classe processingEvents
-if(!isset($root_url)){
-	$root_url ='..';
-}
-include_once($root_url.'/eventsManager/eventsManager.php');
+
 $nbEventParPage= 25;
 $listIdTypeEventPublic = "[5,8,9,10,11,15,16,17]";
 //1 : mouvement
@@ -105,10 +101,27 @@ function Affiche_liste_event($idPerso, $nbEvent, $nbJours){
 	}
 }
 
+function serievent($array){
+	$retour = '';
+	foreach($array as $key => $value){
+		$retour=$retour.$key.'|'.mysql_real_escape_string($value).'|';
+		}
+	return $retour;
+}
 
+function unserievent($seriarray){
+	$explode = explode('|', $seriarray);
+	$retour = array();
+	$nb = count($explode)-1;
+	for($inci=0; $inci<$nb;$inci+=2){
+		$key = $explode[$inci];
+		$value = $explode[$inci+1];
+		$retour[$key]=$value;
+		}
+	return $retour;
+}
 
 function affiche_event($event){
-    $root_url ='..';
     $id         = $event['id'];
     $id_perso   = $event['perso_id'];						
     $nom        = $event['nom'];
@@ -125,7 +138,7 @@ function affiche_event($event){
 ?>
 <tr id='event_mouvement'>
   <td>
-    <img src='<?php echo $root_url; ?>/images/<?php echo $url; ?> ' alt='avatar'/>
+    <img src='<?php echo SERVER_URL; ?>/images/<?php echo $url; ?> ' alt='avatar'/>
     <?php echo "</td><td>le ".$date_event."</td><td>".$nom.get_phrase_event($event_type) ?>
     
     <?php							
@@ -142,7 +155,7 @@ function affiche_event($event){
 		?>
 <tr   id='event_attaque'>
   <td >
-    <img src='<?php echo $root_url; ?>/images/<?php echo $url; ?> ' alt='avatar'>
+    <img src='<?php echo SERVER_URL; ?>/images/<?php echo $url; ?> ' alt='avatar'>
 <?php  
       echo "</td><td>le ".$date_event;                
       if (isset($champs['cible'])){
@@ -179,7 +192,7 @@ function affiche_event($event){
 ?>
 <tr   id='event_sort'>
   <td >
-    <img src='<?php echo $root_url; ?>/images/<?php echo $url; ?> ' alt='avatar'>
+    <img src='<?php echo SERVER_URL; ?>/images/<?php echo $url; ?> ' alt='avatar'>
 <?php  
       echo "</td><td>le ".$date_event;                
 	if($champs['attaquant']==$id_perso){
@@ -281,7 +294,7 @@ function affiche_event($event){
 ?>
 <tr   id='event_esquive_sort'>
   <td >
-    <img src='<?php echo $root_url; ?>/images/<?php echo $url; ?> ' alt='avatar'>
+    <img src='<?php echo SERVER_URL; ?>/images/<?php echo $url; ?> ' alt='avatar'>
 <?php    
       echo "</td><td>le ".$date_event." </td><td>".$nom.get_phrase_event($event_type).$champs['sort']." lancé par ".nom_perso($champs['attaquant'],true);
       echo"<td> ";  
@@ -297,7 +310,7 @@ function affiche_event($event){
 ?>
 <tr   id='event_sprint'>
   <td >
-    <img src='<?php echo $root_url; ?>/images/<?php echo $url; ?> ' alt='avatar'>
+    <img src='<?php echo SERVER_URL; ?>/images/<?php echo $url; ?> ' alt='avatar'>
 <?php  
 	        echo "</td><td>le ".$date_event."</td><td> ".$nom."</td><td > ".get_phrase_event($event_type);
 	                
@@ -310,7 +323,7 @@ function affiche_event($event){
 ?>
 <tr   id='event_suicide'>
   <td >
-    <img src='<?php echo $root_url; ?>/images/<?php echo $url; ?> ' alt='avatar'>
+    <img src='<?php echo SERVER_URL; ?>/images/<?php echo $url; ?> ' alt='avatar'>
 <?php  
       echo "</td><td>le ".$date_event."</td><td> ".$nom;
       if (isset($champs['Attaquant'])){
@@ -327,7 +340,7 @@ function affiche_event($event){
 ?>
 <tr   id='event_entrainement'>
   <td>
-    <img src='<?php echo $root_url; ?>/images/<?php echo $url; ?>
+    <img src='<?php echo SERVER_URL; ?>/images/<?php echo $url; ?>
     ' alt='avatar'></td>
 <?php 
   echo "<td>le ".$date_event."</td><td> ".$nom."</td><td > ".get_phrase_event($event_type);
@@ -348,7 +361,7 @@ function affiche_event($event){
 ?>
 <tr   id='event_transaction'>
   <td >
-    <img src='<?php echo $root_url; ?>/images/<?php echo $url; ?> ' alt='avatar'>
+    <img src='<?php echo SERVER_URL; ?>/images/<?php echo $url; ?> ' alt='avatar'>
 <?php  
       echo "le ".$date_event." ".$nom.get_phrase_event($event_type);
 				
@@ -364,7 +377,7 @@ function affiche_event($event){
 ?>
 <tr   id='event_mort'>
   <td >
-    <img src='<?php echo $root_url; ?>/images/<?php echo $url; ?> ' alt='avatar'>
+    <img src='<?php echo SERVER_URL; ?>/images/<?php echo $url; ?> ' alt='avatar'>
   </td>
 <?php  
 	        echo "<td>le ".$date_event."</td><td> ".$nom.get_phrase_event($event_type).nom_perso($champs['attaquant'],true);
@@ -379,7 +392,7 @@ function affiche_event($event){
 ?>
 <tr   id='event_meurtre'>
   <td >
-    <img src='<?php echo $root_url; ?>/images/<?php echo $url; ?> ' alt='avatar'>
+    <img src='<?php echo SERVER_URL; ?>/images/<?php echo $url; ?> ' alt='avatar'>
   </td>
 <?php  
 	        echo "<td>le ".$date_event."</td><td> ".$nom."</td><td > ".nom_perso($id_perso,true).get_phrase_event($event_type).$champs['liste_victime'];
@@ -392,7 +405,7 @@ function affiche_event($event){
 ?>
 <tr   id='event_destruction'>
   <td >
-    <img src='<?php echo $root_url; ?>/images/<?php echo $url; ?> ' alt='avatar'>
+    <img src='<?php echo SERVER_URL; ?>/images/<?php echo $url; ?> ' alt='avatar'>
 <?php  
 					echo "</td><td>le ".$date_event."</td><td> ".$nom."</td><td > ";
     ?></td>
@@ -403,7 +416,7 @@ function affiche_event($event){
 ?>
 <tr   id='event_grade_up'>
   <td >
-    <img src='<?php echo $root_url; ?>/images/<?php echo $url; ?> ' alt='avatar'>
+    <img src='<?php echo SERVER_URL; ?>/images/<?php echo $url; ?> ' alt='avatar'>
 <?php  
 	        echo "</td><td>le ".$date_event."</td><td> ".$nom."</td><td > ".get_phrase_event($event_type).$champs['grade'].".";
     ?></td>
@@ -414,7 +427,7 @@ function affiche_event($event){
 ?>
 <tr   id='event_grade_down'>
   <td >
-    <img src='<?php echo $root_url; ?>/images/<?php echo $url; ?> ' alt='avatar'>
+    <img src='<?php echo SERVER_URL; ?>/images/<?php echo $url; ?> ' alt='avatar'>
 <?php  
 	        echo "</td><td>le ".$date_event."</td><td> ".$nom."</td><td > ".get_phrase_event($event_type).$champs['grade']."."; 
     ?></td>
@@ -425,7 +438,7 @@ function affiche_event($event){
 ?>
 <tr   id='event_faction_in'>
   <td >
-    <img src='<?php echo $root_url; ?>/images/<?php echo $url; ?> ' alt='avatar'>
+    <img src='<?php echo SERVER_URL; ?>/images/<?php echo $url; ?> ' alt='avatar'>
 <?php  
 	        echo "le ".$date_event." ".$nom;
     ?></td>
@@ -436,7 +449,7 @@ function affiche_event($event){
 ?>
 <tr   id='event_faction_out'>
   <td >
-    <img src='<?php echo $root_url; ?>/images/<?php echo $url; ?> ' alt='avatar'>
+    <img src='<?php echo SERVER_URL; ?>/images/<?php echo $url; ?> ' alt='avatar'>
 <?php  
 	        echo "le ".$date_event." ".$nom;
     ?></td>
@@ -448,7 +461,7 @@ function affiche_event($event){
 <tr   id='event_faction_eject'>
   <td >
     <td >
-      <img src='<?php echo $root_url; ?>/images/<?php echo $url; ?> ' alt='avatar'>
+      <img src='<?php echo SERVER_URL; ?>/images/<?php echo $url; ?> ' alt='avatar'>
 <?php  
 	        echo "le ".$date_event." ".$nom;
       ?></td>
@@ -460,7 +473,7 @@ function affiche_event($event){
 ?>
 <tr   id='event_perso'>
   <td >
-    <img src='<?php echo $root_url; ?>/images/<?php echo $url; ?> ' alt='avatar'>
+    <img src='<?php echo SERVER_URL; ?>/images/<?php echo $url; ?> ' alt='avatar'>
 <?php  
 	        echo "le ".$date_event." ".$nom;
     ?></td>
@@ -471,7 +484,7 @@ function affiche_event($event){
 ?>
 <tr   id='event_perso'>
   <td >
-    <img src='<?php echo $root_url; ?>/images/<?php echo $url; ?> ' alt='avatar'>
+    <img src='<?php echo SERVER_URL; ?>/images/<?php echo $url; ?> ' alt='avatar'>
 <?php  
 	        echo "le ".$date_event." ".$nom;
     ?></td>

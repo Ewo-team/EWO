@@ -1,13 +1,10 @@
 <?php
-session_start();
-$root_url = "..";
-include_once($root_url."/conf/master.php");
-//include_once($root_url."/event/event.php");
-include_once($root_url."/event/eventFormatter.php");
-if (ControleAcces('utilisateur',0) == false){
-	echo "null";
-	exit;
-}elseif(isset($_GET['mat']) && is_numeric($_GET['mat'])){
+
+use persos\eventManager\eventFormatter as eventFormatter;
+
+require __DIR__ . '/../../conf/master.php';
+
+if(isset($_GET['mat']) && is_numeric($_GET['mat'])){
 
 	function cmp($a, $b)
 	{
@@ -75,9 +72,9 @@ victimes&nbsp;</strong></span>
 				}else{
 					echo '<tr style="border-top: 2px dashed #634F18;">';
 				}
-				echo '<td><img src="'.eventFormatter::getIcone($icone, $bdd, $tue['mat_victime']).'" alt="avatar"/></td>'.
+				echo '<td><img src="'.SERVER_URL.'/images/'.icone_persos($tue['mat_victime']).'" alt="avatar"/></td>'.
 			'<td width="100%">'.$tue['nom_victime'].' (<a
-			href="../event/liste_events.php?id='.$tue['mat_victime'].'">'.$tue['mat_victime'].'</a>), '.$race.' de Grade '.$tue['grade_victime'].'</td>'.
+			href="../event/?id='.$tue['mat_victime'].'">'.$tue['mat_victime'].'</a>), '.$race.' de Grade '.$tue['grade_victime'].'</td>'.
 			'<td><span style="white-space:nowrap">'.$tue['date'].'</span></td></tr>';
 			}
 			?>
@@ -121,9 +118,9 @@ victimes&nbsp;</strong></span>
 				}else{
 					echo '<tr style="border-top: 2px dashed #634F18;">';
 				}
-				echo '<td><img src="'.eventFormatter::getIcone($icone, $bdd, $tueur['id_perso']).'" alt="avatar"/></td>'.
+				echo '<td><img src="'.SERVER_URL.'/images/'.icone_persos($tueur['id_perso']).'" alt="avatar"/></td>'.
 			'<td width="100%">'.$tueur['nom'].' (<a
-			href="../event/liste_events.php?id='.$tueur['id_perso'].'">'.$tueur['id_perso'].'</a>), '.$race.' de Grade '.$tueur['grade_perso'].'</td>'.
+			href="../event/?id='.$tueur['id_perso'].'">'.$tueur['id_perso'].'</a>), '.$race.' de Grade '.$tueur['grade_perso'].'</td>'.
 			'<td><span style="white-space:nowrap">'.$tueur['date'].'</span></td></tr>';
 			}
 			?>
@@ -145,11 +142,11 @@ victimes&nbsp;</strong></span>
 <?php while ($nemesis['num'] == $perso['num']) { ?>
 	<tr>
 		<td class='tab_td_icone'><img
-			src='<?php echo eventFormatter::getIcone($icone, $bdd, $perso['info']['id_perso']); ?>'
+			src='<?php echo SERVER_URL.'/images/'.icone_persos($perso['info']['id_perso']); ?>'
 			alt='avatar' /></td>
 		<td class='tab_td'><strong><?php echo $perso['info']['nom']; ?>
 		(<?php echo '<a
-			href="../event/liste_events.php?id='.$perso['info']['id_perso'].'">'.$perso['info']['id_perso']; ?></a>)</strong></td>
+			href="../event/?id='.$perso['info']['id_perso'].'">'.$perso['info']['id_perso']; ?></a>)</strong></td>
 	</tr>
 
 	<tr style="background-color: #C3B689;">
@@ -172,10 +169,10 @@ claques&nbsp;</strong></span>
 <?php while ($claque['num'] == $perso['num']) { ?>
 	<tr>
 		<td class='tab_td_icone'><img
-			src='<?php echo eventFormatter::getIcone($icone, $bdd, $perso['info']['mat_victime']); ?>'
+			src='<?php echo SERVER_URL.'/images/'.icone_persos($perso['info']['mat_victime']); ?>'
 			alt='avatar' /></td>
 		<td class='tab_td'><strong><a
-			href='../event/liste_events.php?id=<?php echo $perso['info']['mat_victime'];?>'><?php echo $perso['info']['nom_victime']; ?></a>
+			href='../event/?id=<?php echo $perso['info']['mat_victime'];?>'><?php echo $perso['info']['nom_victime']; ?></a>
 		(<?php echo $perso['info']['mat_victime']; ?>)</strong></td>
 	</tr>
 

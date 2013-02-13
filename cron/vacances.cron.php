@@ -24,7 +24,6 @@ include_once($root_url."/conf/config.php");
 require_once($root_url.'/compte/config_vacances.php');
 require_once($root_url.'/compte/fonctions.php');
 require_once($root_url.'/jeu/fonctions.php');
-require_once($root_url.'/jeu/gainsxp.php');
 
 $ewo = bdd_connect('ewo');
 if(false === $ewo){

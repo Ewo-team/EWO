@@ -14,16 +14,16 @@ class Loader {
 
     public static function baseloaderClass($class) {
         $file = SERVER_ROOT . '/' . strtr($class, '\\', '//') . '.php';
-        if (file_exists($file))
+        if (file_exists($file)) {
             include($file);
-        else
-            echo $file;
+		}
+
     }
     
     public static function eventautoload($name){
-            if(file_exists(SERVER_ROOT."/persos/event/formatter/$name.php")){
-                include (SERVER_ROOT."/persos/event/formatter/$name.php");
-            }
+		if(file_exists(SERVER_ROOT."/persos/eventManager/formatter/$name.php")){
+			include(SERVER_ROOT."/persos/eventManager/formatter/$name.php");
+		}
     }
 }
 

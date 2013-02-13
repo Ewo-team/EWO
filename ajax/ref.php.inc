@@ -6,5 +6,5 @@
  * @author Benjamin Herbomez <benjamin.herbomez@gmail.com>
  */
 
-$root_url = '../';
+
 ?>

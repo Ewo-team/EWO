@@ -16,7 +16,7 @@ if (isset($_POST['email'])){
 // Paramètres de connexion à la base de données
 $ewo = bdd_connect('ewo');
 $email = mysql_real_escape_string($_POST['email']);
-$pass = generatePassword();
+$pass = \conf\Helpers::generatePassword();
 $passencode = hash("sha256",$pass);
 
 	$sql_users = mysql_fetch_array (mysql_query("SELECT nom FROM utilisateurs WHERE email = '$email'"));

@@ -134,7 +134,7 @@ function edition_get_mdj(id){
 				}
 			}
 	// Envoi en GET -- 
-	xhr.open("GET","../jeu/bdd_mdj.php?mdj="+text,true);
+	xhr.open("GET","../jeu/ajax/bdd_mdj.php?mdj="+text,true);
 	xhr.send(null);
 }
 
@@ -203,7 +203,7 @@ function des_modifier(perso_id, carac, des_attaque){
 				
 		
 				// Envoi en GET
-				xhr.open("GET","../jeu/action_ajax.php?perso_id="+perso_id+"&action=maj_des"+"&caracs_max="+carac+"&des_attaque="+des_attaque,true);
+				xhr.open("GET","../jeu/ajax/action_ajax.php?perso_id="+perso_id+"&action=maj_des"+"&caracs_max="+carac+"&des_attaque="+des_attaque,true);
 				xhr.send(null);		
 }
 
@@ -226,7 +226,7 @@ function esq_mag_modifier(perso_id){
 				
 		
 				// Envoi en GET
-				xhr.open("GET","../jeu/action_ajax.php?perso_id="+perso_id+"&action=maj_esq_mag",true);
+				xhr.open("GET","../jeu/ajax/action_ajax.php?perso_id="+perso_id+"&action=maj_esq_mag",true);
 				xhr.send(null);		
 }
 
@@ -278,7 +278,7 @@ function set_info(type, perso_id){
 						}
 					}
 				// Envoi en GET
-				xhr1.open("GET","./infos_action.php?type="+type,true);
+				xhr1.open("GET","./ajax/infos_action.php?type="+type,true);
 				xhr1.send(null);		
 }
 
@@ -302,7 +302,7 @@ function action(perso_id, ActionID, Cible1ID, Cible1Type, Cible1Nom, Cible1_X, C
 						}
 					}
 				// Envoi en GET
-				xhr.open("GET",'./actions.php?ActionID='+ActionID+'&Cible1ID='+Cible1ID+'&Cible1Type='+Cible1Type+'&Cible1Nom='+Cible1Nom+'&Cible1_X='+Cible1_X+'&Cible1_Y='+Cible1_Y+'&Cible2ID='+Cible2ID+'&Cible2Type='+Cible2Type+'&Cible1allie='+Cible1allie+'&Cible2allie='+Cible2allie+'&Cible2Nom='+Cible2nom+'&choix='+choix+'&X='+X+'&Y='+Y,true);
+				xhr.open("GET",'./ajax/actions.php?ActionID='+ActionID+'&Cible1ID='+Cible1ID+'&Cible1Type='+Cible1Type+'&Cible1Nom='+Cible1Nom+'&Cible1_X='+Cible1_X+'&Cible1_Y='+Cible1_Y+'&Cible2ID='+Cible2ID+'&Cible2Type='+Cible2Type+'&Cible1allie='+Cible1allie+'&Cible2allie='+Cible2allie+'&Cible2Nom='+Cible2nom+'&choix='+choix+'&X='+X+'&Y='+Y,true);
 				xhr.send(null);		
 				return xhr;
 }
