@@ -32,7 +32,7 @@ if($etape >= 1) {
 		header("location: .");				
 	}
 	
-	if($_POST['race'] != 'ange' || $_POST['race'] != 'demon' || $_POST['race'] != 'humain') {
+	if($_POST['race'] != 'ange' && $_POST['race'] != 'demon' && $_POST['race'] != 'humain') {
 		$_SESSION['erreur']['perso'] = "Gest lost, kthxbyebbq.";
 		header("location: .");		
 	}

@@ -830,12 +830,12 @@ CREATE TABLE IF NOT EXISTS `classement_view` (
 --
 DROP TABLE IF EXISTS `classes`;
 CREATE TABLE IF NOT EXISTS `classes` (
-  `Id` varchar(2) NOT NULL,
-  `Camps` tinyint(3) unsigned NOT NULL,
-  `Position` tinyint(1) NOT NULL,
-  `Titre` varchar(40) NOT NULL,
-  `Sub` varchar(50) NOT NULL,
-  `Description` varchar(250) NOT NULL DEFAULT '''''',
+  `id` varchar(2) NOT NULL,
+  `camps` tinyint(3) unsigned NOT NULL,
+  `position` tinyint(1) NOT NULL,
+  `titre` varchar(40) NOT NULL,
+  `sub` varchar(50) NOT NULL,
+  `description` varchar(250) NOT NULL DEFAULT ' ',
   PRIMARY KEY (`Id`,`Camps`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- --------------------------------------------------------
