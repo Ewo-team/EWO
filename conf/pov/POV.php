@@ -61,11 +61,10 @@ class POV {
 	* @param $y1 (Int)
 	* @param $x2 (Int)
 	* @param $y2 (Int)
-	* @param $guaranteeEndPoint By default end point (x2, y2) is guaranteed to belong to the line. Many implementation don't have this. If you don't need it, it's a little faster if you set this to false.
 	* @return (Array of couples forming the line) Eg: array(array(2,100), array(3, 101), array(4, 102), array(5, 103))
 	* Public domain Av'tW
 	*/
-	private function bresenham($x1, $y1, $x2, $y2, $guaranteeEndPoint=true) {
+	private function bresenham($x1, $y1, $x2, $y2) {
 		$xBegin = $x1;
 		$yBegin = $y1;
 		$xEnd = $x2;
@@ -93,8 +92,8 @@ class POV {
 			$y2 = $tmp;
 		}
 		
-		$deltax = floor($x2 - $x1);
-		$deltay = floor(abs($y2 - $y1));
+		$deltax = floor($x2 - $x1) + 0.5; // Approximation qui semble donner de meilleures resultats ?
+		$deltay = floor(abs($y2 - $y1)) + 0.5; // Approximation qui semble donner de meilleures resultats ?
 		$error = 0;
 		$deltaerr = $deltay / $deltax;
 		$y = $y1;
@@ -107,17 +106,6 @@ class POV {
 			if ($error >= 0.5) {
 				$y += $ystep;
 				$error -= 1;
-			}
-		}
-
-		if ($guaranteeEndPoint) {
-			// Bresenham doesn't always include the specified end point in the result line, add it now.
-			if ((($xEnd - $x) * ($xEnd - $x) + ($yEnd - $y) * ($yEnd - $y)) <
-			(($xBegin - $x) * ($xBegin - $x) + ($yBegin - $y) * ($yBegin - $y))) {
-				// Then we're closer to the end
-				$dots[] = array($xEnd, $yEnd);
-			} else {
-				$dots[] = array($xBegin, $yBegin);
 			}
 		}
 		
@@ -159,9 +147,9 @@ class POV {
 			$position_x = $rayon[0];
 			$position_y = $rayon[1];
 
-			$line = $this->bresenham(0, 0, $position_x, $position_y, false);
-			$line[] = array($position_x,$position_y);
-			
+			$line = $this->bresenham(0, 0, $position_x, $position_y);
+			$line[] = array($position_x, $position_y);
+		
 			$current_ray = array();
 			
 			$couleur = 1;
