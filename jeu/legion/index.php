@@ -14,14 +14,23 @@ namespace jeu\legion;
 
 	include_once(SERVER_ROOT.'/template/header_new.php');
 	
+	//Il faut être connecté
+	ControleAcces('utilisateur',1);
+	
+	if($_SESSION['persos']['inc'] == 0) {
+		$titre = "Vous n'avez pas de personnages";
+		$text = "Vous avez besoin de personnages avant de pouvoir accéder à cette fonction.";
+		$lien = "..";
+		gestion_erreur($titre, $text, $lien, 1);		
+	}	
+	
 	include('config.php.inc');
 	include('fonctions.php.inc');
 
 
-	//Il faut être connecté
-	ControleAcces('utilisateur',1);
+
 	
-        checkLegion();
+    checkLegion();
         
 	if(isset($_GET['p']) && array_key_exists($_GET['p'],$pages)){
 		$p = $pages[$_GET['p']];

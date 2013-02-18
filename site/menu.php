@@ -93,7 +93,7 @@ if (isset($template_on)) {
         }
 
 
-
+		$nbperso = @$_SESSION['persos']['inc'];
 
 
         $menu['utilisateur'][] = array('url' => SERVER_URL . '/persos/liste_persos.php', 'nom' => $nom, 'taille' => 'grand');
@@ -101,17 +101,19 @@ if (isset($template_on)) {
         $menu['utilisateur'][] = array('url' => SERVER_URL . '/compte/', 'nom' => 'Mon compte');
         $menu['utilisateur'][] = array('url' => SERVER_URL . '/jeu/carte/', 'nom' => 'Carte du Monde');
         $menu['utilisateur'][] = array('url' => SERVER_URL . '/persos/annuaire/', 'nom' => 'Annuaire');
-        //$menu['utilisateur'][] = array('url' => SERVER_URL.'/persos/liste_persos.php', 'nom' => 'Mes personnages');
         $menu['utilisateur'][] = array('url' => SERVER_URL . '/persos/event/', 'nom' => 'Mes &eacute;v&eacute;nements');
-        $menu['utilisateur'][] = array('url' => SERVER_URL . '/jeu/affiliation/', 'nom' => 'Affiliations ' . $nom_aff);
         $menu['utilisateur'][] = array('url' => SERVER_URL . '/jeu/classement/', 'nom' => 'Classement');
 
-		$nbperso = @$_SESSION['persos']['inc'];
+		if($nbperso > 0) {
+			$menu['utilisateur'][] = array('url' => SERVER_URL . '/jeu/affiliation/', 'nom' => 'Affiliations ' . $nom_aff);
+			$menu['utilisateur'][] = array('url' => SERVER_URL . '/jeu/legion/', 'nom' => 'Légions personnages' . $nom_fac);			
+		}		
+		
 		$creation = controleCreationPerso($utilisateur_id);
         
 // Fin "Savoir si l'utilisateur peut encore créer des persos."
         //$menu['utilisateur'][] = array('url' => SERVER_URL.'/affiliation/liste_persos.php', 'nom' => 'Affiliation personnages'.$nom_aff);
-        $menu['utilisateur'][] = array('url' => SERVER_URL . '/jeu/legion/', 'nom' => 'Légions personnages' . $nom_fac);
+        
 
         $menu['persos'][] = array('url' => SERVER_URL . '/persos/liste_persos.php', 'nom' => 'Pages de jeu');
 
