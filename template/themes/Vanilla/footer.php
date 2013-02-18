@@ -27,7 +27,7 @@ if (isset($pagetype)) {
 				$fin = getmicrotime();
 				$page_time = round($fin-$debut, 3);
 				echo "Page générée en ".$page_time." secondes.</p><br />"; */
-				//include($root_url.'/jeu/stat_time.php');
+				//include(SERVER_ROOT.'/jeu/stat_time.php');
 			?>
 </div>
 <?php 

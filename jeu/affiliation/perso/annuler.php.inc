@@ -1,11 +1,11 @@
 <?php
 
+namespace jeu\affiliation;
+
 /**
  *
  * @author Benjamin Herbomez <benjamin.herbomez@gmail.com>
  */
-
-    require_once($root_url.'/affiliation/class/DemandePerso.php.inc');
 
     $demandes   = new DemandePerso($_GET['mat']);
     $demande    = ($demandes->getDemandes());

@@ -1,5 +1,7 @@
 <?php
 
+namespace jeu\affiliation;
+
 /**
  * Liste des pages utilisables
  *

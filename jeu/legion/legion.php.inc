@@ -1,5 +1,7 @@
 <?php
 
+namespace jeu\legion;
+
 /**
  * Affichage d'une légion en particulier
  *
@@ -7,16 +9,9 @@
  * @version 1.0
  */
 
-include_once('class/LegionConfig.php.inc');
-include_once('class/ManagerFactory.php.inc');
-include_once('class/NameManager.php.inc');
-include_once('class/DemandeUtilisateur.php.inc');
+
 include_once('fonctions.php.inc');
 
-use legions\ManagerFactory as ManagerFactory;
-use legions\LegionConfig as LegionConfig;
-use legions\NameManager as NameManager;
-use legions\DemandeUtilisateur as DemandeUtilisateur;
 
 $txt = '<strong>Cette l&eacute; n\'existe pas</strong>';
 

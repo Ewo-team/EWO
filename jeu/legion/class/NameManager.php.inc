@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\legion;
+
 /**
  * Classe de chargement des nom de types et d'alignement
  *
@@ -7,10 +10,6 @@
  * @package legions
  */
 
-namespace legions;
-
-require_once($root_url.'jeu/legion/class/LegionDAO.php.inc');
-require_once($root_url.'jeu/legion/class/LegionConfig.php.inc');
 
 	class NameManager{
 
@@ -18,7 +17,7 @@ require_once($root_url.'jeu/legion/class/LegionConfig.php.inc');
 		private $alignementNames    = array();
 
 		public function __construct(){
-			if(apc_exists(LegionConfig::typeApcName) && apc_exists(LegionConfig::alignementApcName))
+			if(\conf\VariableStorage::Exists(LegionConfig::typeApcName) && \conf\VariableStorage::Exists(LegionConfig::alignementApcName))
                             $this->loadValuesFromApc();
 			else
                             $this->loadValuesFromBdd();
@@ -27,8 +26,8 @@ require_once($root_url.'jeu/legion/class/LegionConfig.php.inc');
 
 		//Les valeurs doivent exister dans APC
 		private function loadValuesFromApc(){
-			$this->typeNames 	= apc_fetch(LegionConfig::typeApcName);
-			$this->alignementNames	= apc_fetch(LegionConfig::alignementApcName);
+			$this->typeNames 	= \conf\VariableStorage::Fetch(LegionConfig::typeApcName);
+			$this->alignementNames	= \conf\VariableStorage::Fetch(LegionConfig::alignementApcName);
 		}
 
 		private function loadValuesFromBdd(){
@@ -62,8 +61,8 @@ require_once($root_url.'jeu/legion/class/LegionConfig.php.inc');
 		}
 
 		private function store(){
-			apc_store(LegionConfig::typeApcName,$this->typeNames);
-			apc_store(LegionConfig::alignementApcName,$this->alignementNames);
+			\conf\VariableStorage::Store(LegionConfig::typeApcName,$this->typeNames);
+			\conf\VariableStorage::Store(LegionConfig::alignementApcName,$this->alignementNames);
 		}
 
 		//L'id doit être dans le tableau !

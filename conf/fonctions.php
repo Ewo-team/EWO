@@ -374,8 +374,8 @@ function nom_perso($id, $afficheMatricule = false, $italique = true) {
             $noms = "SELECT nom, titre FROM persos WHERE id=" . $id . "";
             $resultat = mysql_query($noms) or die(mysql_error());
             $nom = mysql_fetch_array($resultat);
-            //apc_store('persos.pseudo.'.$id.'.nom', $nom['nom'], 60*60);
-            //apc_store('persos.pseudo.'.$id.'.titre', $nom['titre'], 60*60);
+            \conf\VariableStorage::Store('persos.pseudo.'.$id.'.nom', $nom['nom'], 60*60);
+            \conf\VariableStorage::Store('persos.pseudo.'.$id.'.titre', $nom['titre'], 60*60);
         } else {
             $nom['nom'] = $storage_nom;
             $nom['titre'] = $storage_titre;
@@ -594,11 +594,10 @@ function clean_up($var, $type) {
  * Affichage de la page d'erreur avec le message passer en param
  * @param $titre : Titre de l'erreur
  * @param $text : texte a afficher au client
- * @param $root : lien root_url de la ou est appelé le script '..' '../../'
  * @param $lien : lien de retour ou doit etre rooter le client par defaut ./news.php
  * @param $redirec Si $redirec est a 1 : redirection javascript, si a 0 redirection php
  */
-function gestion_erreur($titre, $text, $root, $lien, $redirec = 0) {
+function gestion_erreur($titre, $text, $lien, $redirec = 0) {
     if (empty($lien)) {
         $lien = './../../..';
     }
@@ -610,7 +609,7 @@ function gestion_erreur($titre, $text, $root, $lien, $redirec = 0) {
         header("location:" . SERVER_URL . "/msg/message.php");
         exit;
     } else {
-        echo "<script language='javascript' type='text/javascript' >document.location='" . $root . "/msg/message.php'</script>";
+        echo "<script language='javascript' type='text/javascript' >document.location='" . SERVER_URL . "/msg/message.php'</script>";
         exit;
     }
 }

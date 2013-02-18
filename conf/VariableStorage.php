@@ -25,20 +25,32 @@ class VariableStorage {
 	static function Sauve($uri, $variable, $ssid) {
 		$curi = '_'.$uri;
 		if(!apc_add($curi, $ssid, static::$ttl)) {
-			// il y a un lock, on v�rifie qu'on en est le propri�taire, 
+			// il y a un lock, on vérifie qu'on en est le propri�taire, 
 			if(apc_fetch($curi) === $ssid) {
-				// sauvegarde, et lib�re le lock
+				// sauvegarde, et libère le lock
 				apc_store($uri, $variable);
 				apc_delete($curi);
 				return true;
 			}
-			// On n'est pas le propri�taire, il y a un probl�me
+			// On n'est pas le propriétaire, il y a un problème
 		} else {
-			// Il n'y avais pas de lock, il y a donc un probl�me
+			// Il n'y avais pas de lock, il y a donc un problème
 			apc_delete($curi);
 		}
 
 		return false;
+	}
+	
+	static function Store($key , $var , $ttl = 0 ) {
+		return apc_store($key , $var , $ttl);
+	}
+	
+	static function Exists($keys) {
+		return apc_exists($keys);
+	}
+	
+	static function Fetch($key) {
+		return apc_fetch($key);
 	}
 	
 	static function Consulte($uri) {

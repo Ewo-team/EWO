@@ -1,11 +1,12 @@
 <?php
+
+namespace jeu\affiliation;
+
 /**
  * Classque qui va permettre de donner la liste des supérieurs via leur liste de mat
  *
  * @author Benjamin Herbomez <benjamin.herbomez@gmail.com>
  */
-
-require_once($root_url.'/jeu/affiliation/class/AffiliationDAO.php.inc');
 
 class Superieurs{
 

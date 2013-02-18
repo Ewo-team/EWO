@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\legion;
+
 /**
  * Class pour la gestion des demandes (dans les deux sens)
  * 
@@ -6,7 +9,7 @@
  * @version 1.0
  * @package legions
  */
-namespace legions;
+
 	class Demande{
 		private $persoId;
                 private $persoNom;

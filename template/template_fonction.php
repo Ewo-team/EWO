@@ -7,7 +7,6 @@
  * @package template
  */
 //--------- Insertion des includes de base pour EWO
-//include ($root_url."/conf/master.php");
 
 $debut = getmicrotime();
 //-- Template chargé : 1 oui; sinon n'existera pas;

@@ -1,11 +1,11 @@
 <?php
 
+namespace jeu\affiliation;
+
 /**
  * Renier un affilié
  * @author Benjamin Herbomez <benjamin.herbomez@gmail.com>
  */
-
-require_once($root_url.'/jeu/affiliation/class/AffiliationDAO.php.inc');
 
 $errMsg     = '';
 $notifMsg   = '';

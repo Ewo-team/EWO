@@ -1,20 +1,13 @@
 <?php
+
+namespace jeu\legion;
+
 /**
  * Affichage de la liste des légions
  * 
  * @author Herbomez Benjamin <benjamin.herbomez@gmail.com>
  * @version 1.0
  */
-
-	include_once('class/LegionConfig.php.inc');
-	include_once('class/ManagerFactory.php.inc');
-	include_once('class/NameManager.php.inc');
-	include_once('class/DemandeUtilisateur.php.inc');
-	
-	use legions\LegionConfig as LegionConfig;
-	use legions\ManagerFactory as ManagerFactory;
-	use legions\NameManager as NameManager;
-	use legions\DemandeUtilisateur as DemandeUtilisateur;
 	
 	if(isset($_GET['l_filter']) && array_key_exists($_GET['l_filter'],LegionConfig::$typeName))
 		$type = $_GET['l_filter'];

@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\legion;
+
 /**
  * Gestion des légions en interne
  *
@@ -6,22 +9,8 @@
  * @version 1.0
  */
 
-	include_once('class/LegionConfig.php.inc');
-	include_once('class/ManagerFactory.php.inc');
-	include_once('class/NameManager.php.inc');
-	include_once('class/DemandeUtilisateur.php.inc');
-	include_once('class/DroitManager.php.inc');
-        include_once('class/LegionDroits.php.inc');
-        include_once('class/LegionDAO.php.inc');
+use \persos\eventManager\eventManager as eventManager;
 
-        include_once($root_url.'/persos/event/eventManager.php');
-
-	use legions\ManagerFactory as ManagerFactory;
-	use legions\LegionConfig as LegionConfig;
-	use legions\NameManager as NameManager;
-	use legions\DemandeUtilisateur as DemandeUtilisateur;
-	use legions\LegionDroits as LegionDroits;
-        use legions\LegionDAO as LegionDAO;
 
 	$factory 	= new ManagerFactory();
 	$legions	= $factory->get(LegionConfig::$bddId[$_SESSION['persos']['camp'][$id]]);

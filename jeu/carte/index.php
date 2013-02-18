@@ -9,14 +9,17 @@
  * @package carte
  */
 //-- Header --
-$root_url = "..";
 
 $css_files = 'carte';
 
 $header['title'] = "Carte du monde";
-$header['desc'] = "Terrain de jeux violents entre les D�mons, les Anges et les Humains d'EWO. Peut aussi servir de circuit de vitesse pour des escargots bourr�s.";
-include($root_url."/template/header_new.php");
-include($root_url."/persos/fonctions.php");
+$header['desc'] = "Terrain de jeux violents entre les Démons, les Anges et les Humains d'EWO. Peut aussi servir de circuit de vitesse pour des escargots bourrés.";
+
+require_once __DIR__ . '/../../conf/master.php';
+
+include_once SERVER_ROOT . '/template/header_new.php';
+include_once SERVER_ROOT . '/persos/fonctions.php';
+
 //------------
 
 if (ControleAcces('utilisateur',0) == TRUE){
@@ -89,17 +92,17 @@ $js->addScript('carte');
 			<div class='centrage'>
 				<div id='fond_carte_terre'>
 				<?php if (ControleAcces('utilisateur',0) == TRUE){
-						echo "<span class='fond_carte' id='carte_terre_portes' style='display:block;'><img src='./carte_terre.php?porte=1' alt='terre'></span> ";
-						echo "<span class='fond_carte' id='carte_terre_boucliers' style='display:block;'><img src='./carte_terre.php?bouclier=1' alt='terre'></span>";
+						echo "<span class='fond_carte' id='carte_terre_portes' style='display:block;'><img src='".SERVER_URL."/jeu/carte/carte_terre.php?porte=1' alt='terre'></span> ";
+						echo "<span class='fond_carte' id='carte_terre_boucliers' style='display:block;'><img src='".SERVER_URL."/jeu/carte/carte_terre.php?bouclier=1' alt='terre'></span>";
 						for($inci=1;$inci<=4;$inci++){
-								echo "<span class='fond_carte' id='carte_terre_R".$inci."G0' style='display:block;'><img src='./carte_terre.php?race=".$inci."&grade=0' alt='terre'></span> ";
-								echo "<span class='fond_carte' id='carte_terre_R".$inci."G4' style='display:block;'><img src='./carte_terre.php?race=".$inci."&grade=4' alt='terre'></span> ";
-								echo "<span class='fond_carte' id='carte_terre_R".$inci."G5' style='display:block;'><img src='./carte_terre.php?race=".$inci."&grade=5' alt='terre'></span> ";							
+								echo "<span class='fond_carte' id='carte_terre_R".$inci."G0' style='display:block;'><img src='".SERVER_URL."/jeu/carte/carte_terre.php?race=".$inci."&grade=0' alt='terre'></span> ";
+								echo "<span class='fond_carte' id='carte_terre_R".$inci."G4' style='display:block;'><img src='".SERVER_URL."/jeu/carte/carte_terre.php?race=".$inci."&grade=4' alt='terre'></span> ";
+								echo "<span class='fond_carte' id='carte_terre_R".$inci."G5' style='display:block;'><img src='".SERVER_URL."/jeu/carte/carte_terre.php?race=".$inci."&grade=5' alt='terre'></span> ";							
 							}
 						
-						echo "<span class='fond_carte' id='carte_terre_R1G-1' style='display:block;'><img src='./carte_terre.php?race=1&grade=-1' alt='terre'></span> ";
-						echo "<span class='fond_carte' id='carte_terre_grille' style='display:block;'><img src='./carte_terre.php?grille=1' alt='terre'></span>";
-						echo "<span class='fond_carte' id='carte_terre_viseur' style='display:block;'><img src='./carte_terre.php?viseur=1' alt='terre'></span>";
+						echo "<span class='fond_carte' id='carte_terre_R1G-1' style='display:block;'><img src='".SERVER_URL."/jeu/carte/carte_terre.php?race=1&grade=-1' alt='terre'></span> ";
+						echo "<span class='fond_carte' id='carte_terre_grille' style='display:block;'><img src='".SERVER_URL."/jeu/carte/carte_terre.php?grille=1' alt='terre'></span>";
+						echo "<span class='fond_carte' id='carte_terre_viseur' style='display:block;'><img src='".SERVER_URL."/jeu/carte/carte_terre.php?viseur=1' alt='terre'></span>";
 						?>
 						<!-- POUR ERASE -->
 						<span class='fond_carte' id='Gcarte_terre_R3G0' style='display:none;'><img src='./carte_terre.php?race=3&grade=0&zoom=1' alt='Gterre'></span>
@@ -162,17 +165,17 @@ if(($carte_par_ok || $carte_en || $carte_fac_par) && !$trich){
 			<div class='centrage'>
 				<div id='fond_carte_paradis'>
 				<?php
-					echo "<span class='fond_carte'  id='carte_paradis_portes'><img src='./carte_paradis.php?porte=1' alt='paradis'></span> ";
-					echo "<span class='fond_carte'  id='carte_paradis_boucliers'><img src='./carte_paradis.php?bouclier=1' alt='paradis'></span>";
+					echo "<span class='fond_carte'  id='carte_paradis_portes'><img src='".SERVER_URL."/jeu/carte/carte_paradis.php?porte=1' alt='paradis'></span> ";
+					echo "<span class='fond_carte'  id='carte_paradis_boucliers'><img src='".SERVER_URL."/jeu/carte/carte_paradis.php?bouclier=1' alt='paradis'></span>";
 					for($inci=1;$inci<=4;$inci++){
-							echo "<span class='fond_carte' id='carte_paradis_R".$inci."G0'><img src='./carte_paradis.php?race=".$inci."&grade=0' alt='paradis'></span> ";
-							echo "<span class='fond_carte' id='carte_paradis_R".$inci."G4'><img src='./carte_paradis.php?race=".$inci."&grade=4' alt='paradis'></span> ";
-							echo "<span class='fond_carte'  id='carte_paradis_R".$inci."G5'><img src='./carte_paradis.php?race=".$inci."&grade=5' alt='paradis'></span> ";							
+							echo "<span class='fond_carte' id='carte_paradis_R".$inci."G0'><img src='".SERVER_URL."/jeu/carte/carte_paradis.php?race=".$inci."&grade=0' alt='paradis'></span> ";
+							echo "<span class='fond_carte' id='carte_paradis_R".$inci."G4'><img src='".SERVER_URL."/jeu/carte/carte_paradis.php?race=".$inci."&grade=4' alt='paradis'></span> ";
+							echo "<span class='fond_carte'  id='carte_paradis_R".$inci."G5'><img src='".SERVER_URL."/jeu/carte/carte_paradis.php?race=".$inci."&grade=5' alt='paradis'></span> ";							
 						}
 					
-					echo "<span class='fond_carte'  id='carte_paradis_R1G-1'><img src='./carte_paradis.php?race=1&grade=-1' alt='paradis'></span> ";
-					echo "<span class='fond_carte' id='carte_paradis_grille'><img src='./carte_paradis.php?grille=1' alt='paradis'></span>";
-					echo "<span class='fond_carte' id='carte_paradis_viseur'><img src='./carte_paradis.php?viseur=1' alt='paradis'></span>";
+					echo "<span class='fond_carte'  id='carte_paradis_R1G-1'><img src='".SERVER_URL."/jeu/carte/carte_paradis.php?race=1&grade=-1' alt='paradis'></span> ";
+					echo "<span class='fond_carte' id='carte_paradis_grille'><img src='".SERVER_URL."/jeu/carte/carte_paradis.php?grille=1' alt='paradis'></span>";
+					echo "<span class='fond_carte' id='carte_paradis_viseur'><img src='".SERVER_URL."/jeu/carte/carte_paradis.php?viseur=1' alt='paradis'></span>";
 				?>
 				</div>
 			</div>			
@@ -209,17 +212,17 @@ if(($carte_enf_ok || $carte_en || $carte_fac_enf) && !$trich){
 			<div class='centrage'>
 				<div id='fond_carte_enfer'>
 			<?php
-					echo "<span class='fond_carte' id='carte_enfer_portes'><img src='./carte_enfer.php?porte=1' alt='Enfer'></span> ";
-					echo "<span class='fond_carte' id='carte_enfer_boucliers'><img src='./carte_enfer.php?bouclier=1' alt='Enfer'></span>";
+					echo "<span class='fond_carte' id='carte_enfer_portes'><img src='".SERVER_URL."/jeu/carte/carte_enfer.php?porte=1' alt='Enfer'></span> ";
+					echo "<span class='fond_carte' id='carte_enfer_boucliers'><img src='".SERVER_URL."/jeu/carte/carte_enfer.php?bouclier=1' alt='Enfer'></span>";
 					for($inci=1;$inci<=4;$inci++){
-							echo "<span class='fond_carte' id='carte_enfer_R".$inci."G0'><img src='./carte_enfer.php?race=".$inci."&grade=0' alt='Enfer'></span> ";
-							echo "<span class='fond_carte' id='carte_enfer_R".$inci."G4'><img src='./carte_enfer.php?race=".$inci."&grade=4' alt='Enfer'></span> ";
-							echo "<span class='fond_carte' id='carte_enfer_R".$inci."G5'><img src='./carte_enfer.php?race=".$inci."&grade=5' alt='Enfer'></span> ";							
+							echo "<span class='fond_carte' id='carte_enfer_R".$inci."G0'><img src='".SERVER_URL."/jeu/carte/carte_enfer.php?race=".$inci."&grade=0' alt='Enfer'></span> ";
+							echo "<span class='fond_carte' id='carte_enfer_R".$inci."G4'><img src='".SERVER_URL."/jeu/carte/carte_enfer.php?race=".$inci."&grade=4' alt='Enfer'></span> ";
+							echo "<span class='fond_carte' id='carte_enfer_R".$inci."G5'><img src='".SERVER_URL."/jeu/carte/carte_enfer.php?race=".$inci."&grade=5' alt='Enfer'></span> ";							
 						}
 					
-					echo "<span class='fond_carte' id='carte_enfer_R1G-1'><img src='./carte_enfer.php?race=1&grade=-1' alt='Enfer'></span> ";
-					echo "<span class='fond_carte' id='carte_enfer_grille'><img src='./carte_enfer.php?grille=1' alt='Enfer'></span>";
-						echo "<span class='fond_carte' id='carte_enfer_viseur'><img src='./carte_enfer.php?viseur=1' alt='enfer'></span>";
+					echo "<span class='fond_carte' id='carte_enfer_R1G-1'><img src='".SERVER_URL."/jeu/carte/carte_enfer.php?race=1&grade=-1' alt='Enfer'></span> ";
+					echo "<span class='fond_carte' id='carte_enfer_grille'><img src='".SERVER_URL."/jeu/carte/carte_enfer.php?grille=1' alt='Enfer'></span>";
+						echo "<span class='fond_carte' id='carte_enfer_viseur'><img src='".SERVER_URL."/jeu/carte/carte_enfer.php?viseur=1' alt='enfer'></span>";
 			?>		
 					</div>
 			</div>	
@@ -250,6 +253,6 @@ if(($carte_enf_ok || $carte_en || $carte_fac_enf) && !$trich){
 
 <?php
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT."/template/footer_new.php");
 //------------
 ?>

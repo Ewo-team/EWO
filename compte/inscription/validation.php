@@ -29,9 +29,8 @@ if (isset($_GET['code']) && isset($_GET['nom']) && isset($_GET['email'])) {
     if ($verif['nom'] != $nom || $verif['droits'][0] == 1) {
         $titre = "Compte actif";
         $text = "Ce compte n'existe pas, où est deja actif";
-        $root = "..";
         $lien = "..";
-        gestion_erreur($titre, $text, $root, $lien);
+        gestion_erreur($titre, $text, $lien);
     }
 
     $msg = "Votre compte vient d'être validé, vous pouvez maintenant accéder à votre page de jeu.";
@@ -65,15 +64,13 @@ if (isset($_GET['code']) && isset($_GET['nom']) && isset($_GET['email'])) {
 
         $titre = "Compte actif";
         $text = "Votre compte est d&eacute;sormais actif, un mail de confirmation vient de vous parvenir sur " . $email;
-        $root = "..";
         $lien = "../";
-        gestion_erreur($titre, $text, $root, $lien);
+        gestion_erreur($titre, $text, $lien);
 
 } else {
     $titre = "Op&eacute;ration non comprise";
     $text = "Op&eacute;ration non comprise, il nous est impossible de valider votre compte utilisateur.";
-    $root = "..";
     $lien = "..";
-    gestion_erreur($titre, $text, $root, $lien);
+    gestion_erreur($titre, $text, $lien);
 }
 ?>

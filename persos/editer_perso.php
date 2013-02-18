@@ -21,9 +21,8 @@ $infos = mysql_fetch_array ($resultat);
 if(!isset($infos['id'])){
 	$titre = "Erreur dans la matrice";
 	$text = "Cette utilisateur ne possèdent pas ce personnage.";
-	$root = "..";
 	$lien = "..";
-	gestion_erreur($titre, $text, $root, $lien, 1);	
+	gestion_erreur($titre, $text, $lien, 1);	
 }
 
 $signature = isset($infos['options'][0]) ? $infos['options'][0] : 0;
@@ -40,10 +39,7 @@ $_SESSION['temps']['page'] = "../persos/editer_perso.php?id=$id";
 <h2>Edition de votre personnage</h2>
 
 <!-- Debut du coin -->
-<div class="upperleft" id='coin_75'>
-	<div class="upperright">
-		<div class="lowerleft">
-			<div class="lowerright">
+<div>
 			<!-- conteneur -->
 				<b>Pseudo : </b><?php echo $infos['nom']." (".$infos['id'].")"; ?>
 
@@ -65,17 +61,11 @@ $_SESSION['temps']['page'] = "../persos/editer_perso.php?id=$id";
 				<i>Image : png, jpg, gif; taille maxi 140*140</i>
 				<p><i>Veuillez ne pas utiliser d'avatar provocant ou choquant.</i></p>
 				<!-- fin conteneur -->
-			</div>
-		</div>
-	</div>
 </div>
 <!-- Fin du coin -->
 <div class="separation"></div>
 <!-- Debut du coin -->
-<div class="upperleft" id='coin_75'>
-	<div class="upperright">
-		<div class="lowerleft">
-			<div class="lowerright">
+<div>
 			<!-- conteneur -->
 				<b>Message du jour :</b><br />
 				<form name='mdj' action="edition_mdj.php" method="post">
@@ -84,17 +74,11 @@ $_SESSION['temps']['page'] = "../persos/editer_perso.php?id=$id";
 					<input type="submit" value="Modifier" class="bouton" />
 				</form>
 				<!-- fin conteneur -->
-			</div>
-		</div>
-	</div>
 </div>
 <!-- Fin du coin -->
 <div class="separation"></div>
 <!-- Debut du coin -->
-<div class="upperleft" id='coin_75'>
-	<div class="upperright">
-		<div class="lowerleft">
-			<div class="lowerright">
+<div>
 			<!-- conteneur -->
 				<b>Signature de la bal :</b><br />
 				<form name='signature' action="edition_signature.php" method="post">
@@ -121,17 +105,11 @@ $_SESSION['temps']['page'] = "../persos/editer_perso.php?id=$id";
 					<input type="submit" value="Modifier" class="bouton" />
 				</form>
 				<!-- fin conteneur -->
-			</div>
-		</div>
-	</div>
 </div>
 <!-- Fin du coin -->
 <div class="separation"></div>
 <!-- Debut du coin -->
-<div class="upperleft" id='coin_75'>
-	<div class="upperright">
-		<div class="lowerleft">
-			<div class="lowerright">
+<div>
 			<!-- conteneur -->
 				<b>Background :</b><br />
 				<form name='background' action="edition_background.php" method="post">
@@ -140,9 +118,7 @@ $_SESSION['temps']['page'] = "../persos/editer_perso.php?id=$id";
 					<input type="submit" value="Modifier" class="bouton" />
 				</form>
 				<!-- fin conteneur -->
-			</div>
-		</div>
-	</div>
+
 </div>
 <!-- Fin du coin -->
 </div>

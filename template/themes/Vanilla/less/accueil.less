@@ -21,9 +21,8 @@
 	overflow:hidden;
 	padding-left: 0px;
 	
-	-moz-animation:carousel 30s infinite;
-	-webkit-animation:carousel 30s infinite;
-	-webkit-animation:carousel 30s infinite;        
+	animation:carousel 30s infinite;
+
 }
 
 #carousel ul > li{
@@ -48,17 +47,17 @@
 
 #zone_inf {
 	margin-top: 20px;
--webkit-column-count: 3;
--webkit-column-gap: 20px;           
-	-webkit-column-rule-color: black;
--webkit-column-rule-style: solid;
--webkit-column-rule-width: 1px;
+	column-count: 3;
+	column-gap: 20px;           
+	column-rule-color: black;
+	column-rule-style: solid;
+	column-rule-width: 1px;
 }
 #zone_inf ul {
 	margin:0;
 }
 
-@-webkit-keyframes carousel{
+@keyframes carousel{
 	0%    { left:0; }
 	17.6%   { left:0; }
 	20% { left:-100%; }

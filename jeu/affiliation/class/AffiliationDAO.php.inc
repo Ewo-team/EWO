@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\affiliation;
+
 /**
  * DAO pour les affiliations
  *
@@ -6,11 +9,10 @@
  */
 
 use \conf\ConnecteurDAO as ConnecteurDAO;
+use \messagerie\messagerieDAO as messagerieDAO;
+use \persos\eventManager\eventManager as eventManager;
 
-    require_once('BonusAffiManager.php.inc');
-    require_once($root_url.'/messagerie/messagerieDAO.php');
-    require_once($root_url.'/persos/event/eventManager.php');
-    require_once($root_url.'/jeu/grille_gainsxp.php');
+    require_once(SERVER_ROOT.'/conf/grille_gainsxp.php');
 
     class AffiliationDAO extends ConnecteurDAO {
 

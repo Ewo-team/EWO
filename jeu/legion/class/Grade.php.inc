@@ -1,5 +1,7 @@
 <?php
 
+namespace jeu\legion;
+
 /**
  * Class pour la gestion des grades
  * 

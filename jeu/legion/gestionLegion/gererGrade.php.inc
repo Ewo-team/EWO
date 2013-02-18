@@ -1,21 +1,13 @@
 <?php
 
+namespace jeu\legion;
+
 /**
  * Gestion des légions en interne : voir la liste des membres
  *
  * @author Herbomez Benjamin <benjamin.herbomez@gmail.com>
  * @version 1.0
  */
-include_once('class/LegionConfig.php.inc');
-include_once('class/ManagerFactory.php.inc');
-include_once('class/LegionDroits.php.inc');
-require_once('class/LegionDAO.php.inc');
-
-use legions\LegionDAO as LegionDAO;
-use legions\ManagerFactory as ManagerFactory;
-use legions\LegionConfig as LegionConfig;
-use legions\DroitManager as DroitManager;
-use legions\LegionDroits    as LegionDroits;
 
 $droitManager = new DroitManager($_SESSION['persos']['faction']['droits'][$id]);
 $droits = LegionDroits::droitsFromPersoId($id);

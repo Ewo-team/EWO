@@ -1265,8 +1265,6 @@ function passage_porte($pos_x_perso, $pos_y_perso, $plan) {
 
 function getCaseDecors($id, $x, $y) {
 
-	//global $root_url;
-
 	$sql = "SELECT SQL_CACHE nom_decors FROM cartes WHERE id='$id'";
 	$resultat = mysql_query ($sql) or die (mysql_error());
 	$carte = mysql_fetch_array ($resultat);

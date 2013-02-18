@@ -161,7 +161,7 @@ class eventFormatter extends tools {
 		switch($type){
 			case 'perso':
 				$ret = '<span style="white-space:nowrap;">'.((mb_strlen($event->$funcName(),'UTF-8')>= 11)?mb_substr($event->$funcName(),0,9,'UTF-8').'..':$event->$funcName()).'</span>';
-				$ret .= '<br/>&nbsp;&nbsp;<span style="font-size:smaller;">Mat. </span><a href="../event/liste_events.php?id='.$event->$func().'">'.$event->$func().'</a>';
+				$ret .= '<br/>&nbsp;&nbsp;<span style="font-size:smaller;">Mat. </span><a href="'.SERVER_URL.'/persos/event/?id='.$event->$func().'">'.$event->$func().'</a>';
 				break;
 			case 'objet_simple':
 			case 'objet_complexe':

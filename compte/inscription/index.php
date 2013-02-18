@@ -29,10 +29,7 @@ if(isset($_SESSION['temp']['error'])){
 <h2>Formulaire d'inscription</h2>
 
 <!-- Debut du coin -->
-<div class="upperleft" id='coin_75'>
-	<div class="upperright">
-		<div class="lowerleft">
-			<div class="lowerright">
+<div>
 			<!-- conteneur -->		
 	
 			
@@ -104,9 +101,6 @@ if(isset($_SESSION['temp']['error'])){
 
 
 			<!-- fin conteneur -->
-			</div>
-		</div>
-	</div>
 </div>
 <!-- Fin du coin -->
 

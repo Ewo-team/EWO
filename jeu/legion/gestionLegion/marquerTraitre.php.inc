@@ -1,4 +1,6 @@
 <?php
+namespace jeu\legion;
+
 require('fonctions_traitre.php');
 ?>
 
@@ -68,7 +70,7 @@ while ($event = mysql_fetch_array($resultat)) {
         }
 
         echo "<tr class='$color winner$n'>";
-        echo "<td align='center'><img src='../images/$url' alt='avatar'/><br/>" . $nom . " [<a href='../event/liste_events.php?id=$id_victime'>$id_victime</a>]</td>";
+        echo "<td align='center'><img src='../images/$url' alt='avatar'/><br/>" . $nom . " [<a href='". SERVER_URL ."/persos/event/?id=$id_victime'>$id_victime</a>]</td>";
         echo "<td align='center'>$date_event</td>";
         echo '<td align="center">
                 <form name="traitre" action="index.php?p=',$_GET['p'],'&amp;mat=',$_GET['mat'],'&amp;s=',$_GET['s'],'"

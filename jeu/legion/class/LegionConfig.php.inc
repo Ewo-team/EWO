@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\legion;
+
 /**
  * Config, s'il faut changer quelque chose c'est ici
  *
@@ -7,9 +10,6 @@
  * @package legions
  */
 
-namespace legions;
-global $root_url;
-require_once($root_url.'jeu/legion/class/LegionDAO.php.inc');
 
 	class LegionConfig{
 		//Les différents camps
@@ -94,11 +94,4 @@ LegionConfig::loadUtilisateurRace();
 
 unset($_SESSION['persos']['id'][0]);
 
-if(!function_exists('apc_exists')){
-	function apc_exists($keys){
-		$r;
-		apc_fetch($keys,$r);
-		return $r;
-	}
-}
 ?>

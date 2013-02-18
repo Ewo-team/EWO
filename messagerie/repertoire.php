@@ -14,10 +14,7 @@ if (isset($template_on)){
 <h2>Mon répertoire</h2>
 
 <!-- Debut du coin -->
-<div class="upperleft" id='coin_50'>
-	<div class="upperright">
-		<div class="lowerleft">
-			<div class="lowerright">
+<div>
 			<!-- conteneur -->
 <div id='repertoire_ok' class="action_ok" style='display:none'></div>
 <div id='voir_repertoire'>[<a href='#' onclick="$('#repertoire').toggle();"><img src='../images/site/add.png' alt='voir'>Voir mon répertoire</a>]</div>
@@ -48,9 +45,6 @@ if (isset($template_on)){
 </div>
 
 			<!-- fin conteneur -->
-			</div>
-		</div>
-	</div>
 </div>
 <!-- Fin du coin -->
 <?php

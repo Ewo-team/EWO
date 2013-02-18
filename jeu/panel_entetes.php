@@ -8,7 +8,7 @@
 								if(isset($_SESSION['persos']['carte'][$id])){
 									$carte_pos =	$_SESSION['persos']['carte'][$id];
 									$plan = get_plan ($carte_pos);
-									echo "Sur <a class='lien_carte' href='$root_url/carte/'>".$plan."</a>";
+									echo "Sur <a class='lien_carte' href='",SERVER_URL,"/jeu/carte/'>".$plan."</a>";
 								}else echo "<b>Nullepart</b>";
 								$format= 'd-m-Y';
 								$format2=' H:i:s';

@@ -29,7 +29,7 @@ include(SERVER_ROOT . '/template/header_new.php');
 	<tr>
 		<td>
 			<form method="post" action="rechercher_personnage.php">
-			<input type="text" name="matricule" size="13" />
+			<input type="number" name="matricule" size="13" required />
 		</td>
 		<td>
 			<input class="bouton" type="submit" value="Rechercher" />
@@ -48,7 +48,7 @@ include(SERVER_ROOT . '/template/header_new.php');
 	<tr>
 		<td>
 			<form method="post" action="rechercher_matricule.php">
-			<input type="text" name="personnage" size="13" />
+			<input type="text" name="personnage" size="13" required />
 		</td>
 		<td>
 			<input class="bouton" type="submit" value="Rechercher" />

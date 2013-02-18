@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\legion;
+
 /**
  * Légion - Liste des onglets de gauche pour les légions
  *
@@ -35,7 +38,7 @@ echo '
 		echo '
 		<div style="margin-bottom : 5px;">
 			<div class="legionPersoLeft">
-			<img src="'.$root_url.'/images/'.icone_persos($_SESSION['persos']['id'][$i]).'" alt="avatar"
+			<img src="'.SERVER_URL.'/images/'.icone_persos($_SESSION['persos']['id'][$i]).'" alt="avatar"
 				title="Avatar de '.$_SESSION['persos']['nom'][$i].'" />
 			</div>
 			<div class="legionPersoRight">

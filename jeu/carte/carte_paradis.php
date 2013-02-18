@@ -6,20 +6,17 @@
  * @version 1.0
  * @package carte
  */
-session_start();
+header("content-Type: image/png");
 
-$root_url = "..";
+require_once __DIR__ . '/../../conf/master.php';
 
-include("../conf/master.php");
-include("../persos/fonctions.php");
-include("../jeu/fonctions.php");
+include_once SERVER_ROOT . '/persos/fonctions.php';
+include_once SERVER_ROOT . '/jeu/fonctions.php';
 // Paramètres de connexion à la base de données
 $ewo_bdd = bdd_connect('ewo');
 
 ControleAcces('utilisateur',1);
 	
-header("content-Type: image/png");
-
 // Récupération des données des persos.
 $nb_perso =  $_SESSION['persos']['inc'];
 

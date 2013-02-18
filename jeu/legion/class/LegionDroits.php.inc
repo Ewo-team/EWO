@@ -1,12 +1,14 @@
 <?php
 
+namespace jeu\legion;
+
 /**
  * Liste des actions possible et construction des accès possibles à partir des droits de base
  *
  * @author Herbomez Benjamin <benjamin.herbomez@gmail.com>
  * @version 1.0
  */
-namespace legions;
+
     class LegionDroits{
         const GERER_MEMBRE          = 0;
         const GERER_BRAS_DROIT      = 1;

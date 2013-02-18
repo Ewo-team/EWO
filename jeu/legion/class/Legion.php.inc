@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\legion;
+
 /**
  * Class pour la gestion d'une faction
  *
@@ -6,10 +9,7 @@
  * @version 1.0
  * @package legions
  */
-namespace legions;
 
-require_once($root_url.'jeu/legion/class/LegionDAO.php.inc');
-require_once($root_url.'jeu/legion/class/Grade.php.inc');
 
 class Legion{
 

@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\legion;
+
 /**
  * Affichage d'un perso
  *
@@ -6,23 +9,10 @@
  * @version 1.0
  */
 
-	include_once('class/LegionDAO.php.inc');
-	include_once('class/LegionConfig.php.inc');
-	include_once('class/ManagerFactory.php.inc');
-	include_once('class/NameManager.php.inc');
-	include_once('class/DemandeUtilisateur.php.inc');
-	include_once('class/DemandeFromLegions.php.inc');
+ use \persos\eventManager\eventManager as eventManager;
+ use \persos\eventManager\eventFormatter as eventFormatter;
+
 	include_once('fonctions.php.inc');
-
-        include_once($root_url.'persos/event/eventManager.php');
-
-	use legions\LegionDAO           as LegionDAO;
-	use legions\ManagerFactory      as ManagerFactory;
-	use legions\LegionConfig        as LegionConfig;
-	use legions\NameManager         as NameManager;
-	use legions\DemandeUtilisateur  as DemandeUtilisateur;
-	use legions\DemandeFromLegion   as DemandeFromLegion;
-
 
 	if(in_array($_GET['mat'],$_SESSION['persos']['id'])){
 
@@ -71,7 +61,7 @@
                 }
 		echo'
 		<div class="legionPersoLeft" style="width:110px;height:55px;padding:2px;text-align:center;">
-                    <img src="'.$root_url.'/images/'.icone_persos($_SESSION['persos']['id'][$id]).'" alt="avatar" style="margin:auto;"/>
+                    <img src="'.SERVER_URL.'/images/'.icone_persos($_SESSION['persos']['id'][$id]).'" alt="avatar" style="margin:auto;"/>
                     ',$_SESSION['persos']['nom'][$id],'
 		</div>';
 

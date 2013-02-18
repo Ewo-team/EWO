@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\affiliation;
+
 /**
  * Action pour se désaffilier
  *

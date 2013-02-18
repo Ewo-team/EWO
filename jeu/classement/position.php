@@ -61,6 +61,6 @@ if(isset($mat) || isset($pseudo)) {
 
 	$page = ceil($rang / 50);
 	
-	header('Location: classement.php?perso_id=0&page='.$page.'&croissant=DESC&grade_ord=-1&race=0&nb_el=50&highlight='.$mat);
+	header('Location: .?perso_id=0&page='.$page.'&croissant=DESC&grade_ord=-1&race=0&nb_el=50&highlight='.$mat);
 }
 ?>

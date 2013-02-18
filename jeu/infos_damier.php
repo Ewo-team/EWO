@@ -701,12 +701,12 @@ function infobulle($type, $id, $cout, $liste_perso, $liste_terrain, $liste_artef
 // Infos pour les personnages
 
 if ($type=='perso'){
-	$infos='<b>Nom : </b><a href="./../event/liste_events.php?id='.$liste_perso['case']['id'][$id].'">'.$liste_perso['case']['nom'][$id].'</a><br/>';
+	$infos='<b>Nom : </b><a href="'.SERVER_URL.'/persos/event/?id='.$liste_perso['case']['id'][$id].'">'.$liste_perso['case']['nom'][$id].'</a><br/>';
 			
 	if(isset($liste_perso['case']['titre'][$id])) {
 		$infos .= '<i>'.$liste_perso['case']['titre'][$id].'</i><br/>';
 	}
-	$infos .= '<b>Mat. : </b><a href="../messagerie/index.php?id='.$_SESSION['persos']['current_id'].'&dest='.$liste_perso['case']['id'][$id].'">'.$liste_perso['case']['id'][$id].'</a><br/>
+	$infos .= '<b>Mat. : </b><a href="'.SERVER_URL.'/messagerie/?id='.$_SESSION['persos']['current_id'].'&dest='.$liste_perso['case']['id'][$id].'">'.$liste_perso['case']['id'][$id].'</a><br/>
 	<b>Race : </b>'.$liste_perso['case']['race']['nom'][$id].'<br/>';
         
         $grade_affichage = ($liste_perso['case']['race']['perso'][$id]) ? "Grade " . $liste_perso['case']['grade']['id'][$id] : $liste_perso['case']['grade']['nom'][$id].' ('.$liste_perso['case']['grade']['id'][$id].')' ;
@@ -715,15 +715,15 @@ if ($type=='perso'){
 			';
 	if($liste_perso['case']['faction']['id'][$id]>0 && $liste_perso['case']['grade']['id'][$id]>=0){
 		if($liste_perso['case']['faction']['logo'][$id]!=''){
-			  $img='<img src="./../images/'.$liste_perso['case']['faction']['logo'][$id].'">';
+			  $img='<img src="'.SERVER_URL.'/images/'.$liste_perso['case']['faction']['logo'][$id].'">';
 				}
-				else $img='<img src="./../images/'.$liste_perso['case']['icone'][$id].'">';
+				else $img='<img src="'.SERVER_URL.'/images/'.$liste_perso['case']['icone'][$id].'">';
 		$info_faction='<hr><b>Faction : </b>'.$liste_perso['case']['faction']['nom'][$id].'<br/>
 						<b>Type : </b>'.$liste_perso['case']['faction']['type'][$id].'<br/>
 						<b>Grade : </b>'.$liste_perso['case']['faction']['grade'][$id].'<br/>';
 		}
 		else {
-			$img='<img src="./../images/'.$liste_perso['case']['icone'][$id].'" alt="icone personnage">';
+			$img='<img src="'.SERVER_URL.'/images/'.$liste_perso['case']['icone'][$id].'" alt="icone personnage">';
 			$info_faction='<br/><b>N\'appartient &agrave; aucune faction</b><br/>';
 			}
 	if($liste_perso['case']['mdj'][$id]!=''){

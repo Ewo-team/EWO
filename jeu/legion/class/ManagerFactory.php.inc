@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\legion;
+
 /**
  * Classe dont le but est de charger les manager et de les fournir si besoin
  * 
@@ -7,10 +10,6 @@
  * @package legions
  */
  
-namespace legions;
-
-	 include_once($root_url.'/jeu/legion/class/LegionConfig.php.inc');
-	 require_once($root_url.'/jeu/legion/class/LegionManager.php.inc');
 
 	class ManagerFactory{
 	
@@ -45,11 +44,13 @@ namespace legions;
 			$entree = LegionConfig::$apcId[$race];
 			
 			/*
-			if(apc_exists($entree))
-				return apc_fetch($entree);//*/
+			if(\conf\VariableStorage::Exists($entree))
+			
+				return \conf\VariableStorage::Fetch($entree);//*/
+			
 			
 			$r = new LegionManager($race);
-			apc_store($entree, $r);
+			\conf\VariableStorage::Store($entree, $r);
 			return $r;
 		}
 	}

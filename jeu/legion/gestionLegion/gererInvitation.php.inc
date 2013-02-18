@@ -1,25 +1,15 @@
 <?php
+
+namespace jeu\legion;
+
 /**
  * Gestion des légions en interne : gérer les invitations
  *
  * @author Herbomez Benjamin <benjamin.herbomez@gmail.com>
  * @version 1.0
  */
-	include_once('class/LegionConfig.php.inc');
-	include_once('class/ManagerFactory.php.inc');
-	include_once('class/DemandeLegion.php.inc');
-	include_once('class/DemandeFromUtilisateur.php.inc');
-	include_once('class/LegionDAO.php.inc');
-        include_once('fonctions.php.inc');
 
-        include_once($root_url.'persos/event/eventManager.php');
-
-	use legions\ManagerFactory          as ManagerFactory;
-	use legions\LegionConfig            as LegionConfig;
-	use legions\DemandeLegion           as DemandeLegion;
-	use legions\DemandeFromUtilisateur  as DemandeFromUtilisateur;
-	use legions\LegionDAO               as LegionDAO;
-	use legions\LegionDroits    as LegionDroits;
+ use \persos\eventManager\eventManager as eventManager;
 
 
         //On veut inviter un personnage

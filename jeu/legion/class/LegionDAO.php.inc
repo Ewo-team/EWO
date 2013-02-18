@@ -1,6 +1,9 @@
 <?php
+
+namespace jeu\legion;
+
 /**
- * Messagerie DAO, requete pour construire la messagerie
+ * Messagerie DAO, requete pour construire la messagerie <= NON!
  *
  * @author Herbomez Benjamin <benjamin.herbomez@gmail.com>
  * @version 1.0
@@ -8,10 +11,7 @@
  * @category dao
  */
 
-namespace legions;
 use \conf\ConnecteurDAO as ConnecteurDAO;
-
-include_once ($root_url.'jeu/legion/class/LegionManager.php.inc');
 
 class LegionDAO extends ConnecteurDAO {
 

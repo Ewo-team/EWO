@@ -29,9 +29,6 @@ include_once (SERVER_ROOT."/conf/controle_connexion.php");
 // Fonctions du site
 include_once(SERVER_ROOT."/conf/fonctions.php");
 
-// Fonctions du forum
-include_once(SERVER_ROOT."/lib/forum/forum.connect.php");
-
 // Magasin de variable
 include_once("VariableStorage.php");
 

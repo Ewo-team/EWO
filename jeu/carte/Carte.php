@@ -3,8 +3,6 @@ namespace jeu\carte;
 
 use \conf\ConnecteurDAO as ConnecteurDAO;
 
-include ("./couleurs.php");
-
 class Carte {
 
 	private $_id;
@@ -28,6 +26,10 @@ class Carte {
 	private $_portes = array();
 	private $_viseurs = array();
 	
+	private $_popup = array();
+	
+	private $_couleurs = array();
+		
 	public function __construct($id, ConnecteurDAO $conn, $ratio_horizontale, $ratio_verticale = null) {
 		if(!isset($ratio_verticale)) {
 			$ratio_verticale = $ratio_horizontale;
@@ -50,6 +52,13 @@ class Carte {
 		$this->_id = $id;	
 		$this->_nom = $info['nom'];	
 		$this->_date = time();	
+		
+		$this->_couleurs['base'] = 'noir';
+		$this->_couleurs['races'][1] = 'humain';
+		$this->_couleurs['races'][2] = 'paria';
+		$this->_couleurs['races'][3] = 'ange';
+		$this->_couleurs['races'][4] = 'demon';		
+		
 	}
 	
 	public function Fond($fond = 'fond_terre') {
@@ -93,8 +102,6 @@ class Carte {
 	public function Boucliers() {
 		$boucliers = $this->conn->SelectBoucliersFromDamier($this->_id, $this->_x_min, $this->_x_max, $this->_y_min, $this->_y_max);
 		
-		global $couleurs;
-		
 		foreach($boucliers as $bouclier) {
 			$this->addBouclier($bouclier['pos_x'], $bouclier['pos_y'], $bouclier['type_id'], $bouclier['id'], $bouclier['nom']);
 		}
@@ -102,9 +109,7 @@ class Carte {
 	
 	public function Portes() {
 		$portes = $this->conn->SelectPortesFromDamier($this->_id, $this->_x_min, $this->_x_max, $this->_y_min, $this->_y_max);
-		
-		global $couleurs;
-			
+				
 		foreach($portes as $porte) {
 			$this->addPorte($porte['pos_x'], $porte['pos_y'], $porte['id'], $porte['nom']);
 		}
@@ -113,18 +118,15 @@ class Carte {
 	public function Persos() {
 		$persos = $this->conn->SelectPersosFromDamier($this->_id, $this->_x_min, $this->_x_max, $this->_y_min, $this->_y_max);
 		
-		global $couleurs;
-		
 		foreach($persos as $perso) {
 			
 			$camp = $perso['camp_id'];
 			
-			if(isset($couleurs['races'][$camp])) {
-				$couleur = $couleurs['races'][$camp];
+			if(isset($this->_couleurs['races'][$camp])) {
+				$couleur = $this->_couleurs['races'][$camp];
 			} else {
 				$couleur = $couleurs['base'];
 			}
-
 			$this->addPerso($perso['pos_x'], $perso['pos_y'], $couleur, $perso['grade_id'], $perso['perso_id']);
 	
 		}
@@ -157,6 +159,7 @@ class Carte {
 			}
 			$camp = $perso['camp'];
 			$retour .= $this->PrintPerso($id,true);
+			//$retour .= '</g>';
 		}
 		$retour .= '</g>';
 		
@@ -179,7 +182,14 @@ class Carte {
 		foreach($this->_viseurs as $id => $viseur) {
 			$retour .= $this->PrintViseur($id);
 		}
-		$retour .= '</g>';				
+		$retour .= '</g>';		
+
+		// Popups
+		$retour .= '<g class="noir">';
+		foreach($this->_popup as $popup) {
+			$retour .= $this->PrintPopup($popup);
+		}
+		$retour .= '</g>';	
 		
 		return $retour;
 	}	
@@ -208,7 +218,13 @@ class Carte {
 		
 		$res .= SVG::cercle($this->coord_x($viseur['x']+0.5), $this->coord_y($viseur['y']-0.5), $this->_ratio_ver*5, array('id' => $viseur['nom']));
 
+		$this->_popup[] = array($this->coord_x($viseur['x']+0.5), $this->coord_y($viseur['y']-0.5) - 20, $viseur['nom'], $viseur['nom']);
+		
 		return $res;
+	}
+	
+	public function PrintPopup($popup) {
+		return SVG::popup($popup[0], $popup[1], $popup[2], $popup[3]);
 	}
 	
 	public function AddPerso($x,$y,$camp,$grade,$id) {
@@ -238,6 +254,9 @@ class Carte {
 	
 	public function PrintBouclier($id) {
 		$bouclier = $this->_boucliers[$id];
+		
+		$this->_popup[] = array($this->coord_x($bouclier['x']+0.5), $this->coord_y($viseur['y']-0.5) - 35, 'bouclier_'.$id, 'Bouclier');		
+		
 		return SVG::rectangle($this->coord_x($bouclier['x']),$this->coord_y($bouclier['y']),
 								$this->_ratio_ver*$bouclier['taille'], $this->_ratio_hor*$bouclier['taille'], 
 								//array('class' => 'bouclier', 'id' => 'bouclier_'.$id, 'onmouseover' => 'affiche_bouclier(this)'));
@@ -254,6 +273,8 @@ class Carte {
 	
 	public function PrintPorte($id) {
 		$porte = $this->_portes[$id];
+				
+		$this->_popup[] = array($this->coord_x($porte['x']+0.5), $this->coord_y($porte['y']-0.5) - 20, 'porte_'.$id, 'Porte');					
 				
 		return SVG::rectangle($this->coord_x($porte['x']),$this->coord_y($porte['y']),
 								$this->_ratio_ver*4, $this->_ratio_hor*4, 
@@ -331,6 +352,12 @@ class SVG {
 
 	static function texte($x,$y,$texte) {
 		return '<text x="'.$x.'" y="'.$y.'">'.$texte.'</text>' . PHP_EOL;
+	}
+	
+	static function popup($x,$y,$parent,$texte) {
+		return '<text id="'.$parent.'_popup" x="'.$x.'" y="'.$y.'" font-size="20" fill="black" visibility="hidden">'.$texte.'
+			<set attributeName="visibility" from="hidden" to="visible" begin="'.$parent.'.mouseover" end="'.$parent.'.mouseout"/>
+		</text>';
 	}
 	
 	static function TableauJavascript($tableau) {

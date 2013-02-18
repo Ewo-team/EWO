@@ -24,7 +24,7 @@ $js->addScript('classements');
 <h2>E.W.O. - Classement <?php echo $param['type']; ?></h2>
 
 <div align="center">
-	<form method="post" action="classement.php">
+	<form method="post" action=".">
 	<label for='classement_type'>Type de classement : </label>
 	<select id="classement_type" name="classement_type">
 		  <option value="xp" <?php if($param['classement_type']=="xp"){echo 'selected="selected"';}?>>Chuck Norris (Classement par l'XP)</option>
@@ -68,7 +68,7 @@ $js->addScript('classements');
 	</form>
 </div> <?php if(isset($param['afficheRecherche'])) { ?>
 	<div align="center">
-	<form method="post" action="classement.php">
+	<form method="post" action=".">
 	<label for='search'>Rechercher un personnage dans le classement (matricule ou pseudo) : </label>
 	<input type="hidden" name="classement_type" value="<?php echo $param['classement_type']; ?>">
 	<input type="text" name="search" size="13" />
@@ -84,8 +84,8 @@ function afficheNavigationClassement($param) {
 	echo '<div align="center">';
 		
 	if($param['page']!=1) { 
-		echo "<a href='",SERVER_URL,"/jeu/classement/classement.php?perso_id=0&page=1&classement_type=",$param['classement_type'],"&grade_ord=",$param['grade_ord'],"&race=",$param['race'],"&nb_el=",$param['nb_el'],"&date=",date("d-m-Y", $param['timestamp']),"'><<</a> ";
-		echo "<a href='",SERVER_URL,"/jeu/classement/classement.php?perso_id=0&page=",max(1,$param['page']-1),"&classement_type=",$param['classement_type'],"&grade_ord=",$param['grade_ord'],"&race=",$param['race'],"&nb_el=",$param['nb_el'],"&date=",date("d-m-Y", $param['timestamp']),"'><</a>";
+		echo "<a href='",SERVER_URL,"/jeu/classement/?perso_id=0&page=1&classement_type=",$param['classement_type'],"&grade_ord=",$param['grade_ord'],"&race=",$param['race'],"&nb_el=",$param['nb_el'],"&date=",date("d-m-Y", $param['timestamp']),"'><<</a> ";
+		echo "<a href='",SERVER_URL,"/jeu/classement/?perso_id=0&page=",max(1,$param['page']-1),"&classement_type=",$param['classement_type'],"&grade_ord=",$param['grade_ord'],"&race=",$param['race'],"&nb_el=",$param['nb_el'],"&date=",date("d-m-Y", $param['timestamp']),"'><</a>";
 	}
 	
 	if($param['page_max']!=0) {
@@ -93,8 +93,8 @@ function afficheNavigationClassement($param) {
 	}
 	
 	if($param['page_max']!=$param['page'] && $param['page_max']!=0){
-		echo "<a href='",SERVER_URL,"/jeu/classement/classement.php?perso_id=0&page=",min($param['page_max'],$param['page']+1),"&classement_type=",$param['classement_type'],"&grade_ord=",$param['grade_ord'],"&race=",$param['race'],"&nb_el=",$param['nb_el'],"&date=",date("d-m-Y", $param['timestamp']),"'>></a> "; 
-		echo "<a href='",SERVER_URL,"/jeu/classement/classement.php?perso_id=0&page=",$param['page_max'],"&classement_type=",$param['classement_type'],"&grade_ord=",$param['grade_ord'],"&race=",$param['race'],"&nb_el=",$param['nb_el'],"&date=",date("d-m-Y", $param['timestamp']),"'>>></a> "; 
+		echo "<a href='",SERVER_URL,"/jeu/classement/?perso_id=0&page=",min($param['page_max'],$param['page']+1),"&classement_type=",$param['classement_type'],"&grade_ord=",$param['grade_ord'],"&race=",$param['race'],"&nb_el=",$param['nb_el'],"&date=",date("d-m-Y", $param['timestamp']),"'>></a> "; 
+		echo "<a href='",SERVER_URL,"/jeu/classement/?perso_id=0&page=",$param['page_max'],"&classement_type=",$param['classement_type'],"&grade_ord=",$param['grade_ord'],"&race=",$param['race'],"&nb_el=",$param['nb_el'],"&date=",date("d-m-Y", $param['timestamp']),"'>>></a> "; 
 	}
 					
 	echo '</div>';
@@ -106,13 +106,13 @@ function afficheNavigationTemporelle($param) {
 	$futur = date("d-m-Y", $param['timestamp'] + 86400);
 		
 	if($param['timestamp'] > $param['first_date']) {
-		echo "<a href='",SERVER_URL,"/jeu/classement/classement.php?perso_id=0&page=",$param['page'],"&classement_type=",$param['classement_type'],"&grade_ord=",$param['grade_ord'],"&race=",$param['race'],"&nb_el=",$param['nb_el'],"&date=",$passe,"'>Time Travel!</a> - ";
+		echo "<a href='",SERVER_URL,"/jeu/classement/?perso_id=0&page=",$param['page'],"&classement_type=",$param['classement_type'],"&grade_ord=",$param['grade_ord'],"&race=",$param['race'],"&nb_el=",$param['nb_el'],"&date=",$passe,"'>Time Travel!</a> - ";
 	}
 		
 	echo "Classement du ",date("d-m-Y", $param['timestamp']);			
 		
 	if(!$param['aujourdhui']) {
-		echo " - <a href='",SERVER_URL,"/jeu/classement/classement.php?perso_id=0&page=",$param['page'],"&classement_type=",$param['classement_type'],"&grade_ord=",$param['grade_ord'],"&race=",$param['race'],"&nb_el=",$param['nb_el'],"&date=",$futur,"'>Back to the Futur!</a>";	
+		echo " - <a href='",SERVER_URL,"/jeu/classement/?perso_id=0&page=",$param['page'],"&classement_type=",$param['classement_type'],"&grade_ord=",$param['grade_ord'],"&race=",$param['race'],"&nb_el=",$param['nb_el'],"&date=",$futur,"'>Back to the Futur!</a>";	
 	}
 }
 
@@ -162,7 +162,7 @@ function afficheListeClassement($tableau, $param) {
 					}
                                         $race = nom_race($rep['race'], $rep['nom_race']);
 						echo "<td align='center'>".($pos)."</td>
-									<td class='cla_td_nom'><a name='perso".$rep['mat']."' href='".SERVER_URL."/persos/event/liste_events.php?id=".$rep['mat']."'>".$rep['pseudo']." (".$rep['mat'].")</a></td>
+									<td class='cla_td_nom'><a name='perso".$rep['mat']."' href='".SERVER_URL."/persos/event/?id=".$rep['mat']."'>".$rep['pseudo']." (".$rep['mat'].")</a></td>
 						<td align='center'>".$race."</td>";
 						if(isset($param['afficheGrade'])) { echo '<td align="center">'.$rep['grade'].'</td>'; }
 						if(isset($param['afficheGalon'])) { echo '<td align="center">'.$rep['galon'].'</td>'; }

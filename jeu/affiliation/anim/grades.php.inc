@@ -1,13 +1,14 @@
 <?php
 
+namespace jeu\affiliation;
+
 /**
  * Gérer les grades des affiliés
  * @author Benjamin Herbomez <benjamin.herbomez@gmail.com>
  */
 
-require_once($root_url.'/jeu/affiliation/class/AffiliationDAO.php.inc');
-require_once($root_url.'/persos/fonctions.php');
-require_once($root_url.'/jeu/fonctions.php');
+require_once(SERVER_ROOT.'/persos/fonctions.php');
+require_once(SERVER_ROOT.'/jeu/fonctions.php');
 
 $errMsg     = '';
 $notifMsg   = '';

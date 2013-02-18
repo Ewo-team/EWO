@@ -65,17 +65,15 @@ if (isset($_POST['email'])) {
             // Le compte est d�j� valid�
             $titre = "Compte actif";
             $text = "Votre compte est deja actif";
-            $root = "..";
             $lien = "..";
-            gestion_erreur($titre, $text, $root, $lien);
+            gestion_erreur($titre, $text, $lien);
         }
     } else {
         // Le compte n'existe pas
         $titre = "Erreur de compte";
         $text = "Ce compte n'existe pas'.";
-        $root = "..";
         $lien = "..";
-        gestion_erreur($titre, $text, $root, $lien);
+        gestion_erreur($titre, $text, $lien);
     }
 } else {
     // On affiche le formulaire de renvoi du code d'activation
@@ -87,10 +85,7 @@ if (isset($_POST['email'])) {
 		<h2>Renvoi du mail de confirmation </h2>
 
 		<!-- Debut du coin -->
-		<div class="upperleft" id='coin_75'>
-			<div class="upperright">
-				<div class="lowerleft">
-					<div class="lowerright">
+		<div>
 					<!-- conteneur -->		
 						
 		<table border="0">
@@ -118,9 +113,6 @@ if (isset($_POST['email'])) {
 		</table>
 
 					<!-- fin conteneur -->
-					</div>
-				</div>
-			</div>
 		</div>
 		<!-- Fin du coin -->
 HEREDOC;

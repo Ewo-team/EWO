@@ -9,6 +9,8 @@
 //-- Header --
 require_once __DIR__ . '/../../conf/master.php';
 
+$css_files = 'classement,listeperso';
+
 include(SERVER_ROOT . "/template/header_new.php");
 
 include(SERVER_ROOT . "/persos/fonctions.php");

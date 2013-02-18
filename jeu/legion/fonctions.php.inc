@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\legion;
+
 /**
  * 2 ou 3 fonctions pour gérer les taches récurrentes (annuler une demande, virer un utilisateur, ....)
  * 
@@ -6,12 +9,8 @@
  * @version 1.0s
  */
  
-	include_once($root_url.'jeu/legion/class/DemandeUtilisateur.php.inc');
-        require_once($root_url.'messagerie/messagerieDAO.php');
-        require_once($root_url.'jeu/legion/class/LegionDAO.php.inc');
-
-	use legions\DemandeUtilisateur  as DemandeUtilisateur;
-        use legions\LegionDAO           as LegionDAO;
+use \messagerie\messagerieDAO as messagerieDAO;
+ 
         
         function checkLegion(){
             $sql = LegionDAO::getInstance();

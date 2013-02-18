@@ -1,11 +1,12 @@
 <?php
 
 use persos\event\eventFormatter as eventFormatter;
-require_once __DIR__ . '/../conf/master.php';
 
 
-include_once(SERVER_ROOT . '/persos/fonctions.php');
-include_once(SERVER_ROOT . '/jeu/fonctions.php');
+require_once __DIR__ . "/../../conf/master.php";
+
+include(SERVER_ROOT . "/persos/fonctions.php");
+include(SERVER_ROOT . "/jeu/fonctions.php");
 
 
 // Paramètres de connexion à la base de données

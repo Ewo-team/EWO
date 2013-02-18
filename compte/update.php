@@ -57,16 +57,14 @@ function changeEmail($compte) {
         } else {
             $titre = "Modification de compte.";
             $text = "Email non valide.";
-            $root = "..";
             $lien = "..";
-            gestion_erreur($titre, $text, $root, $lien);
+            gestion_erreur($titre, $text, $lien);
         }
     } else {
         $titre = "Modification de compte.";
         $text = "Vous n'êtes pas autorisés à effectuer cette action.";
-        $root = "..";
         $lien = "..";
-        gestion_erreur($titre, $text, $root, $lien);
+        gestion_erreur($titre, $text, $lien);
     }
 }
 
@@ -91,9 +89,8 @@ function changePass($compte) {
     } else {
         $titre = "Vous n'êtes pas autorisés à effectuer cette action.";
         $text = "Cet utilisateur n'existe pas.";
-        $root = "..";
         $lien = "..";
-        gestion_erreur($titre, $text, $root, $lien);
+        gestion_erreur($titre, $text, $lien);
     }
 }
 
@@ -106,15 +103,13 @@ function changeRedirect($compte) {
             $titre = "Modification de compte";
             $text = "Aucune page ne correspond a votre demande.";
             $lien = "..";
-            $root = "..";
-            gestion_erreur($titre, $text, $root, $lien);
+            gestion_erreur($titre, $text, $lien);
         }
     } else {
         $titre = "Modification de compte";
         $text = "Vous n'êtes pas autorisés à effectuer cette action.";
         $lien = "..";
-        $root = "..";
-        gestion_erreur($titre, $text, $root, $lien);
+        gestion_erreur($titre, $text, $lien);
     }
 }
 
@@ -139,15 +134,13 @@ function changeTemplate($compte) {
                 $titre = "Modification de compte";
                 $text = "Ceci n'est pas un dossier.";
                 $lien = "..";
-                $root = "..";
-                gestion_erreur($titre, $text, $root, $lien);
+                gestion_erreur($titre, $text, $lien);
             }
         } else {
             $titre = "Modification de compte";
             $text = "Vous n'êtes pas autorisés à effectuer cette action.";
             $lien = "..";
-            $root = "..";
-            gestion_erreur($titre, $text, $root, $lien);
+            gestion_erreur($titre, $text, $lien);
         }
     }
 }
@@ -193,8 +186,7 @@ function erreurVacances() {
     $titre = "Vacances";
     $text = "Vous n'êtes pas autorisés à effectuer cette action.";
     $lien = "../compte/options.php";
-    $root = "..";
-    gestion_erreur($titre, $text, $root, $lien);
+    gestion_erreur($titre, $text, $lien);
 }
 
 ?>

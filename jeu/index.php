@@ -11,7 +11,7 @@ if (!isset($_SESSION['utilisateur']['id'])) {
 $template_mage = false;
 $jeu = true;
 
-$css_files = 'decors,damier';
+$css_files = 'decors,damier,listeperso';
 
 
 $ewo = bdd_connect('ewo');
@@ -27,8 +27,7 @@ if ($statut_vacances == 'vacances' || $statut_vacances == 'retour') {
 	$titre = "Modification de compte";
 	$text = "Vous ne pouvez pas accéder à cette page car vous êtes en vacances.";
 	$lien = "../compte/options.php";
-	$root = "..";
-	gestion_erreur($titre, $text, $root, $lien);
+	gestion_erreur($titre, $text, $lien);
 }
 
 $id_utilisateur = $_SESSION['utilisateur']['id'];
@@ -135,8 +134,7 @@ if ($pos = mysql_fetch_array ($resultat)) {
         $titre = "R.I.P.";
 	$text = "Votre personnage est mort de sa mort définitive. Désolé.";
 	$lien = "../persos/liste_persos.php";
-	$root = "..";
-	gestion_erreur($titre, $text, $root, $lien);
+	gestion_erreur($titre, $text, $lien);
     }
     if (isset($_POST['respawn'])) {
             $choix_spawn = '';

@@ -1,11 +1,9 @@
 <?php
-session_start();
 
-$root_url = "..";
+require_once __DIR__ . "/../../conf/master.php";
 
-include("../conf/master.php");
-include("../persos/fonctions.php");
-include("./fonctions.php");
+include(SERVER_ROOT . "/persos/fonctions.php");
+include(SERVER_ROOT . "/jeu/fonctions.php");
 // Paramètres de connexion à la base de données
 $ewo_bdd = bdd_connect('ewo');
 

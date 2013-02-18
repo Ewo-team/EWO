@@ -46,23 +46,20 @@ $passencode = hash("sha256",$pass);
 
 		$titre = "Récupération du mot de passe";
 		$text = "Vous allez recevoir d'ici peu un mot de passe pour vous connecter sur le site.";
-		$root = "..";
 		$lien = "..";
-		gestion_erreur($titre, $text, $root, $lien);
+		gestion_erreur($titre, $text, $lien);
 
 	}else{
 		mysql_close($ewo);		
 		$titre = "Erreur d'envoi du mail";
 		$text = "Cet email n'existe pas.";
-		$root = "..";
 		$lien = "..";
-		gestion_erreur($titre, $text, $root, $lien);
+		gestion_erreur($titre, $text, $lien);
 	}
 }else{
 	$titre = "Erreur d'envoi du mail";
 	$text = "Opération non comprise, veuillez entrer un email valide.";
-	$root = "..";
 	$lien = "..";
-	gestion_erreur($titre, $text, $root, $lien);
+	gestion_erreur($titre, $text, $lien);
 }
 ?>

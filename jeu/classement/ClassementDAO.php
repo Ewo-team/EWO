@@ -118,20 +118,6 @@ abstract class ClassementDAO extends ConnecteurDAO {
 			$this->exec($sql);			
 		}
 	
-/*
-	
-		if($time = apc_fetch('-classement.archivage')) {
-			if(date("z",$time) != date("z")) {
-				apc_delete('-classement.archivage');
-			}
-		}
-	
-		if(VariableStorage::Temporisation('classement.archivage', 60*60*2)) {
-			// Rechargement du classement
-			//echo "rechargement du classement";
-			$sql = "CALL archivage_classements();";
-			$this->exec($sql);		
-		}	*/	
 	}
 	
 	public abstract function prepareClassement();

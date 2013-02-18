@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\carte;
+
 /**
  * Carte de la terre
  *
@@ -6,16 +9,11 @@
  * @version 1.0
  * @package carte
  */
-$root_url = "..";
 
 $cache_url = __DIR__ . '/../../cache/svg_althian.cache';
 //$cache_url = 'D:/wamp/www/cache/svg_althian.cache';
 
 require_once __DIR__ . "/../../conf/master.php";
-
-
-include("Carte.php");
-include("CarteDAO.php");
 
 include(SERVER_ROOT . "/persos/fonctions.php");
 include(SERVER_ROOT . "/jeu/fonctions.php");
@@ -38,8 +36,8 @@ $encache = false;
 if (file_exists($cache_url)) {
 	clearstatcache();
 	$time = @filemtime($cache_url);
-	if($time && (time() - $time < 60 * 15)) { // Cache de 15min
-	//if($time && (time() - $time < 15)) { // Cache de 15s
+	//if($time && (time() - $time < 60 * 15)) { // Cache de 15min
+	if($time && (time() - $time < 15)) { // Cache de 15s
 		$encache = true;
 	}
 }
@@ -70,7 +68,6 @@ $carte->Viseurs($_SESSION['persos']);
 echo $carte->Header();
 echo $carte->Start();
 echo $carte->Fond();
-echo SVG::Javascript();
 
 echo $carte->Compile();
 

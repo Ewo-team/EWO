@@ -9,6 +9,8 @@
 //-- Header --
 require_once __DIR__ . '/../../conf/master.php';
 
+$css_files = 'classement,listeperso';
+
 include(SERVER_ROOT . "/template/header_new.php");
 
 include(SERVER_ROOT . "/persos/fonctions.php");
@@ -248,9 +250,9 @@ switch($race){
 
 					echo "<tr class='$color winner$n'>";
 						echo "<td align='center'>".$type."</td>
-									<td align='center'><img src='".SERVER_URL."/images/$url' alt='avatar'/><br/>".$nom." [<a href='../persos/event/liste_events.php?id=$id_victime'>$id_victime</a>]</td>";
+									<td align='center'><img src='".SERVER_URL."/images/$url' alt='avatar'/><br/>".$nom." [<a href='".SERVER_URL."/persos/event/?id=$id_victime'>$id_victime</a>]</td>";
 									if($type!='Destruction'){
-									echo "<td align='center'><img src='".SERVER_URL."/images/$url_tueur' alt='avatar'/><br/>".nom_perso($id_perso)." [<a href='../persos/event/liste_events.php?id=$id_perso'>$id_perso</a>]</td>";
+									echo "<td align='center'><img src='".SERVER_URL."/images/$url_tueur' alt='avatar'/><br/>".nom_perso($id_perso)." [<a href='".SERVER_URL."/persos/event/?id=$id_perso'>$id_perso</a>]</td>";
 									}else {
 										echo "<td align='center'>".nom_cible($id_perso,'',true)."</td>";
 										}

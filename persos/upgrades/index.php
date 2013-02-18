@@ -21,7 +21,7 @@ if(!isset($_SESSION['persos']['current_id']) && !isset($admin_mode)){
 	$text = "Vous devez passer par la page de jeu pour faire évoluer votre personnage.";
 	$root = "./../..";
 	$lien = "./../..";
-	gestion_erreur($titre, $text, $root, $lien,1);
+	gestion_erreur($titre, $text, $lien,1);
 }
 
 if(!isset($admin_mode))	{
@@ -104,18 +104,13 @@ if($race==1) {
 	$cercle_ok=($count==2)?true:false;
 }
 ?>
-<link href="../../css/visualize.css" type="text/css" rel="stylesheet" /> 
-<link href="../../css/visualize-light.css" type="text/css" rel="stylesheet" /> 
 <div align='center'>
 <?php
 if (isset($admin_mode)) echo "<h2>Simulateur d'ewolution</h2>";
 ?>
 <!-- Debut du coin -->
 <br />
-<div class="upperleft" id="coin_100">
-	<div class="upperright">
-		<div class="lowerleft">
-			<div class="lowerright">
+<div>
 			<!-- conteneur -->
 
 <?php
@@ -614,9 +609,6 @@ if(!isset($admin_mode) && ($affilie || $race<3)){
 	<div id="infoPa">* Attention, les PA augmentent de 0.1 en 0.1</div>
 </div>
 			<!-- fin conteneur -->
-			</div>
-		</div>
-	</div>
 </div>
 <!-- Fin du coin -->	
 

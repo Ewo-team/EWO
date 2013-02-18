@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\legion;
+
 /**
  * Classe abstraite qui permet de gérer les demandes. Deux instanciations, une pour les persos, l'autre pour les légions
  * 
@@ -7,11 +10,6 @@
  * @package legions
  */
  
-
-namespace legions; 
- 
-require_once($root_url.'jeu/legion/class/DemandeManager.php.inc');
-require_once($root_url.'jeu/legion/class/LegionDAO.php.inc');
 
 	class DemandeLegion extends DemandeManager{
 		

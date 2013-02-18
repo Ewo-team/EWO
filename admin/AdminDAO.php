@@ -1,5 +1,7 @@
 <?php
 
+namespace admin;
+
 use \conf\ConnecteurDAO as ConnecteurDAO;
 
 	class AdminDAO extends ConnecteurDAO {

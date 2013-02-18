@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\affiliation;
+
 /**
  *
  * @author Benjamin Herbomez <benjamin.herbomez@gmail.com>
@@ -34,8 +37,8 @@
             $sexe = 'elle';
         echo '
         <tr>
-            <td><img src="',$root_url,'/images/',icone_persos($sup->id),'" alt="icon perso"/></td>
-            <td><a href="event/liste_events.php?id=',$sup->id,'">',$sup->id,'</a></td>
+            <td><img src="',SERVER_URL,'/images/',icone_persos($sup->id),'" alt="icon perso"/></td>
+            <td><a href="',SERVER_URL,'/persos/event/?id=',$sup->id,'">',$sup->id,'</a></td>
             <td>',$sup->nom,'</td>
             <td>',$sup->descr,'</td>
             <td>

@@ -107,7 +107,6 @@ if($ok){
 		$_SESSION['utilisateur']['nom']	= $connexion['nom'];
 		$_SESSION['utilisateur']['mail']	= $connexion['email'];
 		$_SESSION['utilisateur']['droits']	= $connexion['droits'];
-		$_SESSION['utilisateur']['jabberid'] = $connexion['jabberid'];
 		$_SESSION['utilisateur']['passwd_forum'] = $connexion['passwd_forum'];
 		$_SESSION['utilisateur']['icones_pack'] = $connexion['icones_pack'];
 		
@@ -271,25 +270,22 @@ if($ok){
 		}else{
 			$titre = "Erreur de connexion";
 			$text = "Mauvais mot de pass.";
-			$root = "..";
 			$lien = "..";
-			gestion_erreur($titre, $text, $root, $lien);
+			gestion_erreur($titre, $text, $lien);
 		}	
 	}else{
 		if (isset($pass)) {
 			$_SESSION['autologin']["unlogin"] = true;
 			$titre = "Erreur de connexion";
 			$text = "Cet utilisateur n'existe pas ou n'a pas encore &eacute;t&eacute; valid&eacute;.";
-			$root = "..";
 			$lien = "..";
-			gestion_erreur($titre, $text, $root, $lien);
+			gestion_erreur($titre, $text, $lien);
 		} else {
 			$_SESSION['autologin']["unlogin"] = true;
 			$titre = "Erreur de connexion";
 			$text = "Vous avez été déconnecté, veuillez vous connecter à nouveau.";
-			$root = "..";
 			$lien = "..";
-			gestion_erreur($titre, $text, $root, $lien);			
+			gestion_erreur($titre, $text, $lien);			
 			}
 	}
 	mysql_close($ewo);
@@ -298,8 +294,7 @@ if($ok){
 	$_SESSION['autologin']["unlogin"] = true;
 	$titre = "Erreur de connexion";
 	$text = "Cet utilisateur n'existe pas.";
-	$root = "..";
 	$lien = "..";
-	gestion_erreur($titre, $text, $root, $lien);
+	gestion_erreur($titre, $text, $lien);
 }
 ?>

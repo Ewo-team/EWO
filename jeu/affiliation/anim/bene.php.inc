@@ -1,8 +1,11 @@
 <?php
 
-include_once($root_url.'/persos/event/eventManager.php');
-include_once($root_url.'/persos/event/eventFormatter.php');
-require_once($root_url.'/persos/fonctions.php');
+namespace jeu\affiliation;
+
+use \persos\eventManager\eventManager as eventManager;
+use \persos\eventManager\eventFormatter as eventFormatter;
+
+require_once(SERVER_ROOT.'/persos/fonctions.php');
 /**
  *
  * @author Benjamin Herbomez <benjamin.herbomez@gmail.com>

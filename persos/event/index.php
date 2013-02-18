@@ -5,8 +5,9 @@ use \persos\eventManager\eventFormatter as eventFormatter;
 //-- Header --
 require_once __DIR__ . '/../../conf/master.php';
 
+$css_files = 'listeperso,profil';
+
 include(SERVER_ROOT . "/template/header_new.php");
-$css_files = 'profil';
 
 
 /*-- Connexion basic requise --*/

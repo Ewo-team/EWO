@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\legion;
+
 /**
  * Administration des légions
  *
@@ -13,13 +16,6 @@ if(!$admin && !$anim){
     header('Location: index.php');
     exit();
 }
-
-
-include_once('class/NameManager.php.inc');
-include_once('class/LegionDAO.php.inc');
-
-use legions\NameManager as NameManager;
-use legions\LegionDAO   as LegionDAO;
 
 $nameManager = new NameManager();
 

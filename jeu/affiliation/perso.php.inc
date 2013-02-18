@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\affiliation;
+
 /**
  * Action uniques au niveau d'un perso
  *
@@ -11,8 +14,6 @@
         header('Location: index.php');
         die();
     }
-
-    require_once($root_url.'/affiliation/class/Superieurs.php.inc');
 
     $id = array_keys($_SESSION['persos']['id'], $_GET['mat']);
     $id = $id[0];

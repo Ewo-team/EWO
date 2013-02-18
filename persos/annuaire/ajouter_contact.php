@@ -32,23 +32,20 @@ if (isset($_POST['contact']) AND isset($_POST['personnage'])){
 		if($conn->AddPersoToRepertoire($perso, $contact)==1) {
 			$titre = "Votre répertoire";
 			$text = "Votre nouveau contact a bien été ajouté dans votre répertoire.";
-			$lien = "../annuaire/";
-			$root = "..";
-			gestion_erreur($titre, $text, $root, $lien);			
+			$lien = "../persos/annuaire";
+			gestion_erreur($titre, $text, $lien);			
 		} else {
 			$titre = "Votre répertoire";
 			$text = "Vous avez déjà ce contact dans votre répertoire.";
-			$lien = "../annuaire/";
-			$root = "..";
-			gestion_erreur($titre, $text, $root, $lien);			
+			$lien = "../persos/annuaire";
+			gestion_erreur($titre, $text, $lien);			
 		}
 	} else {
 	
 		$titre = "Votre répertoire";
 		$text = "Votre contact n'existe pas.";
-		$lien = "../annuaire/";
-		$root = "..";
-		gestion_erreur($titre, $text, $root, $lien);		
+		$lien = "../persos/annuaire";
+		gestion_erreur($titre, $text, $lien);		
 	
 	}
 
@@ -64,23 +61,20 @@ if (isset($_POST['contact']) AND isset($_POST['personnage'])){
 		if($conn->AddPersoToRepertoire($perso, $contact)==1) {
 			$titre = "Votre répertoire";
 			$text = "Votre nouveau contact a bien été ajouté dans votre répertoire.";
-			$lien = "../annuaire/";
-			$root = "..";
-			gestion_erreur($titre, $text, $root, $lien);			
+			$lien = "../persos/annuaire";
+			gestion_erreur($titre, $text, $lien);			
 		} else {
 			$titre = "Votre répertoire";
 			$text = "Vous avez déjà ce contact dans votre répertoire.";
-			$lien = "../annuaire/";
-			$root = "..";
-			gestion_erreur($titre, $text, $root, $lien);			
+			$lien = "../persos/annuaire";
+			gestion_erreur($titre, $text, $lien);			
 		}
 	} else {
 	
 		$titre = "Votre répertoire";
 		$text = "Votre contact n'existe pas.";
-		$lien = "../annuaire/";
-		$root = "..";
-		gestion_erreur($titre, $text, $root, $lien);		
+		$lien = "../persos/annuaire";
+		gestion_erreur($titre, $text, $lien);		
 	
 	}
 }

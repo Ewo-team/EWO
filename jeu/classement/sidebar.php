@@ -9,7 +9,7 @@
  */
 ?>
 <div class='side_txt'>
-<a class='side_lien' href='./classement.php'>Classement</a>
+<a class='side_lien' href='.'>Classement</a>
 <br/>
 <a class='side_lien' href='./superman.php'>Superman</a>
 <br/>

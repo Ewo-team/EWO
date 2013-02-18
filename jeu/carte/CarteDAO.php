@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\carte;
+
 /**
  * Connecteur DAO pour l'annuaire
  * 
@@ -29,7 +32,7 @@ class CarteDAO extends ConnecteurDAO {
 			AND races.race_id = persos.race_id AND races.grade_id = -2 
 			AND(pos_x BETWEEN :xmin AND :xmax) 
 			AND (pos_y BETWEEN :ymin AND :ymax) ORDER BY camp_id";
-			
+		
 		$param = array(":carte" => $carte,":xmin" => $x_min,":xmax" => $x_max,":ymin" => $y_min,":ymax" => $y_max);
 		$this->prepare($sql);
 		$this->executePreparedStatement(null,$param);	

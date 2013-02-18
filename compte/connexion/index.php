@@ -18,10 +18,7 @@ include(SERVER_ROOT . "/template/header_new.php");
 <h2>Page de connexion</h2>
 
 <!-- Debut du coin -->
-<div class="upperleft" id='coin_75'>
-	<div class="upperright">
-		<div class="lowerleft">
-			<div class="lowerright">
+<div>
 			<!-- conteneur -->
 			
 <?php
@@ -70,9 +67,6 @@ include(SERVER_ROOT . "/template/header_new.php");
 </div>
 
 			<!-- fin conteneur -->
-			</div>
-		</div>
-	</div>
 </div>
 <!-- Fin du coin -->
 <?php

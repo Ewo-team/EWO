@@ -1,7 +1,7 @@
 <?php
-session_start();
-$root_url = "..";
-include ($root_url."/conf/master.php");
+
+require_once __DIR__ . "/../../conf/master.php";
+
 /*-- Connexion requise --*/
 if (ControleAcces('utilisateur',0) == false){
 	echo "false";exit;

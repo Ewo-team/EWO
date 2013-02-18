@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\affiliation;
+
 /**
  * Class pour la gestion des demandes (dans les deux sens)
  *

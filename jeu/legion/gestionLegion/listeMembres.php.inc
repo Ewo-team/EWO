@@ -1,22 +1,15 @@
 <?php
+
+namespace jeu\legion;
+
 /**
  * Gestion des légions en interne : voir la liste des membres
  *
  * @author Herbomez Benjamin <benjamin.herbomez@gmail.com>
  * @version 1.0
  */
-include_once('class/LegionConfig.php.inc');
-include_once('class/ManagerFactory.php.inc');
-include_once('class/DroitManager.php.inc');
-include_once('class/LegionDAO.php.inc');
-
-include_once($root_url.'persos/event/eventManager.php');
-
-use legions\ManagerFactory  as ManagerFactory;
-use legions\LegionConfig    as LegionConfig;
-use legions\DroitManager    as DroitManager;
-use legions\LegionDroits    as LegionDroits;
-use legions\LegionDAO       as LegionDAO;
+ 
+use \persos\eventManager\eventManager as eventManager;
 
 
 $factory 	= new ManagerFactory();

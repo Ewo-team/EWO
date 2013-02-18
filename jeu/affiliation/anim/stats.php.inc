@@ -1,4 +1,6 @@
-<style type="text/css">
+<?php
+	namespace jeu\affiliation;
+?><style type="text/css">
     .ange{color : blue;}
     .dem{color : red;}
     .hum{color : green;}

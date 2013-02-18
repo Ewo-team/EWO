@@ -10,8 +10,7 @@ require_once __DIR__ . '/../conf/master.php';
 if(!isset($_SESSION['utilisateur']['id'])){
 	exit;
 }
-	$root_url = '../';
-    require_once($root_url.'/jeu/legion/class/LegionDAO.php.inc');
+    require_once(SERVER_ROOT.'/jeu/legion/class/LegionDAO.php.inc');
 
     use legions\LegionDAO as LegionDAO;
 

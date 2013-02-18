@@ -29,29 +29,25 @@ if(isset($_REQUEST['id'])) {
 			$titre = "Action";
 			$text = "L'action à bien été effacée.";
 			$lien = "../admin/gestion_actions/";
-			$root = "../..";
-			gestion_erreur($titre, $text, $root, $lien);			
+			gestion_erreur($titre, $text, $lien);			
 		} else {
 			$titre = "Action";
 			$text = "Une erreur est survenue.";
 			$lien = "../admin/gestion_actions/";
-			$root = "../..";
-			gestion_erreur($titre, $text, $root, $lien);			
+			gestion_erreur($titre, $text, $lien);			
 		}
 
 	} else {
 		$titre = "Action";
 		$text = "L'identifiant spécifié n'est pas un nombre.";
 		$lien = "../admin/gestion_actions/";
-		$root = "../..";
-		gestion_erreur($titre, $text, $root, $lien);	
+		gestion_erreur($titre, $text, $lien);	
 	}
 } else {
 	$titre = "Action";
 	$text = "L'identifiant n'as pas été spécifié.";
 	$lien = "../admin/gestion_actions/";
-	$root = "../..";
-	gestion_erreur($titre, $text, $root, $lien);	
+	gestion_erreur($titre, $text, $lien);	
 }
 //-- Footer --
 include($root_url."/template/footer_new.php");

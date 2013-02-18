@@ -43,15 +43,13 @@ $mat = $_POST['matricule'];
 	}else{
 		$titre = "Erreur de matricule";
 		$text = "Ce matricule n'existe pas, ou erreur de matricule.";
-		$lien = "../annuaire";
-		$root = "..";
-		gestion_erreur($titre, $text, $root, $lien,1);
+		$lien = "../persos/annuaire";
+		gestion_erreur($titre, $text, $lien, 1);
 	}
 }else{
 	$titre = "Erreur de matricule";
 	$text = "Un matricule vide n'est pas un matricule !";
-	$lien = "../annuaire";
-	$root = "..";
-	gestion_erreur($titre, $text, $root, $lien,1);
+	$lien = "../persos/annuaire";
+	gestion_erreur($titre, $text, $lien, 1);
 }
 ?>

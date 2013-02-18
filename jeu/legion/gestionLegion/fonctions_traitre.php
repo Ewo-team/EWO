@@ -1,12 +1,13 @@
 <?php
 
+namespace jeu\legion;
+
 /**
  * Quelques fonction utiles pour la gestion des traitres
  *
  * @author Herbomez Benjamin <benjamin.herbomez@gmail.com>
  * @version 1.0
  */
-require_once('class/LegionDAO.php.inc');
 
 use legions\LegionDAO as LegionDAO;
 

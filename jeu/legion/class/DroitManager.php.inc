@@ -1,5 +1,7 @@
 <?php
 
+namespace jeu\legion;
+
 /**
  * Class pour la gestion des droits dans une faction
  * 
@@ -8,7 +10,6 @@
  * @package legions
  */
 
-namespace legions;
 
 class DroitManager {
 

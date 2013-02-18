@@ -14,7 +14,7 @@ $page_jeu = "1";
 <div id='carac'>
 <?php
 	//-- Carac entete du personnage	
-	include(SERVER_ROOT . "/jeu/panel_entete.php");
+	include(SERVER_ROOT . "/jeu/panel_entetes.php");
 ?>
 </div>	
 

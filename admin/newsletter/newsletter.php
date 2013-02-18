@@ -16,10 +16,7 @@ $js->addScript('wysiwyg');
 
 <h2>Newsletter</h2>
 <!-- Debut du coin -->
-<div class="upperleft" id='coin_100'>
-	<div class="upperright">
-		<div class="lowerleft">
-			<div class="lowerright">
+<div>
 			<!-- conteneur -->
 				<div id='contact' align='center'>
 					<form name='new' action="send_newsletter.php" method="post">
@@ -41,9 +38,6 @@ $js->addScript('wysiwyg');
 					</form>
 				</div>	
 			<!-- fin conteneur -->
-			</div>
-		</div>
-	</div>
 </div>
 <!-- Fin du coin -->
 <?php

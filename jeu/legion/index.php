@@ -1,13 +1,19 @@
 <?php
+
+namespace jeu\legion;
+
 /**
  * Légion - Structure
  *
  * @author Herbomez Benjamin <benjamin.herbomez@gmail.com>
  * @version 1.0
  */
-	$root_url = '../../';
-	require_once $root_url.'conf/master.php';
-	include($root_url.'/template/header_new.php');
+
+	require_once __DIR__ . '/../../conf/master.php';
+	
+
+	include_once(SERVER_ROOT.'/template/header_new.php');
+	
 	include('config.php.inc');
 	include('fonctions.php.inc');
 
@@ -26,7 +32,7 @@
         
 	
 	echo '
-	<link rel="stylesheet" href="',$root_url,'/jeu/legion/style.css" type="text/css" />
+	<link rel="stylesheet" href="',SERVER_URL,'/jeu/legion/style.css" type="text/css" />
 	<table style="width:98%;height:100%;margin:auto;border-spacing:0px;">
 		<tr>
 			<td id="legionLeftPanel" valign="top">
@@ -44,5 +50,5 @@
 	</table>
 	';
 	
-	include($root_url.'/template/footer_new.php');
+	include(SERVER_ROOT.'/template/footer_new.php');
 ?>

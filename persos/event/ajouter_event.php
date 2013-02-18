@@ -1,9 +1,11 @@
 <?php
-//-- Header --
-$root_url = "..";
-include($root_url."/template/header_new.php");
-include_once($root_url.'/event/eventManager.php');
-include_once($root_url.'/event/eventFormatter.php');
+require_once __DIR__ . '/../../conf/master.php';
+
+include_once SERVER_ROOT . '/template/header_new.php';
+
+use \persos\eventManager\eventManager as eventManager;
+use \persos\eventManager\eventFormatter as eventFormatter;
+
 
 /*-- Connexion requise --*/
 ControleAcces('anim;admin',1);
@@ -18,10 +20,7 @@ if(!isset($_POST['mat']) || (!isset($_POST['message']) && !isset($_POST['id'])))
 <h2>Créer un événement personnalisé</h2>
 
 <!-- Debut du coin -->
-<div class="upperleft" id='coin_75'>
-	<div class="upperright">
-		<div class="lowerleft">
-			<div class="lowerright">
+<div>
 			<!-- conteneur -->
 			
 <div class='news' align='center'>
@@ -55,9 +54,6 @@ if(!isset($_POST['mat']) || (!isset($_POST['message']) && !isset($_POST['id'])))
 </form>
 
 			<!-- fin conteneur -->
-			</div>
-		</div>
-	</div>
 </div>	
 	<?php
 	
@@ -79,9 +75,9 @@ if(!isset($_POST['mat']) || (!isset($_POST['message']) && !isset($_POST['id'])))
 	$ev->infos->addPublicInfo('m',$id);	
 	
 	echo "l'événement à été ajouté !<br />
-	<a href='liste_events.php?id=$mat'>Voir les événements</a>";
+	<a href='.?id=$mat'>Voir les événements</a>";
 }
 
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT."/template/footer_new.php");
 //------------

@@ -44,10 +44,7 @@ $default_value = '-- Choix --';
     <h2>Modification de vos options d'utilisateur</h2>
 
     <!-- Debut du coin -->
-    <div class="upperleft" id='coin_75'>
-        <div class="upperright">
-            <div class="lowerleft">
-                <div class="lowerright">
+    <div>
                     <!-- conteneur -->
 
                     <table border="0">
@@ -157,9 +154,6 @@ $default_value = '-- Choix --';
                     </table>
 
                     <!-- fin conteneur -->
-                </div>
-            </div>
-        </div>
     </div>
     <!-- Fin du coin -->
 

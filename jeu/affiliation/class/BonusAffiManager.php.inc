@@ -1,14 +1,14 @@
 <?php
+
+namespace jeu\affiliation;
+
 /**
  * Classe qui va gèrer les bonus d'affiliation pour les supérieurs
  *
  * @author Benjamin Herbomez <benjamin.herbomez@gmail.com>
  */
 
-    require_once('AffiliationDAO.php.inc');
-    require_once($root_url.'/jeu/affiliation/class/Superieurs.php.inc');
-
-require_once($root_url.'/persos/fonctions.php');
+require_once(SERVER_ROOT.'/persos/fonctions.php');
 
 
 class BonusAffiManager{

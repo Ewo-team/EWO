@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\affiliation;
+
 /**
  * Point d'entrée pour toute la partie de gestion des affiliés
  *

@@ -37,9 +37,8 @@ if (is_file(SERVER_ROOT . '/forum/common.php') && is_file(SERVER_ROOT . '/forum/
 			$_SESSION['autologin']["unlogin"] = true;
 			$titre = "Erreur de connexion";
 			$text = "Une erreur dans le processus de connexion automatique est survenu. Veuillez vous reconnecter.";
-			$root = "..";
 			$lien = "..";
-			gestion_erreur($titre, $text, $root, $lien);        
+			gestion_erreur($titre, $text, $lien);        
 		}
 	}
 }

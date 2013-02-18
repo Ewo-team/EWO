@@ -1,12 +1,12 @@
 <?php
+
+namespace jeu\affiliation;
+
 /**
  * Gestion des demandes d'affiliation
  *
  * @author Benjamin Herbomez <benjamin.herbomez@gmail.com>
  */
-
-require_once($root_url.'/jeu/affiliation/class/Superieurs.php.inc');
-require_once($root_url.'/jeu/affiliation/class/DemandeSup.php.inc');
 
 $sups   =   Superieurs::getAvailableSup($_SESSION['persos']['camp'][$id]);
 $sup    =   $sups[$_GET['mat']];
@@ -67,7 +67,7 @@ if($action != null){
             echo '
         <tr>
             <td>
-                <img src="'.$root_url.'/images/',icone_persos($demande->getPersoId()),'" alt="avatar"
+                <img src="'.SERVER_URL.'/images/',icone_persos($demande->getPersoId()),'" alt="avatar"
                     title="Avatar de ',$demande->getPersoNom(),'" /></td>
             <td>',$demande->getPersoNom(),'</td>
             <td>',$demande->getPersoId(),'</td>

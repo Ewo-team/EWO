@@ -1,17 +1,13 @@
 <?php
 
+namespace jeu\legion;
+
 /**
  * Gestion des légions en interne : voir la liste des noobs
  *
  * @author Herbomez Benjamin <benjamin.herbomez@gmail.com>
  * @version 1.0
  */
-
-include_once('class/LegionDroits.php.inc');
-include_once('class/Legion.php.inc');
-
-use legions\LegionDroits    as LegionDroits;
-use legions\Legion          as Legion;
 
 $droits = LegionDroits::droitsFromPersoId($id);
 
@@ -52,7 +48,7 @@ echo '
 					echo '
 			<tr>
 				<td align="center"><img src="../../images/',$url,'" alt="avatar"/></td>
-				<td align="center"><a href="'.$root_url.'messagerie/index.php?id='.$_GET['mat'].'&dest='.$perso->id.'">'.$perso->id.'</a></td>
+				<td align="center"><a href="'.SERVER_URL.'messagerie/index.php?id='.$_GET['mat'].'&dest='.$perso->id.'">'.$perso->id.'</a></td>
 				<td align="center">',$perso->name,'</td>
 			<tr>';
 				}

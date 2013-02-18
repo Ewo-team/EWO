@@ -16,9 +16,8 @@ include(SERVER_ROOT . '/jeu/fonctions.php');
 if(!isset($_POST['pvUp']) || !is_numeric($_POST['pvUp']) || !isset($_POST['recupPvUp']) || !is_numeric($_POST['recupPvUp']) || !isset($_POST['paUp']) || !is_numeric($_POST['paUp']) || !isset($_POST['mouvUp']) || !is_numeric($_POST['mouvUp']) || !isset($_POST['desUp']) || !is_numeric($_POST['desUp']) || !isset($_POST['forceUp']) || !is_numeric($_POST['forceUp']) || !isset($_POST['percUp']) || !is_numeric($_POST['percUp']) || !isset($_POST['nvMagUp']) || !is_numeric($_POST['nvMagUp'])){
 	$titre = "Erreur d'update";
 	$text = "Donn&eacute;es manaquantes";
-	$root = SERVER_URL;
 	$lien = "./../../persos/upgrades/";
-	gestion_erreur($titre, $text, $root, $lien);
+	gestion_erreur($titre, $text, $lien);
 }
 
 // Paramètres de connexion à la base de données

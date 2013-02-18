@@ -25,7 +25,7 @@ if (isset($_SESSION['damier_persos']))
 {
 $liste_perso             = $_SESSION['damier_persos'];
 }else {
-	echo "<script language='javascript' type='text/javascript' >document.location='./$root_url/'</script>";exit;
+	echo "<script language='javascript' type='text/javascript' >document.location='./",SERVER_URL,"/'</script>";exit;
 	}
 	
 if (isset($_SESSION['damier_porte']))

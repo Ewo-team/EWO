@@ -15,9 +15,9 @@
 						$pv = $caracs['pv']/$caracs_max['pv']*100;
 						if ($pv > 100){
 							$pv = 100;
-							$classcolor = "color_depass";
+							$classcolor = "color_blue";
 						}else{
-							$classcolor = "color_vert";
+							$classcolor = "color_green";
 						}
 						echo "Pv ";
 					?>
@@ -34,7 +34,7 @@
 					<?php
 						if ($caracs['malus_def'] == 0){
 							$malus = 100;
-							$classcolor = "color_vert";
+							$classcolor = "color_green";
 						}else{
 							$malus = 0;
 						}
@@ -55,9 +55,9 @@
 
 						if ($pa > 100){
 							$pa = 100;
-							$classcolor = "color_depass";
+							$classcolor = "color_blue";
 						}else{
-							$classcolor = "color_vert";
+							$classcolor = "color_green";
 						}
 						echo "Pa ";
 				  ?>
@@ -75,9 +75,9 @@
 						$mouv = $caracs['mouv']/$caracs_max['mouv']*100;
 						if ($mouv > 100){
 							$mouv = 100;
-							$classcolor = "color_depass";
+							$classcolor = "color_blue";
 						}else{
-							$classcolor = "color_vert";
+							$classcolor = "color_green";
 						}						
 						echo "Mouv ";
 					?>
@@ -94,10 +94,10 @@
 					<?php
 						if ($caracs['res_mag'] > $caracs_max['res_mag']){
 							$malus = 100;
-							$classcolor = "color_depass";
+							$classcolor = "color_blue";
 						}else{
 							$malus = 100+$caracs['res_mag']-$caracs_max['res_mag'];
-							$classcolor = "color_vert";
+							$classcolor = "color_green";
 						}
 						echo "Res Magique";
 					?>
@@ -118,9 +118,9 @@
 					else $recuppv=0;
 						if ($recuppv > 100){
 							$recuppv = 100;
-							$classcolor = "color_depass";
+							$classcolor = "color_blue";
 						}else{
-							$classcolor = "color_vert";
+							$classcolor = "color_green";
 						}
 						echo "R&eacute;cup&eacute;ration Pv ";
 					?>
@@ -140,9 +140,9 @@
 						$recup_malus= ($tab_recup_malus_actu["recup_fixe"]/$tab_recup_malus["recup_fixe"])*100;
 						if ($recup_malus > 100){
 							$recup_malus = 100;
-							$classcolor = "color_depass";
+							$classcolor = "color_blue";
 						}else{
-							$classcolor = "color_vert";
+							$classcolor = "color_green";
 						}
 						echo "R&eacute;cup'Malus ";
 					?>
@@ -160,9 +160,9 @@
 						$force = $caracs['force']/$caracs_max['force']*100;
 						if ($force > 100){
 							$force = 100;
-							$classcolor = "color_depass";
+							$classcolor = "color_blue";
 						}else{
-							$classcolor = "color_vert";
+							$classcolor = "color_green";
 						}
 						echo "Force ";
 					?>
@@ -180,9 +180,9 @@
 						$perception = $caracs['perception']/$caracs_max['perception']*100;
 						if ($perception > 100){
 							$perception = 100;
-							$classcolor = "color_depass";
+							$classcolor = "color_blue";
 						}else{
-							$classcolor = "color_vert";
+							$classcolor = "color_green";
 						}
 						echo "Perception ";
 					?>
@@ -199,17 +199,17 @@
 					<?php
 						if ($caracs_max['magie'] == 0 AND $caracs['magie'] > 0){
 							$magie = 100;
-							$classcolor = "color_depass";
+							$classcolor = "color_blue";
 						}elseif ($caracs_max['magie'] == 0 AND $caracs['magie'] == 0){
 							$magie = 100;
-							$classcolor = "color_vert";
+							$classcolor = "color_green";
 						}else{
 							$magie = $caracs['magie']/$caracs_max['magie']*100;
 							if ($magie > 100){
 								$magie = 100;
-								$classcolor = "color_depass";
+								$classcolor = "color_blue";
 							}else{
-								$classcolor = "color_vert";
+								$classcolor = "color_green";
 							}		
 						}	
 						echo "Niveau de magie ";

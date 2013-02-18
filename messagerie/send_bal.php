@@ -41,8 +41,7 @@ if ((!empty($_POST['mat']) || !empty($_POST['liste'])) AND !empty($_POST['text']
 			$titre = "BAL";
 			$text = "Une erreur s'est produite";
 			$lien = "../messagerie/index.php?id=".$matperso;
-			$root = "..";
-			gestion_erreur($titre, $text, $root, $lien);	
+			gestion_erreur($titre, $text, $lien);	
 		}
 	}
 	if(!empty($_POST['liste']) && $_POST['liste'] != 'null') {
@@ -92,8 +91,7 @@ if ((!empty($_POST['mat']) || !empty($_POST['liste'])) AND !empty($_POST['text']
 						$titre = "BAL";
 						$text = "Vous n'avez pas les droits nécessaires";
 						$lien = "../messagerie/index.php?id=".$matperso;
-						$root = "..";
-						gestion_erreur($titre, $text, $root, $lien);						
+						gestion_erreur($titre, $text, $lien);						
 					}
 					break;
 				case 'mass_camp':
@@ -103,8 +101,7 @@ if ((!empty($_POST['mat']) || !empty($_POST['liste'])) AND !empty($_POST['text']
 						$titre = "BAL";
 						$text = "Vous n'avez pas les droits nécessaires";
 						$lien = "../messagerie/index.php?id=".$matperso;
-						$root = "..";
-						gestion_erreur($titre, $text, $root, $lien);						
+						gestion_erreur($titre, $text, $lien);						
 					}						
 					break;
 			}
@@ -244,8 +241,7 @@ if ((!empty($_POST['mat']) || !empty($_POST['liste'])) AND !empty($_POST['text']
 				$titre = "BAL";
 				$text = "Le(s) matricule(s) suivant(s) provoque une erreur : $badmat";
 				$lien = "../messagerie/index.php?id=".$matperso;
-				$root = "..";
-				gestion_erreur($titre, $text, $root, $lien);	
+				gestion_erreur($titre, $text, $lien);	
 			}
 		} else {
 			if($ajax) {
@@ -254,8 +250,7 @@ if ((!empty($_POST['mat']) || !empty($_POST['liste'])) AND !empty($_POST['text']
 				$titre = "BAL";
 				$text = "Une erreur s'est produite";
 				$lien = "../messagerie/index.php?id=".$matperso;
-				$root = "..";
-				gestion_erreur($titre, $text, $root, $lien);	
+				gestion_erreur($titre, $text, $lien);	
 			}
 		}
 		//echo 'badmat'; //message bien envoyé
@@ -267,8 +262,7 @@ if ((!empty($_POST['mat']) || !empty($_POST['liste'])) AND !empty($_POST['text']
 		$titre = "BAL";
 		$text = "Votre message à bien été envoyé";
 		$lien = "../messagerie/index.php?id=".$matperso;
-		$root = "..";
-		gestion_erreur($titre, $text, $root, $lien);	
+		gestion_erreur($titre, $text, $lien);	
 	}
 	
 } else {
@@ -278,8 +272,7 @@ if ((!empty($_POST['mat']) || !empty($_POST['liste'])) AND !empty($_POST['text']
 		$titre = "BAL";
 		$text = "Une erreur s'est produite";
 		$lien = "../messagerie/";
-		$root = "..";
-		gestion_erreur($titre, $text, $root, $lien);	
+		gestion_erreur($titre, $text, $lien);	
 	}
 }
 ?>

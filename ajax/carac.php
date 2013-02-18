@@ -37,59 +37,59 @@ if(isset($_GET['perso_id'])){
 		'pv' => array(
 			'max' => $caracs_max['pv'],
 			'actu' => $caracs['pv'],
-			'classcolor' => 'color_vert',
+			'classcolor' => 'color_green',
 			'taille' => 100
 		),
 		'malus' => array(
 			'actu' => $caracs['malus_def'],
-			'classcolor' => 'color_vert',
+			'classcolor' => 'color_green',
 			'taille' => 100
 		),
 		'pa' => array(
 			'max' => ($caracs_max['pa']+$caracs_max['pa_dec']/10),
 			'actu' => ($caracs['pa']+$caracs['pa_dec']/10),
-			'classcolor' => 'color_vert',
+			'classcolor' => 'color_green',
 			'taille' => 100
 		),
 		'mouv' => array(
 			'max' => $caracs_max['mouv'],
 			'actu' => $caracs['mouv'],
-			'classcolor' => 'color_vert',
+			'classcolor' => 'color_green',
 			'taille' => 100
 		),
 		'res_mag' => array(
 			'actu' => $caracs['res_mag'],
-			'classcolor' => 'color_vert',
+			'classcolor' => 'color_green',
 			'taille' => 100
 		),
 		'recup_pv' => array(
 			'max' => floor($caracs_max['recup_pv']*$caracs_max['pv']/100),
 			'actu' => floor($caracs['recup_pv']*$caracs_max['pv']/100),
-			'classcolor' => 'color_vert',
+			'classcolor' => 'color_green',
 			'taille' => 100
 		),
 		'recup_malus' => array(
 			'max' => $tab_recup_malus["recup_fixe"],
 			'actu' => $tab_recup_malus_actu["recup_fixe"],
-			'classcolor' => 'color_vert',
+			'classcolor' => 'color_green',
 			'taille' => 100
 		),
 		'force' => array(
 			'max' => $caracs_max['force'],
 			'actu' => $caracs['force'],
-			'classcolor' => 'color_vert',
+			'classcolor' => 'color_green',
 			'taille' => 100
 		),
 		'percept' => array(
 			'max' => $caracs_max['perception'],
 			'actu' => $caracs['perception'],
-			'classcolor' => 'color_vert',
+			'classcolor' => 'color_green',
 			'taille' => 100
 		),
 		'magie' => array(
 			'max' => $caracs_max['magie'],
 			'actu' => $caracs['magie'],
-			'classcolor' => 'color_vert',
+			'classcolor' => 'color_green',
 			'taille' => 100
 		)
 	);
@@ -99,7 +99,7 @@ if(isset($_GET['perso_id'])){
 			case 'malus':
 				if ($caracs['malus_def'] == 0){
 					$taille = 100;
-					$classe = "color_vert";
+					$classe = "color_green";
 				}else{
 					$taille = 0;
 					$classe = $valeurs['pv']['classcolor'];
@@ -108,10 +108,10 @@ if(isset($_GET['perso_id'])){
 			case 'res_mag':
 				if ($caracs['res_mag'] > $caracs_max['res_mag']){
 					$taille = 100;
-					$classe = "color_depass";
+					$classe = "color_blue";
 				}else{
 					$taille = 100+$caracs['res_mag']-$caracs_max['res_mag'];
-					$classe = "color_vert";
+					$classe = "color_green";
 				}
 				break;
 			default:
@@ -122,9 +122,9 @@ if(isset($_GET['perso_id'])){
 				}
 				if ($val > 100){
 					$taille = 100;
-					$classe = "color_depass";
+					$classe = "color_blue";
 				}else{
-					$classe = "color_vert";
+					$classe = "color_green";
 					$taille = $val;
 				}
 				break;

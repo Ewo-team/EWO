@@ -1,7 +1,8 @@
 <?php
 //-- Header --
-$root_url = "..";
-include($root_url."/template/header_new.php");
+require_once __DIR__ . '/../../conf/master.php';
+
+include_once SERVER_ROOT . '/template/header_new.php';
 /*-- Connexion basic requise --*/
 ControleAcces('utilisateur',1);
 /*-----------------------------*/
@@ -10,7 +11,7 @@ ControleAcces('utilisateur',1);
 //  DEFINITION DES VARIABLES 
 //----------------------------
 
-$target     = $root_url.'/images/avatar/';  // Repertoire cible
+$target     = SERVER_ROOT.'/images/avatar/';  // Repertoire cible
 $max_size   = 10000000000;     // Taille max en octets du fichier
 $width_max  = 140;        // Largeur max de l'image en pixels
 $height_max = 140;        // Hauteur max de l'image en pixels
@@ -92,7 +93,7 @@ $height_max = 140;        // Hauteur max de l'image en pixels
     // Sinon on affiche une erreur pour le champ vide
     // echo "<h2>Probleme</h2><p align='center'>Le champ du formulaire est vide !</p><p align='center'>[<a href='".$_SESSION['temps']['page']."'>Retour</a>]</p>";    
 //-- Footer --
-include($root_url."/template/footer_new.php");
+include(SERVER_ROOT."/template/footer_new.php");
 //}
 //------------
 ?>

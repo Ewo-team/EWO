@@ -73,6 +73,8 @@ $_SESSION['utilisateur']['template_mage']=true;
 
 <meta name="google-site-verification" content="rZADXCyuEh8aaWXfEkxQxz4uSd_X0k7Ksfw0Td7gimQ" />
 
+<link rel="stylesheet" href="<?php echo SERVER_URL; ?>/css/normalize.css?v=<?php echo filemtime(SERVER_ROOT.'/css/normalize.css') ?>" type="text/css" />
+
 <?php
 
 	echo '<link rel="stylesheet" href="'.SERVER_URL.$template_url.'/css/jquery-ui.css?v='.filemtime(SERVER_ROOT.$template_url.'/css/jquery-ui.css').'" type="text/css" />';
@@ -98,7 +100,7 @@ $_SESSION['utilisateur']['template_mage']=true;
     //} catch (Exception $e) {
         // Nothing to do here
     //}
-    echo '<link rel="stylesheet" href="'. SERVER_URL . $template_url.'/css/ewo.css?v='.filemtime( SERVER_ROOT . $template_url.'/css/ewo.css').'" type="text/css" />';
+    echo '<link rel="stylesheet" href="'. SERVER_URL . $template_url.'/css/ewo.css?v='.filemtime( SERVER_ROOT . $template_url.'/css/ewo.css').'" type="text/css" />' . PHP_EOL;
     
     // Fichiers CSS supplémentaires
     if(isset($css_files)) {
@@ -142,7 +144,7 @@ $_SESSION['utilisateur']['template_mage']=true;
             
         }
         
-        echo '<link rel="stylesheet" href="'.SERVER_URL . $template_url.'/css/generate/'.$nom.'.css?v='.filemtime(SERVER_ROOT.$template_url.'/css/generate/'.$nom.'.css').'" type="text/css" />';        
+        echo '<link rel="stylesheet" href="'.SERVER_URL . $template_url.'/css/generate/'.$nom.'.css?v='.filemtime(SERVER_ROOT.$template_url.'/css/generate/'.$nom.'.css').'" type="text/css" />' . PHP_EOL;        
     }
 ?>
 

@@ -1,10 +1,11 @@
 <?php
+
+namespace jeu\affiliation;
+
 /**
  * Gestion des demandes pour un même supérieur
  * @author Benjamin Herbomez <benjamin.herbomez@gmail.com>
  */
-
-require('DemandeManager.php.inc');
 
 /**
  *

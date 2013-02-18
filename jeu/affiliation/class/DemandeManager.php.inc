@@ -1,5 +1,7 @@
 <?php
 
+namespace jeu\affiliation;
+
 /**
  * Classe abstraite qui permet de gérer les demandes.
  *
@@ -8,9 +10,6 @@
  * @package legions
  */
 
-
-require_once($root_url . '/jeu/affiliation/class/Demande.php.inc');
-require_once($root_url . '/jeu/affiliation/class/AffiliationDAO.php.inc');
 
 abstract class DemandeManager {
 

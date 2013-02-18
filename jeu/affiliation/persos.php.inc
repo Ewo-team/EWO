@@ -1,13 +1,13 @@
 <?php
 
+namespace jeu\affiliation;
+
 /**
  * Affichage de la liste des persos
  *
  * @author Benjamin Herbomez <benjamin.herbomez@gmail.com>
  */
 
-    require($root_url.'/affiliation/class/Superieurs.php.inc');
-    require($root_url.'/affiliation/class/DemandePerso.php.inc');
     $sups = Superieurs::getSups($_SESSION['persos']['superieur']);
 ?>
 <h2>Affiliation de mes personnages</h2>
@@ -43,8 +43,8 @@
 
             echo '
         <tr>
-            <td><img src="',$root_url,'/images/',icone_persos($v),'" alt="icon perso"/></td>
-            <td><a href="',$root_url,'/event/liste_events.php?id=',$v,'">',$v,'</a></td>
+            <td><img src="',SERVER_URL,'/images/',icone_persos($v),'" alt="icon perso"/></td>
+            <td><a href="',SERVER_URL,'/event/?id=',$v,'">',$v,'</a></td>
             <td>',$_SESSION['persos']['nom'][$k],'</td>
             <td>',$_SESSION['persos']['grade'][$k],'</td>
             <td>',$_SESSION['persos']['galon'][$k],'</td>';
@@ -64,10 +64,10 @@
             else{
                 $sup = $sups[$_SESSION['persos']['superieur'][$k]];
                 echo '
-            <td><img src="',$root_url,'/images/',icone_persos($sup->id),'" alt="icon perso"/></td>
-            <td><a href="event/liste_events.php?id=',$sup->id,'">',$sup->id,'</a></td>
+            <td><img src="',SERVER_URL,'/images/',icone_persos($sup->id),'" alt="icon perso"/></td>
+            <td><a href="',SERVER_URL,'/persos/event/?id=',$sup->id,'">',$sup->id,'</a></td>
             <td>',$sup->nom,'</td>
-            <td> <a href="',$root_url,'/messagerie/index.php?id=',$v,'&dest=',$sup->id,'">BAL</a> </td>';
+            <td> <a href="',SERVER_URL,'/messagerie/index.php?id=',$v,'&dest=',$sup->id,'">BAL</a> </td>';
                 if($sup->pv <= 0)
                     echo '
             <td> <a href="index.php?p=1&amp;mat=',$v,'&amp;a=',PAGE_PERSO_DESAFFILIER,'">Se désaffilier</a> </td>';

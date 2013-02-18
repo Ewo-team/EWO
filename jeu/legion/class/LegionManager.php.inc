@@ -1,4 +1,7 @@
 <?php
+
+namespace jeu\legion;
+
 /**
  * Class pour la gestion de toutes les légions
  * 
@@ -7,13 +10,6 @@
  * @package legions
  */
  
-namespace legions;
-
-require_once($root_url.'jeu/legion/class/ManagerFactory.php.inc');
-require_once($root_url.'jeu/legion/class/Legion.php.inc');
-require_once($root_url.'jeu/legion/class/LegionConfig.php.inc');
-require_once($root_url.'jeu/legion/class/LegionDAO.php.inc');
-
 	class LegionManager{
 	
 		private $legions 	= array();

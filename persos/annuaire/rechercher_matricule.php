@@ -42,15 +42,13 @@ $pseudo = $_POST['personnage'];
 	}else{
 		$titre = "Erreur de pseudo";
 		$text = "Ce personnage n'existe pas, ou erreur de pseudo.";
-		$lien = "../annuaire";
-		$root = "..";
-		gestion_erreur($titre, $text, $root, $lien, 1);
+		$lien = "../persos/annuaire";
+		gestion_erreur($titre, $text, $lien, 1);
 	}
 }else{
 $titre = "Erreur de pseudo";
 $text = "Un pseudo vide n'est pas un pseudo !";
-$lien = "../annuaire";
-$root = "..";
-gestion_erreur($titre, $text, $root, $lien,1);
+$lien = "../persos/annuaire";
+gestion_erreur($titre, $text, $lien,1);
 }
 ?>

@@ -19,9 +19,8 @@ include($root_url."/jeu/fonctions.php");
 if(!isset($_SESSION['persos']['current_id'])){
 	$titre = "Vous n'avez pas de personnage selection&eacute;'";
 	$text = "Vous devez passer par la page de jeu pour g&eacute;rer les pnj.";
-	$root = "./../..";
 	$lien = "./../..";
-	gestion_erreur($titre, $text, $root, $lien,1);
+	gestion_erreur($titre, $text, $lien, 1);
 }
 
 // D�termine le personnage dont il est question.

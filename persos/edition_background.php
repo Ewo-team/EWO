@@ -16,21 +16,18 @@ $utilisateur_id = $_SESSION['utilisateur']['id'];
 	 	$titre = "Modification de votre personnage";
 		$text = "Votre background a bien été mis à jour.";
 		$lien = "../persos/editer_perso.php?id=".$id_perso."";
-		$root = "..";
-		gestion_erreur($titre, $text, $root, $lien);		
+		gestion_erreur($titre, $text, $lien);		
 	}else{
 	 	$titre = "Modification de votre personnage";
 		$text = "Votre message n'a pu etre mis à jour, ce personnage ne vous appartient pas'.";
 		$lien = "/";
-		$root = "..";
-		gestion_erreur($titre, $text, $root, $lien);
+		gestion_erreur($titre, $text, $lien);
 	}
    
 }else{
  	$titre = "Modification de votre personnage";
 	$text = "Vous n'êtes pas autorisé à effectuer cette action.";
 	$lien = "../persos/editer_perso.php?id=".$id_perso."";
-	$root = "..";
-	gestion_erreur($titre, $text, $root, $lien);
+	gestion_erreur($titre, $text, $lien);
 }
 ?>

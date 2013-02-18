@@ -25,8 +25,24 @@ class Loader {
 			include(SERVER_ROOT."/persos/eventManager/formatter/$name.php");
 		}
     }
+	
+    public static function affiliationload($class) {
+
+		$pos = strrpos($class, '\\');
+
+		$className = substr($class, $pos);
+
+		$result = substr_replace($class, '\\class\\' . $className, $pos + 1);
+			
+        $file = SERVER_ROOT . '/' . strtr($result, '\\', '//') . '.php.inc';
+        if (file_exists($file)) {
+            include($file);
+		}
+
+    }	
 }
 
 Loader::registerAutoload("baseloaderClass");
 Loader::registerAutoload("eventautoload");
+Loader::registerAutoload("affiliationload");
 ?>

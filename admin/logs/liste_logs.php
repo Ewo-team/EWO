@@ -10,11 +10,8 @@ ControleAcces('admin',1);
 <h2>Liste des dernières éditions de personnages</h2>
 
 <!-- Debut du coin -->
-<div class="upperleft" id='coin_75'>
-	<div class="upperright">
-		<div class="lowerleft">
-			<div class="lowerright">
-			<!-- conteneur -->
+<div>
+
 			
 <div class='news' align='center'>
 
@@ -59,10 +56,7 @@ $switch++;
 </table>
 </div>
 
-			<!-- fin conteneur -->
-			</div>
-		</div>
-	</div>
+
 </div>
 <!-- Fin du coin -->
 

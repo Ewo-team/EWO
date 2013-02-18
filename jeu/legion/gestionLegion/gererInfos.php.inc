@@ -1,18 +1,7 @@
 <?php
-include_once('class/LegionConfig.php.inc');
-include_once('class/ManagerFactory.php.inc');
-include_once('class/NameManager.php.inc');
-include_once('class/DemandeUtilisateur.php.inc');
-include_once('class/DemandeUtilisateur.php.inc');
-include_once('fonctions.php.inc');
+namespace jeu\legion;
 
-use legions\ManagerFactory as ManagerFactory;
-use legions\LegionConfig as LegionConfig;
-use legions\NameManager as NameManager;
-use legions\DemandeUtilisateur as DemandeUtilisateur;
-use legions\DroitManager as DroitManager;
-use legions\LegionDroits as LegionDroits;
-use legions\LegionDAO as LegionDAO;
+include_once 'fonctions.php.inc';
 
 $droitManager = new DroitManager($_SESSION['persos']['faction']['droits'][$id]);
 $droits = LegionDroits::droitsFromPersoId($id);

@@ -66,21 +66,18 @@ if (!empty($mail) && !empty($sujet) && !empty($auteur) && !empty($text)){
 	if($mail->Send()) {
 		$titre = "Message envoyé";
 		$text = "Votre message vient d\'être envoyé, les administrateurs du site feront au plus vite pour vous apporter une réponse.";
-		$root = "..";
 		$lien = "..";
-		gestion_erreur($titre, $text, $root, $lien);		
+		gestion_erreur($titre, $text, $lien);		
 	} else {
 		$titre = "Message non envoyé";
 		$text = "En raison d\'un problème technique, le message n\'a pu être envoyé.";
-		$root = "..";
 		$lien = "..";
-		gestion_erreur($titre, $text, $root, $lien);	
+		gestion_erreur($titre, $text, $lien);	
 	}
 }else{
 		$titre = "Erreur dans le message";
 		$text = "Il faut remplir les champs avant d'envoyer !";
-		$root = "..";
 		$lien = "..";
-		gestion_erreur($titre, $text, $root, $lien);
+		gestion_erreur($titre, $text, $lien);
 }
 ?>

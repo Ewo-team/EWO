@@ -1,12 +1,13 @@
 <?php
 
+namespace jeu\affiliation;
+
 /**
  * Téléporter un affilié
  * @author Benjamin Herbomez <benjamin.herbomez@gmail.com>
  */
 
-require_once($root_url.'/jeu/affiliation/class/AffiliationDAO.php.inc');
-require_once($root_url.'/persos/fonctions.php');
+require_once(SERVER_ROOT.'/persos/fonctions.php');
 
 
 $caracs = calcul_caracs($_GET['mat']);
@@ -40,7 +41,7 @@ if(isset($_POST['mat']) && isset($_POST['x']) && isset($_POST['y']) &&
         if($x >= $carte->x_min && $x <= $carte->x_max &&
            $y >= $carte->y_min && $y <= $carte->y_max){
 
-            require_once($root_url.'/jeu/fonctions.php');
+            require_once(SERVER_ROOT.'/jeu/fonctions.php');
             //var_dump($caracs);
             $admin_mode = true;
             if(!set_pos($mat, $x, $y, $carte->id)){

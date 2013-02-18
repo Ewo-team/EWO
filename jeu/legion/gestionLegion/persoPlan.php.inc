@@ -1,17 +1,13 @@
 <?php
 
+namespace jeu\legion;
+
 /**
  * Gestion des légions en interne : voir la position des ennemis
  *
  * @author Herbomez Benjamin <benjamin.herbomez@gmail.com>
  * @version 1.0
  */
-
-include_once('class/LegionDroits.php.inc');
-include_once('class/Legion.php.inc');
-
-use legions\LegionDroits    as LegionDroits;
-use legions\Legion          as Legion;
 
 $droits = LegionDroits::droitsFromPersoId($id);
 

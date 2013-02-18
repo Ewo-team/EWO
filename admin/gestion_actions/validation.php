@@ -107,21 +107,18 @@ if(isset($_POST['flag'])) {
 		$titre = "Action";
 		$text = "L'action à bien été crée/modifiée.";
 		$lien = "../admin/gestion_actions/";
-		$root = "../..";
-		gestion_erreur($titre, $text, $root, $lien);	
+		gestion_erreur($titre, $text, $lien);	
 	} else {
 		$titre = "Action";
 		$text = "Une erreur est survenue. Veuillez vérifier les paramètres de l'action.";
 		$lien = "../admin/gestion_actions/";
-		$root = "../..";
-		gestion_erreur($titre, $text, $root, $lien);	
+		gestion_erreur($titre, $text, $lien);	
 	}
 	
 } else {
 	$titre = "Action";
 	$text = "Une erreur est survenue.";
 	$lien = "../admin/gestion_actions/";
-	$root = "../..";
-	gestion_erreur($titre, $text, $root, $lien);	
+	gestion_erreur($titre, $text, $lien);	
 }
 ?>

@@ -19,10 +19,7 @@ include(SERVER_ROOT . "/template/header_new.php");
 <h2>vous avez oublié votre mot de passe ?</h2>
 
 <!-- Debut du coin -->
-<div class="upperleft" id='coin_75'>
-	<div class="upperright">
-		<div class="lowerleft">
-			<div class="lowerright">
+<div>
 			<!-- conteneur -->
 
 <div align='center'>
@@ -42,9 +39,6 @@ include(SERVER_ROOT . "/template/header_new.php");
 
 
 			<!-- fin conteneur -->
-			</div>
-		</div>
-	</div>
 </div>
 <!-- Fin du coin -->
 

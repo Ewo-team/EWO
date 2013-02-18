@@ -11,7 +11,7 @@ echo '<h2>Annuaire des personnages EwOiens</h2>
 <div align="center">
 	<table width="400" id="perso_liste" border="0">
 		<tr>
-			<td colspan="3" align="center" style="background-color:', $couleur , '; color:#fff;"><b><a href="../event/liste_events.php?id=', $mat, '">', nom_perso($mat), ' (Mat. ', $mat, ')</a></b></td>
+			<td colspan="3" align="center" style="background-color:', $couleur , '; color:#fff;"><b><a href="',SERVER_URL,'/persos/event/?id=', $mat, '">', nom_perso($mat), ' (Mat. ', $mat, ')</a></b></td>
 		</tr>
 		<tr>
 			<td colspan="3" align="center"><img src="', SERVER_URL, '/images/', $url, '" alt="avatar"></td>
@@ -22,7 +22,7 @@ echo '<h2>Annuaire des personnages EwOiens</h2>
 if (isset($_SESSION['utilisateur']['id'])){
 		echo '<tr>';
 		if(isset($_SESSION['persos']['current_id'])) {
-			echo '<td align="center">[ <a href="',SERVER_URL,'/messagerie/index.php?id=', $_SESSION['persos']['current_id'], '&dest=', $mat, '">Envoyer un message</a> ]</td>';
+			echo '<td align="center">[ <a href="',SERVER_URL,'/messagerie/?id=', $_SESSION['persos']['current_id'], '&dest=', $mat, '">Envoyer un message</a> ]</td>';
 		} else {
 			echo '<td></td>';
 		}
@@ -32,7 +32,7 @@ if (isset($_SESSION['utilisateur']['id'])){
 		</tr>';
  }
 echo '</table>
-	<p>[<a href="', SERVER_URL, '/annuaire/">Retour</a>]</p>
+	<p>[<a href="', SERVER_URL, '/persos/annuaire/">Retour</a>]</p>
 </div>';
 
 ?>

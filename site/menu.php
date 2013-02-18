@@ -102,9 +102,9 @@ if (isset($template_on)) {
         $menu['utilisateur'][] = array('url' => SERVER_URL . '/jeu/carte/', 'nom' => 'Carte du Monde');
         $menu['utilisateur'][] = array('url' => SERVER_URL . '/persos/annuaire/', 'nom' => 'Annuaire');
         //$menu['utilisateur'][] = array('url' => SERVER_URL.'/persos/liste_persos.php', 'nom' => 'Mes personnages');
-        $menu['utilisateur'][] = array('url' => SERVER_URL . '/event/liste_events.php', 'nom' => 'Mes &eacute;v&eacute;nements');
-        $menu['utilisateur'][] = array('url' => SERVER_URL . '/persos/affiliation/', 'nom' => 'Affiliations ' . $nom_aff);
-        $menu['utilisateur'][] = array('url' => SERVER_URL . '/jeu/classement/classement.php', 'nom' => 'Classement');
+        $menu['utilisateur'][] = array('url' => SERVER_URL . '/persos/event/', 'nom' => 'Mes &eacute;v&eacute;nements');
+        $menu['utilisateur'][] = array('url' => SERVER_URL . '/jeu/affiliation/', 'nom' => 'Affiliations ' . $nom_aff);
+        $menu['utilisateur'][] = array('url' => SERVER_URL . '/jeu/classement/', 'nom' => 'Classement');
 
 		$nbperso = @$_SESSION['persos']['inc'];
 		$creation = controleCreationPerso($utilisateur_id);

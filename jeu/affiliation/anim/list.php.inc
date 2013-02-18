@@ -1,11 +1,11 @@
 <?php
 
+namespace jeu\affiliation;
+
 /**
  *
  * @author Benjamin Herbomez <benjamin.herbomez@gmail.com>
  */
-
-require_once($root_url.'/jeu/affiliation/class/AffiliationDAO.php.inc');
 
 $sql = AffiliationDAO::getInstance();
 $i = 0;
@@ -21,10 +21,10 @@ foreach($sql->getAffiList($_GET['mat']) as $perso){
     if($i%$j == 0){
         echo '<tr>';
     }
-    echo '<td style="border-right:0;"><img src="',$root_url,'/images/',icone_persos($perso->id),'" alt="icon perso"/></td>
+    echo '<td style="border-right:0;"><img src="',SERVER_URL,'/images/',icone_persos($perso->id),'" alt="icon perso"/></td>
     <td  style="border-left:0;">
-    <a href="../event/liste_events.php?id=',$perso->id,'">',$perso->nom,'</a>
-    (<a href="../messagerie/index.php?id=',$_GET['mat'],'&dest=',$perso->id,'">',$perso->id,'</a>)</td>';
+    <a href="',SERVER_URL,'/persos/event/?id=',$perso->id,'">',$perso->nom,'</a>
+    (<a href="',SERVER_URL,'/messagerie/index.php?id=',$_GET['mat'],'&dest=',$perso->id,'">',$perso->id,'</a>)</td>';
      if($i%$j == $j-1){
         echo '</tr>';
     }
