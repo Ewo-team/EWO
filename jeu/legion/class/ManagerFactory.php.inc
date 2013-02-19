@@ -46,11 +46,11 @@ namespace jeu\legion;
 			/*
 			if(\conf\VariableStorage::Exists($entree))
 			
-				return \conf\VariableStorage::Fetch($entree);//*/
+				return \conf\VariableStorage::Consulte($entree);//*/
 			
 			
 			$r = new LegionManager($race);
-			\conf\VariableStorage::Store($entree, $r);
+			\conf\VariableStorage::Sauve($entree, $r);
 			return $r;
 		}
 	}

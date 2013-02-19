@@ -374,8 +374,8 @@ function nom_perso($id, $afficheMatricule = false, $italique = true) {
             $noms = "SELECT nom, titre FROM persos WHERE id=" . $id . "";
             $resultat = mysql_query($noms) or die(mysql_error());
             $nom = mysql_fetch_array($resultat);
-            \conf\VariableStorage::Store('persos.pseudo.'.$id.'.nom', $nom['nom'], 60*60);
-            \conf\VariableStorage::Store('persos.pseudo.'.$id.'.titre', $nom['titre'], 60*60);
+            \conf\VariableStorage::Sauve('persos.pseudo.'.$id.'.nom', $nom['nom'], 60*60);
+            \conf\VariableStorage::Sauve('persos.pseudo.'.$id.'.titre', $nom['titre'], 60*60);
         } else {
             $nom['nom'] = $storage_nom;
             $nom['titre'] = $storage_titre;

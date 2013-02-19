@@ -2,55 +2,53 @@
 
 namespace conf;
 
-if(!function_exists('apc_exists')){
-	function apc_exists($keys){
-		$r;
-		apc_fetch($keys,$r);
-		return $r;
-	}
-}
-
 class VariableStorage {
 
 	// Durée de vie d'un lock. 60 secondes
 	private static $ttl = 60;
 
-	static function Charge($uri, $ssid) {
+	static function Charge($uri) {
 		// Boucle tant que la variable est locké
-		while(apc_add('_'.$uri, $ssid, static::$ttl)) {
+		while(apc_add('_'.$uri, session_id(), static::$ttl)) {
 			return apc_fetch($uri);
 		}
 	}
 	
-	static function Sauve($uri, $variable, $ssid) {
+	static function Verrouille($uri, $ttl = null) {
+		$tempo = ($ttl==null) ? static::$ttl : $ttl; // On utilise la ttl si spécifié, ou sinon celle par défaut
+		$tempo = ($tempo==0) ? static::$ttl : $tempo; // Si la ttl spécifié est à 0, on utilise celle par défaut
+		return apc_add('_'.$uri, session_id() , $tempo);
+	}
+	
+	static function LibereVerrou($uri) {
+		if(apc_fetch('_'.$uri) === session_id()) {
+			apc_delete('_'.$uri);
+		}
+	}
+	
+	static function Sauve($uri, $variable, $ttl = null) {
 		$curi = '_'.$uri;
-		if(!apc_add($curi, $ssid, static::$ttl)) {
-			// il y a un lock, on vérifie qu'on en est le propri�taire, 
-			if(apc_fetch($curi) === $ssid) {
-				// sauvegarde, et libère le lock
-				apc_store($uri, $variable);
+		if(!VariableStorage::Verrouille($uri,$ttl)) {
+			// il y a un lock, on vérifie qu'on en est le propriétaire, 
+			if(apc_fetch($curi) === session_id()) {
+				// on sauvegarde, et libère le lock
+				$result = apc_store($uri, $variable);
 				apc_delete($curi);
-				return true;
+				return $result;
 			}
 			// On n'est pas le propriétaire, il y a un problème
 		} else {
-			// Il n'y avais pas de lock, il y a donc un problème
+			// Il n'y avais pas de lock
+			$result = apc_store($uri, $variable);
+			
 			apc_delete($curi);
+			return $result;
 		}
 
-		return false;
 	}
 	
-	static function Store($key , $var , $ttl = 0 ) {
-		return apc_store($key , $var , $ttl);
-	}
-	
-	static function Exists($keys) {
-		return apc_exists($keys);
-	}
-	
-	static function Fetch($key) {
-		return apc_fetch($key);
+	static function Exists($uri) {
+		return apc_exists($uri);
 	}
 	
 	static function Consulte($uri) {
@@ -79,11 +77,15 @@ class VariableStorage {
 
 //Fallback if apc in not present
 if(!function_exists('apc_fetch')){
+
+	$path = __DIR__ . '/../cache/'; 
+
 	function apc_fetch($p1=null,&$p2=null,$p3=null){
 		$p2 = false;
 		return false;
 	}
 	function apc_add($p1=null,$p2=null,$p3=null){
+		
 		return false;
 	}	
 	function apc_delete($p1=null,$p2=null,$p3=null){
@@ -92,5 +94,14 @@ if(!function_exists('apc_fetch')){
 	function apc_store($p1=null,$p2=null,$p3=null){
 		return false;
 	}		
+}
+
+// Fallback pour les vieilles version de apc
+if(!function_exists('apc_exists')){
+	function apc_exists($keys){
+		$r;
+		apc_fetch($keys,$r);
+		return $r;
+	}
 }
 ?>

@@ -26,8 +26,8 @@ namespace jeu\legion;
 
 		//Les valeurs doivent exister dans APC
 		private function loadValuesFromApc(){
-			$this->typeNames 	= \conf\VariableStorage::Fetch(LegionConfig::typeApcName);
-			$this->alignementNames	= \conf\VariableStorage::Fetch(LegionConfig::alignementApcName);
+			$this->typeNames 	= \conf\VariableStorage::Consulte(LegionConfig::typeApcName);
+			$this->alignementNames	= \conf\VariableStorage::Consulte(LegionConfig::alignementApcName);
 		}
 
 		private function loadValuesFromBdd(){
@@ -61,8 +61,8 @@ namespace jeu\legion;
 		}
 
 		private function store(){
-			\conf\VariableStorage::Store(LegionConfig::typeApcName,$this->typeNames);
-			\conf\VariableStorage::Store(LegionConfig::alignementApcName,$this->alignementNames);
+			\conf\VariableStorage::Sauve(LegionConfig::typeApcName,$this->typeNames);
+			\conf\VariableStorage::Sauve(LegionConfig::alignementApcName,$this->alignementNames);
 		}
 
 		//L'id doit être dans le tableau !

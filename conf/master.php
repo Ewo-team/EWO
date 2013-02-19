@@ -30,7 +30,7 @@ include_once (SERVER_ROOT."/conf/controle_connexion.php");
 include_once(SERVER_ROOT."/conf/fonctions.php");
 
 // Magasin de variable
-include_once("VariableStorage.php");
+//include_once("VariableStorage.php");
 
 // Helpers
 //include_once("Helpers.php");
