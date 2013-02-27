@@ -3,7 +3,6 @@
 use \conf\ConnecteurDAO as ConnecteurDAO;
 
 include 'header.php';
-include '../conf/ConnecteurDAO.php';
 
 $file = $_SESSION['cartographe']['raw'];
 

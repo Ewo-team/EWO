@@ -18,111 +18,66 @@ use \conf\ConnecteurDAO as ConnecteurDAO;
 class CreationPersoDAO extends ConnecteurDAO {
 
     /**
-     * Retourne true si un utilisateur avec le nom $name existe
+     * Retourne true si un perso avec le nom $name existe
      * @param string $name
      * @return boolean
      */
     public function VerifyExistName($name) {
-        $sql = 'SELECT count(nom) FROM utilisateurs WHERE nom = ?';
+        $sql = 'SELECT count(nom) FROM persos WHERE nom = ?';
         $this->prepare($sql);
         $this->executePreparedStatement(null, array($name));
         $result = $this->fetch_row();
         return ($result[0] == 0) ? false : true;           
     }
     
-    /**
-     * Retourne true si un utilisateur avec l'email $email existe
-     * @param string $email
-     * @return boolean
-     */
-    public function VerifyExistEmail($email) {
-        $sql = 'SELECT count(nom) FROM utilisateurs WHERE email = ?';
+    public function SelectRaceId($race, $gameplay) {
+        $sql = "SELECT races.race_id, races.camp_id
+        FROM races, camps
+        WHERE camps.id = races.camp_id AND
+        races.grade_id = -2 AND 
+        camps.nom = :race AND races.type = :gp"; 
+
         $this->prepare($sql);
-        $this->executePreparedStatement(null, array($email));
-        $result = $this->fetch_row();
-        return ($result[0] == 0) ? false : true;                
+        $this->executePreparedStatement(null, array(':race' => $race, ':gp' => $gameplay));
+        return $this->fetch();    
     }
     
-    /**
-     * Retourne true si un utilisateur avec le ticket $ticket existe
-     * @param string $ticket
-     * @return boolean
-     */
-    public function VerifyExistTicket($ticket) {
-        // She got a ticket to ride
-        $sql = 'SELECT count(nom) FROM utilisateurs WHERE ticket = ?';
-        $this->prepare($sql);
-        $this->executePreparedStatement(null, array($ticket));
-        $result = $this->fetch_row();
-        return ($result[0] == 0) ? false : true;           
-    }   
-    
-    /**
-     * Supprime le ticket
-     * @param string $ticket
-     */
-    public function RemoveTicket($ticket) {
-        $sql = "DELETE FROM invitations WHERE numero=?";
-        $this->prepare($sql);
-        $this->executePreparedStatement(null, array($ticket));        
-    }
-    
-    /**
-     * Sélectionne l'utilisateur ayant le code $code
-     * @param string $code
-     */
-    public function SelectUserByCode($code) {
-        $sql = "SELECT * FROM `utilisateurs` WHERE codevalidation = ?";
-        $this->prepare($sql);
-        $this->executePreparedStatement(null, array($code));  
-        return $this->fetch();
-    }
-    
-    /**
-     * Sélectionne l'utilisateur ayant l'email $email
-     * @param string $email
-     */
-    public function SelectUserByEmail($email) {
-        $sql = "SELECT * FROM `utilisateurs` WHERE email = ?";
-        $this->prepare($sql);
-        $this->executePreparedStatement(null, array($email));  
-        return $this->fetch();        
-    }
+    public function InsertPerso($perso) {
         
-    /**
-     * Ajoute un nouvel utilisateur
-     * @param string $nom
-     * @param string $mail
-     * @param string $hash
-     * @param string $code
-     * @param string $session
-     */
-    public function AddUser($nom,$mail,$hash,$code,$session) {
-        $sql = "INSERT INTO utilisateurs(nom, email, passwd,  
-            date_enregistrement, droits, options, codevalidation, session_id, 
-            bals_speed, template, redirection) VALUES(:nom,:mail,:pass,NOW(),'0000','',:code, :session, '0.5','defaut', '1')";
-        $this->prepare($sql);
-        $result = $this->executePreparedStatement(null, array(
-            ":nom" => $nom, 
-            ":mail" => $mail, 
-            ":pass" => $hash, 
-            ":code" => $code,             
-            ":session" => $session
-         ));    
-        
-        return $result;
+
+        $this->exec("INSERT INTO persos (
+                                `id`, `background`, `description_affil`, `utilisateur_id`, `nb_suicide`, `race_id`,
+                                `superieur_id`, `grade_id`, `faction_id`, `nom`, `creation_date`, `date_tour`,
+                                `avatar_url`, `icone_id`, `galon_id`, `options`, `mdj`, `signature`, `sexe`)
+                        VALUES (
+                                $perso->Mat, '', '', $perso->UtilisateurId, '', $perso->RaceId,
+                                null, $perso->Grade, '', '$perso->Nom', CURRENT_TIMESTAMP(), '',
+                                '', '', '', '0', '', '', '".$perso->Sexe."')");
+
+        return $this->_conn->lastInsertId();        
     }
     
-    /**
-     * Active le compte pour l'utilisateur ayant le code $code
-     * @param string $code
-     */
-    public function ActiveCompte($code) {
-        $sql = "UPDATE utilisateurs SET droits=1000 WHERE codevalidation = ?";
-        $this->prepare($sql);
-        $this->executePreparedStatement(null, array($code));           
+    public function InsertCarac($perso) {
+ 
+        $this->exec("INSERT INTO `caracs` (
+                                `perso_id`, `px`, `pi`, `pv`, `recup_pv`, `malus_def`,
+                                `niv`, `cercle`, `mouv`, `pa`, `pa_dec`,
+                                `des_attaque`, `maj_des`, `force`, `perception`,`res_mag`)
+                        VALUES (
+                                '$perso->Mat', '$perso->Xp', '$perso->Xp', '$perso->Pv','$perso->RecupPv', '0',
+                                '$perso->Niveau', '', '$perso->Mouvement', '$perso->Pa', '',
+                                '$perso->Des', '', '$perso->Force', '$perso->Perception', '$perso->ResistanceMagique')");        
     }
-        
+    
+    public function InsertCaracAlter($mat) {
+    
+            $this->exec("INSERT INTO `caracs_alter` (
+                                `perso_id`, `alter_pa`, `alter_mouv`, `alter_def`, `alter_att`,
+                                `alter_recup_pv`, `alter_force`, `alter_perception`, `nb_desaffil`, `alter_niv_mag`)
+                        VALUES (
+                                '$mat', '', '', '', '',
+                                '', '', '', '', '')");
+    }
     
 }
 

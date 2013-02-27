@@ -28,15 +28,33 @@ class EwoForum {
         $this->jeu = EwoForumDAO::getInstance();
         $this->forum = EwoForumDAO::getInstance("forum");
     }
-
-    
-    public function createPerso($pseudo, $password, $mail) {
+   
+    public function createPerso($pseudo, $mail, $password = null) {
+        if($password != null) {
+            $pass = phpbb_hash($password);
+        } else {
+            $hash = $this->selectPassEmail($mail);
+            
+            if(isset($hash['user_password'])) {
+                $pass = $hash['user_password'];
+            } else {
+                $pass = 'blanc';
+            }
+            
+        }
         
-        $pass = phpbb_hash($password);
         $email_hash = phpbb_email_hash($mail);
         $clean = utf8_clean_string($pseudo);
         
         $this->forum->addPerso($pseudo, $clean, $pass, $mail, $email_hash);
+    }
+    
+    public function selectPassEmail($email) {
+        return $this->forum->getHashEmail($email);
+    }
+    
+    public function lierComptes($email) {
+        $this->forum->setMasterId($email);
     }
     
     public function setRaceGrade($id,$race,$grade,$galon) {

@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+require_once __DIR__ . '/../../conf/master.php';
 
 if(isset($_SESSION['cartographe']['raw'])) {
     $projet = $_SESSION['cartographe']['raw'];
@@ -9,6 +9,7 @@ if(isset($_SESSION['cartographe']['raw'])) {
     $carte = false;
     $export = false;
     $attribution = false;
+    $objets = false;
     
     if(file_exists('raw/'.$projet.'_palette.php')) {
         $palette = true;
@@ -29,6 +30,7 @@ if(isset($_SESSION['cartographe']['raw'])) {
     $carte = false;
     $export = false;
     $attribution = false;    
+    $objets = false;    
 }
 
 ?><!doctype html>

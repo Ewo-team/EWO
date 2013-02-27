@@ -19,7 +19,7 @@ class Export {
 		$file = ($this->_nomFichier) . '_' . $fragment_x . '_' . $fragment_y;
 		
 
-		if($handle = @fopen('map/'.$file.'.php','w')) {
+		if($handle = @fopen('map/'.$file.'.php','a')) {
 			
 			if(!in_array($file, $this->generate)) {			
 			

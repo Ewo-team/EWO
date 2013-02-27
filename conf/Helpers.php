@@ -19,7 +19,7 @@ class Helpers {
     public static function getSelectOption($liste, $type, $choix, $defaut){
                     $html 		= array();
 
-                    $html[]	= '<select name="'.$type.'">';
+                    $html[]	= '<select id="'.$type.'" name="'.$type.'">';
                     $html[] = '<option value="">'.$defaut.'</option>';
                     foreach($liste as $label=>$value){
                             $selected = '';
@@ -51,9 +51,9 @@ class Helpers {
     }
 	
 	/**
-	 * Génération d'un nouveau mot de passe
-	 * @param $length Par defaut 9 sinon celui passé en param
-	 * @return $password Mot de passe retourné par la fonction de la taille demandé
+	 * Gï¿½nï¿½ration d'un nouveau mot de passe
+	 * @param $length Par defaut 9 sinon celui passï¿½ en param
+	 * @return $password Mot de passe retournï¿½ par la fonction de la taille demandï¿½
 	 */
 	public static function generatePassword ($length = 9)
 	{

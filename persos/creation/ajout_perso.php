@@ -1,396 +1,212 @@
 <?php
 
-require __DIR__ . '/../../conf/master.php';
+require_once __DIR__ . '/../../conf/master.php';
 
-include(SERVER_ROOT. "/persos/fonctions.php");
+include_once(SERVER_ROOT. "/persos/fonctions.php");
 
 include_once(SERVER_ROOT."/persos/creation/controle_persos.php");
 
-ControleAcces('utilisateur',1);
+    ControleAcces('utilisateur',1);
 
-if(!isset($_SESSION['CreationPerso']['Etape'])) {
-	exit;
-}
+    $controle = controleCreationPerso($utilisateur_id);
 
-$controle = controleCreationPerso($utilisateur_id);
-$etape = $_SESSION['CreationPerso']['Etape'];
+    if(!isset($_POST['gameplay'])) {
+            $_SESSION['erreur']['perso'] = "Veuiller choisir un gameplay.";
+            header("location: .");		
+    }
 
-if($etape >= 1) {
-	// Verification de l'étape 1
-	if(!isset($_POST['gameplay'])) {
-		$_SESSION['erreur']['perso'] = "Veuiller choisir un gameplay.";
-		header("location: .");		
-	}
-	
-	if(!isset($_POST['race'])) {
-		$_SESSION['erreur']['perso'] = "Veuiller choisir un camp.";
-		header("location: .");		
-	}	
-	
-	if($_POST['race'] != $controle['camp'] && $controle['camp'] != "") {
-		$_SESSION['erreur']['perso'] = "Multicamps interdit!";
-		header("location: .");				
-	}
-	
-	if($_POST['race'] != 'ange' && $_POST['race'] != 'demon' && $_POST['race'] != 'humain') {
-		$_SESSION['erreur']['perso'] = "Gest lost, kthxbyebbq.";
-		header("location: .");		
-	}
-	
-	if($_POST['gameplay'] == 'T3' && !$controle['creationT3']) {
-		$_SESSION['erreur']['perso'] = "Vous ne pouvez plus créer de perso type T1!";
-		header("location: .");		
-	}
-	
-	if($_POST['gameplay'] == 'T41' && !$controle['creationT4']) {
-		$_SESSION['erreur']['perso'] = "Vous ne pouvez plus créer de perso type T4!";
-		header("location: .");		
-	}	
-	
-	if($_POST['gameplay'] != 'T3' && $_POST['gameplay'] != 'T41') {
-		$_SESSION['erreur']['perso'] = "Veuillez, monsieur, cesser de magouiller les variables du formulaire";
-		header("location: .");		
-	}	
-	
-	if(!$controle['peutCreer']) {
-		$_SESSION['erreur']['perso'] = "La limite du nombre de persos sert à limiter le nombre de persos";
-		header("location: .");		
-	}
+    if(!isset($_POST['race'])) {
+            $_SESSION['erreur']['perso'] = "Veuiller choisir un camp.";
+            header("location: .");		
+    }	
 
-	$gameplay = $_POST['gameplay'];
-	$race 	  = $_POST['race'];
-	$_SESSION['CreationPerso']['Gameplay'] = $gameplay;
-	$_SESSION['CreationPerso']['Race'] = $race;
-	$_SESSION['CreationPerso']['Etape'] = 2;
-}
-/*
-if (empty($_POST['nom']) OR empty($_POST['race'])) {
-	$_SESSION['erreur']['perso'] = "Veuiller entrer un nom.";
-	header("location:creation_perso.php");
-}
+    if($_POST['race'] != $controle['camp'] && $controle['camp'] != "") {
+            $_SESSION['erreur']['perso'] = "Multicamps interdit!";
+            header("location: .");				
+    }
 
-// Paramètres de connexion à la base de données
-$ewo_bdd = bdd_connect('ewo');
+    if($_POST['race'] != 'ange' && $_POST['race'] != 'demon' && $_POST['race'] != 'humain') {
+            $_SESSION['erreur']['perso'] = "Gest lost, kthxbyebbq.";
+            header("location: .");		
+    }
 
-include($root_url."/persos/fonctions.php");
-include($root_url."/jeu/fonctions.php");
-//include($root_url."/inscription/reservation.php");
+    if($_POST['gameplay'] == 'T3' && !$controle['creationT3']) {
+            $_SESSION['erreur']['perso'] = "Vous ne pouvez plus créer de perso type T1!";
+            header("location: .");		
+    }
 
-if (!isset($admin_mode)) {
-	$utilisateur_id = $_SESSION['utilisateur']['id'];
-	include($root_url."/inscription/controle_persos.php");
-} else {
-	if (!isset($_POST['utilisateur_id'])) {
-		$_SESSION['erreur']['perso'] = "Veuiller entrer un id utilisateur.";
-		header("location:creation_perso.php");
-	} else {
-		$utilisateur_id = $_POST['utilisateur_id'];
-	}
-}
+    if($_POST['gameplay'] == 'T41' && !$controle['creationT4']) {
+            $_SESSION['erreur']['perso'] = "Vous ne pouvez plus créer de perso type T4!";
+            header("location: .");		
+    }	
 
-$perso_nom_fofo = ucfirst(htmlspecialchars(strip_tags($_POST['nom']),ENT_COMPAT, 'UTF-8'));
-$perso_nom = mysql_real_escape_string(ucfirst(htmlspecialchars(strip_tags($_POST['nom']),ENT_COMPAT, 'UTF-8')));
-$perso_race = $_POST['race'];
+    if($_POST['gameplay'] != 'T3' && $_POST['gameplay'] != 'T41') {
+            $_SESSION['erreur']['perso'] = "Veuillez, monsieur, cesser de magouiller les variables du formulaire";
+            header("location: .");		
+    }	
 
-if(!is_numeric($perso_race)) {
-	$_SESSION['erreur']['perso'] = "Veuillez choisir la race.";
-	header("location:creation_perso.php");
-	exit;
-} else {
-	if (isset($_POST['type']) && is_numeric($_POST['type'])) {
-		$perso_type = $_POST['type'];
-		if ($perso_type == 3 || $perso_type == 4) {
-			$sql = "SELECT race_id FROM races WHERE camp_id = '$perso_race' AND type = '$perso_type' AND grade_id=-2";
-			$resultat = mysql_query ($sql) or die (mysql_error());
-			$info_race = mysql_fetch_array ($resultat);
-			$race = $info_race['race_id'];
-		} else {
-			$_SESSION['erreur']['perso'] = "Erreur dans le choix du type de perso.";
-			header("location:creation_perso.php");
-			exit;
-		}
-	} else {
-		$_SESSION['erreur']['perso'] = "Erreur dans le choix du type de perso.";
-		header("location:creation_perso.php");
-		exit;
-	}
-}
-// On vérifi si le sexe est possible, homme/femme/autre (= 1/2/3)
-$sexe = mysql_real_escape_string($_POST['sexe']);
-if (!($sexe == 1 || $sexe == 2 || $sexe == 3)) {
-	$_SESSION['erreur']['perso'] = "Sexe anormal !";
-	header("location:creation_perso.php");
-	exit;
-}
+    if(!$controle['peutCreer']) {
+            $_SESSION['erreur']['perso'] = "La limite du nombre de persos sert à limiter le nombre de persos";
+            header("location: .");		
+    }
 
-// Si le combot camp + type existe pas, mysql revoi NULL
-if ($race == NULL) {
-	$_SESSION['erreur']['perso'] = "Ce type de perso n'existe pas dans ce camp.";
-	header("location:creation_perso.php");
-	exit;
-}
+    $gameplay = $_POST['gameplay'];
+    $race 	  = $_POST['race'];
 
-// Verifie si l'utilisateur peut créer ce type de perso et si son camp est bon.
-if (!isset($admin_mode)) {
-	$sql = "SELECT races.camp_id, races.type FROM persos, races WHERE (persos.race_id = races.race_id AND races.grade_id = -2) AND persos.utilisateur_id = $utilisateur_id";
-	$resultat = mysql_query ($sql) or die (mysql_error());
+    checkPseudo($_POST['nom1']);
 
-	$camp = NULL;
-	$t3 = $t4 = 0;
+    if(!isset($_POST['sexe1']) || ($_POST['sexe1'] != '1' && $_POST['sexe1'] != '2' && $_POST['sexe1'] != '3')) {
+        $_SESSION['erreur']['perso'] = "Vous n'avez pas choisi votre sexe (profitez, IRL c'est moins simple)";
+        header("location: .");            
+    }        
 
-	while ($perso = mysql_fetch_array($resultat)) {
-		if (!$camp && $perso['camp_id'] != 2 && $perso['camp_id'] != 5 && $perso['camp_id'] != 6) {
-			$camp = $perso['camp_id'];
-		}
+    $perso_type = 3;
 
-		if ($perso['type'] == 4)
-			$t4++;
-		else
-			$t3++;
-	}
+    if($gameplay == "T4") {
+        $perso_type = 4;
+        checkPseudo($_POST['nom2']);
+        checkPseudo($_POST['nom3']);
+        checkPseudo($_POST['nom4']);
 
-	if ($camp == 1) {
-		$restantT3 = 1 - $t3;
-		$restantT4 = 8 - $t4;
-		$groupeT4 = true;
-	} else {
-		if ($t4 >= 1) {
-			$restantT3 = 2 - $t3;
-			$restantT4 = 4 - $t4;
-			$groupeT4 = true;
-		} else {
-			$restantT3 = 3 - $t3;
-			if ($restantT3 >= 1)
-				$restantT4 = 4;
-			else
-				$restantT4 = 0;
-			$groupeT4 = false;
-		}
-	}
+        if(!isset($_POST['sexe2']) || ($_POST['sexe2'] != '1' && $_POST['sexe2'] != '2' && $_POST['sexe2'] != '3') ||         
+           !isset($_POST['sexe3']) || ($_POST['sexe3'] != '1' && $_POST['sexe3'] != '2' && $_POST['sexe3'] != '3') ||
+           !isset($_POST['sexe4']) || ($_POST['sexe4'] != '1' && $_POST['sexe4'] != '2' && $_POST['sexe4'] != '3')) {
 
-	if ($perso_type == 3) {
-		if ($restantT3 < 1) {
-			$_SESSION['erreur']['perso'] = "Vous ne pouvez plus créer ce type de personnage.";
-			header("location:creation_perso.php");
-			exit;
-		}
-	} else { // =4
-		if ($restantT4 < 1) {
-			$_SESSION['erreur']['perso'] = "Vous ne pouvez plus créer ce type de personnage.";
-			header("location:creation_perso.php");
-			exit;
-		}
-	}
+            $_SESSION['erreur']['perso'] = "Vous n'avez pas choisi votre sexe (profitez, IRL c'est moins simple)";
+            header("location: .");    
 
-	if ($camp != NULL && $camp != $perso_race) {
-		$_SESSION['erreur']['perso'] = "On se limite aux personnages de son camp.";
-		header("location:creation_perso.php");
-		exit;
-	}
-}
+        }            
+    }    
 
-//-- Recup du mail et pass de l'utilisateur pour l'injecter dans la bdd du forum PHPBB pour créer le compte du personnage.
-$sql = "SELECT passwd_forum, email FROM utilisateurs WHERE id = '$utilisateur_id'";
-$resultat = mysql_query ($sql) or die (mysql_error());
-$user_compte = mysql_fetch_array ($resultat);
+    checkClass($gameplay, $race);
 
-$utilisateur_mail = $user_compte['email'];
-$utilisateur_pass = $user_compte['passwd_forum'];
-//---------------------
+    function checkPseudo($pseudo) {
+        if(preg_match("/^([[:alnum:]'àâéèêôùûç[:blank:]-]{1,75})$/i", $pseudo) != 1) {
+                $_SESSION['erreur']['perso'] = "Votre pseudo contient des caractères interdits";
+                header("location: .");	                
+        }
 
-$perso_bg = mysql_real_escape_string($_POST['bg_perso']);
+        if(persos\creation\CreationPerso::PseudoExists($pseudo)) {
+                $_SESSION['erreur']['perso'] = "Le pseudo $pseudo existe déjà";
+                header("location: .");	         
+        }
 
-// Vérifier que le nom ne soit pas en bdd
-$verif_nom_existe = mysql_query("SELECT nom FROM persos WHERE nom = '$perso_nom'") or die (mysql_error());
-if (mysql_fetch_row($verif_nom_existe)) {
-	$_SESSION['erreur']['perso'] = "Ce nom de personnage existe déjà.";
-	header("location:creation_perso.php");
-	exit;
-}
-if (empty($perso_nom) || !ctype_alpha($perso_nom[0])){
-	$_SESSION['erreur']['perso'] = "Veuillez donner un nom à votre personnage (sans caracteres ^$*%...).";
-	header("location:creation_perso.php");
-	exit;
-}
+    }
 
-$matricule = null;
-// Vérification de la réservation, et récupération du matricule si necessaire
-if(checkReservation($perso_nom,$utilisateur_mail,$matricule) == 0) {
-	$_SESSION['erreur']['perso'] = "Ce nom est déjà réservé.";
-	header("location:creation_perso.php");
-	exit;
-}
+    function checkClass($gameplay, $race) {
+            if(!isset($_POST['choixclasse1' . $race]) || $_POST['choixclasse1' . $race] == '') {
+                $_SESSION['erreur']['perso'] = "Vous n'avez pas choisi votre classe";
+                header("location: .");	                    
+            }
 
-$sql = "SELECT DISTINCT camp_id FROM races WHERE race_id = '$race'";
-$resultat = mysql_query ($sql) or die (mysql_error());
-$info_race = mysql_fetch_array ($resultat);
-
-$sql = "SELECT nom AS nom FROM races WHERE race_id = '$race' AND grade_id=-2";
-$resultat = mysql_query ($sql) or die (mysql_error());
-$nom_race = mysql_fetch_array ($resultat);
-$nom_race = $nom_race['nom'];
-
-$sql = "SELECT nom AS nom FROM races WHERE race_id = '$race' AND grade_id=0";
-$resultat = mysql_query ($sql) or die (mysql_error());
-$nom_grade = mysql_fetch_array ($resultat);
-$nom_grade = $nom_grade['nom'];
-
-//-- ID
-$race_id = $race;
-$camp = $info_race['camp_id'];
-$grade_id = 0;
+            if($gameplay == 'T4') {
+                if(!isset($_POST['choixclasse2' . $race]) || $_POST['choixclasse2' . $race] == '' ||
+                   !isset($_POST['choixclasse3' . $race]) || $_POST['choixclasse3' . $race] == '' ||   
+                   !isset($_POST['choixclasse4' . $race]) || $_POST['choixclasse4' . $race] == '') {
+                    $_SESSION['erreur']['perso'] = "Vous n'avez pas choisi votre classe";
+                    header("location: .");	                    
+                }                      
+            }            
+    }
 
 
-// Tout semble ok, on peut créer le perso dans la BDD.
+    // Paramètres de connexion à la base de données
+    //$ewo_bdd = bdd_connect('ewo');
 
-//-- AVATAR ET GROUPE FORUM
-if ($camp == 3) {
-	$avatar = '../images/persos/ange/ang01.gif';
-} elseif ($camp == 4) {
-	$avatar = '../images/persos/demon/dem01.gif';
-} elseif ($camp == 1) {
-	$avatar = '../images/persos/humain/hum01.gif';
-}
+    switch($race) {
+        case 'humain':
+            $perso_race = 1;
+            break;
+        case 'ange':
+            $perso_race = 3;
+            break;
+        case 'demon':
+            $perso_race = 4;
+            break;        
+    }
 
-if(!$matricule) {
-	$matricule = 'null';
-}
-$sql = "INSERT INTO persos (
-			`id`, `background`, `description_affil`, `utilisateur_id`, `nb_suicide`, `race_id`,
-			`superieur_id`, `grade_id`, `faction_id`, `nom`, `creation_date`, `date_tour`,
-			`avatar_url`, `icone_id`, `galon_id`, `options`, `mdj`, `signature`, `sexe`)
-		VALUES (
-			$matricule, '$perso_bg', '', $utilisateur_id, '', $race_id,
-			null, $grade_id, '', '$perso_nom', CURRENT_TIMESTAMP(), '',
-			'', '', '', '0', '', '', '".$sexe."')";
-$sql_perso = mysql_query($sql);
+    $include_forum = true;
+    include (SERVER_ROOT . '/lib/forum/ewo_forum.php');
+    
+    $forum = new EwoForum($utilisateur_id);
+    
+    $perso1 = new persos\creation\CreationPerso();
 
-//-- Recup de l'id du perso
-if($matricule == 'null') {
-	$id_perso = mysql_insert_id();
-} else {
-	$id_perso = $matricule;
-}
+    $perso1->Nom = $_POST['nom1'];
+    $perso1->Race = $race;
+    $perso1->UtilisateurId = $utilisateur_id;
+    $perso1->Gameplay = $gameplay;
+    $perso1->Sexe = $_POST['sexe1'];
 
-//-- Alteration des caractéristiques de base
-$sql = "INSERT INTO `caracs_alter` (
-			`perso_id`, `alter_pa`, `alter_mouv`, `alter_def`, `alter_att`,
-			`alter_recup_pv`, `alter_force`, `alter_perception`, `nb_desaffil`, `alter_niv_mag`)
-		VALUES (
-			'$id_perso', '', '', '', '',
-			'', '', '', '', '')";
-$sql_carac_alter = mysql_query($sql);
+    $perso1->Save();
+    $forum->createPerso($perso1->Nom, $_SESSION['utilisateur']['mail'], $_SESSION['utilisateur']['passwd']);
+    $forum->setRaceGrade($perso1->Mat, $perso1->Camp, 0, 1);
 
-//-- Caracteristique de base des races
-$caracs_base = caracs_base ($race, 0);
+    if($gameplay == 'T4') {
+        $perso2 = new persos\creation\CreationPerso();
+        $perso3 = new persos\creation\CreationPerso();
+        $perso4 = new persos\creation\CreationPerso();
 
-$px = 0;
-$pi = 0;
-$pv = $caracs_base['pv'];
-$recup_pv = $caracs_base['recup_pv'];
-$malus_def = 0;
-$niv = $caracs_base['magie'];
-$mouv = $caracs_base['mouv'];
-$pa = $caracs_base['pa'];
-$des_attaque = floor($caracs_base['des']/2);
-$force = $caracs_base['force'];
-$perception = $caracs_base['perception'];
-$res_mag = $caracs_base['res_mag'];
+        $perso2->Nom = $_POST['nom2'];
+        $perso2->Sexe = $_POST['sexe2'];
 
-$sql = "INSERT INTO `caracs` (
-			`perso_id`, `px`, `pi`, `pv`, `recup_pv`, `malus_def`,
-			`niv`, `cercle`, `mouv`, `pa`, `pa_dec`,
-			`des_attaque`, `maj_des`, `force`, `perception`,`res_mag`)
-		VALUES (
-			'$id_perso', '$px', '$pi', '$pv','$recup_pv', '$malus_def',
-			'$niv', '', '$mouv', '$pa', '',
-			'$des_attaque', '', '$force', '$perception', '$res_mag')";
-$sql_perso_carac = mysql_query($sql);
+        $perso3->Nom = $_POST['nom3'];
+        $perso3->Sexe = $_POST['sexe3'];
 
+        $perso4->Nom = $_POST['nom4'];
+        $perso4->Sexe = $_POST['sexe4'];    
 
-$sql_perso_design = mysql_query("INSERT INTO blocks (unique_id, perso_id, block_id, column_id, order_id) VALUES
-									('', '$id_perso', 'block-1', 'column-1', 0),
-									('', '$id_perso', 'block-3', 'column-1', 1),
-									('', '$id_perso', 'block-2', 'column-1', 2),
-									('', '$id_perso', 'block-4', 'column-1', 3),
-									('', '$id_perso', 'block-5', 'column-2', 2),
-									('', '$id_perso', 'block-6', 'column-2', 1),
-									('', '$id_perso', 'block-7', 'column-2', 0)");
+        $perso2->Race = $race;
+        $perso2->UtilisateurId = $utilisateur_id;
+        $perso2->Gameplay = $gameplay;
 
-if($sql_carac_alter == FALSE) {
-	echo 'sql_carac_alter';
-	exit;
-}
-if($sql_perso_carac == FALSE) {
-	echo 'sql_perso_carac';
-	exit;
-}
-if($sql_perso == FALSE) {
-	echo 'sql_perso1';
-	exit;
-}
-if($sql_perso_design == FALSE) {
-	echo 'sql_perso2';
-	exit;
-} else {
-	mysql_close($ewo_bdd);
+        $perso3->Race = $race;
+        $perso3->UtilisateurId = $utilisateur_id;
+        $perso3->Gameplay = $gameplay;
 
-	//-- Code phpBB pour la gestion du pass et du login
-	define('IN_PHPBB', true);
-	$phpEx = 'php';
-	$phpbb_root_path = $root.'/forum/';
+        $perso4->Race = $race;
+        $perso4->UtilisateurId = $utilisateur_id;
+        $perso4->Gameplay = $gameplay;    
 
-	require($root.'/forum/common.php');
-	require($root.'/forum/includes/functions_user.php');
-	//--
+        $perso2->Save();    
+        $perso3->Save();   
+        $perso4->Save();   
+        
+        $forum->createPerso($perso2->Nom, $_SESSION['utilisateur']['mail'], $_SESSION['utilisateur']['passwd']);        
+        $forum->createPerso($perso3->Nom, $_SESSION['utilisateur']['mail'], $_SESSION['utilisateur']['passwd']);
+        $forum->createPerso($perso4->Nom, $_SESSION['utilisateur']['mail'], $_SESSION['utilisateur']['passwd']);
 
-	$utilisateur_pass = phpbb_hash($utilisateur_pass);
+        $forum->setRaceGrade($perso2->Mat, $perso2->Camp, 0, 1);        
+        $forum->setRaceGrade($perso3->Mat, $perso3->Camp, 0, 1);   
+        $forum->setRaceGrade($perso4->Mat, $perso4->Camp, 0, 1);   
+    }
 
-	require($root.'/persos/binding_forum.php');
-	
-	if(!LierPerso($perso_nom_fofo,$grade_id,$camp,$utilisateur_pass)) {
-		// Le perso n'existais pas, il est ajouté
+    $forum->lierComptes($_SESSION['utilisateur']['mail']);
 
-		// set user data
-		$user_row = array(
-			'username'		=> $perso_nom_fofo,
-			'user_password'	=> $utilisateur_pass,
-			'user_email'	=> $utilisateur_mail,
-			'group_id'		=> $binding[$camp][0],
-			'user_type'		=> USER_NORMAL);
+   /* $_SESSION['temp']['perso_nom'] = $perso_nom;
+    $_SESSION['temp']['perso_race'] = $perso_race;
+    $_SESSION['temp']['perso_bg'] = $perso_bg;
+    $_SESSION['temp']['perso_avatar'] = $avatar;
 
-		// add user
-		if (user_add($user_row) == false) {
-			$_SESSION['erreur']['perso'] = "Il est possible que ce nom de personnage existe déjà.";
-			echo "<script language='javascript' type='text/javascript' >document.location='./creation_perso.php'</script>";
-			exit;
-		}
-	}
+    $_SESSION['persos']['inc']		+= 1;
+    $inc = $_SESSION['persos']['inc'];
+    $_SESSION['persos']['id'][$inc]				= $id_perso ;
+    $_SESSION['persos']['nom'][$inc]			= $perso_nom ;
+    $_SESSION['persos']['race'][$inc]			= $race_id ;
+    $_SESSION['persos']['race']['nom'][$inc]	= $nom_race ;
+    $_SESSION['persos']['grade'][$inc]			= $grade_id ;
+    $_SESSION['persos']['grade']['nom'][$inc]	= $nom_grade ;
+    $_SESSION['persos']['faction']['id'][$inc]	= 0 ;
+    $_SESSION['persos']['date_tour'][$inc]		= 0 ;
+    $_SESSION['persos']['type'][$inc]			= $perso_type;
+    $_SESSION['persos']['camp'][$inc]			= $perso_race;
 
-	$_SESSION['temp']['perso_nom'] = $perso_nom;
-	$_SESSION['temp']['perso_race'] = $perso_race;
-	$_SESSION['temp']['perso_bg'] = $perso_bg;
-	$_SESSION['temp']['perso_avatar'] = $avatar;
+    $_SESSION['temp']['perso_inc'] = $inc;
 
-	$_SESSION['persos']['inc']		+= 1;
-	$inc = $_SESSION['persos']['inc'];
-	$_SESSION['persos']['id'][$inc]				= $id_perso ;
-	$_SESSION['persos']['nom'][$inc]			= $perso_nom ;
-	$_SESSION['persos']['race'][$inc]			= $race_id ;
-	$_SESSION['persos']['race']['nom'][$inc]	= $nom_race ;
-	$_SESSION['persos']['grade'][$inc]			= $grade_id ;
-	$_SESSION['persos']['grade']['nom'][$inc]	= $nom_grade ;
-	$_SESSION['persos']['faction']['id'][$inc]	= 0 ;
-	$_SESSION['persos']['date_tour'][$inc]		= 0 ;
-	$_SESSION['persos']['type'][$inc]			= $perso_type;
-	$_SESSION['persos']['camp'][$inc]			= $perso_race;
-
-	$_SESSION['temp']['perso_inc'] = $inc;
-
-	echo "<script language='javascript' type='text/javascript' >document.location='../persos/apercu_perso.php'</script>";exit;
-}
+    echo "<script language='javascript' type='text/javascript' >document.location='../persos/apercu_perso.php'</script>";exit;
 */
-
-header("location: .");
-
+ 	$titre = "Personnage(s) crée(s)";
+	$text = "La création du ou des personnages a été faite, vous pouvez vous reconnecter pour les jouer";
+	$lien = SERVER_URL . "session.php";
+	gestion_erreur($titre, $text, $lien);
 ?>

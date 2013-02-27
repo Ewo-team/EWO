@@ -39,6 +39,29 @@ class EwoForumDAO extends ConnecteurDAO {
         }
     }
     
+    public function getHashEmail($email) {
+        $sql = "SELECT user_password FROM phpbb_users WHERE user_email = ? AND user_password != 'blanc' LIMIT 1";
+        $this->prepare($sql);
+        $this->executePreparedStatement(null,array($email));
+        return $this->fetch();            
+    }
+    
+    public function setMasterId($email) {
+        $sql = 'SELECT user_id FROM phpbb_users WHERE user_email = ? LIMIT 1';
+        $this->prepare($sql);
+        $this->executePreparedStatement(null,array($email));
+        $result = $this->fetch();          
+        $master = $result[0];
+        
+        $sql = 'UPDATE phpbb_users SET master_id = :master WHERE user_email = :email AND user_id != :master';
+        $this->prepare($sql);
+        $this->executePreparedStatement(null,array(':master' => $master, ':email' => $email));       
+        
+        $sql = 'UPDATE phpbb_users SET master_id = 0 WHERE user_id = ?';
+        $this->prepare($sql);
+        $this->executePreparedStatement(null,array($master));            
+    }
+    
     public function isBlankPassword($pseudo) {
         $sql = 'SELECT user_password as pass FROM phpbb_users WHERE username_clean = ?';
         $this->prepare($sql);
@@ -66,8 +89,8 @@ class EwoForumDAO extends ConnecteurDAO {
         $sql = "DELETE FROM phpbb_user_group WHERE user_id = :id AND group_id IN (:group)";
         $query = $this->prepare($sql);
         $this->executePreparedStatement($query,array(
-                    ':id' => id,
-                    ':group' => $groupes
+                    ':id' => $id,
+                    ':group' => $group
                 ));        
     }
     

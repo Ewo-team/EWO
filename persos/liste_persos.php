@@ -66,7 +66,7 @@ if ($_SESSION['persos']['inc']!=0){
 	}
 
 }else{
-	echo "Vous ne possédez pas encore de personnage, <a href='../inscription/creation_perso.php'>Créer un personnage<a/>";
+	echo "Vous ne possédez pas encore de personnage, <a href='".SERVER_URL."/persos/creation/'>Créer un personnage<a/>";
 }
 ?>
 

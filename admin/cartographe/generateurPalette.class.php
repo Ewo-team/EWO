@@ -3,20 +3,21 @@
 class GenerateurPalette {
         
         public function listerImages() {
-            $dirname = '../images/decors/motifs/';
+            $dirname = SERVER_ROOT . '/images/decors/motifs/';
+            $urlname = SERVER_URL . '/images/decors/motifs/';
             $dir = opendir($dirname); 
             $liste_images = array();
             while($file = readdir($dir)) {
                     if($file != '.' && $file != '..' && !is_dir($dirname.$file))
                     {
-                            $liste_images[$dirname.$file] =  $file;
+                            $liste_images[$urlname.$file] =  $file;
                     }
             }  
             return $liste_images;
         }
         
 	public function afficheImages($liste) {
-            $dirname = '../images/decors/motifs/';
+            $dirname = SERVER_ROOT . '/images/decors/motifs/';
             $dir = opendir($dirname); 
             echo '<div class="liste_images"><h3>Liste des motifs</h3><ul>';
             foreach($liste as $url => $img) {
@@ -60,7 +61,8 @@ class GenerateurPalette {
                     <th>Nom classe CSS</th>
                     <th>Image</th>
                     <th>Background</th>
-                    <th>Bloquante</th>					
+                    <th>Bloquante</th>	                    
+                    <th>Opaque</th>					
                     <th>Coût mouv.</th>
                     <th>Coût PV</th>
                 </tr>';
@@ -73,6 +75,7 @@ class GenerateurPalette {
                 $back = (isset($css[$couleur]['back'])) ? $css[$couleur]['back'] : '';
 				
                 $block = (isset($css[$couleur]['block'])) ? " checked" : "";
+                $opaque = (isset($css[$couleur]['opaque'])) ? " checked" : "";
 				
                 $mouv = (isset($css[$couleur]['mouv'])) ? $css[$couleur]['mouv'] : '';
                 $pv = (isset($css[$couleur]['pv'])) ? $css[$couleur]['pv'] : '';
@@ -85,22 +88,23 @@ class GenerateurPalette {
                     <td><select name="image_'.$couleur.'"><option></option>';
                         foreach ($liste_images as $url => $image) {
                             if($image == $img) {
-                                 echo '<option selected value="'.$image.'" data-image="../images/decors/motifs/'.$image.'">'.static::Camel($image).'</option>';
+                                 echo '<option selected value="'.$image.'" data-image="'.SERVER_URL.'/images/decors/motifs/'.$image.'">'.static::Camel($image).'</option>';
                             } else {
-                                echo '<option value="'.$image.'" data-image="../images/decors/motifs/'.$image.'">'.static::Camel($image).'</option>';
+                                echo '<option value="'.$image.'" data-image="'.SERVER_URL.'/images/decors/motifs/'.$image.'">'.static::Camel($image).'</option>';
                             }
                         }                            
                 echo '</select></td>
                     <td><select name="background_'.$couleur.'"><option></option>';
                         foreach ($liste_images as $url => $image) {
                             if($image == $back) {
-                                 echo '<option selected value="'.$image.'" data-image="../images/decors/motifs/'.$image.'">'.static::Camel($image).'</option>';
+                                 echo '<option selected value="'.$image.'" data-image="'.SERVER_URL.'/images/decors/motifs/'.$image.'">'.static::Camel($image).'</option>';
                             } else {
-                                echo '<option value="'.$image.'" data-image="../images/decors/motifs/'.$image.'">'.static::Camel($image).'</option>';
+                                echo '<option value="'.$image.'" data-image="'.SERVER_URL.'/images/decors/motifs/'.$image.'">'.static::Camel($image).'</option>';
                             }
                         }                            
                 echo '</select></td>     
-					<td><input type="checkbox" '.$block.' name="block_'.$couleur.'"></td>
+					<td><input type="checkbox" '.$block.' name="block_'.$couleur.'"></td>					
+                                        <td><input type="checkbox" '.$opaque.' name="opaque_'.$couleur.'"></td>
 					<td><input type="text" value="'.$mouv.'" name="mouv_'.$couleur.'"></td>
 					<td><input type="text" value="'.$pv.'" name="pv_'.$couleur.'"></td>
                 </tr>';
@@ -120,7 +124,8 @@ class GenerateurPalette {
                     <th>Nom classe CSS</th>
                     <th>Image</th>
                     <th>Background</th>
-                    <th>Bloquante</th>					
+                    <th>Bloquante</th>	
+                    <th>Opaque</th>
                     <th>Coût mouv.</th>
                     <th>Coût PV</th>					
                 </tr>';
@@ -156,6 +161,7 @@ class GenerateurPalette {
                         }                            
                 echo '</select></td> 
 					<td><input type="checkbox" '.$block.' name="block_'.$couleur.'"></td>
+                                        <td><input type="checkbox" '.$opaque.' name="opaque_'.$couleur.'"></td>
 					<td><input type="text" value="'.$mouv.'" name="mouv_'.$couleur.'"></td>
 					<td><input type="text" value="'.$pv.'" name="pv_'.$couleur.'"></td>
                 </tr>';        
@@ -201,6 +207,10 @@ class GenerateurPalette {
                 if(isset($v['block'])) {
                     $data .= '$css['.$k.']["block"] = "'.$v['block'].'";' . PHP_EOL;
                 }  	
+                
+                if(isset($v['opaque'])) {
+                    $data .= '$css['.$k.']["opaque"] = "'.$v['opaque'].'";' . PHP_EOL;
+                }  	                
 
                 if(isset($v['mouv']) && $v['mouv'] != 0) {
                     $data .= '$css['.$k.']["mouv"] = "'.$v['mouv'].'";' . PHP_EOL;

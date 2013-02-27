@@ -21,7 +21,7 @@ echo '</ul></div>';
 reset($css);
 $first = current($css);
 
-echo '<div class="outil"><h3>Outil actuel</h3><div><span><img src="../images/decors/motifs/'.$first['img'].'"></span>
+echo '<div class="outil"><h3>Outil actuel</h3><div><span><img src="'.SERVER_URL.'/images/decors/motifs/'.$first['img'].'"></span>
     <input id="modeedition" type="checkbox">
     <input type="button" id="sauver" value="sauver"></div></div></div>';
 
@@ -37,10 +37,10 @@ for($y = $y_max-1; $y >= $y_min; $y--) {
         /*if(isset($css[$couleur]['img'])) {
             $background = '';
             if(isset($css[$couleur]['back'])) {
-                $background = 'background: url(../images/decors/motifs/'.$css[$couleur]['back'].');';
+                $background = 'background: url('.SERVER_URL.'/images/decors/motifs/'.$css[$couleur]['back'].');';
             }
             
-            $img =  '<img src="../images/decors/motifs/'.$css[$couleur]['img'].'" style="border: 1px #000 solid; '.$background.'">';       
+            $img =  '<img src="'.SERVER_URL.'/images/decors/motifs/'.$css[$couleur]['img'].'" style="border: 1px #000 solid; '.$background.'">';       
         */
         if(isset($css[$couleur]['nom'])) {
             $class = $css[$couleur]['nom'];

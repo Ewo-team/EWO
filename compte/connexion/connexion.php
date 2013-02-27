@@ -99,16 +99,18 @@ if($ok){
 		} else {
 			$passhash = false;
 		}
+                $password = null;
 	}
 		
 	if (($connexion != FALSE) AND ($passhash == true) AND ($droits[0] == 1)){
 		if ($passhash == true){
-		$_SESSION['utilisateur']['id'] = $connexion['id'];
-		$_SESSION['utilisateur']['nom']	= $connexion['nom'];
-		$_SESSION['utilisateur']['mail']	= $connexion['email'];
-		$_SESSION['utilisateur']['droits']	= $connexion['droits'];
-		$_SESSION['utilisateur']['passwd_forum'] = $connexion['passwd_forum'];
-		$_SESSION['utilisateur']['icones_pack'] = $connexion['icones_pack'];
+		$_SESSION['utilisateur']['id']              = $connexion['id'];
+		$_SESSION['utilisateur']['nom']             = $connexion['nom'];
+		$_SESSION['utilisateur']['mail']            = $connexion['email'];
+		$_SESSION['utilisateur']['droits']          = $connexion['droits'];
+		$_SESSION['utilisateur']['passwd_forum']    = $connexion['passwd_forum'];
+		$_SESSION['utilisateur']['icones_pack']     = $connexion['icones_pack'];
+                $_SESSION['utilisateur']['passwd']          = $password;
 		
 
 	//-- Récupération des infos des persos
