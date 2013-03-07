@@ -20,7 +20,7 @@ include(SERVER_ROOT . "/template/header_new.php");
 
 //Envoie du mail de confirmation
 
-	$mail = \conf\Mail();
+	$mail = new \conf\Mail();
 	
 	$mail->Subject .= 'Code de validation de votre compte';
 	
@@ -36,9 +36,9 @@ include(SERVER_ROOT . "/template/header_new.php");
 	$mail->ParseCorps = "<table width='100%' height='200px'>
 				<tr>
 					<td align='center' style='background: url(".SERVER_URL."/images/site/ewo_transparant.png) no-repeat 50% 50%'>
-					Votre compte $nom est bien enregistr&eacute;<br />
-					il ne vous reste plus qu'&agrave; le valider<br />
-					<a href='".SERVER_URL."/inscription/validation.php?code=$codevalidation&nom=$nom&email=$email'>Lien de validation</a>
+					Votre compte $nom est bien enregistré<br />
+					il ne vous reste plus qu'à le valider<br />
+					<a href='".SERVER_URL."/compte/inscription/validation.php?code=$codevalidation&nom=$nom&email=$email'>Lien de validation</a>
 					</td>
 				</tr>
 			</table>";

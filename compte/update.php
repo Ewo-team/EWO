@@ -86,6 +86,8 @@ function changePass($compte) {
         $passencode = $compte->encodePassword($_POST['pass_modif']);
 
         $compte->passwd = $passencode;
+				
+		
     } else {
         $titre = "Vous n'êtes pas autorisés à effectuer cette action.";
         $text = "Cet utilisateur n'existe pas.";

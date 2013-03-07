@@ -604,8 +604,8 @@ function gestion_erreur($titre, $text, $lien, $redirec = 0) {
     $_SESSION['message']['titre'] = $titre;
     $_SESSION['message']['text'] = $text;
     $_SESSION['message']['lien'] = $lien;
-
-    if ($redirec == 0) {
+	
+    if ($redirec == 0 && !headers_sent()) {
         header("location:" . SERVER_URL . "/msg/message.php");
         exit;
     } else {

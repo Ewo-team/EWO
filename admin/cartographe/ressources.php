@@ -16,21 +16,11 @@ if(!isset($_GET['raw'])) {
         }  
         echo '</table>';   
 } else {
-    
-    echo '<h1>Génération en cours</h1>
-        <h2>Cela peut prendre un moment!</h2>';
 
-    include 'generateurRaw.class.php';
-    
-    set_time_limit(0);
-
-    $gr = new GenerateurRaw();
 
 	$raw = substr($_GET['raw'],0,-4);
-	
-    $gr->genereFromPng($raw);  
-    
+	    
     $_SESSION['cartographe']['raw'] = $raw;
     
-    echo '<hr><h1>Génération terminée</h1>';
+    echo '<h1>Ressource sélectionné</h1>';
 }

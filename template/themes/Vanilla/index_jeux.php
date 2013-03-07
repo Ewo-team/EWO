@@ -38,7 +38,7 @@ $page_jeu = "1";
 	<?php	
 
 		//-- Damier du jeux
-		include(SERVER_ROOT . "/jeu/damier.php");
+		include(SERVER_ROOT . "/jeu/panel_damier.php");
 
 	?>		
 	</div>

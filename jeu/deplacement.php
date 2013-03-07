@@ -55,20 +55,21 @@ if($is_spawn){
 	if($caracs['mouv'] > 0){
 		if($lock == $_SESSION['persos']['mouv_lock'][$id]) {
                         unset($_SESSION['persos']['mouv_en_cours'][$id]);
+
 			maj_pos($id, $caracs);
-                        
+        
 		}
 	}
         
 	$caracs = calcul_caracs($_SESSION['persos']['current_id']);
-	if ($caracs['pv'] <=0) {
+	/*if ($caracs['pv'] <=0) {
 		$events = SPECIAL_EVENT::$INDEX;
 		$em = new eventManager();
 		$ev1 = $em->createEvent('special');
 		$ev1->setSource($perso_id, 'perso');
 		$ev1->infos->addPublicInfo('m',$events['mort_lave']);
 		desincarne($perso_id);
-	}	
+	}	*/
 	mysql_query('COMMIT;');
 	mysql_query('SET autocommit=1;');
 	mysql_close();

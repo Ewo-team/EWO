@@ -98,7 +98,7 @@ include_once(SERVER_ROOT."/persos/creation/controle_persos.php");
                 $_SESSION['erreur']['perso'] = "Vous n'avez pas choisi votre classe";
                 header("location: .");	                    
             }
-
+			
             if($gameplay == 'T4') {
                 if(!isset($_POST['choixclasse2' . $race]) || $_POST['choixclasse2' . $race] == '' ||
                    !isset($_POST['choixclasse3' . $race]) || $_POST['choixclasse3' . $race] == '' ||   
@@ -106,7 +106,9 @@ include_once(SERVER_ROOT."/persos/creation/controle_persos.php");
                     $_SESSION['erreur']['perso'] = "Vous n'avez pas choisi votre classe";
                     header("location: .");	                    
                 }                      
-            }            
+            }   
+
+			
     }
 
 
@@ -125,6 +127,8 @@ include_once(SERVER_ROOT."/persos/creation/controle_persos.php");
             break;        
     }
 
+	
+	
     $include_forum = true;
     include (SERVER_ROOT . '/lib/forum/ewo_forum.php');
     
@@ -137,10 +141,15 @@ include_once(SERVER_ROOT."/persos/creation/controle_persos.php");
     $perso1->UtilisateurId = $utilisateur_id;
     $perso1->Gameplay = $gameplay;
     $perso1->Sexe = $_POST['sexe1'];
+	
+	$perso1->Classe = $_POST['choixclasse1' . $race];
+
 
     $perso1->Save();
+
     $forum->createPerso($perso1->Nom, $_SESSION['utilisateur']['mail'], $_SESSION['utilisateur']['passwd']);
-    $forum->setRaceGrade($perso1->Mat, $perso1->Camp, 0, 1);
+		
+    $forum->setRaceGrade($perso1->Nom, $perso1->Camp, 0, 1);
 
     if($gameplay == 'T4') {
         $perso2 = new persos\creation\CreationPerso();
@@ -167,7 +176,11 @@ include_once(SERVER_ROOT."/persos/creation/controle_persos.php");
         $perso4->Race = $race;
         $perso4->UtilisateurId = $utilisateur_id;
         $perso4->Gameplay = $gameplay;    
-
+		
+		$perso2->Classe = $_POST['choixclasse2' . $race];
+		$perso3->Classe = $_POST['choixclasse3' . $race];
+		$perso4->Classe = $_POST['choixclasse4' . $race];		
+		
         $perso2->Save();    
         $perso3->Save();   
         $perso4->Save();   
@@ -176,9 +189,9 @@ include_once(SERVER_ROOT."/persos/creation/controle_persos.php");
         $forum->createPerso($perso3->Nom, $_SESSION['utilisateur']['mail'], $_SESSION['utilisateur']['passwd']);
         $forum->createPerso($perso4->Nom, $_SESSION['utilisateur']['mail'], $_SESSION['utilisateur']['passwd']);
 
-        $forum->setRaceGrade($perso2->Mat, $perso2->Camp, 0, 1);        
-        $forum->setRaceGrade($perso3->Mat, $perso3->Camp, 0, 1);   
-        $forum->setRaceGrade($perso4->Mat, $perso4->Camp, 0, 1);   
+        $forum->setRaceGrade($perso2->Nom, $perso2->Camp, 0, 1);        
+        $forum->setRaceGrade($perso3->Nom, $perso3->Camp, 0, 1);   
+        $forum->setRaceGrade($perso4->Nom, $perso4->Camp, 0, 1);   
     }
 
     $forum->lierComptes($_SESSION['utilisateur']['mail']);
@@ -207,6 +220,6 @@ include_once(SERVER_ROOT."/persos/creation/controle_persos.php");
 */
  	$titre = "Personnage(s) crée(s)";
 	$text = "La création du ou des personnages a été faite, vous pouvez vous reconnecter pour les jouer";
-	$lien = SERVER_URL . "session.php";
+	$lien = SERVER_URL . "/session.php";
 	gestion_erreur($titre, $text, $lien);
 ?>

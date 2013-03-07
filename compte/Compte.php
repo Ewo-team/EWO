@@ -7,6 +7,7 @@ namespace compte;
 
 include_once 'config_vacances.php';
 
+
 /**
  * Description of Compte
  *
@@ -16,6 +17,7 @@ class Compte {
 
     public $id;
     private $dao;
+    private $forum;
     private $options = array();
     private $changed = array();
     private $initialized;
@@ -54,6 +56,10 @@ class Compte {
                     return;
                 }
             }
+			
+			if($name == 'passwd') {
+				forum_passwd($this->Id, $value);
+			}
             
             $this->changed[] = $name;  
             $this->options[$name] = $value;        
@@ -154,6 +160,14 @@ function departVacances(){
 		return new Compte($uid[0]);		
 	}
 
+}
+
+function forum_passwd($id, $pwd) {
+	include_once (SERVER_ROOT . '/lib/forum/ewo_forum.php');
+	
+	$forum = new \EwoForum($id);		
+	
+	$forum->changePasswords($pwd);
 }
 
 ?>

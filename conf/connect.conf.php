@@ -36,24 +36,24 @@ function bdd_connect($bdd){
 function info_connect($i){
 	if ($i == "ewo"){
 		$conf['serveur'] = "localhost";
-		$conf['user'] = "root";
+		$conf['user'] = "ewo";
 		$conf['pass'] = "";
 		$conf['bdd'] = "ewo";
 	}elseif($i == "forum"){
 		$conf['serveur'] = "localhost";
-		$conf['user'] = "root";
+		$conf['user'] = "ewo";
 		$conf['pass'] = "";
 		$conf['bdd'] = "ewo_forum";
 	}elseif($i == "blog"){
 		$conf['serveur'] = "localhost";
-		$conf['user'] = "root";
+		$conf['user'] = "ewo";
 		$conf['pass'] = "";
 		$conf['bdd'] = "ewo_blog";
 	}elseif($i == "forum_vf"){
 		$conf['serveur'] = "localhost";
-		$conf['user'] = "root";
+		$conf['user'] = "ewo";
 		$conf['pass'] = "";
-		$conf['bdd'] = "ewo_forum2";
+		$conf['bdd'] = "ewo_forum";
 	}
 	return $conf;
   }

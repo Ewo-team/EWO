@@ -1,0 +1,46 @@
+<?php
+
+$chargement[] = "MAP_PREVF2_-2_-0";
+
+$carte["-30"]["-14"]["nom"] = "eau";
+$carte["-30"]["-14"]["img"] = "eau.gif";
+$carte["-30"]["-14"]["mouv"] = "2";
+$carte["-30"]["-13"]["nom"] = "eau";
+$carte["-30"]["-13"]["img"] = "eau.gif";
+$carte["-30"]["-13"]["mouv"] = "2";
+$carte["-30"]["-12"]["nom"] = "eau";
+$carte["-30"]["-12"]["img"] = "eau.gif";
+$carte["-30"]["-12"]["mouv"] = "2";
+$carte["-30"]["-11"]["nom"] = "eau";
+$carte["-30"]["-11"]["img"] = "eau.gif";
+$carte["-30"]["-11"]["mouv"] = "2";
+$carte["-30"]["-10"]["nom"] = "eau";
+$carte["-30"]["-10"]["img"] = "eau.gif";
+$carte["-30"]["-10"]["mouv"] = "2";
+$carte["-30"]["-9"]["nom"] = "eau";
+$carte["-30"]["-9"]["img"] = "eau.gif";
+$carte["-30"]["-9"]["mouv"] = "2";
+$carte["-30"]["-8"]["nom"] = "eau";
+$carte["-30"]["-8"]["img"] = "eau.gif";
+$carte["-30"]["-8"]["mouv"] = "2";
+$carte["-30"]["-7"]["nom"] = "eau";
+$carte["-30"]["-7"]["img"] = "eau.gif";
+$carte["-30"]["-7"]["mouv"] = "2";
+$carte["-30"]["-6"]["nom"] = "eau";
+$carte["-30"]["-6"]["img"] = "eau.gif";
+$carte["-30"]["-6"]["mouv"] = "2";
+$carte["-30"]["-5"]["nom"] = "eau";
+$carte["-30"]["-5"]["img"] = "eau.gif";
+$carte["-30"]["-5"]["mouv"] = "2";
+$carte["-30"]["-4"]["nom"] = "eau";
+$carte["-30"]["-4"]["img"] = "eau.gif";
+$carte["-30"]["-4"]["mouv"] = "2";
+$carte["-30"]["-3"]["nom"] = "eau";
+$carte["-30"]["-3"]["img"] = "eau.gif";
+$carte["-30"]["-3"]["mouv"] = "2";
+$carte["-30"]["-2"]["nom"] = "eau";
+$carte["-30"]["-2"]["img"] = "eau.gif";
+$carte["-30"]["-2"]["mouv"] = "2";
+$carte["-30"]["-1"]["nom"] = "eau";
+$carte["-30"]["-1"]["img"] = "eau.gif";
+$carte["-30"]["-1"]["mouv"] = "2";

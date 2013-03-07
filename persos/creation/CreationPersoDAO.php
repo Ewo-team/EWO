@@ -37,6 +37,11 @@ class CreationPersoDAO extends ConnecteurDAO {
         races.grade_id = -2 AND 
         camps.nom = :race AND races.type = :gp"; 
 
+		/*echo "SELECT races.race_id, races.camp_id
+        FROM races, camps
+        WHERE camps.id = races.camp_id AND
+        races.grade_id = -2 AND 
+        camps.nom = $race AND races.type = $gameplay";*/
         $this->prepare($sql);
         $this->executePreparedStatement(null, array(':race' => $race, ':gp' => $gameplay));
         return $this->fetch();    
@@ -44,39 +49,54 @@ class CreationPersoDAO extends ConnecteurDAO {
     
     public function InsertPerso($perso) {
         
-
-        $this->exec("INSERT INTO persos (
-                                `id`, `background`, `description_affil`, `utilisateur_id`, `nb_suicide`, `race_id`,
-                                `superieur_id`, `grade_id`, `faction_id`, `nom`, `creation_date`, `date_tour`,
+		$query = "INSERT INTO persos (
+                                `id`, `background`, `description_affil`, `classe`, `utilisateur_id`, `nb_suicide`, `race_id`,
+                                `superieur_id`, `grade_id`, `faction_id`, `nom`, `creation_date`, `date_tour`, `date_esquivemagique`,
                                 `avatar_url`, `icone_id`, `galon_id`, `options`, `mdj`, `signature`, `sexe`)
                         VALUES (
-                                $perso->Mat, '', '', $perso->UtilisateurId, '', $perso->RaceId,
-                                null, $perso->Grade, '', '$perso->Nom', CURRENT_TIMESTAMP(), '',
-                                '', '', '', '0', '', '', '".$perso->Sexe."')");
+                                ".$perso->Mat.", '', '', :classe, :utilisateur, 0, :race,
+                                null, :grade, 0, :nom, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(),
+                                '', 0, 1, '0', '', '', :sexe)";
+								
+        $this->prepare($query);
+        $this->executePreparedStatement(null, array(
+			':classe' => $perso->Classe, 
+			':utilisateur' => $perso->UtilisateurId,
+			':race' => $perso->RaceId,
+			':grade' => $perso->Grade,
+			':nom' => $perso->Nom,
+			':sexe' => $perso->Sexe
+			));								
+		/*echo $query;
+		exit;*/
+
+        //$this->exec($query);
 
         return $this->_conn->lastInsertId();        
     }
     
     public function InsertCarac($perso) {
  
-        $this->exec("INSERT INTO `caracs` (
-                                `perso_id`, `px`, `pi`, `pv`, `recup_pv`, `malus_def`,
-                                `niv`, `cercle`, `mouv`, `pa`, `pa_dec`,
-                                `des_attaque`, `maj_des`, `force`, `perception`,`res_mag`)
+		$query = "INSERT INTO `caracs` (
+                                `perso_id`, `px`, `pi`, `pv`, `recup_pv`, 
+                                `niv`, `mouv`, `pa`,
+                                `des_attaque`, `force`, `perception`,`res_mag`)
                         VALUES (
-                                '$perso->Mat', '$perso->Xp', '$perso->Xp', '$perso->Pv','$perso->RecupPv', '0',
-                                '$perso->Niveau', '', '$perso->Mouvement', '$perso->Pa', '',
-                                '$perso->Des', '', '$perso->Force', '$perso->Perception', '$perso->ResistanceMagique')");        
+                                '".$perso->Mat."', '".$perso->Xp."', '".$perso->Xp."', '".$perso->Pv."','".$perso->RecupPv."',
+                                '".$perso->Niveau."', '".$perso->Mouvement."', '".$perso->Pa."',
+                                '".$perso->Des."', '".$perso->Force."', '".$perso->Perception."', '".$perso->ResistanceMagique."')";
+ 
+		//echo $query . '<br>';
+
+        $this->exec($query);        
     }
     
     public function InsertCaracAlter($mat) {
     
-            $this->exec("INSERT INTO `caracs_alter` (
-                                `perso_id`, `alter_pa`, `alter_mouv`, `alter_def`, `alter_att`,
-                                `alter_recup_pv`, `alter_force`, `alter_perception`, `nb_desaffil`, `alter_niv_mag`)
-                        VALUES (
-                                '$mat', '', '', '', '',
-                                '', '', '', '', '')");
+			$query = "INSERT INTO `caracs_alter` (`perso_id`) VALUES ('$mat')";
+
+	
+            $this->exec($query);
     }
     
 }

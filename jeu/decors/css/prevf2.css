@@ -1,0 +1,412 @@
+.damier_eau {
+                background: url(http://ewo/images/decors/motifs/eau.gif);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_gauche_pierre {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_gauche_pierre.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_bas_herbe {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_bas_herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_gauche_herbe {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_gauche_herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_droite_herbe {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_droite_herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_hautgauche_eau {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_hautgauche.png)
+, url(http://ewo/images/decors/motifs/eau.gif);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_basgauche_pierre {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_basgauche_pierre.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_mur_gauche {
+                background: url(http://ewo/images/decors/motifs/falaise_mur_gauche.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_base_gauche_sable {
+                background: url(http://ewo/images/decors/motifs/falaise_base_gauche_sable.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_mur_centre {
+                background: url(http://ewo/images/decors/motifs/falaise_mur_centre.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_hautdroite_eau {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_hautdroite.png)
+, url(http://ewo/images/decors/motifs/eau.gif);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_basdroite_pierre {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_basdroite_pierre.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_mur_droite {
+                background: url(http://ewo/images/decors/motifs/falaise_mur_droite.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_boucheur_hautgauche {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_boucheur_hautgauche.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_boucheur_basgauche {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_boucheur_basgauche.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_boucheur_hautgauche_herbe {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_boucheur_hautgauche_herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_boucheur_basgauche_herbe {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_boucheur_basgauche_herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_boucheur_hautdroite {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_boucheur_hautdroite.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_boucheur_basdroite {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_boucheur_basdroite.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_boucheur_basdroite_herbe {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_boucheur_basdroite_herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_hautgauche_herbe_eau {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_hautgauche_herbe.png)
+, url(http://ewo/images/decors/motifs/eau.gif);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_basgauche_herbe {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_basgauche_herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_base_gauche_herbe {
+                background: url(http://ewo/images/decors/motifs/falaise_base_gauche_herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_base_gauche_eau {
+                background: url(http://ewo/images/decors/motifs/falaise_base_gauche.png)
+, url(http://ewo/images/decors/motifs/eau.gif);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_bas {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_bas.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_roche {
+                background: url(http://ewo/images/decors/motifs/montagne.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_basdroite_herbe {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_basdroite_herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_base_droite_herbe {
+                background: url(http://ewo/images/decors/motifs/falaise_base_droite_herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_base_droite_eau {
+                background: url(http://ewo/images/decors/motifs/falaise_base_droite.png)
+, url(http://ewo/images/decors/motifs/eau.gif);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_droite_pierre {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_droite_pierre.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_haut_eau {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_haut.png)
+, url(http://ewo/images/decors/motifs/eau.gif);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_plage_s {
+                background: url(http://ewo/images/decors/motifs/plage_s.png)
+, url(http://ewo/images/decors/motifs/eau.gif);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_base_centre_herbe {
+                background: url(http://ewo/images/decors/motifs/falaise_base_centre_herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_base_centre_eau {
+                background: url(http://ewo/images/decors/motifs/falaise_base_centre.png)
+, url(http://ewo/images/decors/motifs/eau.gif);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_base_centre_pierre {
+                background: url(http://ewo/images/decors/motifs/falaise_base_centre.png)
+, url(http://ewo/images/decors/motifs/montagne.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_plage {
+                background: url(http://ewo/images/decors/motifs/plage.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_herbe {
+                background: url(http://ewo/images/decors/motifs/herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_plage_so_bord {
+                background: url(http://ewo/images/decors/motifs/plage_so_bo.png)
+, url(http://ewo/images/decors/motifs/eau.gif);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_plage_so_creux {
+                background: url(http://ewo/images/decors/motifs/plage_so_cr.png)
+, url(http://ewo/images/decors/motifs/eau.gif);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_base_gauche_pierre {
+                background: url(http://ewo/images/decors/motifs/falaise_base_gauche.png)
+, url(http://ewo/images/decors/motifs/montagne.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_base_droite_pierre {
+                background: url(http://ewo/images/decors/motifs/falaise_base_droite.png)
+, url(http://ewo/images/decors/motifs/montagne.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_hautgauche_pierre {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_hautgauche.png)
+, url(http://ewo/images/decors/motifs/montagne.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_hautdroite_pierre {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_hautdroite.png)
+, url(http://ewo/images/decors/motifs/montagne.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_haut_pierre {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_haut.png)
+, url(http://ewo/images/decors/motifs/montagne.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_plageherbe_so_bord {
+                background: url(http://ewo/images/decors/motifs/plage_so_bo.png)
+, url(http://ewo/images/decors/motifs/herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_plageherbe_so_creux {
+                background: url(http://ewo/images/decors/motifs/plage_so_cr.png)
+, url(http://ewo/images/decors/motifs/herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_plageherbe_se_bord {
+                background: url(http://ewo/images/decors/motifs/plage_se_bo.png)
+, url(http://ewo/images/decors/motifs/herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_plageherbe_se_creux {
+                background: url(http://ewo/images/decors/motifs/plage_se_cr.png)
+, url(http://ewo/images/decors/motifs/herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_plageherbe_no_bord {
+                background: url(http://ewo/images/decors/motifs/plage_no_bo.png)
+, url(http://ewo/images/decors/motifs/herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_plageherbe_no_creux {
+                background: url(http://ewo/images/decors/motifs/plage_no_cr.png)
+, url(http://ewo/images/decors/motifs/herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_plageherbe_ne_bord {
+                background: url(http://ewo/images/decors/motifs/plage_ne_bo.png)
+, url(http://ewo/images/decors/motifs/herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_plageherbe_ne_creux {
+                background: url(http://ewo/images/decors/motifs/plage_ne_cr.png)
+, url(http://ewo/images/decors/motifs/herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_plageherbe_s {
+                background: url(http://ewo/images/decors/motifs/plage_s.png)
+, url(http://ewo/images/decors/motifs/herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_plageherbe_n {
+                background: url(http://ewo/images/decors/motifs/plage_n.png)
+, url(http://ewo/images/decors/motifs/herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_plageherbe_e {
+                background: url(http://ewo/images/decors/motifs/plage_e.png)
+, url(http://ewo/images/decors/motifs/herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_plageherbe_o {
+                background: url(http://ewo/images/decors/motifs/plage_o.png)
+, url(http://ewo/images/decors/motifs/herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_falaise_sommet_bas_herbe_court {
+                background: url(http://ewo/images/decors/motifs/falaise_sommet_bas_herbe_court.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_escalier_bas_gauche_herbe {
+                background: url(http://ewo/images/decors/motifs/escaliers_bas_gauche.png)
+, url(http://ewo/images/decors/motifs/herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_escalier_bas_centre_herbe {
+                background: url(http://ewo/images/decors/motifs/escaliers_bas_centre.png)
+, url(http://ewo/images/decors/motifs/herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_escalier_bas_droite_herbe {
+                background: url(http://ewo/images/decors/motifs/escaliers_bas_droite.png)
+, url(http://ewo/images/decors/motifs/herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_escalier_haut_gauche_herbe {
+                background: url(http://ewo/images/decors/motifs/escaliers_haut_gauche.png)
+, url(http://ewo/images/decors/motifs/falaise_base_centre_herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_escalier_haut_centre {
+                background: url(http://ewo/images/decors/motifs/escaliers_haut_centre.png);
+                width: 45px;
+                height: 39px
+             }
+
+        .damier_escalier_haut_droite_herbe {
+                background: url(http://ewo/images/decors/motifs/escaliers_haut_droite.png)
+, url(http://ewo/images/decors/motifs/falaise_base_centre_herbe.png);
+                width: 45px;
+                height: 39px
+             }
+
+        

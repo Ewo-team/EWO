@@ -10,7 +10,8 @@ if(isset($_SESSION['cartographe']['raw'])) {
     $export = false;
     $attribution = false;
     $objets = false;
-    
+    $raw = true;
+	
     if(file_exists('raw/'.$projet.'_palette.php')) {
         $palette = true;
     }
@@ -31,6 +32,7 @@ if(isset($_SESSION['cartographe']['raw'])) {
     $export = false;
     $attribution = false;    
     $objets = false;    
+	$raw = false;
 }
 
 ?><!doctype html>
@@ -124,6 +126,7 @@ if(isset($_SESSION['cartographe']['raw'])) {
      <menu>
          <ul>
              <li><a href="ressources.php">Ressources</a></li>
+             <li><?php if($raw) { echo '<a href="raw.php">Raw</a>'; } else { echo '<span class="desactive">Raw</span>'; }?></li>
              <li><?php if($palette) { echo '<a href="edition_palette.php">Palette</a>'; } else { echo '<span class="desactive">Palette</span>'; }?></li>
              <li><?php if($carte) { echo '<a href="edition_carte.php">Carte</a>'; } else { echo '<span class="desactive">Carte</span>'; }?></li>
              <li><?php if($objets) { echo '<a href="objets.php">Objets</a>'; } else { echo '<span class="desactive">Objets</span>'; }?></li>             

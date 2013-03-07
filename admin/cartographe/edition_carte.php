@@ -51,7 +51,7 @@ for($y = $y_max-1; $y >= $y_min; $y--) {
             //$texte = '(vide)';
         }
         
-        echo '<td class="'.$class.' case" data-color="'.$couleur.'" data-classe="'.$class.'" data-x="'.$x.'" data-y="'.$y.'">'.$texte.'</td>';
+        echo '<td class="damier_'.$class.' case" data-color="'.$couleur.'" data-classe="'.$class.'" data-x="'.$x.'" data-y="'.$y.'">'.$texte.'</td>';
     }
     echo '</tr>';
     

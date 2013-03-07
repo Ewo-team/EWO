@@ -31,18 +31,17 @@ $tableau = $dao->fetchAll_assoc();
         $table[1] = array();        
         $table[3] = array();
         $table[4] = array();      
-        
 
         for ($i = 0; $i < count($tableau); $i++) {
-            $kcamp = $tableau[$i]['camps'];
-            $table[$kcamp][0][] = $tableau[$i]['titre'];
-            $key = $tableau[$i]['titre'] . ', ' . $tableau[$i]['sub'];
-            $value = $tableau[$i]['id'];
+            $kcamp = $tableau[$i]['Camps'];
+            $table[$kcamp][0][] = $tableau[$i]['Titre'];
+            $key = $tableau[$i]['Titre'] . ', ' . $tableau[$i]['Sub'];
+            $value = $tableau[$i]['Id'];
             
             $liste[$kcamp][$key] = $value;
             
-            $table[$kcamp][1][] = $tableau[$i]['sub'];
-            $table[$kcamp][2][] = $tableau[$i]['description'];
+            $table[$kcamp][1][] = $tableau[$i]['Sub'];
+            $table[$kcamp][2][] = $tableau[$i]['Description'];
         }
 
 $js->AddScript('creation');
@@ -50,7 +49,7 @@ $js->AddScript('formstep');
 ?>
 
 <div id="page_persos">  
-    <form action="ajout_perso.php" method="post" name="personnage">
+    <form action="ajout_perso.php" method="post" name="personnage" id="creation_perso">
         <h2>Informations n&eacute;cessaires &agrave; la cr&eacute;ation de votre/vos personnage(s)</h2>
                 <p>
                     <?php echo '<h3>' . $texte . '</h3>';
@@ -155,7 +154,7 @@ $js->AddScript('formstep');
     
             <input type="hidden" id="race" name="race" value="<?php echo $camp; ?>" />
 
-            <fieldset data-validation="creation_perso">
+            <fieldset>
 
 
             <label for="nom_perso">Nom du personnage :
@@ -168,9 +167,9 @@ $js->AddScript('formstep');
                 <option value='3'>Autre</option>
             </select>
 
-            <?php echo \conf\Helpers::getSelectOption($liste[1], "choixclasse1humain", null, "Sélectionnez votre classe"); ?>        
-            <?php echo \conf\Helpers::getSelectOption($liste[3], "choixclasse1ange", null, "Sélectionnez votre classe"); ?>
-            <?php echo \conf\Helpers::getSelectOption($liste[4], "choixclasse1demon", null, "Sélectionnez votre classe"); ?>
+            <?php if($camp == null || $camp == "humain") { echo \conf\Helpers::getSelectOption($liste[1], "choixclasse1humain", null, "Sélectionnez votre classe"); } ?>        
+            <?php if($camp == null || $camp == "ange") { echo \conf\Helpers::getSelectOption($liste[3], "choixclasse1ange", null, "Sélectionnez votre classe"); } ?>
+            <?php if($camp == null || $camp == "demon") { echo \conf\Helpers::getSelectOption($liste[4], "choixclasse1demon", null, "Sélectionnez votre classe"); } ?>
 
             <div id="perso2">
                 <label for="nom_perso">Nom du personnage :
@@ -183,9 +182,9 @@ $js->AddScript('formstep');
                     <option value='3'>Autre</option>
                 </select>
 
-                <?php echo \conf\Helpers::getSelectOption($liste[1], "choixclasse2humain", null, "Sélectionnez votre classe"); ?>        
-                <?php echo \conf\Helpers::getSelectOption($liste[3], "choixclasse2ange", null, "Sélectionnez votre classe"); ?>
-                <?php echo \conf\Helpers::getSelectOption($liste[4], "choixclasse2demon", null, "Sélectionnez votre classe"); ?>                    
+                <?php if($camp == null || $camp == "humain") { echo \conf\Helpers::getSelectOption($liste[1], "choixclasse2humain", null, "Sélectionnez votre classe"); } ?>        
+                <?php if($camp == null || $camp == "ange") { echo \conf\Helpers::getSelectOption($liste[3], "choixclasse2ange", null, "Sélectionnez votre classe"); } ?>
+                <?php if($camp == null || $camp == "demon") { echo \conf\Helpers::getSelectOption($liste[4], "choixclasse2demon", null, "Sélectionnez votre classe"); } ?>                    
             </div>
                 
             <div id="perso3">
@@ -199,9 +198,9 @@ $js->AddScript('formstep');
                     <option value='3'>Autre</option>
                 </select>
 
-                <?php echo \conf\Helpers::getSelectOption($liste[1], "choixclasse3humain", null, "Sélectionnez votre classe"); ?>        
-                <?php echo \conf\Helpers::getSelectOption($liste[3], "choixclasse3ange", null, "Sélectionnez votre classe"); ?>
-                <?php echo \conf\Helpers::getSelectOption($liste[4], "choixclasse3demon", null, "Sélectionnez votre classe"); ?>                    
+                <?php if($camp == null || $camp == "humain") { echo \conf\Helpers::getSelectOption($liste[1], "choixclasse3humain", null, "Sélectionnez votre classe"); } ?>        
+                <?php if($camp == null || $camp == "ange") { echo \conf\Helpers::getSelectOption($liste[3], "choixclasse3ange", null, "Sélectionnez votre classe"); } ?>
+                <?php if($camp == null || $camp == "demon") { echo \conf\Helpers::getSelectOption($liste[4], "choixclasse3demon", null, "Sélectionnez votre classe"); } ?>                    
             </div>
                 
             <div id="perso4">
@@ -215,18 +214,25 @@ $js->AddScript('formstep');
                     <option value='3'>Autre</option>
                 </select>
 
-                <?php echo \conf\Helpers::getSelectOption($liste[1], "choixclasse4humain", null, "Sélectionnez votre classe"); ?>        
-                <?php echo \conf\Helpers::getSelectOption($liste[3], "choixclasse4ange", null, "Sélectionnez votre classe"); ?>
-                <?php echo \conf\Helpers::getSelectOption($liste[4], "choixclasse4demon", null, "Sélectionnez votre classe"); ?>                    
+                <?php if($camp == null || $camp == "humain") { echo \conf\Helpers::getSelectOption($liste[1], "choixclasse4humain", null, "Sélectionnez votre classe"); } ?>        
+                <?php if($camp == null || $camp == "ange") { echo \conf\Helpers::getSelectOption($liste[3], "choixclasse4ange", null, "Sélectionnez votre classe"); } ?>
+                <?php if($camp == null || $camp == "demon") { echo \conf\Helpers::getSelectOption($liste[4], "choixclasse4demon", null, "Sélectionnez votre classe"); } ?>                    
             </div>                
 
-            <input type="submit" name="Submit2" value="Donnez vie à vos personnage" />
+            <input type="submit" class="submit" name="Submit" value="Donnez vie à vos personnage" />
 
     <?php 
 
-        foreach ($table as $id => $camp) {
-                echo '<table id="classe' . $id . '" style="display: none;">';
-                foreach ($camp as $key => $ligne) {
+		$camp_lst['humain'] = 1;
+		$camp_lst['ange'] = 3;
+		$camp_lst['demon'] = 4;
+	
+        foreach ($table as $id => $camp_id) {
+		
+				$display = ($camp == null || $camp_lst[$camp] != $id) ? ' style="display: none;"' : '';
+		
+                echo '<table id="classe' . $id . '" '.$display.'>';
+                foreach ($camp_id as $key => $ligne) {
                     echo '<tr>';
                     foreach ($ligne as $colonne) {
                         if ($key == 0) {

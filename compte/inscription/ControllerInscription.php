@@ -17,7 +17,7 @@ require_once __DIR__ . '/../../conf/master.php';
 // paramètres de connexion à la base de données
 $ewo = bdd_connect('ewo');
 
-$dao = \inscription\InscriptionDAO::getInstance();
+$dao = InscriptionDAO::getInstance();
 
 
 // Mise sous variables des données récupérées

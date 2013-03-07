@@ -58,7 +58,7 @@ use \PDO as PDO,
 
 			if (isset($instances[$class][$base]) === false)
 			{
-			 $instances[$class][$base] = new $class($base);
+				$instances[$class][$base] = new $class($base);
 			}
 
 			return $instances[$class][$base];   

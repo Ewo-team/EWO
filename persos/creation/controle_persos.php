@@ -32,20 +32,17 @@ function controleCreationPerso($utilisateur_id) {
 
 	if($t4 > 0) {
 		$creationT4 = false;
-	} else {
-		$creationT4 = true;
 	}
 
 	if(($t4 > 0 && $t3 < 2) || ($t4 == 0 && $t3 < 3)) {
 		$creationT3 = true;
 		
-		if($t4 > 0) {
-			$groupeT4 = true;
-		} else {
-			$groupeT4 = false;
+		if($t4 == 0) {
+			$creationT4 = true;
 		}
 	} else {
 		$creationT3 = false;
+		$creationT4 = false;
 	}
 
 

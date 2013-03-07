@@ -1291,17 +1291,10 @@ function set_pos($perso_id, $pos_x_perso, $pos_y_perso, $carte_pos, $type='perso
 
 	$case = getCaseDecors($carte_pos, $pos_x_perso, $pos_y_perso);
 	
-	if($case == 'mur_haut_vertical' || 
-		$case == 'mur_centre_vertical' || 
-		$case == 'mur_bas_vertical' || 
-		$case == 'mur' || 
-		$case == 'cascade') {
-		
-			return false;
-		}
+	if(isset($case['block'])) {
+		return false;
+	}
 
-	
-	
 	$sql="SELECT $id
 		FROM damier_$type
 		WHERE $id='$perso_id'";
@@ -1604,26 +1597,33 @@ function maj_pos($inc, $caracs) {
 								raz_alter_plan($perso_id);
 							}
 						}
+
 						$deplacement_reussi = set_pos($perso_id, $pos_x_perso, $pos_y_perso, $carte_pos);
 
 						if ($deplacement_reussi) {
 							
-							$case = getCaseDecors($carte_pos, $pos_x_perso, $pos_y_perso);
+							//$case = getCaseDecors($carte_pos, $pos_x_perso, $pos_y_perso);
 							
 							$cout_pv = 0;
 							
-							if($case == 'lave') {
-								$events = SPECIAL_EVENT::$INDEX;
-								$cout_pv = 40;		
-								$em = new persos\event\eventManager();
-								$ev1 = $em->createEvent('special');
-								$ev1->setSource($perso_id, 'perso');
-								$ev1->infos->addPublicInfo('m',$events['lave']);
-							}						
-							
+							if(isset($case['degats'])) {
+								
+								$cout_pv = $case['degats'];	
+								
+								if(isset($case['degats_event'])) {		
+									$ix = $case['degats_event'];
+									
+									$events = SPECIAL_EVENT::$INDEX;
+									$em = new persos\eventManager\eventManager();
+									$ev1 = $em->createEvent('special');
+									$ev1->setSource($perso_id, 'perso');
+									$ev1->infos->addPublicInfo('m',$events[$ix]);
+								}
+							}					
+
 							$sql = "UPDATE caracs SET `mouv`=`mouv` - ".$cout.", `pv`=`pv` - ".$cout_pv."
 									WHERE perso_id=".$perso_id;
-	
+
 							$res = mysql_query($sql);
 							
 							$_SESSION['persos']['pos_x'][$inc] = $pos_x_perso;
@@ -1632,8 +1632,8 @@ function maj_pos($inc, $caracs) {
 
 							// On log le déplacement dans les évènements.
 
-							$em = new \persos\event\eventManager();
-                                                        echo 'ici';
+							$em = new \persos\eventManager\eventManager();
+
 							$ev1 = $em->createEvent('mouv');
                                                         
 							$ev1->setSource($perso_id, 'perso');

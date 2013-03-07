@@ -29,11 +29,11 @@ if (isset($_POST['email'])) {
 
         if ($droits == 0) {
             // Le compte n'est pas encore validé
-            $codevalidation = $requete[1];
-            $nom = $requete[2];
+            $codevalidation = $requete['codevalidation'];
+            $nom = $requete['nom'];
 
 
-			$mail = \conf\Mail();
+			$mail = new \conf\Mail();
 			
 			$mail->Subject .= 'Code de validation de votre compte';
 
@@ -43,10 +43,10 @@ if (isset($_POST['email'])) {
 			$mail->ParseTitle = "EWO";			
 			$mail->ParseCorps = "<table width='100%' height='200px'>
 								<tr>
-									<td align='center' style='background: url(http://" . SERVER_URL . "/images/site/ewo_transparant.png) no-repeat 50% 50%'>
+									<td align='center' style='background: url(" . SERVER_URL . "/images/site/ewo_transparant.png) no-repeat 50% 50%'>
 									Vous avez demand&eacute; de recevoir le mail de confirmation de votre compte $nom<br />
 									il ne vous reste plus qu'&agrave; le valider<br />
-									<a href='http://" . SERVER_URL . "/inscription/validation.php?code=$codevalidation&nom=$nom&email=$email'>Lien de validation</a>
+									<a href='" . SERVER_URL . "/compte/inscription/validation.php?code=$codevalidation&nom=$nom&email=$email'>Lien de validation</a>
 									</td>
 								</tr>
 					</table>";

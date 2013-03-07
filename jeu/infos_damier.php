@@ -639,9 +639,8 @@ if($val > 0 && $decors != null) {
     $case = $decors->getCase($pos_x_case, $pos_y_case);
 
     if($case) {
-        // fix, en attendant les décors VF
-        if($case == 'eau') {
-            $val *= 2;
+        if(isset($case["mouv"])) {
+            $val *= $case["mouv"];
         }
     }
 }

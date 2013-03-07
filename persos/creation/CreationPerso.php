@@ -16,6 +16,7 @@ class CreationPerso {
     public $UtilisateurId;
     public $Gameplay;
     public $Sexe;
+    public $Classe;
     public $Grade = 0;
     public $Galon = 1;
     public $Xp = 0;
@@ -37,12 +38,12 @@ class CreationPerso {
 
     public function Save() {
         
-        $dao = CreationPersoDAO::getInstance();
+        $dao = CreationPersoDAO::getInstance("ewo");
    
         $gameplay = ($this->Gameplay == "T4") ? 4 : 3;
         
         $races = $dao->SelectRaceId(ucfirst($this->Race), $gameplay);
-        
+		
         $this->RaceId = $races['race_id'];
         $this->Camp = $races['camp_id'];
 

@@ -30,6 +30,7 @@ class Mail {
 	}
 	
 	public static function Html2Text($html) {
+		$html = preg_replace('/<a href=["\'](.*)["\']>(.+)<\/a>/i', '$2 : $1', $html);
 		$html = preg_replace('/<(br).*>/i', "\n", $html);
 		$html = preg_replace('/<(p)>/i', "\n", $html);
 		$texte = strip_tags($html);
@@ -119,13 +120,14 @@ class Mail {
 			
 			$dao = ConnecteurDAO::getInstance();
 			
-			$dao->prepare('INSERT INTO emails (to_email, title, message, headers) VALUES (:to, :title, :msg, :headers)');
+			$dao->prepare('INSERT INTO emails (to_email, title, message, headers, hash_id) VALUES (:to, :title, :msg, :headers, :hashid)');
 			
 			$dao->executePreparedStatement(null, array(
 				':to' => base64_encode($to),
 				':title' => base64_encode($this->Subject),
 				':msg' => base64_encode($msg),
-				':headers' => base64_encode($headers)));
+				':headers' => base64_encode($headers),
+				':hashid' => $this->ParseID));
 						
 			$send = mail($to, '=?UTF-8?B?' . base64_encode($this->Subject) . '?=', $msg, $headers);		
 			
@@ -198,26 +200,27 @@ class Mail {
 		
 	private function getMessageText() {
 		
-		$message = 'This is a multi-part message in MIME format.'."\n\n"; 
+		$message = 'This is a multi-part message in MIME format.'."\r\n\n"; 
 
-		$message .= '--'.$this->Separator."\n"; 
-		$message .= 'Content-Type: text/plain; charset="UTF-8"'."\n"; 
-		$message .= 'Content-Transfer-Encoding: 8bit'."\n\n"; 
+		$message .= '--'.$this->Separator."\r\n"; 
+		$message .= 'Mime-Version: 1.0"'."\r\n"; 
+		$message .= 'Content-Type: text/plain; charset=UTF-8'."\r\n"; 
+		$message .= 'Content-Transfer-Encoding: 8bit'."\r\n\n"; 
 		$message .= $this->template['MessageTextePrefix'];	
 		$message .= $this->MessageText;
-		$message .= $this->template['MessageTexteSuffix']."\n\n"; 	
+		$message .= $this->template['MessageTexteSuffix']."\r\n\n"; 	
 
 		return $message;
 	}
 	
 	private function getMessageHtml() {
-		$message = '--'.$this->Separator."\n";
-		$message .= 'Content-Type: text/html; charset="UTF-8"'."\n"; 
-		$message .= 'Content-Transfer-Encoding: 8bit'."\n\n"; 
+		$message = '--'.$this->Separator."\r\n";
+		$message .= 'Mime-Version: 1.0'."\r\n"; 
+		$message .= 'Content-Type: text/html; charset=UTF-8'."\r\n"; 
+		$message .= 'Content-Transfer-Encoding: 8bit'."\r\n\n"; 
 		$message .= $this->template['MessageHtmlPrefix'];			
 		$message .= $this->MessageHtml; 
-		$message .= $this->template['MessageHtmlSuffix'] ."\n\n"; 
-		$message .= '--'.$this->Separator."\n"; 	
+		$message .= $this->template['MessageHtmlSuffix'] ."\r\n\n"; 
 		
 		return $message;
 	}
@@ -232,8 +235,8 @@ class Mail {
 			$reply        = $from;				
 		}
 		
-		$emails    = 'From: ' . $from . "\n" .
-					 'Reply-To: ' . $reply . "\n";	
+		$emails    = 'From: ' . $from . "\r\n" .
+					 'Reply-To: ' . $reply . "\r\n";	
 		
 		if(count($this->Cc) > 0) {
 			$cc = '';
@@ -242,7 +245,7 @@ class Mail {
 				$cc .= is_numeric($key) ? $value.',' : '"' . mb_encode_mimeheader($key) . '" <' . $value . '>,';
 			}
 			
-			$emails .= 'Cc: '.substr($cc,0,-1). "\n";
+			$emails .= 'Cc: '.substr($cc,0,-1). "\r\n";
 		}
 		
 		if(count($this->Bcc) > 0) {
@@ -252,7 +255,7 @@ class Mail {
 				$bcc .= is_numeric($key) ? $value.',' : '"' . mb_encode_mimeheader($key) . '" <' . $value . '>,';
 			}
 			
-			$emails .= 'Bcc: ' . substr($bcc,0,-1). "\n";			
+			$emails .= 'Bcc: ' . substr($bcc,0,-1). "\r\n";			
 		}
 		
 		$headers    = array
@@ -260,7 +263,7 @@ class Mail {
 			'MIME-Version: 1.0',
 			'Content-Type: multipart/alternative; boundary="'.$this->Separator.'"',
 			'Date: ' . date('r', $_SERVER['REQUEST_TIME']),
-			'Message-ID: <' . $_SERVER['REQUEST_TIME'] . md5($_SERVER['REQUEST_TIME']) . '@' . $_SERVER['SERVER_NAME'] . '>'
+			'Message-ID: <' . $_SERVER['REQUEST_TIME'] . md5($_SERVER['REQUEST_TIME']) . '@' . $_SERVER['SERVER_NAME'] . '>'	
 		);
 
 		$returns    = array
@@ -269,7 +272,7 @@ class Mail {
 			'X-Originating-IP: ' . $_SERVER['SERVER_ADDR']
 		);		
 		
-		$string_headers = implode("\n", $headers). "\n" . $emails .  implode("\n", $returns);
+		$string_headers = implode("\r\n", $headers). "\r\n" . $emails .  implode("\r\n", $returns);
 		return $string_headers;
 	}
 }
@@ -283,7 +286,7 @@ class MailTemplate {
 		'MessageTextePrefix' =>	'',
 		'MessageHtmlSuffix' =>	'',
 		'MessageTexteSuffix' =>	'',
-		'MessageHtmlParse' => '<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv=Content-Type content="text/html; charset=utf-8"><meta content="width=device-width"><body style="margin:0px; padding:0px; -webkit-text-size-adjust:none"><table width="100%" cellpadding=0 cellspacing=0 border=0 style="background-color:rgb(42, 55, 78)"><tbody><tr><td align=center bgcolor="#2A374E"><table cellpadding=0 cellspacing=0 border=0><tbody><tr><td class=w640 width=640 height=10></td><tr><td align=center class=w640 width=640 height=20><a style="color:#ffffff; font-size:12px" href="http://www.ewo-le-monde.com/site/mail/affiche.php?id={IDMAIL}"><span style="color:#ffffff; font-size:12px">Voir le contenu de ce mail en ligne</span></a></td><tr><td class=w640 width=640 height=10></td><tr class=pagetoplogo><td class=w640 width=640><table class=w640 width=640 cellpadding=0 cellspacing=0 border=0 bgcolor="#F2F0F0"><tbody><tr><td class=w30 width=30></td><td class=w580 width=580 valign=middle align=left><div class=pagetoplogo-content style="text-align: center"><img class=w580 style="padding: 10px;text-decoration: none;  color:#476688; font-size:30px" src="http://www.ewo-le-monde.com/images/logo.png" alt="Eternal War One" width=254 height=175></div></td><td class=w30 width=30></td></table></td><tr><td class=w640 width=640 height=1 bgcolor="#d7d6d6"></td><tr class=content><td class=w640 class=w640 width=640 bgcolor="#ffffff"><table class=w640 width=640 cellpadding=0 cellspacing=0 border=0><tbody><tr><td class=w30 width=30></td><td class=w580 width=580><table class=w580 width=580 cellpadding=0 cellspacing=0 border=0><tbody><tr><td class=w580 width=580><h2 style="color:#0E7693; font-size:22px; padding-top:12px">{TITRE}</h2><div align=left class=article-content>{CONTENT}</div></td><tr><td class=w580 width=580 height=1 bgcolor="#c7c5c5"></td></table></td><td class=w30 class=w30 width=30></td></table></td><tr><td class=w640 width=640 height=15 bgcolor="#ffffff"></td><tr class=pagebottom><td class=w640 width=640><table class=w640 width=640 cellpadding=0 cellspacing=0 border=0 bgcolor="#c7c7c7"><tbody><tr><td colspan=5 height=10></td><tr><td class=w30 width=30></td><td class=w580 width=580 valign=top><p align=right class=pagebottom-content-left><a style="color:#255D5C" href="http://www.ewo-le-monde.com"><span style="color:#255D5C">Eternal War One</span></a></p></td><td class=w30 width=30></td><tr><td colspan=5 height=10></td></table></td><tr><td class=w640 width=640 height=60></td></table></td></table>',
+		'MessageHtmlParse' => '<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv=Content-Type content="text/html; charset=utf-8"><meta content="width=device-width"></head><body style="margin:0px; padding:0px; -webkit-text-size-adjust:none"><table width="100%" cellpadding=0 cellspacing=0 border=0 style="background-color:rgb(42, 55, 78)"><tbody><tr><td align=center bgcolor="#2A374E"><table cellpadding=0 cellspacing=0 border=0><tbody><tr><td class=w640 width=640 height=10></td><tr><td align=center class=w640 width=640 height=20><a style="color:#ffffff; font-size:12px" href="http://www.ewo-le-monde.com/site/mail/affiche.php?id={IDMAIL}"><span style="color:#ffffff; font-size:12px">Voir le contenu de ce mail en ligne</span></a></td><tr><td class=w640 width=640 height=10></td><tr class=pagetoplogo><td class=w640 width=640><table class=w640 width=640 cellpadding=0 cellspacing=0 border=0 bgcolor="#F2F0F0"><tbody><tr><td class=w30 width=30></td><td class=w580 width=580 valign=middle align=left><div class=pagetoplogo-content style="text-align: center"><img class=w580 style="padding: 10px;text-decoration: none;  color:#476688; font-size:30px" src="http://www.ewo-le-monde.com/images/site/logo.png" alt="Eternal War One" width=254 height=175></div></td><td class=w30 width=30></td></table></td><tr><td class=w640 width=640 height=1 bgcolor="#d7d6d6"></td><tr class=content><td class=w640 class=w640 width=640 bgcolor="#ffffff"><table class=w640 width=640 cellpadding=0 cellspacing=0 border=0><tbody><tr><td class=w30 width=30></td><td class=w580 width=580><table class=w580 width=580 cellpadding=0 cellspacing=0 border=0><tbody><tr><td class=w580 width=580><h2 style="color:#0E7693; font-size:22px; padding-top:12px">{TITRE}</h2><div align=left class=article-content>{CONTENT}</div></td><tr><td class=w580 width=580 height=1 bgcolor="#c7c5c5"></td></table></td><td class=w30 class=w30 width=30></td></table></td><tr><td class=w640 width=640 height=15 bgcolor="#ffffff"></td><tr class=pagebottom><td class=w640 width=640><table class=w640 width=640 cellpadding=0 cellspacing=0 border=0 bgcolor="#c7c7c7"><tbody><tr><td colspan=5 height=10></td><tr><td class=w30 width=30></td><td class=w580 width=580 valign=top><p align=right class=pagebottom-content-left><a style="color:#255D5C" href="http://www.ewo-le-monde.com"><span style="color:#255D5C">Eternal War One</span></a></p></td><td class=w30 width=30></td><tr><td colspan=5 height=10></td></table></td><tr><td class=w640 width=640 height=60></td></table></td></table></body></html>',
 		'MessageTexteParse' => "Eternal War One\n===============\n\n{TITRE}\n------\n\n{CONTENT}\n\nwww.ewo-le-monde.com\n\nVersion HTML : http://www.ewo-le-monde.com/site/mail/affiche.php?id={IDMAIL}"
 	);
 	

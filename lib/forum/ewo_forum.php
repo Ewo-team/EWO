@@ -1,21 +1,6 @@
 <?php
 
-
-if(!defined('IN_PHPBB')) {
-    define('IN_PHPBB', true);
-}
-
-$phpEx = 'php';
-$phpbb_root_path = SERVER_ROOT . '/forum/';
-
-if(isset($include_forum)) {
-
-    include_once(SERVER_ROOT . '/forum/common.php');
-
-}
-
-include 'EwoForumDAO.php';
-include 'EwoForumConfig.php';
+include 'include.php';	
 
 class EwoForum {
     
@@ -24,6 +9,7 @@ class EwoForum {
     private $forum;
     
     public function __construct($user = 1) {
+		
         $this->id = $user;
         $this->jeu = EwoForumDAO::getInstance();
         $this->forum = EwoForumDAO::getInstance("forum");
@@ -59,28 +45,31 @@ class EwoForum {
     
     public function setRaceGrade($id,$race,$grade,$galon) {
         
-        if(is_numeric($id)) {
-            
-        } else {
-            $clean = utf8_clean_string(id);
+        if(!is_numeric($id)) {
+            $clean = utf8_clean_string($id);
+			
+			$id = $this->forum->selectPerso($clean);
+
+			$id = $id[0];
         }
-        
-        
-        
-        $id = $this->forum->selectPerso($clean);
-        
+		
+		
+               
         $grp_list = array();
         
-        global $groupes;
+        include 'EwoForumConfig.php';
         
-        foreach($groupes as $race) {  
-            foreach($race as $groupe) {  
-                $grp_list = $groupe;
+        foreach($groupes as $race_index) {  
+            foreach($race_index as $groupe) {  
+                $grp_list[] = $groupe;
             }           
         }        
         
+		//print_r($grp_list);
+		//print_r($groupes);
+		
         $this->forum->removeGroup($id, implode(",", $grp_list));
-        
+        		
         $this->forum->addGroup($id,$groupes[$race]["Base"]);
         
         if($grade >= 4) {
@@ -89,15 +78,28 @@ class EwoForum {
                 $this->forum->addGroup($id,$groupes[$race]["Officier"]);
             }            
             
-            if(isset($groupes[$race]["Chef"])) {
-                $this->forum->addGroup($id,$groupes[$race]["Chef"]);
-            }
+			if($grade >= 5) {
+				if(isset($groupes[$race]["Chef"])) {
+					$this->forum->addGroup($id,$groupes[$race]["Chef"]);
+				}
+			}
         } else if($grade >= 3 && $galon >= 2) {
             
             if(isset($groupes[$race]["Officier"])) {
                 $this->forum->addGroup($id,$groupes[$race]["Officier"]);
             }
-        }        
+        }
+		
+		if(isset($rangs[$race][$grade])) {
+			$this->forum->setRank($id, $rangs[$race][$grade]);
+		} else {
+			if(isset($rangs[$race][0])) {
+				$this->forum->setRank($id, $rangs[$race][0]);
+			} else {
+				$this->forum->setRank($id, 0);
+			}
+		}
+        
     }
     
     public function changePasswords($password) {

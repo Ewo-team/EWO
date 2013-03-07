@@ -193,6 +193,7 @@ if ($is_spawn) {
 	$y_max_carte = $carte['y_max'];
 	
 	$nom_decors = $carte['nom_decors'];
+	$decors_default = $carte['decors_defaut'];
 
 	$_SESSION['x_min_visible'] = $carte['visible_x_min'];
 	$_SESSION['x_max_visible'] = $carte['visible_x_max'];

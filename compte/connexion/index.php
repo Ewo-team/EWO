@@ -30,11 +30,11 @@ include(SERVER_ROOT . "/template/header_new.php");
 			<table width="50%" border="0">
 				<tr align="center">
 					<td style="text-align:center;">Nom d'utilisateur</td>
-                                        <td ><input type="text" name="login" size="13" value="" /></td>
+                                        <td ><input type="text" name="login" size="13" value="" required /></td>
 				</tr>
 				<tr>
 					<td style="text-align:center;">Mot de Passe </td>
-                                        <td style="text-align:center;"><input type="password" name="pass" size="13" value="" /></td>
+                                        <td style="text-align:center;"><input type="password" name="pass" size="13" value="" required /></td>
 				</tr>
                                 <tr>
 					<td style="text-align:center;">Se souvenir de moi ?</td>

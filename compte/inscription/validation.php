@@ -39,7 +39,7 @@ if (isset($_GET['code']) && isset($_GET['nom']) && isset($_GET['email'])) {
     $dao->ActiveCompte($code_validation);
 
 
-		$mail = \conf\Mail();
+		$mail = new \conf\Mail();
 		
 		$mail->Subject .= 'Votre compte est valide';
 
