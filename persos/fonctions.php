@@ -818,8 +818,8 @@ mysql_query("UPDATE persos SET superieur_id = 0
 
 
 // Fonction de changement de grade et/ou race. Il faut lui donner l'id du perso, le nouveau grade et la nouvelle race
-function change_race_grade($id_perso, $new_race, $new_grade){
-	$sql = "SELECT race_id, grade_id
+function change_race_grade_galon($id_perso, $new_race = NULL, $new_grade = NULL, $new_galon = NULL){
+	$sql = "SELECT utilisateur_id, race_id, grade_id, galon_id
 					FROM persos
 						WHERE id = $id_perso";
 
@@ -827,30 +827,44 @@ function change_race_grade($id_perso, $new_race, $new_grade){
 	$old_caracs = mysql_fetch_array($reponse);
 	$old_race =$old_caracs['race_id'];
 	$old_grade=$old_caracs['grade_id'];
+	$old_galon=$old_caracs['galon_id'];
+	$utilisateur_id = $old_caracs['utilisateur_id'];
 
-	if($new_grade > $old_grade) {
-		// Si le gradé passe G4
-		if($new_grade == 4) {
-			ajouteMedaille(MEDAILLE_G4, $id_perso);
+	if(isset($new_grade)) {
+		if($new_grade > $old_grade) {
+			// Si le gradé passe G4
+			if($new_grade == 4) {
+				ajouteMedaille(MEDAILLE_G4, $id_perso);
+			}
+
+			// Si le gradé passe G4
+			if($new_grade == 5) {
+				ajouteMedaille(MEDAILLE_G5, $id_perso);
+			}
 		}
 
-		// Si le gradé passe G4
-		if($new_grade == 5) {
-			ajouteMedaille(MEDAILLE_G5, $id_perso);
+		if($old_grade==5){
+			desaffil_all($id_perso);
 		}
-	}
-
-	if($old_grade==5){
-		desaffil_all($id_perso);
+		
+		if($old_grade != $new_grade) {
+			$em = new persos\eventManager\eventManager();
+			$ev1 = $em->createEvent('grade');
+			$ev1->setSource($id_perso, 'perso');
+			$ev1->infos->addPublicInfo('i',$old_grade);
+			$ev1->infos->addPublicInfo('f',$new_grade);	
+		}
+	} else {
+		$new_grade = $old_grade;
 	}
 	
-	if($old_grade != $new_grade) {
-		$em = new persos\eventManager\eventManager();
-		$ev1 = $em->createEvent('grade');
-		$ev1->setSource($id_perso, 'perso');
-		$ev1->infos->addPublicInfo('i',$old_grade);
-		$ev1->infos->addPublicInfo('f',$new_grade);	
+	if(!isset($new_race)) {
+		$new_race = $old_race;
 	}
+	
+	if(!isset($new_galon)) {
+		$new_galon = $old_galon;
+	}	
 	
 	renew_caracs($id_perso, $new_race, $new_grade);
 
@@ -858,12 +872,26 @@ function change_race_grade($id_perso, $new_race, $new_grade){
 					WHERE id = $id_perso") or die (mysql_error());
 	mysql_query("UPDATE persos SET race_id = $new_race
 					WHERE id = $id_perso") or die (mysql_error());
+	mysql_query("UPDATE persos SET galon_id = $new_galon
+					WHERE id = $id_perso") or die (mysql_error());					
+					
+	include_once (SERVER_ROOT . '/lib/forum/ewo_forum.php');
+	
+	$forum = new \EwoForum($utilisateur_id);		
+		
+	$forum_id = $forum->selectIdByMat($id_perso);
+	$forum->setRaceGrade($forum_id ,$new_race,$new_grade,$new_galon);
+					
 
-	}
+}
+
+// Fonction de changement de grade et/ou race. Il faut lui donner l'id du perso, le nouveau grade et la nouvelle race
+function change_race_grade($id_perso, $new_race, $new_grade){
+	change_race_grade_galon($id_perso, $new_race, $new_grade);
+}
 
 function change_galon($perso_id,$galon){
-mysql_query("UPDATE persos SET galon_id = $galon
-				WHERE id = $perso_id") or die (mysql_error());
+	change_race_grade_galon($perso_id, null, null, $galon);
 }
 
 function bonus_effet($perso_race, $perso_grade, $perso_galon){

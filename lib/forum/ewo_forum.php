@@ -11,7 +11,7 @@ class EwoForum {
     public function __construct($user = 1) {
 		
         $this->id = $user;
-        $this->jeu = EwoForumDAO::getInstance();
+        $this->jeu = EwoForumDAO::getInstance("ewo");
         $this->forum = EwoForumDAO::getInstance("forum");
     }
    
@@ -35,6 +35,17 @@ class EwoForum {
         $this->forum->addPerso($pseudo, $clean, $pass, $mail, $email_hash);
     }
     
+	public function selectIdByName($pseudo) {
+		$pseudo = utf8_clean_string($pseudo);
+		$result = $this->forum->selectPerso($pseudo);
+		return $result[0];
+	}
+	
+	public function selectIdByMat($mat) {
+		$name = $this->jeu->SelectPersoNameById($mat);
+		return $this->selectIdByName($name);
+	}
+	
     public function selectPassEmail($email) {
         return $this->forum->getHashEmail($email);
     }

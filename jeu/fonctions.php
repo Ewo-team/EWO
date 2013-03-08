@@ -9,6 +9,8 @@ include_once(SERVER_ROOT.'/persos/eventManager/special.php');
 include_once(SERVER_ROOT.'/persos/medailles.php');
 include_once(SERVER_ROOT.'/lib/forum/ewo_forum.php');
 
+require_once(SERVER_ROOT.'/conf/grille_gainsxp.php');
+
 //Inlcude des fonction de controle des interactions
 include_once(SERVER_ROOT.'/admin/antitriche/class/InterGeoLogger.php.inc');
 
@@ -142,6 +144,7 @@ function esquive_sort($perso_xp, $perso_grade, $cible_xp, $cible_grade, $esquive
 // Fonction de calcul et mise à jour d'xp
 // calcul_xp(cibleur, ciblé, type, réussite ou non)
 function calcul_xp($perso_id, $cible_id, $type, $reussite, $esquive, $cout=0) {
+
 	$gain_att 	= 0;
 	$gain_def 	= 0;
 	$base_xp	= 7;
@@ -265,7 +268,7 @@ function calcul_xp($perso_id, $cible_id, $type, $reussite, $esquive, $cout=0) {
 						$_SESSION['gain_xp']['att']+=$gain_att;
 					}
 				} else {
-					$gain_att = gainxp($nbpa,'frappe_famille', ($perso_rang - $cible_rang));
+					$gain_att = gainxp($nbpa,'famille');
 
 					$perso_carac['px']+=$gain_att;
 					maj_carac($perso_id, 'px', $perso_carac['px']);
@@ -276,7 +279,7 @@ function calcul_xp($perso_id, $cible_id, $type, $reussite, $esquive, $cout=0) {
 
 				if ($esquive==2) {
 
-					$gain_def = gainxp($nbpa,'esquiver_frappe', ($perso_rang - $cible_rang));
+					$gain_def = gainxp($nbpa,'esquiver_cible', ($perso_rang - $cible_rang));
 
 					$cible_carac['px']+=$gain_def;
 					maj_carac($cible_id, 'px', $cible_carac['px']);
@@ -285,12 +288,8 @@ function calcul_xp($perso_id, $cible_id, $type, $reussite, $esquive, $cout=0) {
 					$_SESSION['gain_xp']['def'][$cible_id]+=$gain_def;
 					//$_SESSION['temp']['info_action'] = $_SESSION['temp']['info_action']."<br/>Gain esquive : ".$gain;
 				}
-				if ($cible_grade == 5)
-					$gain_def = gainxp($nbpa,'attaque_recu_g5', $perso_rang - $cible_rang);
-				else if ($cible_grade == 4)
-					$gain_def = gainxp($nbpa,'attaque_recu_g4', $perso_rang - $cible_rang);
-				else
-					$gain_def = gainxp($nbpa,'attaque_recu', $perso_rang - $cible_rang);
+
+				$gain_def = gainxp($nbpa,'attaque_recu', $perso_rang - $cible_rang);
 
 				$cible_carac['px']+=$gain_def;
 				maj_carac($cible_id, 'px', $cible_carac['px']);
@@ -298,12 +297,8 @@ function calcul_xp($perso_id, $cible_id, $type, $reussite, $esquive, $cout=0) {
 				maj_carac($cible_id, 'pi', $cible_carac['pi']);
 				$_SESSION['gain_xp']['def'][$cible_id]+=$gain_def;
 			} else {
-				// Si c'est un T4 qui attaque un T1, le gain est différent
-				if ($perso_type==4 && $cible_type!=4) {
-					$gain_att = gainxp($nbpa,'attaque_esquive_t4', ($perso_rang - $cible_rang));
-				} else {
-					$gain_att = gainxp($nbpa,'attaque_esquive', ($perso_rang - $cible_rang));
-				}
+			
+				$gain_att = gainxp($nbpa,'attaque_esquive', ($perso_rang - $cible_rang));
 
 				$perso_carac['px']+=$gain_att;
 				maj_carac($perso_id, 'px', $perso_carac['px']);
@@ -311,7 +306,7 @@ function calcul_xp($perso_id, $cible_id, $type, $reussite, $esquive, $cout=0) {
 				maj_carac($perso_id, 'pi', $perso_carac['pi']);
 				$_SESSION['gain_xp']['att']+=$gain_att;
 
-				$gain_def = gainxp($nbpa,'esquiver_frappe', ($perso_rang - $cible_rang));
+				$gain_def = gainxp($nbpa,'esquiver_cible', ($perso_rang - $cible_rang));
 
 				$cible_carac['px']+=$gain_def;
 				maj_carac($cible_id, 'px', $cible_carac['px']);
@@ -324,18 +319,18 @@ function calcul_xp($perso_id, $cible_id, $type, $reussite, $esquive, $cout=0) {
 			//Calcul d'xp en cas de mort par une attaque au cac
 		case 'mort_att' :
 			if ($reussite && (!$esquive || $esquive==2)) {
-				if ($perso_type!=4 && $cible_type!=4) {
-					$gain_att = gainxp($nbpa,'tueur_t3_tue_t3', ($cible_rang - $perso_rang));
-				} elseif ($perso_type!=4 && $cible_type==4) {
-					$gain_att = gainxp($nbpa,'tueur_t3_tue_t4', ($cible_rang - $perso_rang));
-				} elseif ($perso_type==4 && $cible_type==4) {
-					$gain_att = gainxp($nbpa,'tueur_t4_tue_t4', ($cible_rang - $perso_rang));
-				} elseif ($cible_grade == -1) {
+			
+				if ($cible_grade == -1) {
 					$gain_att = gainxp($nbpa,'tueur_cafard');
 				} elseif ($famille) {
-					$gain_att = gainxp($nbpa,'tueur_famille', ($cible_rang - $perso_rang));
+					$gain_att = gainxp($nbpa,'famille');
+				} elseif ($cible_type!=4) {
+					$gain_att = gainxp($nbpa,'tueur_tue_t3', ($cible_rang - $perso_rang));
+				} elseif ($cible_type==4) {
+					$gain_att = gainxp($nbpa,'tueur_tue_t4', ($cible_rang - $perso_rang));
 				} else {
-					$gain_att = gainxp($nbpa,'tueur_t4_tue_t3', ($cible_rang - $perso_rang));
+					// Normalement ne passe jamais ici
+					$gain_att = gainxp($nbpa,'tueur_tue_t3', ($cible_rang - $perso_rang));
 				}
 
 
@@ -345,11 +340,9 @@ function calcul_xp($perso_id, $cible_id, $type, $reussite, $esquive, $cout=0) {
 				maj_carac($perso_id, 'pi', $perso_carac['pi']);
 				$_SESSION['gain_xp']['att']+=$gain_att;
 
-				if ($cible_type!=4) {
-					$gain_def = gainxp($nbpa,'tue_t3', ($cible_rang - $perso_rang));
-				} else {
-					$gain_def = gainxp($nbpa,'tue_t4', ($cible_rang - $perso_rang));
-				}
+	
+				$gain_def = gainxp($nbpa,'tue', ($cible_rang - $perso_rang));
+				
 
 				$cible_carac['px']+=$gain_def;
 				maj_carac($cible_id, 'px', $cible_carac['px']);
@@ -382,12 +375,8 @@ function calcul_xp($perso_id, $cible_id, $type, $reussite, $esquive, $cout=0) {
 
 						if ($famille) {
 
-							if ($esquive) {
-								$gain_att = gainxp($nbpa,'sort_surlanceur_esquive') * $cout;
-							} else {
-								$gain_att = gainxp($nbpa,'sort_surlanceur_reussi') * $cout;
-							}
-
+							$gain_att = gainxp($nbpa,'famille');
+							
 							$perso_carac['px']+=$gain_att;
 							maj_carac($perso_id, 'px', $perso_carac['px']);
 							$perso_carac['pi']+=$gain_att;
@@ -395,17 +384,17 @@ function calcul_xp($perso_id, $cible_id, $type, $reussite, $esquive, $cout=0) {
 							$_SESSION['gain_xp']['att']+=$gain_att;
 						} else {
 
-							$etiquette = 'sort_unique_';
+							$etiquette = 'sort_unique';
 
 							if ($esquive) {
-								$etiquette.='esquive_';
+								$etiquette.='_esquive';
 							}
 
-							if ($cible_type!=4) {
+							/*if ($cible_type!=4) {
 								$etiquette.='t3';
 							} else {
 								$etiquette.='t4';
-							}
+							}*/
 
 							$gain_att = gainxp($nbpa, $etiquette, ($perso_rang - $cible_rang)) * $cout;
 
@@ -423,19 +412,15 @@ function calcul_xp($perso_id, $cible_id, $type, $reussite, $esquive, $cout=0) {
 					//calcul du gain potentiel de la cible
 					if (!$esquive) {
 
-						if ($cible_grade == 5) {
-							$gain_def = gainxp($nbpa, 'attaque_recu_g5', ($perso_rang - $cible_rang)) * $cout;
-						} elseif ($cible_grade == 4) {
-							$gain_def = gainxp($nbpa, 'attaque_recu_g4', ($perso_rang - $cible_rang)) * $cout;
-						} else {
-							$gain_def = gainxp($nbpa, 'attaque_recu', ($perso_rang - $cible_rang)) * $cout;
-						}
+
+						$gain_def = gainxp($nbpa, 'attaque_recu', ($perso_rang - $cible_rang)) * $cout;
+
 
 					} else {
 						if ($_SESSION['zone']) {
-							$gain_def = gainxp($nbpa, 'esquiver_sort_zone', ($perso_rang - $cible_rang)) * $cout;
+							$gain_def = gainxp($nbpa, 'esquiver_zone', ($perso_rang - $cible_rang)) * $cout;
 						} else {
-							$gain_def = gainxp($nbpa, 'esquiver_sort_unique', ($perso_rang - $cible_rang)) * $cout;
+							$gain_def = gainxp($nbpa, 'esquiver_cible', ($perso_rang - $cible_rang)) * $cout;
 						}
 					}
 
@@ -454,11 +439,9 @@ function calcul_xp($perso_id, $cible_id, $type, $reussite, $esquive, $cout=0) {
 		case 'mort_sort' :
 			$gain_def = 0;
 			if ($reussite) {
-				if ($cible_type!=4) {
-					$gain_def = gainxp($nbpa,'tue_t3', ($cible_rang - $perso_rang));
-				} else {
-					$gain_def = gainxp($nbpa,'tue_t4', ($cible_rang - $perso_rang));
-				}
+
+				$gain_def = gainxp($nbpa,'tue', ($cible_rang - $perso_rang));
+
 				$cible_carac['px']+=$gain_def;
 				maj_carac($cible_id, 'px', $cible_carac['px']);
 				$cible_carac['pi']+=$gain_def;
@@ -487,17 +470,16 @@ function calcul_xp($perso_id, $cible_id, $type, $reussite, $esquive, $cout=0) {
 
 						//Kamule le 14/01 : je ne sais pas trop pourquoi il y avait une moyenne stable, mais ça tue les sorts sur les gros
 						// des gros donc je met une moyenne simple
-						//$rang_moy = moyenneStable($_SESSION['esquive']['table_rang']);
-						$rang_moy = round($_SESSION['esquive']['somme_rang']/$_SESSION['esquive']['nb']);
+						// Ganesh le 08/03/2013 : je la remet, na! et je prend la moyenne la plus élevé des deux, on est généreux chez EWO
+						$rang_moy_stable = moyenneStable($_SESSION['esquive']['table_rang']);
+						$rang_moy_normale = round($_SESSION['esquive']['somme_rang']/$_SESSION['esquive']['nb']);
+						$rang_moy = max($rang_moy_stable, $rang_moy_normale);
 					} else {
 						$rang_moy = 0;
 					}
 
-					if ($perso_type!=4) {
-						$gain_att = gainxp($nbpa,'sort_zone_t3', $rang_moy - $perso_rang)*$cout;
-					} else {
-						$gain_att = gainxp($nbpa,'sort_zone_t4', $rang_moy - $perso_rang)*$cout;
-					}
+					$gain_att = gainxp($nbpa,'sort_zone', $rang_moy - $perso_rang)*$cout;
+
 
 					$perso_carac['px']+=$gain_att;
 					maj_carac($perso_id, 'px', $perso_carac['px']);
@@ -518,7 +500,7 @@ function calcul_xp($perso_id, $cible_id, $type, $reussite, $esquive, $cout=0) {
 
 					// Entrainement inter-compte
 					if ($cible_type == 4 && $perso_type == 4) {
-						$gain_att = gainxp($nbpa,'entrainement_famille_attaquant');
+						$gain_att = gainxp($nbpa,'famille');
 					} else {
 						// Il y a triche!
 						$gain_att = gainxp($nbpa,'triche');
@@ -750,7 +732,12 @@ function calcul_xp($perso_id, $cible_id, $type, $reussite, $esquive, $cout=0) {
 	//Calcul du gain d'xp pour le mage ayant lancé un sort de zone
 	if ($_SESSION['mort']['valid'] && $_SESSION['mort']['nb']>0) {
 		//Calcul du gain du perso
-		$gain_att = gainxp($nbpa,'tueur_sort', $_SESSION['mort']['nb']);
+		
+		$rang_moy_stable = moyenneStable($_SESSION['mort']['table_rang']);
+		$rang_moy_normale = round($_SESSION['mort']['somme_rang']/$_SESSION['mort']['nb']);
+		$rang_moy = max($rang_moy_stable, $rang_moy_normale);
+		
+		$gain_att = gainxp($nbpa,'tueur_sort', $rang_moy);
 		$perso_carac['px']+=$gain_att;
 		maj_carac($perso_id, 'px', $perso_carac['px']);
 		$perso_carac['pi']+=$gain_att;
@@ -903,6 +890,8 @@ function destruction($perso_id, $cible) {
 	}
 	else $type=$cible[1];
 
+
+	
 	if ($type=="porte") {
 		//Recupération de la position de la porte
 		$sql		="SELECT pos_x, pos_y, carte_id, porte_liee_id, objet_lie FROM damier_porte WHERE id=".$cible[0];
@@ -981,12 +970,25 @@ function destruction($perso_id, $cible) {
 
 				$victime_carac_noalter=recup_carac($victime_id, array('pv'));
 
+				$em = new \persos\eventManager\eventManager();
+
+				$ev1 = $em->createEvent('explosion');		
+				$ev1->setSource($cible[0], $type);						
+				
+				$ev1->setAffected($victime_id,'perso');
+				
 				if (($victime_carac_noalter['pv']-$degat)<=0) {
 					maj_carac($victime_id, "pv", 0);
+					
+					// Ajout de l'evenement
+					$ev1->setState(1);
+			
+					
 					//Désincarnation
 					desincarne($victime_id);
 				}
 				else {
+					$ev1->setState(0);
 					maj_carac($victime_id, "pv", $victime_carac_noalter['pv']-$degat);
 				}
 			}
@@ -1059,12 +1061,25 @@ function destruction($perso_id, $cible) {
 
 				$victime_carac_noalter=recup_carac($victime_id, array('pv'));
 
+				
+				$em = new \persos\eventManager\eventManager();
+
+				$ev1 = $em->createEvent('explosion');		
+				$ev1->setSource($cible[0], $type);						
+				
+				$ev1->setAffected($victime_id,'perso');
+				
 				if (($victime_carac_noalter['pv']-$degat)<=0) {
 					maj_carac($victime_id, "pv", 0);
 					//Désincarnation
+					$ev1->setState(1);
+					
 					desincarne($victime_id);
 				}
 				else {
+				
+					$ev1->setState(0);
+				
 					maj_carac($victime_id, "pv", $victime_carac_noalter['pv']-$degat);
 				}
 			}
@@ -2007,6 +2022,8 @@ function applique_effet($tableau, $effet_id, $cible, $cible2=array(0,'',''), $rt
 							} else {
 								$nb_mort = ++$_SESSION['mort']['nb'];
 								meurtre($perso_id, $cible[0], 'mort_sort');
+								$_SESSION['mort']['somme_rang']+=calcul_rang($cible_caracs['px']);
+								$_SESSION['mort']['table_rang'][] = calcul_rang($cible_caracs['px']);								
 								$_SESSION['mort']['nom'][$nb_mort] = $cible_info['nom'];
 								$_SESSION['mort']['id'][$nb_mort] = $cible_info['id'];
 							}
@@ -2993,17 +3010,19 @@ function gainxp($nbpa,$action,$param = null) {
 	
 
 	// Calculs
-	$coef = 1;
-	$modificateur = 0;
+	$coef = 1; // Le coeficiant est multiplié au gain
+	$modificateur = 0; // le modificateur est ajouté au gain
 	
 	if(isset($gain[$action]['param'])) {
 		$nom_param = $gain[$action]['param'];
 		switch($nom_param) {
 			case 'plan':
+				// $param = coordonné Y
 				$modificateur = ceil(abs($param) / $gain[$action][$nom_param]);
 				break;
 
 			case 'esquiver': 
+				// $param = différence de rang
 				$modificateur = $param + $gain[$action][$nom_param];
 				$coef = 0;
 				break;			
@@ -3015,7 +3034,7 @@ function gainxp($nbpa,$action,$param = null) {
 			case 'attaque':
 				$modificateur = $param * $gain[$action][$nom_param];
 				break;
-
+				
 			case 'kill':
 				//gain pour le tué
 				//param = rang cible - rang tueur
@@ -3039,13 +3058,19 @@ function gainxp($nbpa,$action,$param = null) {
 		
 	}
 	
+	// Les bornes définissent les limites de l'aléatoire
+	// Exemple: borne_min = 5
+	//			borne_max = 8
+	//			coef = 1, modificateur = -2
+	//			le gain sera entre 3 et 6
 	if(isset($gain[$action]['borne_min'])) {
 		$calculxp = rand($gain[$action]['borne_min']*$coef+$modificateur,$gain[$action]['borne_max']*$coef+$modificateur);
 	} else {
 		$calculxp = $gain[$action]['val']*$coef+$modificateur;
 	}
 	
-
+	// Les cap définissent les valeurs minimal et maximal d'un gain
+	// Le cap est calculé avant la modulation par PA
 	if(isset($gain[$action]['cap_min'])) {
 		$cap_min = $gain[$action]['cap_min'];
 	} else {
@@ -3063,8 +3088,10 @@ function gainxp($nbpa,$action,$param = null) {
 		
 		$calculxp = ($calculxp / $nbpa) * 2;
 		
-		$gain_min = floor($calculxp);
-		$gain_max = ceil($calculxp);
+		// Si la modulation donne un resultat à virgule (exemple: 2.666...7), il y 
+		//   aura un rand entre la valeur entière supérieur et inférieur
+		$gain_min = max(floor($calculxp),1);
+		$gain_max = max(ceil($calculxp),1);
 		$calculxp = rand($gain_min,$gain_max);
 	}
 	

@@ -272,7 +272,7 @@ use \PDO as PDO,
 		}
 		
 		public function SelectPersoNameById($id) {
-			$sql = "SELECT SQL_CACHE persos.nom FROM persos WHERE id='?' LIMIT 1";
+			$sql = "SELECT SQL_CACHE persos.nom FROM persos WHERE id=? LIMIT 1";
 			$this->prepare($sql);
 			$this->executePreparedStatement(null,array($id));
 			

@@ -8,7 +8,6 @@ require_once __DIR__ . "/../../conf/master.php";
 include(SERVER_ROOT . "/persos/fonctions.php");
 include(SERVER_ROOT . "/jeu/fonctions.php");
 
-
 // Paramètres de connexion à la base de données
 $ewo_bdd = bdd_connect('ewo');
 ControleAcces('utilisateur',1);
@@ -33,6 +32,8 @@ $_SESSION['esquive']['nb'] = 0;
 $_SESSION['event_effect']['malus'] = 0 ;
 $_SESSION['esquive']['somme_rang'] = 0;
 $_SESSION['esquive']['table_rang'] = array();
+$_SESSION['mort']['somme_rang'] = 0;
+$_SESSION['mort']['table_rang'] = array();
 
 //recup des infos perso
 $perso_id     		= $_SESSION['persos']['current_id'];
@@ -191,6 +192,7 @@ if(isset($action_id)){
 	// S'il s'agit d'un entrainement ou d'une attaque au cac, on vérifie que la cible n'est pas partie
 	$present2 = 1;
 	if($action_info['type_action']=='attaque' || $action_info['type_action']=='entrainement'){
+
 		if($type=='persos'){
 			$sql        = "SELECT * FROM damier_$type WHERE $type_id='$cible_id'";
 			$resultat    = mysql_query($sql)or die (mysql_error());
@@ -213,6 +215,7 @@ if(isset($action_id)){
 				}
 			}
 		}
+
 	}
 	else { //Sinon on verifie que le perso est dans le champs de vision
 		if($type=='persos'){
@@ -257,6 +260,8 @@ if(isset($action_id)){
 
 	}
 
+
+	
 	//Recupération du centre de la zone de l'action
 	//Recuperation de la taille de la zone d'effet
 	$zone=$action_info['zone'];
@@ -961,7 +966,7 @@ if(isset($action_id)){
 	 * GESTION DES EVENEMENTS
 	 * ========================================================================= */
 
-	$evman = new persos\event\eventManager();
+	$evman = new persos\eventManager\eventManager();
 
 	//$_SESSION['debug_event0'] = $_SESSION;
 if(!isset($_SESSION['gain_xp']['att']))
