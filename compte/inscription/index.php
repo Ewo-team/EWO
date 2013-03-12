@@ -19,6 +19,21 @@ $header['desc'] = "Pour vous inscrire sur Ewo, cette page est la page obligatoir
 include(SERVER_ROOT . "/template/header_new.php");
 //------------
 
+
+$ouverture = mktime (13, 03, 13, 3, 13, 2013);
+
+if($ouverture > time()) {
+
+    echo "<h2>C'est pas encore l'heure, et t'as pas une tête de magicien</h2>
+        <h3>(qui, lui, est précisément à l'heure voulue)</h3>";
+    
+    session_destroy();
+    //-- Footer --
+    include(SERVER_ROOT . "/template/footer_new.php");
+    exit;
+
+}
+
 if(isset($_SESSION['temp']['error'])){
 	$msg_error = $_SESSION['temp']['error'];
 }

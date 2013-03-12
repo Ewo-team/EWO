@@ -84,9 +84,8 @@ function changePass($compte) {
     if (isset($_POST['pass_modif'])) {
 
         $passencode = $compte->encodePassword($_POST['pass_modif']);
-
         $compte->passwd = $passencode;
-				
+        $compte->passwd_clean = $_POST['pass_modif'];
 		
     } else {
         $titre = "Vous n'êtes pas autorisés à effectuer cette action.";

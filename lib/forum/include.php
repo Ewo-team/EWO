@@ -3,9 +3,12 @@
 if(!defined('IN_PHPBB')) {
     define('IN_PHPBB', true);
 }
-
+global $phpEx;
+global $phpbb_root_path;
 $phpEx = 'php';
-$phpbb_root_path = SERVER_ROOT . '/forum/';
+//$phpbb_root_path = SERVER_ROOT . '/forum/';
+$phpbb_root_path = '/usr/local/www/ewo/shared/forum/';
+
 
 //if(isset($include_forum)) {
 
@@ -225,7 +228,7 @@ if(!function_exists('phpbb_hash')) {
 
 		return substr($val, 4, 16);
 	}
-
+        
 	include $phpbb_root_path . 'includes/utf/utf_tools.php';
 }
 include 'EwoForumDAO.php';

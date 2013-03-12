@@ -71,7 +71,7 @@ if (isset($_POST['email'])) {
     } else {
         // Le compte n'existe pas
         $titre = "Erreur de compte";
-        $text = "Ce compte n'existe pas'.";
+        $text = "Ce compte n'existe pas.";
         $lien = "..";
         gestion_erreur($titre, $text, $lien);
     }

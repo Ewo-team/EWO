@@ -35,6 +35,7 @@ class EwoForum {
         $this->forum->addPerso($pseudo, $clean, $pass, $mail, $email_hash);
     }
     
+    
 	public function selectIdByName($pseudo) {
 		$pseudo = utf8_clean_string($pseudo);
 		$result = $this->forum->selectPerso($pseudo);
@@ -118,6 +119,9 @@ class EwoForum {
 
         $liste_persos = $this->jeu->listePersos($this->id);
 
+        
+        $liste_persos = array_map("utf8_clean_string", $liste_persos);
+        
         $this->forum->setHash($liste_persos,$hash);
     }
     

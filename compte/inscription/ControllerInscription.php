@@ -20,6 +20,14 @@ $ewo = bdd_connect('ewo');
 $dao = InscriptionDAO::getInstance();
 
 
+$ouverture = mktime (13, 03, 13, 3, 13, 2013);
+
+if($ouverture > time()) {
+
+    exit;
+
+}
+
 // Mise sous variables des données récupérées
 $nom = ucfirst(htmlspecialchars(strip_tags($_POST['nom']), ENT_COMPAT, 'UTF-8'));
 $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);

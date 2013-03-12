@@ -17,7 +17,7 @@ class Compte {
 
     public $id;
     private $dao;
-    private $forum;
+    public $passwd_clean;
     private $options = array();
     private $changed = array();
     private $initialized;
@@ -30,6 +30,7 @@ class Compte {
     }
     
     public function __destruct() {
+
         if(count($this->changed > 0)) {
             $change = array();
 
@@ -57,9 +58,9 @@ class Compte {
                 }
             }
 			
-			if($name == 'passwd') {
-				forum_passwd($this->Id, $value);
-			}
+            if($name == 'passwd') {
+                    forum_passwd($this->id, $this->passwd_clean);
+            }
             
             $this->changed[] = $name;  
             $this->options[$name] = $value;        
@@ -164,10 +165,11 @@ function departVacances(){
 
 function forum_passwd($id, $pwd) {
 	include_once (SERVER_ROOT . '/lib/forum/ewo_forum.php');
-	
+
 	$forum = new \EwoForum($id);		
-	
+
 	$forum->changePasswords($pwd);
+
 }
 
 ?>

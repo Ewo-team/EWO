@@ -23,7 +23,6 @@ class EwoForumDAO extends ConnecteurDAO {
         $this->executePreparedStatement(null,array($user_id));
         $result = $this->fetchAll();
         $liste = array();
-        
         foreach($result as $ligne) {
             $liste[] = $ligne['nom'];
         }
@@ -35,7 +34,7 @@ class EwoForumDAO extends ConnecteurDAO {
         $sql = 'UPDATE phpbb_users SET user_password = :hash WHERE username_clean = :pseudo';
         $query = $this->prepare($sql);
         foreach ($pseudo as $p) {
-            $this->executePreparedStatement($query,array(':hash' => $hash, ':pseudo' => $p));        
+            $this->executePreparedStatement($query,array(':hash' => $hash, ':pseudo' => $p));    
         }
     }
     
