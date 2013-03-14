@@ -1,6 +1,6 @@
 <?php
 
-use persos\eventManager\eventFormatter as eventFormatter;
+use \persos\eventManager\eventFormatter as eventFormatter;
 
 require __DIR__ . '/../../conf/master.php';
 

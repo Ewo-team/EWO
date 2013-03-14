@@ -87,10 +87,10 @@ $js->addScript('carte');
 
 <div align='center'>
 			<!-- Affichage des coordonn�es terrestres-->
-			<div id="fond_carte_terre_coord" style="visibility:hidden">Position en X : <span id="fond_carte_terre_coordX"></span> | Position en Y : <span id="fond_carte_terre_coordY"></span></div>
+			<!-- <div id="fond_carte_terre_coord" style="visibility:hidden">Position en X : <span id="fond_carte_terre_coordX"></span> | Position en Y : <span id="fond_carte_terre_coordY"></span></div>-->
 			<!-- Fin affichage des coordonn�es terrestres -->
 			<div class='centrage'>
-				<div id='fond_carte_terre'>
+				<div id='fond_carte_terre' style="background-image: url(<?php SERVER_URL; ?>/images/althian.png);">
 				<?php if (ControleAcces('utilisateur',0) == TRUE){
 						echo "<span class='fond_carte' id='carte_terre_portes' style='display:block;'><img src='".SERVER_URL."/jeu/carte/carte_terre.php?porte=1' alt='terre'></span> ";
 						echo "<span class='fond_carte' id='carte_terre_boucliers' style='display:block;'><img src='".SERVER_URL."/jeu/carte/carte_terre.php?bouclier=1' alt='terre'></span>";

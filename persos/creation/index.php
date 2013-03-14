@@ -157,66 +157,82 @@ $js->AddScript('formstep');
             <fieldset>
 
 
-            <label for="nom_perso">Nom du personnage :
+            <label for="nom1">Nom du personnage :
                 <input id='nom1' name="nom1" type="text" value="" maxlengh='64' />
             </label>
 
-            <select id='sexe1' name='sexe1' title='Choisissez le sexe du personnage'>
-                <option value='1'>Homme</option>
-                <option value='2'>Femme</option>
-                <option value='3'>Autre</option>
-            </select>
+            <label for="sexe1">Sexe : 
+				<select id='sexe1' name='sexe1' title='Choisissez le sexe du personnage'>
+					<option value='1'>Homme</option>
+					<option value='2'>Femme</option>
+					<option value='3'>Autre</option>
+				</select>
+			</label>
 
-            <?php if($camp == null || $camp == "humain") { echo \conf\Helpers::getSelectOption($liste[1], "choixclasse1humain", null, "Sélectionnez votre classe"); } ?>        
-            <?php if($camp == null || $camp == "ange") { echo \conf\Helpers::getSelectOption($liste[3], "choixclasse1ange", null, "Sélectionnez votre classe"); } ?>
-            <?php if($camp == null || $camp == "demon") { echo \conf\Helpers::getSelectOption($liste[4], "choixclasse1demon", null, "Sélectionnez votre classe"); } ?>
-
-            <div id="perso2">
-                <label for="nom_perso">Nom du personnage :
+			<label for="classe1">Classe : 
+				<?php if($camp == null || $camp == "humain") { echo \conf\Helpers::getSelectOption($liste[1], "choixclasse1humain", null, "Sélectionnez votre classe"); } ?>        
+				<?php if($camp == null || $camp == "ange") { echo \conf\Helpers::getSelectOption($liste[3], "choixclasse1ange", null, "Sélectionnez votre classe"); } ?>
+				<?php if($camp == null || $camp == "demon") { echo \conf\Helpers::getSelectOption($liste[4], "choixclasse1demon", null, "Sélectionnez votre classe"); } ?>
+			</label>
+            <div id="perso2" class="perso_sup">
+                <label for="nom2">Nom du personnage :
                     <input name="nom2" type="text" value="" maxlengh='64' />
                 </label>
 
+				<label for="sexe2">Sexe : 					
                 <select name='sexe2' title='Choisissez le sexe du personnage'>
                     <option value='1'>Homme</option>
                     <option value='2'>Femme</option>
                     <option value='3'>Autre</option>
                 </select>
+				</label>
 
+				<label for="classe2">Classe : 
                 <?php if($camp == null || $camp == "humain") { echo \conf\Helpers::getSelectOption($liste[1], "choixclasse2humain", null, "Sélectionnez votre classe"); } ?>        
                 <?php if($camp == null || $camp == "ange") { echo \conf\Helpers::getSelectOption($liste[3], "choixclasse2ange", null, "Sélectionnez votre classe"); } ?>
                 <?php if($camp == null || $camp == "demon") { echo \conf\Helpers::getSelectOption($liste[4], "choixclasse2demon", null, "Sélectionnez votre classe"); } ?>                    
+				</label>
             </div>
                 
-            <div id="perso3">
-                <label for="nom_perso">Nom du personnage :
+            <div id="perso3" class="perso_sup">
+                <label for="nom3">Nom du personnage :
                     <input name="nom3" type="text" value="" maxlengh='64' />
                 </label>
+				
 
+				<label for="sexe3">Sexe : 
                 <select name='sexe3' title='Choisissez le sexe du personnage'>
                     <option value='1'>Homme</option>
                     <option value='2'>Femme</option>
                     <option value='3'>Autre</option>
                 </select>
+				</label>
 
+				<label for="classe3">Classe : 
                 <?php if($camp == null || $camp == "humain") { echo \conf\Helpers::getSelectOption($liste[1], "choixclasse3humain", null, "Sélectionnez votre classe"); } ?>        
                 <?php if($camp == null || $camp == "ange") { echo \conf\Helpers::getSelectOption($liste[3], "choixclasse3ange", null, "Sélectionnez votre classe"); } ?>
                 <?php if($camp == null || $camp == "demon") { echo \conf\Helpers::getSelectOption($liste[4], "choixclasse3demon", null, "Sélectionnez votre classe"); } ?>                    
+				</label>
             </div>
                 
-            <div id="perso4">
-                <label for="nom_perso">Nom du personnage :
+            <div id="perso4" class="perso_sup">
+                <label for="nom4">Nom du personnage :
                     <input name="nom4" type="text" value="" maxlengh='64' />
                 </label>
 
+				<label for="sexe4">Sexe : 
                 <select name='sexe4' title='Choisissez le sexe du personnage'>
                     <option value='1'>Homme</option>
                     <option value='2'>Femme</option>
                     <option value='3'>Autre</option>
                 </select>
+				</label>
 
+				<label for="classe4">Classe : 
                 <?php if($camp == null || $camp == "humain") { echo \conf\Helpers::getSelectOption($liste[1], "choixclasse4humain", null, "Sélectionnez votre classe"); } ?>        
                 <?php if($camp == null || $camp == "ange") { echo \conf\Helpers::getSelectOption($liste[3], "choixclasse4ange", null, "Sélectionnez votre classe"); } ?>
                 <?php if($camp == null || $camp == "demon") { echo \conf\Helpers::getSelectOption($liste[4], "choixclasse4demon", null, "Sélectionnez votre classe"); } ?>                    
+				</label>
             </div>                
 
             <input type="submit" class="submit" name="Submit" value="Donnez vie à vos personnage" />

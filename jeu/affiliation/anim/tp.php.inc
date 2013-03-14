@@ -2,6 +2,9 @@
 
 namespace jeu\affiliation;
 
+use \persos\eventManager\eventManager as eventManager;
+use \persos\eventManager\eventFormatter as eventFormatter;
+
 /**
  * Téléporter un affilié
  * @author Benjamin Herbomez <benjamin.herbomez@gmail.com>

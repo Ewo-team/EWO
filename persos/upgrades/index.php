@@ -1,6 +1,6 @@
 <?php
 //-- Header --
-require_once __DIR__ . '/../conf/master.php';
+require_once __DIR__ . '/../../conf/master.php';
 
 include(SERVER_ROOT . "/template/header_new.php");
 /*-- Connexion basic requise --*/

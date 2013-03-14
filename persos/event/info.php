@@ -1,5 +1,5 @@
 <?php
-use persos\eventManager\eventFormatter as eventFormatter;
+use \persos\eventManager\eventFormatter as eventFormatter;
 
 require __DIR__ . '/../../conf/master.php';
 
@@ -24,12 +24,13 @@ if(isset($_GET['mat']) && is_numeric($_GET['mat'])){
 	'races AS r WHERE p.grade_id = r.grade_id AND p.race_id = r.race_id '.
 	'AND p.id = '.$mat.' AND r.camp_id = c.id;';*/
 	
-	$sql = 'SELECT p.nom, p.background AS background, x.sexe AS sexe, c.nom AS camp, r.nom AS grade, p.galon_id AS galon, p.grade_id, p.mdj, p.faction_id, p.nom_race, s.id as superieur_mat, s.nom as superieur_nom '.
+	$sql = 'SELECT p.nom, cl.Titre as classe_titre, cl.Sub as classe_sub, p.background AS background, x.sexe AS sexe, c.nom AS camp, r.nom AS grade, p.galon_id AS galon, p.grade_id, p.mdj, p.faction_id, p.nom_race, s.id as superieur_mat, s.nom as superieur_nom '.
 	'FROM persos AS p '.
 	'LEFT JOIN sexe AS x ON (p.sexe = x.id) '.
 	'LEFT JOIN persos AS s ON (p.superieur_id = s.id) '.
 	'LEFT JOIN races AS r ON (p.race_id = r.race_id AND p.grade_id = r.grade_id) '.
 	'LEFT JOIN camps AS c ON (r.camp_id = c.id) '.
+	'LEFT JOIN classes AS cl ON (cl.Camps = c.id AND cl.Id = p.classe) '.
 	'WHERE p.id = '.$mat.';';
 	$res = mysql_query($sql, $bdd);
 	$perso = mysql_fetch_assoc($res);
@@ -60,7 +61,7 @@ if(isset($_GET['mat']) && is_numeric($_GET['mat'])){
 			<tr class='tab_tr_ligne1'>
 				<td><i>Grade : </i></td>
 				<td><?php echo htmlspecialchars_decode($faction['grade']); ?> (<?php echo $perso['grade_id']; ?>)</td>
-			</tr>
+			</tr>		
 		</table>
 		</td>
 	</tr>
@@ -71,6 +72,7 @@ if(isset($_GET['mat']) && is_numeric($_GET['mat'])){
         
         $race_affichage = ($perso['nom_race']) ?: $perso['camp'] ;
         $grade_affichage = ($perso['nom_race']) ? "Grade " . $perso['grade_id'] : htmlspecialchars_decode($perso['grade']).' ('.$perso['grade_id'].')' ;
+		$classe_affichage = ($perso['classe_titre']) ? "<b>" . $perso['classe_titre'] . "</b><br>" . $perso['classe_sub'] : "" ;
         
 	?>
 <table class="tab_list_perso" style="width: 49%;">
@@ -92,6 +94,10 @@ if(isset($_GET['mat']) && is_numeric($_GET['mat'])){
 				<td><i>Grade : </i></td>
 				<td><?php echo $grade_affichage; ?>, Galon <?php echo $perso['galon'] ?></td>
 			</tr>
+			<tr class='tab_tr_ligne1'>
+				<td><i>Classe : </i></td>
+				<td><?php echo $classe_affichage; ?></td>
+			</tr>				
 			<tr class='tab_tr_ligne0'>
 				<td><i>Sexe : </i></td>
 				<td><?php echo $perso['sexe']; ?></td>

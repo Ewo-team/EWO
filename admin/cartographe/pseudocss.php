@@ -15,9 +15,9 @@ if(isset($_SESSION['cartographe']['raw'])) {
 
         foreach($css as $couleur => $array) {
             $lignecss = '.damier_'.$array['nom'].' {
-                background: url('.SERVER_URL.'/images/decors/motifs/'.$array['img'].')';
+                background: url(../../../images/decors/motifs/'.$array['img'].')';
                 if(isset($array['back'])) {
-                    $lignecss .= PHP_EOL . ', url('.SERVER_URL.'/images/decors/motifs/'.$array['back'].')';
+                    $lignecss .= PHP_EOL . ', url(../../../images/decors/motifs/'.$array['back'].')';
                 }
                 $lignecss .= ';
                 width: 45px;
@@ -30,7 +30,7 @@ if(isset($_SESSION['cartographe']['raw'])) {
         }
     }
 	
-	file_put_contents(SERVER_ROOT . '/jeu/decors/css/'.$file.'.css', $cssfile);
+	file_put_contents(SERVER_ROOT . '/../../shared/decors/css/'.$file.'.css', $cssfile);
 }
 
 

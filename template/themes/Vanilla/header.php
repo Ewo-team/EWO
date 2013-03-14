@@ -95,16 +95,16 @@ $_SESSION['utilisateur']['template_mage']=true;
         ));
 
         
-        $less->compileFile(SERVER_ROOT . $template_url.'/less/ewo.less', SERVER_ROOT . $template_url.'/css/ewo.css'); 
+        $less->compileFile(SERVER_ROOT . $template_url.'/less/ewo.less', SERVER_ROOT . $template_url.'/css/ewo_'.md5(SERVER_URL).'.css'); 
         //$less->checkedCompile(SERVER_ROOT . $template_url.'/less/ewo.less', SERVER_ROOT . $template_url.'/css/ewo.css');    
     //} catch (Exception $e) {
         // Nothing to do here
     //}
-    echo '<link rel="stylesheet" href="'. SERVER_URL . $template_url.'/css/ewo.css?v='.filemtime( SERVER_ROOT . $template_url.'/css/ewo.css').'" type="text/css" />' . PHP_EOL;
+    echo '<link rel="stylesheet" href="'. SERVER_URL . $template_url.'/css/ewo_'.md5(SERVER_URL).'.css?v='.filemtime( SERVER_ROOT . $template_url.'/css/ewo_'.md5(SERVER_URL).'.css').'" type="text/css" />' . PHP_EOL;
     
     // Fichiers CSS supplémentaires
     if(isset($css_files)) {
-        $nom = md5($css_files);
+        $nom = md5($css_files . SERVER_URL);
         $array = explode(",", $css_files);
 
         

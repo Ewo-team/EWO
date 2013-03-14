@@ -1,6 +1,6 @@
 <?php
 
-use persos\event\eventFormatter as eventFormatter;
+use \persos\eventManager\eventFormatter as eventFormatter;
 
 
 require_once __DIR__ . "/../../conf/master.php";
@@ -966,11 +966,12 @@ if(isset($action_id)){
 	 * GESTION DES EVENEMENTS
 	 * ========================================================================= */
 
-	$evman = new persos\eventManager\eventManager();
-
+	$evman = new \persos\eventManager\eventManager();
+	echo 'create event ';
 	//$_SESSION['debug_event0'] = $_SESSION;
 if(!isset($_SESSION['gain_xp']['att']))
 	$_SESSION['gain_xp']['att']=0;
+	echo 'prepare action ('.$type_action.') ';
 	switch($type_action){
 		case 'attaque':
 			$id_cible=(int)$_SESSION['esquive']['mat'][1];
@@ -1062,6 +1063,13 @@ if(!isset($_SESSION['gain_xp']['att']))
 			}
 			break;
 		case 'entrainement':
+/*
+									$em = new \persos\eventManager\eventManager();
+									$ev1 = $em->createEvent('special');
+									$ev1->setSource($perso_id, 'perso');
+									$ev1->infos->addPublicInfo('m',$events[$ix]);
+*/		
+		echo 'add entrainement event... ';
 			$cible_id = $_SESSION['esquive']['mat'][1];
 			$ev_entr = $evman->createEvent('entraine');
 			$ev_entr->setSource($current_perso_id, eventFormatter::convertType('perso'));
@@ -1070,6 +1078,7 @@ if(!isset($_SESSION['gain_xp']['att']))
 				$ev_entr->setAffected($cible_id,eventFormatter::convertType('perso'));
 				$ev_entr->infos->addPrivateInfo('xpD',$_SESSION['gain_xp']['def'][$cible_id]);
 			}
+			echo 'Done!';
 			break;
 		case 'reparation':
 			$cible_id = $_SESSION['reparation']['cible'];

@@ -1,6 +1,6 @@
 <?php
 //-- Header --
-require_once __DIR__ . '/../conf/master.php';
+require_once __DIR__ . '/../../conf/master.php';
 
 /*-- Connexion basic requise --*/
 ControleAcces('utilisateur',1);

@@ -1629,7 +1629,7 @@ function maj_pos($inc, $caracs) {
 									$ix = $case['degats_event'];
 									
 									$events = SPECIAL_EVENT::$INDEX;
-									$em = new persos\eventManager\eventManager();
+									$em = new \persos\eventManager\eventManager();
 									$ev1 = $em->createEvent('special');
 									$ev1->setSource($perso_id, 'perso');
 									$ev1->infos->addPublicInfo('m',$events[$ix]);
@@ -2239,7 +2239,7 @@ function applique_effet($tableau, $effet_id, $cible, $cible2=array(0,'',''), $rt
 		case 'event_mouv' :
 			if ($cible[1]=='allie' || $cible[1]=='ennemi' || $cible[1]=='both' || $cible[1]=='persos') {
 			
-				$em = new persos\event\eventManager();
+				$em = new \persos\event\eventManager();
 				$ev1 = $em->createEvent('mouv');
 				$ev1->setSource($cible[0], 'perso');
 				$ev1->infos->addPrivateInfo('x',0);

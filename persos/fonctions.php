@@ -848,7 +848,7 @@ function change_race_grade_galon($id_perso, $new_race = NULL, $new_grade = NULL,
 		}
 		
 		if($old_grade != $new_grade) {
-			$em = new persos\eventManager\eventManager();
+			$em = new \persos\eventManager\eventManager();
 			$ev1 = $em->createEvent('grade');
 			$ev1->setSource($id_perso, 'perso');
 			$ev1->infos->addPublicInfo('i',$old_grade);

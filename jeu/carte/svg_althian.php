@@ -5,7 +5,6 @@ namespace jeu\carte;
 /**
  * Carte de la terre
  *
- * @author Anarion <anarion@ewo.fr>
  * @version 1.0
  * @package carte
  */

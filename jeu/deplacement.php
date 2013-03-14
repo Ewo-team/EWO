@@ -1,8 +1,8 @@
 <?php
 
 namespace jeu;
-use persos\eventManager\eventManager as eventManager;
-use persos\eventManager\SPECIAL_EVENT as SPECIAL_EVENT;
+use \persos\eventManager\eventManager as eventManager;
+use \persos\eventManager\SPECIAL_EVENT as SPECIAL_EVENT;
 
 
 require_once __DIR__ . '/../conf/master.php';
