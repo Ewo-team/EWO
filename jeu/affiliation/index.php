@@ -12,6 +12,8 @@ namespace jeu\affiliation;
     //-- Header --
     require __DIR__ . '/../../conf/master.php';
 
+    ob_start();
+    include(SERVER_ROOT."/template/header_new.php");
 	//Il faut être connecté
 	ControleAcces('utilisateur',1);
 	
@@ -77,7 +79,7 @@ namespace jeu\affiliation;
     }
     
 
-    include(SERVER_ROOT."/template/header_new.php");
+  
     echo '
 	<link rel="stylesheet" href="',SERVER_ROOT,'/affiliation/style.css" type="text/css" />
         '.$links.'
@@ -88,7 +90,7 @@ namespace jeu\affiliation;
     echo '
         </div>
         ';
-
+    ob_flush();
     //-- Footer --
     include(SERVER_ROOT."/template/footer_new.php");
     //------------
