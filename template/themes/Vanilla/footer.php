@@ -22,7 +22,7 @@ if (isset($pagetype)) {
 
 <!-- Start footer -->
 <div id='<?php echo $footer; ?>' <?php echo $width_content_jeu; ?>>
-			<p><b>Ewo</b> designé et développé par <b>La Team Ewo</b></p>
+			<p>Personne ne va lire ce texte</p>
 			<?php /*
 				$fin = getmicrotime();
 				$page_time = round($fin-$debut, 3);

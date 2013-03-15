@@ -1372,7 +1372,7 @@ function lignePerso($perso,$carac,$inc){
 	//Icone
 	$retour[]	= '<td class="tab_td_icone"><img src="'.SERVER_URL.'/images/'.$url.'" alt="avatar" title="Avatar de '.$nom.'" /></td>';
 	//Nom et matricule (avec lien sur la page d'évènement
-	$retour[]	= '<td class="tab_td_nom"><a href="'.SERVER_URL.'/persos/event/?id='.$id.'">'.$nom.' ('.$id.')</a> <a href="'.SERVER_URL.'/persos/editer_perso.php?id='.$id.'"><img src="'.SERVER_URL.'/images/site/reply.png"</a></td>';
+	$retour[]	= '<td class="tab_td_nom"><a href="'.SERVER_URL.'/persos/event/?id='.$id.'">'.$nom.' ('.$id.')</a> <!-- <a href="'.SERVER_URL.'/persos/editer_perso.php?id='.$id.'"><img src="'.SERVER_URL.'/images/site/reply.png"</a>--></td>';
 	//Points de vie (restants et total)
 	$retour[]	= persoCaracCase($pv,'fonce',$pv_max,1);
 	//Mouvements (restants et total)

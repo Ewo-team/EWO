@@ -5,7 +5,7 @@
 			<table width='100%'>		
 				<tr>
 					<td id="carac_xp"><a href="../persos/upgrades/">
-					<?php	echo "Px ".$caracs['px']." | Pi ".$caracs['pi'].""; ?>
+					<?php	echo "Px ".$caracs['px']." | Pi ".$caracs['pi'].""; echo '<img src="'.SERVER_URL.'/images/site/reply.png"'; ?>
                                         </a></td>
                                         <td><span>(Rang <?php echo $perso_rang; ?>)</span></td>
 				</tr>

@@ -31,7 +31,7 @@ if (isset($template_on)) {
 
     //$menu['jeu'][] = array('url' => SERVER_URL.'/bug/', 'nom' => 'Bugs');
     $menu['jeu'][] = array('url' => SERVER_URL . '/site/chat/', 'nom' => 'Chat');
-    $menu['jeu'][] = array('url' => SERVER_URL . '/site/partenaires/', 'nom' => 'Partenaires');
+    $menu['jeu'][] = array('url' => 'http://wiki.ewo-le-monde.com/doku.php?id=jeu:teamewo', 'nom' => 'Team EWO');
     $menu['jeu'][] = array('url' => 'http://blog.ewo-le-monde.com', 'nom' => 'Blog d\'Ewo');
     $menu['jeu'][] = array('url' => SERVER_URL . '/site/contact/', 'nom' => 'Contact');
     $menu['jeu'][] = array('url' => SERVER_URL . '/site/boutique/', 'nom' => 'Boutique');
