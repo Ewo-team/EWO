@@ -23,7 +23,7 @@ if(!isset($_SESSION['utilisateur']['id'])){
     if (!$q) die();
 
 
-    $sql    = AffiliationDAO::getInstance();
+    $sql    = jeu\affiliation\AffiliationDAO::getInstance();
     //Selection des persos qui n'ont pas de faction
     $query_alter  = '
         SELECT

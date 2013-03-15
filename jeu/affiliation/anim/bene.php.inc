@@ -309,7 +309,7 @@ if($post){
 ?>
 <script type="text/javascript">
     <!--
-	var autocomplete_url =  "../ajax/affi.php?sup=<?php echo $_GET['mat'];?>&";
+	var autocomplete_url =  "../../ajax/affi.php?sup=<?php echo $_GET['mat'];?>&";
 
         function handleDuree(){
             var val = jQuery('select[name="duree_ctrl"]').val();
