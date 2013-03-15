@@ -127,7 +127,7 @@ if ((!empty($_POST['mat']) || !empty($_POST['liste'])) AND !empty($_POST['text']
 			if(!preg_match('#[a-z]#i',$mat) && !(preg_match('#[^0-9]#',$mat) && preg_match('#[^a-z]#i',$mat)) && !empty($mat)){
 				$res = $conn->VerifPersoId($mat);
 			}	
-			if(!$res['count']){
+			if(!isset($res['count']) || $res['count'] == false){
 				$badmat .= $mat.' ';
 			}
 		}
@@ -191,7 +191,7 @@ if ((!empty($_POST['mat']) || !empty($_POST['liste'])) AND !empty($_POST['text']
 				$mat = $mat[0];
 			}	
 			
-			if($mat != 0) {
+			if($mat > 0) {
 				$parametres = array($expediteur, $mat, $corps_id, $flag, $type_message, 0);
 				//-- Envoie de la bal a son destinataire
 				$sql_bal = $conn->InsertBalPrepare($sql_query, $parametres);
