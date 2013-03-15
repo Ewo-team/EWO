@@ -9,6 +9,8 @@ namespace jeu\affiliation;
  */
 
     $sups = Superieurs::getSups($_SESSION['persos']['superieur']);
+    
+    include('../../persos/fonctions.php');
 ?>
 <h2>Affiliation de mes personnages</h2>
 <table>
@@ -40,14 +42,16 @@ namespace jeu\affiliation;
                 $demande    = null;
             else
                 $demande    = $demande[0];
-
+            
+          	$xp = recup_carac($v, array('px'));
+            $xp = $xp[0];
             echo '
         <tr>
             <td><img src="',SERVER_URL,'/images/',icone_persos($v),'" alt="icon perso"/></td>
             <td><a href="',SERVER_URL,'/event/?id=',$v,'">',$v,'</a></td>
             <td>',$_SESSION['persos']['nom'][$k],'</td>
             <td>',$_SESSION['persos']['grade'][$k],'</td>
-            <td>',$_SESSION['persos']['galon'][$k],'</td>';
+            <td>',$_SESSION['persos']['galon'][$k], '</td>';
 
             if($_SESSION['persos']['superieur'][$k] == null){
                 if($demande != null){
@@ -57,7 +61,9 @@ namespace jeu\affiliation;
                 }
                 else{
                     echo '
-            <td colspan="3" style="text-align:center;"><strong>pas de supérieur</strong></td>
+            <td colspan="3" style="text-align:center;"><strong>pas de supérieur</strong></td>';
+                    if($xp >= 100)
+                    	echo '
             <td> <a href="index.php?p=1&amp;mat=',$v,'&amp;a=',PAGE_PERSO_AFFILIER,'">En choisir un</a> </td>';
                 }
             }

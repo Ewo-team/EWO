@@ -10,6 +10,14 @@ namespace jeu\affiliation;
 
     $sups = Superieurs::getAvailableSup($_SESSION['persos']['camp'][$id]);
 
+    include('../../../persos/fonctions.php');
+    $xp = recup_carac($v, array('px'));
+    $xp = $xp[0];
+    if($xp < 100){
+    	header('location: index.php');
+    	die();
+    }
+    
     if(isset($_GET['aff']) && is_numeric($_GET['aff']) && array_key_exists($_GET['aff'], $sups)){
         $sup = $sups[$_GET['aff']];
         AffiliationDAO::getInstance()->addAffiliationQuery($sup->id, $_GET['mat']);
