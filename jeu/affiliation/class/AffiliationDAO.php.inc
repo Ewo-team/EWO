@@ -263,7 +263,7 @@ Votre demande d\'affiliation à '.$sup_nom.' a été acceptée.');
             $eventManager = new EventManager();
                 $event = $eventManager->createEvent('affilia');
                 $event->setSource($affi_id, 'perso');
-                $event->setState(affilia::AFFI_AFFILIER);
+                $event->setState(\affilia::AFFI_AFFILIER);
                 $event->setAffected($sup_id, 'perso');
         }
 

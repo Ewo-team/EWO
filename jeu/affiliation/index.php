@@ -11,7 +11,6 @@ namespace jeu\affiliation;
  */
     //-- Header --
     require __DIR__ . '/../../conf/master.php';
-    include(SERVER_ROOT."/template/header_new.php");
 
 	//Il faut être connecté
 	ControleAcces('utilisateur',1);
@@ -26,7 +25,7 @@ namespace jeu\affiliation;
     require_once('config.php.inc');
 
     /**
-     * Selection de la pae actuelle
+     * Selection de la pgae actuelle
      */
     if(isset($_GET['p']) && array_key_exists($_GET['p'],$pages)){
         $p = $pages[$_GET['p']];
@@ -76,6 +75,9 @@ namespace jeu\affiliation;
             $links  .= ' | <a href="index.php">retour à l\'index</a>';
         $links  = '<div id="affiBoard">'.$links.'</div><hr class="affiHr"/>';
     }
+    
+
+    include(SERVER_ROOT."/template/header_new.php");
     echo '
 	<link rel="stylesheet" href="',SERVER_ROOT,'/affiliation/style.css" type="text/css" />
         '.$links.'

@@ -73,7 +73,7 @@ class BonusAffiManager{
         $stmt = BonusAffiManager::$sql->prepare($query);
         $stmt->execute(array(':camp' => $this->camp));
         $r = array();
-        foreach($stmt->fetchAll(PDO::FETCH_OBJ) as $v)
+        foreach($stmt->fetchAll(\PDO::FETCH_OBJ) as $v)
             $r[$v->id] = $v->nb;
         return $r;
     }

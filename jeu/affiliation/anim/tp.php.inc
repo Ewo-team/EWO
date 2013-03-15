@@ -39,7 +39,7 @@ if(isset($_POST['mat']) && isset($_POST['x']) && isset($_POST['y']) &&
 
         $stmt = $sql->prepare('SELECT * FROM `cartes` WHERE id=:id');
         $stmt->execute(array(':id' => $carte));
-        $carte = $stmt->fetch(PDO::FETCH_OBJ);
+        $carte = $stmt->fetch(\PDO::FETCH_OBJ);
 
         if($x >= $carte->x_min && $x <= $carte->x_max &&
            $y >= $carte->y_min && $y <= $carte->y_max){
