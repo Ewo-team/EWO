@@ -18,23 +18,23 @@ if(!isset($_SESSION['utilisateur']['id'])){
  * id : matricule du perso qui subit l'action
  * value : nouvelle valeure de grade
  */
-    if (!isset($_POST['mat']) || !is_numeric($_POST['mat']) ||
+    if (!isset($_POST['mat']) || !is_numeric($_POST['mat']) || !in_array($_POST['mat'], $_SESSION['persos']['id']) ||
             !isset($_POST['id']) || !is_numeric($_POST['id']) ||
             !isset($_POST['value']) || !is_numeric($_POST['value']))
         die();
 
-    include_once(SERVER_ROOT . '/legion/class/LegionConfig.php.inc');
-    include_once(SERVER_ROOT . '/legion/class/LegionConfig.php.inc');
-    include_once(SERVER_ROOT . '/legion/class/ManagerFactory.php.inc');
-    include_once(SERVER_ROOT . '/legion/class/DroitManager.php.inc');
-    require_once(SERVER_ROOT . '/legion/class/LegionDAO.php.inc');
-    require_once(SERVER_ROOT . '/legion/class/LegionDroits.php.inc');
+    include_once(SERVER_ROOT . '/jeu/legion/class/LegionConfig.php.inc');
+    include_once(SERVER_ROOT . '/jeu/legion/class/LegionConfig.php.inc');
+    include_once(SERVER_ROOT . '/jeu/legion/class/ManagerFactory.php.inc');
+    include_once(SERVER_ROOT . '/jeu/legion/class/DroitManager.php.inc');
+    require_once(SERVER_ROOT . '/jeu/legion/class/LegionDAO.php.inc');
+    require_once(SERVER_ROOT . '/jeu/legion/class/LegionDroits.php.inc');
 
-    use legions\LegionDAO       as LegionDAO;
-    use legions\ManagerFactory  as ManagerFactory;
-    use legions\LegionConfig    as LegionConfig;
-    use legions\DroitManager    as DroitManager;
-    use legions\LegionDroits    as LegionDroits;
+    use jeu\legion\LegionDAO       as LegionDAO;
+    use jeu\legion\ManagerFactory  as ManagerFactory;
+    use jeu\legion\LegionConfig    as LegionConfig;
+    use jeu\legion\DroitManager    as DroitManager;
+    use jeu\legion\LegionDroits    as LegionDroits;
 
     $id = array_keys($_SESSION['persos']['id'], $_POST['mat']);
     $id = $id[0];
@@ -45,7 +45,7 @@ if(!isset($_SESSION['utilisateur']['id'])){
 
     $droitManager = new DroitManager($_SESSION['persos']['faction']['droits'][$id]);
 
-    $droits = new LegionDroits($droitManager);
+    $droits = new LegionDroits($droitManager, $legion, $_POST['mat']);
 
     $attr = array();
     //Génération de la liste des grades attribuables

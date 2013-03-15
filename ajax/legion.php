@@ -12,7 +12,7 @@ if(!isset($_SESSION['utilisateur']['id'])){
 }
     require_once(SERVER_ROOT.'/jeu/legion/class/LegionDAO.php.inc');
 
-    use legions\LegionDAO as LegionDAO;
+    use jeu\legion\LegionDAO as LegionDAO;
 
     $sql = LegionDAO::getInstance();
 

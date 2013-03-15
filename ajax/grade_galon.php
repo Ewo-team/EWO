@@ -11,7 +11,7 @@ if(!isset($_SESSION['utilisateur']['id'])){
 
 bdd_connect('ewo');
     
-if(!isset($_GET['mat']) || !is_numeric($_GET['mat']))
+if(!isset($_GET['mat']) || !is_numeric($_GET['mat']) )
     die('{"error":"pas de mat"}');
 
 $query = 'SELECT `grade_id` as grade,`galon_id` as galon FROM `persos` WHERE `id` = '.$_GET['mat'].';';

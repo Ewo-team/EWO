@@ -13,17 +13,17 @@ if(!isset($_SESSION['utilisateur']['id'])){
 	exit;
 }
 
-    require_once(SERVER_ROOT.'/legion/class/LegionDAO.php.inc');
-    require_once(SERVER_ROOT.'/legion/class/DroitManager.php.inc');
-    require_once(SERVER_ROOT.'/legion/class/LegionDroits.php.inc');
-    require_once(SERVER_ROOT.'/legion/class/LegionConfig.php.inc');
-    require_once(SERVER_ROOT.'/legion/class/ManagerFactory.php.inc');
+    require_once(SERVER_ROOT.'/jeu/legion/class/LegionDAO.php.inc');
+    require_once(SERVER_ROOT.'/jeu/legion/class/DroitManager.php.inc');
+    require_once(SERVER_ROOT.'/jeu/legion/class/LegionDroits.php.inc');
+    require_once(SERVER_ROOT.'/jeu/legion/class/LegionConfig.php.inc');
+    require_once(SERVER_ROOT.'/jeu/legion/class/ManagerFactory.php.inc');
 
-    use legions\LegionDAO       as LegionDAO;
-    use legions\DroitManager    as DroitManager;
-    use legions\ManagerFactory  as ManagerFactory;
-    use legions\LegionConfig    as LegionConfig;
-    use legions\LegionDroits    as LegionDroits;
+    use jeu\legion\LegionDAO       as LegionDAO;
+    use jeu\legion\DroitManager    as DroitManager;
+    use jeu\legion\ManagerFactory  as ManagerFactory;
+    use jeu\legion\LegionConfig    as LegionConfig;
+    use jeu\legion\LegionDroits    as LegionDroits;
 
 
     if( !isset($_POST['c']) || !is_numeric($_POST['c']) ||
@@ -45,7 +45,7 @@ if(!isset($_SESSION['utilisateur']['id'])){
 
 
     $droitManager   = new DroitManager($_SESSION['persos']['faction']['droits'][$id]);
-    $droits         = new LegionDroits($droitManager);
+    $droits         = new LegionDroits($droitManager, $legion, $_POST['mat']);
 
     if(!$droits->canDo(LegionDroits::GERER_GRADE))
         die();
