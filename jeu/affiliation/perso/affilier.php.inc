@@ -11,7 +11,8 @@ namespace jeu\affiliation;
     $sups = Superieurs::getAvailableSup($_SESSION['persos']['camp'][$id]);
 
     include('../../../persos/fonctions.php');
-    $xp = recup_carac($v, array('px'));
+    
+    $xp = recup_carac($_GET ['mat'], array('px'));
     $xp = $xp[0];
     if($xp < 100){
     	header('location: index.php');
