@@ -96,7 +96,7 @@ if(isset($_POST['mat']) && isset($_POST['grade_perso']) && isset($_POST['galon_p
 ?>
 <script type="text/javascript">
     <!--
-	var autocomplete_url =  "../ajax/affi.php?sup=<?php echo $_GET['mat'];?>&";
+	var autocomplete_url =  "../../ajax/affi.php?sup=<?php echo $_GET['mat'];?>&";
 
     -->
 </script>

@@ -155,7 +155,7 @@ if($caracs['pv'] > 0){
 ?>
 <script type="text/javascript">
     <!--
-	var autocomplete_url =  "../ajax/affi.php?sup=<?php echo $_GET['mat'];?>&";
+	var autocomplete_url =  "../../ajax/affi.php?sup=<?php echo $_GET['mat'];?>&";
     -->
 </script>
 <link rel="stylesheet" href="js/jquery-ui-1.8.17.custom.css" type="text/css" />
