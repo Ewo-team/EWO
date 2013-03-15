@@ -48,7 +48,7 @@ namespace jeu\affiliation;
             echo '
         <tr>
             <td><img src="',SERVER_URL,'/images/',icone_persos($v),'" alt="icon perso"/></td>
-            <td><a href="',SERVER_URL,'/event/?id=',$v,'">',$v,'</a></td>
+            <td><a href="',SERVER_URL,'/persos/event/?id=',$v,'">',$v,'</a></td>
             <td>',$_SESSION['persos']['nom'][$k],'</td>
             <td>',$_SESSION['persos']['grade'][$k],'</td>
             <td>',$_SESSION['persos']['galon'][$k], '</td>';
