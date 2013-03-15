@@ -59,7 +59,7 @@ use \persos\eventManager\eventManager as eventManager;
                 WHERE '.$query;
             $stmt = $this->prepare($query);
             $stmt->execute($mats);
-            foreach ($stmt->fetchAll(PDO::FETCH_OBJ) as $v){
+            foreach ($stmt->fetchAll(\PDO::FETCH_OBJ) as $v){
                 $r[$v->id] = $v;
             }
             return $r;
@@ -111,7 +111,7 @@ use \persos\eventManager\eventManager as eventManager;
                     '.$query;
             $stmt = $this->prepare($query);
             $stmt->execute();
-            foreach ($stmt->fetchAll(PDO::FETCH_OBJ) as $v)
+            foreach ($stmt->fetchAll(\PDO::FETCH_OBJ) as $v)
                 $r[$v->id] = $v;
             return $r;
         }
@@ -159,7 +159,7 @@ use \persos\eventManager\eventManager as eventManager;
             $query = 'SELECT nb_suicide AS nb FROM persos WHERE id=:id';
             $stmt = $this->prepare($query);
             $stmt->execute(array(':id' => $perso_id));
-            $nb = $this->fetch($stmt, PDO::FETCH_ASSOC);
+            $nb = $this->fetch($stmt, \PDO::FETCH_ASSOC);
             $nb_suicide = $nb['nb'];
 
             $perte = $gain['suicide']['val']  + ($gain['suicide']['attaque'] * $nb_suicide );
@@ -303,14 +303,14 @@ Votre demande d\'affiliation à '.$sup_nom.' a été refusée.');
             $query = 'SELECT id, nom FROM persos WHERE superieur_id = :mat ORDER BY nom';
             $stmt = $this->prepare($query);
             $stmt->execute(array(':mat'=>$sup));
-            return $stmt->fetchAll(PDO::FETCH_OBJ);
+            return $stmt->fetchAll(\PDO::FETCH_OBJ);
         }
         
         function isSup($sup_id, $affi_id){
             $query = 'SELECT superieur_id FROM persos WHERE  id = :mat';
             $stmt = $this->prepare($query);
             $stmt->execute(array(':mat'=>$affi_id));
-            $val = $stmt->fetch(PDO::FETCH_OBJ);
+            $val = $stmt->fetch(\PDO::FETCH_OBJ);
             return $val && $val->superieur_id == $sup_id;
         }
         
