@@ -129,4 +129,10 @@ class EwoForumDAO extends ConnecteurDAO {
         $this->executePreparedStatement($query,array(':id' => $id, ':rank' => $rank));  	
 		//echo "UPDATE phpbb_users SET user_rank = $rank WHERE user_id = $id"; 		
 	}
+	
+	public function setCustomField($id,$field,$value) {
+		$sql = "REPLACE INTO phpbb_profile_fields_data (user_id, $field) VALUE (:id, :value)";
+        $query = $this->prepare($sql);
+        $this->executePreparedStatement($query,array(':id' => $id, ':value' => $value));  		
+	}
 }

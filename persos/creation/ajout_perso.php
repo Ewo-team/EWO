@@ -150,6 +150,8 @@ include_once(SERVER_ROOT."/persos/creation/controle_persos.php");
     $forum->createPerso($perso1->Nom, $_SESSION['utilisateur']['mail'], $_SESSION['utilisateur']['passwd']);
 		
     $forum->setRaceGrade($perso1->Nom, $perso1->Camp, 0, 1);
+	
+	$forum->setMatricule($perso2->Nom, $perso1->Mat);   
 
     if($gameplay == 'T4') {
         $perso2 = new persos\creation\CreationPerso();
@@ -191,7 +193,11 @@ include_once(SERVER_ROOT."/persos/creation/controle_persos.php");
 
         $forum->setRaceGrade($perso2->Nom, $perso2->Camp, 0, 1);        
         $forum->setRaceGrade($perso3->Nom, $perso3->Camp, 0, 1);   
-        $forum->setRaceGrade($perso4->Nom, $perso4->Camp, 0, 1);   
+        $forum->setRaceGrade($perso4->Nom, $perso4->Camp, 0, 1);           
+		
+		$forum->setMatricule($perso2->Nom, $perso2->Mat);        
+        $forum->setMatricule($perso3->Nom, $perso3->Mat);   
+        $forum->setMatricule($perso4->Nom, $perso4->Mat);   
     }
 
     $forum->lierComptes($_SESSION['utilisateur']['mail']);

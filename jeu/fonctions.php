@@ -1306,9 +1306,10 @@ function set_pos($perso_id, $pos_x_perso, $pos_y_perso, $carte_pos, $type='perso
 
 	$case = getCaseDecors($carte_pos, $pos_x_perso, $pos_y_perso);
 	
-	if(isset($case['block'])) {
+	// TODO 
+	/*if(isset($case['block'])) {
 		return false;
-	}
+	}*/
 
 	$sql="SELECT $id
 		FROM damier_$type

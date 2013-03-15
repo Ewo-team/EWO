@@ -640,7 +640,7 @@ if($val > 0 && $decors != null) {
 
     if($case) {
         if(isset($case["mouv"])) {
-            $val *= $case["mouv"];
+            //$val *= $case["mouv"];
         }
     }
 }

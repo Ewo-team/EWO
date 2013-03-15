@@ -54,6 +54,22 @@ class EwoForum {
     public function lierComptes($email) {
         $this->forum->setMasterId($email);
     }
+	
+	public function setMatricule($id, $mat) {
+	
+        if(!is_numeric($id)) {
+            $clean = utf8_clean_string($id);
+			
+			$id = $this->forum->selectPerso($clean);
+
+			$id = $id[0];
+        }
+		if($id) {		
+			$this->forum->setCustomField($id,'pf_matricule',$mat);
+		}
+	
+		
+	}
     
     public function setRaceGrade($id,$race,$grade,$galon) {
         

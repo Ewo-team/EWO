@@ -125,7 +125,7 @@ class Carte {
 			if(isset($this->_couleurs['races'][$camp])) {
 				$couleur = $this->_couleurs['races'][$camp];
 			} else {
-				$couleur = $couleurs['base'];
+				$couleur = $this->_couleurs['base'];
 			}
 			$this->addPerso($perso['pos_x'], $perso['pos_y'], $couleur, $perso['grade_id'], $perso['perso_id']);
 	

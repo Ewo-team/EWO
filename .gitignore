@@ -26,6 +26,9 @@ web.config
 #css compiled
 template/themes/*/css/generate
 
+#GPS 
+jeu/carte/*.png
+
 #uploaded images for legions
 legions/blasons/*.png
 >>>>>>> origin/dev-legions
