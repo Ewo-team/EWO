@@ -17,8 +17,92 @@ $header['desc'] = "Partenaires du projet Ewo ainsi que les scripts open source u
 include(SERVER_ROOT . "/template/header_new.php");
 //------------
 ?>
-    <h2>E.W.O. - Partenaires du projet</h2>
+    <h1>E.W.O. - Partenaires du projet</h1>
 
+
+
+    <p>Au cours de son (long) développement, le projet « EWO » a mis à contribution de nombreuses personnes. Aux origines du projet, l’équipe était bien différente de ce qu’elle est aujourd’hui. Certains ont abandonné par manque de temps, d’autres par manque de motivation ou d’intérêt. Mais tous ont apporté un peu ou beaucoup au jeu que nous connaissons aujourd’hui.</p>
+
+    <p>EWO est un jeu entièrement gratuit, entièrement conçu bénévolement. Alors si nous n’avons rien à leur offrir, nous tenons néanmoins à remercier tous les partenaires du projet ci-dessous. Nous espérons n’avoir oublié personne mais – si c’est le cas – n’hésitez pas à le faire remarquer.</p>
+
+
+    <h2>Administrateur en Chef, et Chef de Projet : Kazuya</h2>
+
+[i][b]Recherche appliquée et développement[/b][/i]
+
+[u]Programmeurs actifs et chefs de développement:[/u]
+
+- Ganesh
+- Elestel
+- Kazuya
+
+[u]Programmeurs passés :[/u]
+
+- Nybbas
+- Aigleblanc
+- Anarion
+- Le barge
+- Schepi
+- Salelodenouye
+
+[u]Contributeurs programmeurs:[/u]
+
+- Erase
+- Switch
+- Rewolution
+
+[i][b]Enluminures et développement Role Play[/b][/i]
+
+[u]Enlumineurs actifs et chefs de rédaction :[/u]
+
+- Kazuya
+- Selvaria
+
+[u]Enlumineurs passés :[/u]
+
+- Deyron
+- Anarion
+- LoO
+
+[u]Enlumineurs contributeurs :[/u]
+
+- Ganesh
+- Elestel
+- Jefferson
+- Miyuri
+- Bohors
+- Garba
+- Bellamy
+- Contrôle
+- Silice
+- Raoul
+- Xizor
+- Aigleblanc
+- …
+
+[i][b]Design et arts appliqués[/b][/i]
+
+[u]Designers actifs :[/u]
+
+- Aucun pour l’heure. Intéressés, s’adresser à l’administration.
+
+[u]Designers passés :[/u]
+
+- Aigleblanc
+- Francis-
+
+[u]Contributeurs designers :[/u]
+
+- Ganesh
+- Elestel
+[i]
+[b]Initiateurs du projet et/ou contributeurs annexes ou passés[/b][/i]
+
+- Aniol
+- MiKa
+- Salelodenouye    
+    
+    
     <div class='cadre upperleft'>
         <b>- Développement de EWO -</b>
         <ul>

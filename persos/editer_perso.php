@@ -30,7 +30,7 @@ $bal_reception = isset($infos['options'][3]) ? $infos['options'][3] : 0;
 $bal_htmltxt = isset($infos['options'][4]) ? $infos['options'][4] : 0;
 
 $_SESSION['temps']['page'] = "../persos/editer_perso.php?id=$id";
-
+/*
 ?>
 
 <link href="../js/lib/ckeditor/sample.css" rel="stylesheet" type="text/css" />
@@ -128,9 +128,11 @@ $_SESSION['temps']['page'] = "../persos/editer_perso.php?id=$id";
     $js->addLib('ckeditor/ckeditor');
     $js->addLib('ckeditor/sample');
     $js->addScript('wysiwyg');
-
+*/
 }
 
+
+echo '<h1>Fonctions temporairement désactivés</h1>';
 //-- Footer --
 include(SERVER_ROOT."/template/footer_new.php");
 //------------
