@@ -10,7 +10,6 @@ namespace jeu\legion;
  * @package legions
  */
 
-namespace legions;
 
     class Grade {
 

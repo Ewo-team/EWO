@@ -91,7 +91,7 @@ namespace jeu\legion;
                     }
 
                     $list = '';
-                    $demandes   = new DemandeFromLegion($_SESSION['utilisateur']['id']);
+                    $demandes   = new jeu\legion\DemandeFromLegion($_SESSION['utilisateur']['id']);
                     foreach($demandes->getDemandes() as $v){
                         if($v->getPersoId() == $_SESSION['persos']['id'][$id]){//Il y en a une
                             $factory 	= new ManagerFactory();
