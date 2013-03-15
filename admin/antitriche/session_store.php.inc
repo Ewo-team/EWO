@@ -1,11 +1,11 @@
 <?php
 	include('ref.php.inc');
+	require_once __DIR__ . '/../../conf/master.php';
 	require_once('class/AT.php.inc');
-	require_once($ref.'connexion/controle_connexion.php');
-	require_once($ref.'conf/connect.conf.php');
+	
+	include(SERVER_ROOT."/persos/fonctions.php");
 	
 	function get(){
-		session_start();
 		
 		if(!ControleAcces('admin;at',0))
 			return false;
