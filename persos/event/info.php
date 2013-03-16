@@ -24,15 +24,24 @@ if(isset($_GET['mat']) && is_numeric($_GET['mat'])){
 	'races AS r WHERE p.grade_id = r.grade_id AND p.race_id = r.race_id '.
 	'AND p.id = '.$mat.' AND r.camp_id = c.id;';*/
 	
-	$sql = 'SELECT p.nom, cl.Titre as classe_titre, cl.Sub as classe_sub, p.background AS background, x.sexe AS sexe, c.nom AS camp, r.nom AS grade, p.galon_id AS galon, p.grade_id, p.mdj, p.faction_id, p.nom_race, s.id as superieur_mat, s.nom as superieur_nom '.
-	'FROM persos AS p '.
-	'LEFT JOIN sexe AS x ON (p.sexe = x.id) '.
-	'LEFT JOIN persos AS s ON (p.superieur_id = s.id) '.
-	'LEFT JOIN races AS r ON (p.race_id = r.race_id AND p.grade_id = r.grade_id) '.
-	'LEFT JOIN camps AS c ON (r.camp_id = c.id) '.
-	'LEFT JOIN classes AS cl ON (cl.Camps = c.id AND cl.Id = p.classe) '.
-	'WHERE p.id = '.$mat.';';
-	$res = mysql_query($sql, $bdd);
+	$sql = '
+		SELECT
+			 p.nom, cl.Titre as classe_titre, cl.Sub as classe_sub, p.background AS background,
+			 x.sexe AS sexe, c.nom AS camp, r.nom AS grade, p.galon_id AS galon,
+			 p.grade_id, p.mdj, p.faction_id, p.nom_race, s.id as superieur_mat,
+			 s.nom as superieur_nom , f.nom as legion, f.id as legion_id, fg.nom as legion_grade
+		FROM persos AS p
+		LEFT JOIN sexe AS x ON (p.sexe = x.id) 
+		LEFT JOIN persos AS s ON (p.superieur_id = s.id) 
+		LEFT JOIN races AS r ON (p.race_id = r.race_id AND p.grade_id = r.grade_id) 
+		LEFT JOIN camps AS c ON (r.camp_id = c.id) 
+		LEFT JOIN classes AS cl ON (cl.Camps = c.id AND cl.Id = p.classe) 
+		LEFT JOIN faction_membres AS fm ON (fm.perso_id = p.id)
+		LEFT JOIN factions AS f ON (f.id = fm.faction_id)
+		LEFT JOIN faction_grades AS fg ON (fg.grade_id = fm.faction_grade_id AND fg.faction_id = f.id)
+		
+		WHERE p.id = '.$mat.';';
+	$res = mysql_query($sql, $bdd) or die(mysql_error());
 	$perso = mysql_fetch_assoc($res);
 	$icone = array();
 	
@@ -107,11 +116,19 @@ if(isset($_GET['mat']) && is_numeric($_GET['mat'])){
 				<td><i>Au ordres de : </i></td>
 				<td><?php echo $perso['superieur_nom'] ?> (Mat. <?php echo $perso['superieur_mat']; ?>)</td>
 			</tr>	
+			<?php } ?>		
+			<?php if(isset($perso['legion'])) { ?>
+			<tr class='tab_tr_ligne1'>
+				<td><i>L&eacute;gion : </i></td>
+				<td><a href="../../jeu/legion/index.php?p=2&id=<?php echo $perso['legion_id'] ?>">
+				<?php echo $perso['legion'] ?>
+				</a>
+				(<?php echo $perso['legion_grade']; ?>)</td>
+			</tr>	
 			<?php } ?>
 			<tr class='tab_tr_ligne_titre'>
 				<td colspan='2'>Message du jour :</td>
 			</tr>
-
 			<tr class='tab_tr_ligne0'>
 				<td align='left' colspan='2' style="text-align: justify;"><?php echo htmlspecialchars_decode($perso['mdj']); ?></td>
 			</tr>
