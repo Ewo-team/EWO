@@ -19,16 +19,21 @@ include(SERVER_ROOT . "/jeu/fonctions.php");
 // Paramètres de connexion à la base de données
 $ewo_bdd = bdd_connect('ewo');
 
-$taille = 4;
-if(isset($_GET['taille'])) {
-	$taille = $_GET['taille'];
+$ratio_hori = 5;
+if(isset($_GET['hori'])) {
+	$ratio_hori = $_GET['hori'];
+}
+
+$ratio_vert = 3;
+if(isset($_GET['vert'])) {
+	$ratio_vert = $_GET['vert'];
 }
 
 ControleAcces('utilisateur',1);
 
 $conn = CarteDAO::getInstance();
 //$carte = new Carte(1, $conn, 4.6666, 2.6666);
-$carte = new Carte(1, $conn, 5, 3);
+$carte = new Carte(1, $conn, $ratio_hori, $ratio_vert);
 
 $encache = false;
 
@@ -41,13 +46,13 @@ if (file_exists($cache_url)) {
 	}
 }
 
-
+$image_encoded = null;
 if($encache) {
 		
 	// La carte est en cache, on la charge
 	$data = file_get_contents($cache_url);
 	$carte = Carte::deserializer($data, $conn);
-	
+
 } else {
 	// La carte n'est pas en cache, on la recréer et la place en cache
 	$carte->Persos();	
@@ -60,13 +65,16 @@ if($encache) {
 	@file_put_contents($cache_url, $data); 
 }
 
+$image_source = file_get_contents(SERVER_ROOT . '/images/althian.png');
+$image_encoded = base64_encode($image_source);
+
 // Les viseurs sont ajouté après la mise en cache
 $carte->Viseurs($_SESSION['persos']);
 
 // Affichage de la carte
 echo $carte->Header();
 echo $carte->Start();
-echo $carte->Fond();
+echo $carte->Fond(null, $image_encoded);
 
 echo $carte->Compile();
 

@@ -86,170 +86,136 @@ $js->addScript('carte');
 <h2>Althian</h2>
 
 <div align='center'>
-			<!-- Affichage des coordonn�es terrestres-->
-			<!-- <div id="fond_carte_terre_coord" style="visibility:hidden">Position en X : <span id="fond_carte_terre_coordX"></span> | Position en Y : <span id="fond_carte_terre_coordY"></span></div>-->
-			<!-- Fin affichage des coordonn�es terrestres -->
 			<div class='centrage'>
-				<div id='fond_carte_terre' style="background-image: url(<?php SERVER_URL; ?>/images/althian.png);">
-				<?php if (ControleAcces('utilisateur',0) == TRUE){
-						echo "<span class='fond_carte' id='carte_terre_portes' style='display:block;'><img src='".SERVER_URL."/jeu/carte/carte_terre.php?porte=1' alt='terre'></span> ";
-						echo "<span class='fond_carte' id='carte_terre_boucliers' style='display:block;'><img src='".SERVER_URL."/jeu/carte/carte_terre.php?bouclier=1' alt='terre'></span>";
-						for($inci=1;$inci<=4;$inci++){
-								echo "<span class='fond_carte' id='carte_terre_R".$inci."G0' style='display:block;'><img src='".SERVER_URL."/jeu/carte/carte_terre.php?race=".$inci."&grade=0' alt='terre'></span> ";
-								echo "<span class='fond_carte' id='carte_terre_R".$inci."G4' style='display:block;'><img src='".SERVER_URL."/jeu/carte/carte_terre.php?race=".$inci."&grade=4' alt='terre'></span> ";
-								echo "<span class='fond_carte' id='carte_terre_R".$inci."G5' style='display:block;'><img src='".SERVER_URL."/jeu/carte/carte_terre.php?race=".$inci."&grade=5' alt='terre'></span> ";							
-							}
-						
-						echo "<span class='fond_carte' id='carte_terre_R1G-1' style='display:block;'><img src='".SERVER_URL."/jeu/carte/carte_terre.php?race=1&grade=-1' alt='terre'></span> ";
-						echo "<span class='fond_carte' id='carte_terre_grille' style='display:block;'><img src='".SERVER_URL."/jeu/carte/carte_terre.php?grille=1' alt='terre'></span>";
-						echo "<span class='fond_carte' id='carte_terre_viseur' style='display:block;'><img src='".SERVER_URL."/jeu/carte/carte_terre.php?viseur=1' alt='terre'></span>";
-						?>
-						<!-- POUR ERASE -->
-						<span class='fond_carte' id='Gcarte_terre_R3G0' style='display:none;'><img src='./carte_terre.php?race=3&grade=0&zoom=1' alt='Gterre'></span>
-						<!-- FIN POUR ERASE -->
-						<?php
-					} else {?>
-							<img src='../images/cartes/carte.jpg' alt='Terre'>
-					<?php	} ?>
+				<div id="boutons"></div>
+				<div id="map">
+					<embed id="emb" style="left:0;top:0;" type="image/svg+xml" src="svg_althian.php?hori=10&vert=6"></embed>
 				</div>
 			</div>
+			
+			
+			<script>
+				getElementsByClassName = function(cl) {
+					var retnode = [];
+					var myclass = new RegExp('\\b'+cl+'\\b');
+					var elem = this.getElementsByTagName('*');
+					for (var i = 0; i < elem.length; i++) {
+						var classes = elem[i].className;
+						if (myclass.test(classes)) retnode.push(elem[i]);
+					}
+					return retnode;
+				}; 
+				
+				var tabZooms = [0.5, 2];
+				var tabLimitZooms = [-2, 2];
+				var tabBoucliers = [];
+				var tabRaces = ['humain', 'paria', 'ange', 'demon'];
+				var svg;
+				var mouvement = 0;
+				function init(){
+					// On initialise notre svg
+					svg = getSvg();
+				
+					// DÃ©but RÃ©cupÃ©ration de tous les boucliers ************************//
+						var titreBoucliers = getAllBouclier();
+				
+						var elems = svg.getElementsByClassName('bouclier');
+						for(var i=0, y=elems.length;i<y;i++){
+							if(elems[i].getAttribute('id')){
+								tabBoucliers.push(new Array(titreBoucliers[elems[i].id],elems[i]));
+							}
+						}	
+					// Fin RÃ©cupÃ©ration de tous les boucliers *************************//
 
-	<p>
-		[<span class='curspointer' onclick="layer_carte('carte_terre_viseur');">Mes personnages</span>]
-	</p>
-	<p>	
-		[<span class='curspointer' onclick="layer_carte('carte_terre_grille');">Grille</span>]
-		[<span class='curspointer' onclick="layer_carte('carte_terre_portes');">Porte</span>]
-		[<span class='curspointer' onclick="layer_carte('carte_terre_boucliers');">Bouclier</span>]
-	</p>
-	<p>		
-		[<span class='curspointer' onclick="layer_carte('carte_terre_R1G0');layer_carte('carte_terre_R1G4');layer_carte('carte_terre_R1G5');">Humain</span>]
-		[<span class='curspointer' onclick="layer_carte('carte_terre_R4G0');layer_carte('carte_terre_R4G4');layer_carte('carte_terre_R4G5');">Demon</span>]
-		[<span class='curspointer' onclick="layer_carte('carte_terre_R3G0');layer_carte('carte_terre_R3G4');layer_carte('carte_terre_R3G5');">Ange</span>]
-		[<span class='curspointer' onclick="layer_carte('carte_terre_R2G0');layer_carte('carte_terre_R2G4');layer_carte('carte_terre_R2G5');">Paria</span>]
-	</p>
-	<p>		
-		[<span class='curspointer' onclick="layer_all('terre')">Afficher tout</span>]
-	</p>	
-</div>
-
-<?php
-/*-- Connexion basic requise --*/
-if (ControleAcces('utilisateur',0) == TRUE){
-
-/*-----------------------------*/
-$id_utilisateur = $_SESSION['utilisateur']['id'];
-
-// Recup?ration des donn?es
-        
-for ($inc=1; $inc<=$_SESSION['persos']['inc']; $inc++){
-
-	$perso_id 	= $_SESSION['persos']['id'][$inc];
-	$race_grade = recup_race_grade($perso_id);
-	if($race_grade['race_id']==1 || $race_grade['race_id']==3 || $race_grade['race_id']==4)
-		{
-			$race = $race_grade['race_id'];
-			break;
-		}
-	}
-	
-if(($carte_par_ok || $carte_en || $carte_fac_par) && !$trich){
-?>
-
-<h2>Celestia</h2>
-
-<div align='center'>
-		<!-- Affichage des coordonn�es paradis -->
-		<div id="fond_carte_paradis_coord" style="visibility:hidden">Position en X : <span id="fond_carte_paradis_coordX"></span> | Position en Y : <span id="fond_carte_paradis_coordY"></span></div>
-		<!-- Fin Affichage des coordonn�es paradis -->
-			<div class='centrage'>
-				<div id='fond_carte_paradis'>
-				<?php
-					echo "<span class='fond_carte'  id='carte_paradis_portes'><img src='".SERVER_URL."/jeu/carte/carte_paradis.php?porte=1' alt='paradis'></span> ";
-					echo "<span class='fond_carte'  id='carte_paradis_boucliers'><img src='".SERVER_URL."/jeu/carte/carte_paradis.php?bouclier=1' alt='paradis'></span>";
-					for($inci=1;$inci<=4;$inci++){
-							echo "<span class='fond_carte' id='carte_paradis_R".$inci."G0'><img src='".SERVER_URL."/jeu/carte/carte_paradis.php?race=".$inci."&grade=0' alt='paradis'></span> ";
-							echo "<span class='fond_carte' id='carte_paradis_R".$inci."G4'><img src='".SERVER_URL."/jeu/carte/carte_paradis.php?race=".$inci."&grade=4' alt='paradis'></span> ";
-							echo "<span class='fond_carte'  id='carte_paradis_R".$inci."G5'><img src='".SERVER_URL."/jeu/carte/carte_paradis.php?race=".$inci."&grade=5' alt='paradis'></span> ";							
-						}
 					
-					echo "<span class='fond_carte'  id='carte_paradis_R1G-1'><img src='".SERVER_URL."/jeu/carte/carte_paradis.php?race=1&grade=-1' alt='paradis'></span> ";
-					echo "<span class='fond_carte' id='carte_paradis_grille'><img src='".SERVER_URL."/jeu/carte/carte_paradis.php?grille=1' alt='paradis'></span>";
-					echo "<span class='fond_carte' id='carte_paradis_viseur'><img src='".SERVER_URL."/jeu/carte/carte_paradis.php?viseur=1' alt='paradis'></span>";
-				?>
-				</div>
-			</div>			
+				}
+				
+				function afficheCalque(elem){
+					if(elem.style.display == "none"){elem.style.display = "block";
+					}else{elem.style.display = "none";}
+				}
 
-			<p>
-				[<span class='curspointer' onclick="layer_carte('carte_paradis_viseur');">Mes personnages</span>]
-			</p>
-			<p>	
-				[<span class='curspointer' onclick="layer_carte('carte_paradis_grille');">Grille</span>]
-				[<span class='curspointer' onclick="layer_carte('carte_paradis_portes');">Porte</span>]
-				[<span class='curspointer' onclick="layer_carte('carte_paradis_boucliers');">Bouclier</span>]
-			</p>
-			<p>		
-				[<span class='curspointer' onclick="layer_carte('carte_paradis_R1G0');layer_carte('carte_paradis_R1G4');layer_carte('carte_paradis_R1G5');">Humain</span>]
-				[<span class='curspointer' onclick="layer_carte('carte_paradis_R4G0');layer_carte('carte_paradis_R4G4');layer_carte('carte_paradis_R4G5');">Demon</span>]
-				[<span class='curspointer' onclick="layer_carte('carte_paradis_R3G0');layer_carte('carte_paradis_R3G4');layer_carte('carte_paradis_R3G5');">Ange</span>]
-				[<span class='curspointer' onclick="layer_carte('carte_paradis_R2G0');layer_carte('carte_paradis_R2G4');layer_carte('carte_paradis_R2G5');">Paria</span>]
-			</p>
-			<p>		
-				[<span class='curspointer' onclick="layer_all('terre')">Afficher tout</span>]
-			</p>	
-</div>
-
-<?php
-	}
-if(($carte_enf_ok || $carte_en || $carte_fac_enf) && !$trich){
-?>
-<h2>Ciferis</h2>
-
-<div align='center'>
-		<!-- Affichage des coordonn�es enfer -->
-		<div id="fond_carte_enfer_coord" style="visibility:hidden">Position en X : <span id="fond_carte_enfer_coordX"></span> | Position en Y : <span id="fond_carte_enfer_coordY"></span></div>
-		<!-- Fin Affichage des coordonn�es enfer -->
-			<div class='centrage'>
-				<div id='fond_carte_enfer'>
-			<?php
-					echo "<span class='fond_carte' id='carte_enfer_portes'><img src='".SERVER_URL."/jeu/carte/carte_enfer.php?porte=1' alt='Enfer'></span> ";
-					echo "<span class='fond_carte' id='carte_enfer_boucliers'><img src='".SERVER_URL."/jeu/carte/carte_enfer.php?bouclier=1' alt='Enfer'></span>";
-					for($inci=1;$inci<=4;$inci++){
-							echo "<span class='fond_carte' id='carte_enfer_R".$inci."G0'><img src='".SERVER_URL."/jeu/carte/carte_enfer.php?race=".$inci."&grade=0' alt='Enfer'></span> ";
-							echo "<span class='fond_carte' id='carte_enfer_R".$inci."G4'><img src='".SERVER_URL."/jeu/carte/carte_enfer.php?race=".$inci."&grade=4' alt='Enfer'></span> ";
-							echo "<span class='fond_carte' id='carte_enfer_R".$inci."G5'><img src='".SERVER_URL."/jeu/carte/carte_enfer.php?race=".$inci."&grade=5' alt='Enfer'></span> ";							
-						}
-					
-					echo "<span class='fond_carte' id='carte_enfer_R1G-1'><img src='".SERVER_URL."/jeu/carte/carte_enfer.php?race=1&grade=-1' alt='Enfer'></span> ";
-					echo "<span class='fond_carte' id='carte_enfer_grille'><img src='".SERVER_URL."/jeu/carte/carte_enfer.php?grille=1' alt='Enfer'></span>";
-						echo "<span class='fond_carte' id='carte_enfer_viseur'><img src='".SERVER_URL."/jeu/carte/carte_enfer.php?viseur=1' alt='enfer'></span>";
-			?>		
-					</div>
-			</div>	
+				function zOom(type){
+					var op = '+';
+					var facZoom = tabZooms[1];
+					if(type=='-'){facZoom = tabZooms[0]; op = '-';}
+					if(op == '+'){mouvement++;}else{mouvement--;}
+					if(mouvement < tabLimitZooms[1] && mouvement > tabLimitZooms[0]){
+						var elems = svg.getElementsByTagName('*');
+						for(var i=0, y=elems.length; i<y;i++){
+							var tabAtr = elems[i].attributes;
+							for(var m=0, n=tabAtr.length;m<n;m++){
+								if(tabAtr[m].localName && tabAtr[m].nodeValue){
+									if(!isNaN(tabAtr[m].nodeValue)){
+										tabAtr[m].nodeValue = tabAtr[m].nodeValue*facZoom;
+									}
+								}
+							}
+							if(elems[i].tagName == 'text'){
+								if(elems[i].style.fontSize != ""){
+									var elem = elems[i].style.fontSize;
+									var px = elem.split('px');
+									if(op == '+'){
+										elems[i].style.fontSize = parseInt(parseInt(px[0])+7)+'px';
+									}else{
+										elems[i].style.fontSize = parseInt(parseInt(px[0])-7)+'px';
+									}
+								}else{
+									if(op == '+'){
+										elems[i].style.fontSize = '17px';
+									}else{
+										elems[i].style.fontSize = '3px';
+									}
+								}
+							}
 						
-			<p>
-				[<span class='curspointer' onclick="layer_carte('carte_enfer_viseur');">Mes personnages</span>]
-			</p>
-			<p>	
-				[<span class='curspointer' onclick="layer_carte('carte_enfer_grille');">Grille</span>]
-				[<span class='curspointer' onclick="layer_carte('carte_enfer_portes');">Porte</span>]
-				[<span class='curspointer' onclick="layer_carte('carte_enfer_boucliers');">Bouclier</span>]
-			</p>
-			<p>		
-				[<span class='curspointer' onclick="layer_carte('carte_enfer_R1G0');layer_carte('carte_enfer_R1G4');layer_carte('carte_enfer_R1G5');">Humain</span>]
-				[<span class='curspointer' onclick="layer_carte('carte_enfer_R4G0');layer_carte('carte_enfer_R4G4');layer_carte('carte_enfer_R4G5');">Demon</span>]
-				[<span class='curspointer' onclick="layer_carte('carte_enfer_R3G0');layer_carte('carte_enfer_R3G4');layer_carte('carte_enfer_R3G5');">Ange</span>]
-				[<span class='curspointer' onclick="layer_carte('carte_enfer_R2G0');layer_carte('carte_enfer_R2G4');layer_carte('carte_enfer_R2G5');">Paria</span>]
-			</p>
-			<p>		
-				[<span class='curspointer' onclick="layer_all('terre')">Afficher tout</span>]
-			</p>	
+						}
+					}else{
+						if(op == '+'){mouvement--;}else{mouvement++;}
+					}
+				}
+				
+				function afficheBoutons(){
+					var ret = '';
+					for(var i=0, y=tabBoucliers.length;i<y;i++){
+						ret += "<input type='button' value='"+tabBoucliers[i][0]+"' onclick='afficheCalque(svg.getElementById(\""+tabBoucliers[i][1].id+"\"))'>";
+					}
+					for(var i=0,y=tabRaces.length; i<y; i++){
+						ret += "<input type='button' value='"+tabRaces[i]+"' onclick='afficheCalque(svg.getElementsByClassName(\""+tabRaces[i]+"\")[0])'>";
+					}
+					ret += "<input type='button' value='Portes' onclick='afficheCalque(svg.getElementsByClassName(\"porte\")[0])'>";
+					ret += "<input type='button' value='Mes Personnages' onclick='afficheCalque(svg.getElementsByClassName(\"viseurs\")[0])'>";
+					//ret += "<input type='button' value='+' onclick='zOom(this.value)'>";
+					//ret += "<input type='button' value='-' onclick='zOom(this.value)'>";
+					document.getElementById('boutons').innerHTML += ret;
+				}
+				
+				
+				function Affiche(sens) {
+					if(sens > 0){zOom('+');
+					}else{zOom('-');}
+				}
+
+				function Molette(event){
+					var sens = 0;
+					if (!event){event = window.event;}
+					if (event.wheelDelta) {
+						sens =(window.opera)?-event.wheelDelta/120: event.wheelDelta/120; 
+					}else {sens=(event.detail)?-event.detail/3:sens;}
+					if (sens){
+						Affiche(sens);
+					}
+				}
+
+				window.onload = function(){
+					init();
+					afficheBoutons();
+					//if (svg.addEventListener){svg.addEventListener('DOMMouseScroll', Molette, false);}
+					//else{svg.onmousewheel =function(){Molette()};svg.onmousewheel = function(){Molette()};}
+				}
+				
+			</script>			
 </div>
-	<?php
-		}
-	}
-	?>
-	
 
 <?php
 //-- Footer --

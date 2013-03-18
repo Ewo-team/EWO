@@ -61,7 +61,10 @@ class Carte {
 		
 	}
 	
-	public function Fond($fond = 'fond_terre') {
+	public function Fond($fond = 'fond_terre', $img = null) {
+		if(isset($img)) {
+			return SVG::image(0,0,$this->_taille_ver ,$this->_taille_hor , $img);
+		}
 		return SVG::rectangle(0,0,$this->_taille_ver ,$this->_taille_hor , array('class' => $fond));	
 	}
 	
@@ -87,15 +90,15 @@ class Carte {
 	
 	public function AxeHorizontale($position) {
 		$retour = SVG::rectangle(0,$this->coord_y($position)-round($this->_ratio_ver / 2), 1, $this->_taille_hor, array('class' => 'axe'));
-		$retour .= SVG::texte($this->coord_x(-73),$this->coord_y($position+2),'Y='.$position);
-		$retour .= SVG::texte($this->coord_x(67),$this->coord_y($position+2),'Y='.$position);
+		$retour .= SVG::texte($this->coord_x($this->_x_min) + 15,$this->coord_y($position+2),'Y='.$position);
+		$retour .= SVG::texte($this->coord_x($this->_x_max) - 40,$this->coord_y($position+2),'Y='.$position);
 		return $retour;
 	}
 	
 	public function AxeVerticale($position) {
 		$retour = SVG::rectangle($this->coord_x($position)+round($this->_ratio_hor / 2), 0, $this->_taille_ver, 1, array('class' => 'axe'));
-		$retour .= SVG::texte($this->coord_x($position+2),$this->coord_y(70),'X='.$position);
-		$retour .= SVG::texte($this->coord_x($position+2),$this->coord_y(-74),'X='.$position);
+		$retour .= SVG::texte($this->coord_x($position+2),$this->coord_y($this->_y_min) - 5,'X='.$position);
+		$retour .= SVG::texte($this->coord_x($position+2),$this->coord_y($this->_y_max) + 20,'X='.$position);
 		return $retour;
 	}	
 	
@@ -206,19 +209,27 @@ class Carte {
 	public function PrintViseur($id) {	
 		$viseur = $this->_viseurs[$id];
 
-		$res = SVG::ligne($this->coord_x($viseur['x']+0.5 - $this->_ratio_ver*0.7),
+		/*$max_width = $this->_ratio_ver*0.7;
+		$max_height = $this->_ratio_hor*0.7;
+		$max_circ = max(min($this->_ratio_ver*5, 20),3);*/
+		
+		$res = SVG::ligne($this->coord_x($viseur['x']+0.5) - 15,
 								$this->coord_y($viseur['y']-0.5),
-								$this->coord_x($viseur['x']+0.5 + $this->_ratio_ver*0.7), 
+								$this->coord_x($viseur['x']+0.5) + 15, 
 								$this->coord_y($viseur['y']-0.5));		
 
 		$res .= SVG::ligne($this->coord_x($viseur['x']+0.5),
-								$this->coord_y($viseur['y']-0.5 - $this->_ratio_hor*0.7),
+								$this->coord_y($viseur['y']-0.5) - 15,
 								$this->coord_x($viseur['x']+0.5), 
-								$this->coord_y($viseur['y']-0.5 + $this->_ratio_hor*0.7));									
+								$this->coord_y($viseur['y']-0.5) + 15);									
 		
-		$res .= SVG::cercle($this->coord_x($viseur['x']+0.5), $this->coord_y($viseur['y']-0.5), $this->_ratio_ver*5, array('id' => $viseur['nom']));
+		$res .= SVG::cercle($this->coord_x($viseur['x']+0.5), $this->coord_y($viseur['y']-0.5), 20, array('id' => $viseur['nom']));
 
-		$this->_popup[] = array($this->coord_x($viseur['x']+0.5), $this->coord_y($viseur['y']-0.5) - 20, $viseur['nom'], $viseur['nom']);
+		if(($this->coord_y($viseur['y']-0.5) - 20) < 3) {
+			$this->_popup[] = array($this->coord_x($viseur['x']+0.5), $this->coord_y($viseur['y']-0.5) + 30, $viseur['nom'], $viseur['nom']);
+		} else {
+			$this->_popup[] = array($this->coord_x($viseur['x']+0.5), $this->coord_y($viseur['y']-0.5) - 20, $viseur['nom'], $viseur['nom']);
+		}
 		
 		return $res;
 	}
@@ -355,6 +366,12 @@ class SVG {
 	}
 	
 	static function popup($x,$y,$parent,$texte) {
+	
+		/*$largeur = strlen($texte) * 20;
+		$hauteur = 20;
+	
+		$rect = SVG::rectangle($x, $y, $hauteur, $largeur, array('class' => 'blanc'));*/
+	
 		return '<text id="'.$parent.'_popup" x="'.$x.'" y="'.$y.'" font-size="20" fill="black" visibility="hidden">'.$texte.'
 			<set attributeName="visibility" from="hidden" to="visible" begin="'.$parent.'.mouseover" end="'.$parent.'.mouseout"/>
 		</text>';
@@ -362,6 +379,10 @@ class SVG {
 	
 	static function TableauJavascript($tableau) {
 		return '';
+	}
+	
+	static function image($y, $x, $y_max, $x_max, $data) {
+		return '<image x="'.$x.'" y="'.$y.'" width="'.$x_max.'" height="'.$y_max.'" preserveAspectRatio="none" xlink:href="data:image/png;base64,'.$data.'" />';		
 	}
 	
 	static function Header($titre, $largeur, $hauteur, $date, $css = null) {
@@ -375,6 +396,11 @@ class SVG {
 		<title>'.$titre.'</title>
 		<script type="text/ecmascript"> 
 		<![CDATA[
+		
+			top.getAllBouclier = getAllBouclier;
+			top.getElem = getElem;
+			top.getSvg = getSvg;		
+		
 			var Date = '.$date.';
 			var TableBouclier = new Array();
 			TableBouclier["bouclier_4"] = "Bouclier Humain : Terra";
@@ -382,18 +408,19 @@ class SVG {
 			TableBouclier["bouclier_9"] = "Ultima";
 			TableBouclier["bouclier_11"] = "Bouclier T2";
 			
-			function masquer_calque(calque) {
-				alert(calque);
+			function getElem(methode){
+				return eval(methode);
 			}
 			
-			function affiche_bouclier(bouclier) {
-				var nom = TableBouclier[bouclier.id];
-				info_bulle(nom);
+			
+			function getSvg(){
+				return document;
 			}
-		
-			function info_bulle(texte) {
-				//alert(texte);
+			
+			function getAllBouclier(){
+				return TableBouclier;
 			}
+
 		]]></script>
 		';
 		
@@ -448,6 +475,10 @@ class SVG {
 				.viseurs {
 					stroke: rgb(200,0,0);
 					fill-opacity: 0.05;
+				}
+				
+				.blanc {
+					fill:	rgb(255,255,255);
 				}
 
 			  ]]>

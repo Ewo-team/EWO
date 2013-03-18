@@ -27,6 +27,7 @@ if (isset($template_on)) {
         $menu['jeu'][] = array('url' => SERVER_URL . '/compte/inscription/', 'nom' => 'Inscription');
     }
 
+    $menu['jeu'][] = array('url' => 'http://wiki.ewo-le-monde.com/doku.php?id=jeu:presentation_d_ewo', 'nom' => 'Présentation d\'EWO');
     $menu['jeu'][] = array('url' => 'http://wiki.ewo-le-monde.com', 'nom' => 'Guide du Jeu');
 
     //$menu['jeu'][] = array('url' => SERVER_URL.'/bug/', 'nom' => 'Bugs');
@@ -36,6 +37,7 @@ if (isset($template_on)) {
     $menu['jeu'][] = array('url' => SERVER_URL . '/site/contact/', 'nom' => 'Contact');
     $menu['jeu'][] = array('url' => SERVER_URL . '/site/boutique/', 'nom' => 'Boutique');
     $menu['jeu'][] = array('url' => 'http://bug.ewo-le-monde.com', 'nom' => 'Bug');
+    $menu['jeu'][] = array('url' => SERVER_URL . '/site/patch.php', 'nom' => 'Notes de versions');
 
     $is_log = ControleAcces('utilisateur', 0);
     $is_admin = ControleAcces('admin', 0);

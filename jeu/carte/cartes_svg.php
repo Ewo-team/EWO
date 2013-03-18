@@ -86,32 +86,135 @@ $js->addScript('carte');
 <h2>Althian</h2>
 
 <div align='center'>
-			<!-- Affichage des coordonn�es terrestres-->
-			<!-- <div id="fond_carte_terre_coord" style="visibility:hidden">Position en X : <span id="fond_carte_terre_coordX"></span> | Position en Y : <span id="fond_carte_terre_coordY"></span></div>-->
-			<!-- Fin affichage des coordonn�es terrestres -->
 			<div class='centrage'>
+				<div id="boutons"></div>
 				<div id="map">
-					<embed id="emb" style="left:0;top:0;" type="image/svg+xml" src="svg_althian.php"></embed>
+					<embed id="emb" style="left:0;top:0;" type="image/svg+xml" src="svg_althian.php?hori=10&vert=6"></embed>
 				</div>
 			</div>
+			
+			
+			<script>
+				getElementsByClassName = function(cl) {
+					var retnode = [];
+					var myclass = new RegExp('\\b'+cl+'\\b');
+					var elem = this.getElementsByTagName('*');
+					for (var i = 0; i < elem.length; i++) {
+						var classes = elem[i].className;
+						if (myclass.test(classes)) retnode.push(elem[i]);
+					}
+					return retnode;
+				}; 
+				
+				var tabZooms = [0.5, 2];
+				var tabLimitZooms = [-2, 2];
+				var tabBoucliers = [];
+				var tabRaces = ['humain', 'paria', 'ange', 'demon'];
+				var svg;
+				var mouvement = 0;
+				function init(){
+					// On initialise notre svg
+					svg = getSvg();
+				
+					// DÃ©but RÃ©cupÃ©ration de tous les boucliers ************************//
+						var titreBoucliers = getAllBouclier();
+				
+						var elems = svg.getElementsByClassName('bouclier');
+						for(var i=0, y=elems.length;i<y;i++){
+							if(elems[i].getAttribute('id')){
+								tabBoucliers.push(new Array(titreBoucliers[elems[i].id],elems[i]));
+							}
+						}	
+					// Fin RÃ©cupÃ©ration de tous les boucliers *************************//
 
-	<p>
-		[<span class='curspointer' onclick="layer_carte('carte_terre_viseur');">Mes personnages</span>]
-	</p>
-	<p>	
-		[<span class='curspointer' onclick="layer_carte('carte_terre_grille');">Grille</span>]
-		[<span class='curspointer' onclick="layer_carte('carte_terre_portes');">Porte</span>]
-		[<span class='curspointer' onclick="layer_carte('carte_terre_boucliers');">Bouclier</span>]
-	</p>
-	<p>		
-		[<span class='curspointer' onclick="layer_carte('carte_terre_R1G0');layer_carte('carte_terre_R1G4');layer_carte('carte_terre_R1G5');">Humain</span>]
-		[<span class='curspointer' onclick="layer_carte('carte_terre_R4G0');layer_carte('carte_terre_R4G4');layer_carte('carte_terre_R4G5');">Demon</span>]
-		[<span class='curspointer' onclick="layer_carte('carte_terre_R3G0');layer_carte('carte_terre_R3G4');layer_carte('carte_terre_R3G5');">Ange</span>]
-		[<span class='curspointer' onclick="layer_carte('carte_terre_R2G0');layer_carte('carte_terre_R2G4');layer_carte('carte_terre_R2G5');">Paria</span>]
-	</p>
-	<p>		
-		[<span class='curspointer' onclick="layer_all('terre')">Afficher tout</span>]
-	</p>	
+					
+				}
+				
+				function afficheCalque(elem){
+					if(elem.style.display == "none"){elem.style.display = "block";
+					}else{elem.style.display = "none";}
+				}
+
+				function zOom(type){
+					var op = '+';
+					var facZoom = tabZooms[1];
+					if(type=='-'){facZoom = tabZooms[0]; op = '-';}
+					if(op == '+'){mouvement++;}else{mouvement--;}
+					if(mouvement < tabLimitZooms[1] && mouvement > tabLimitZooms[0]){
+						var elems = svg.getElementsByTagName('*');
+						for(var i=0, y=elems.length; i<y;i++){
+							var tabAtr = elems[i].attributes;
+							for(var m=0, n=tabAtr.length;m<n;m++){
+								if(tabAtr[m].localName && tabAtr[m].nodeValue){
+									if(!isNaN(tabAtr[m].nodeValue)){
+										tabAtr[m].nodeValue = tabAtr[m].nodeValue*facZoom;
+									}
+								}
+							}
+							if(elems[i].tagName == 'text'){
+								if(elems[i].style.fontSize != ""){
+									var elem = elems[i].style.fontSize;
+									var px = elem.split('px');
+									if(op == '+'){
+										elems[i].style.fontSize = parseInt(parseInt(px[0])+7)+'px';
+									}else{
+										elems[i].style.fontSize = parseInt(parseInt(px[0])-7)+'px';
+									}
+								}else{
+									if(op == '+'){
+										elems[i].style.fontSize = '17px';
+									}else{
+										elems[i].style.fontSize = '3px';
+									}
+								}
+							}
+						
+						}
+					}else{
+						if(op == '+'){mouvement--;}else{mouvement++;}
+					}
+				}
+				
+				function afficheBoutons(){
+					var ret = '';
+					for(var i=0, y=tabBoucliers.length;i<y;i++){
+						ret += "<input type='button' value='"+tabBoucliers[i][0]+"' onclick='afficheCalque(svg.getElementById(\""+tabBoucliers[i][1].id+"\"))'>";
+					}
+					for(var i=0,y=tabRaces.length; i<y; i++){
+						ret += "<input type='button' value='"+tabRaces[i]+"' onclick='afficheCalque(svg.getElementsByClassName(\""+tabRaces[i]+"\")[0])'>";
+					}
+					ret += "<input type='button' value='Portes' onclick='afficheCalque(svg.getElementsByClassName(\"porte\")[0])'>";
+					ret += "<input type='button' value='Mes Personnages' onclick='afficheCalque(svg.getElementsByClassName(\"viseurs\")[0])'>";
+					//ret += "<input type='button' value='+' onclick='zOom(this.value)'>";
+					//ret += "<input type='button' value='-' onclick='zOom(this.value)'>";
+					document.getElementById('boutons').innerHTML += ret;
+				}
+				
+				
+				function Affiche(sens) {
+					if(sens > 0){zOom('+');
+					}else{zOom('-');}
+				}
+
+				function Molette(event){
+					var sens = 0;
+					if (!event){event = window.event;}
+					if (event.wheelDelta) {
+						sens =(window.opera)?-event.wheelDelta/120: event.wheelDelta/120; 
+					}else {sens=(event.detail)?-event.detail/3:sens;}
+					if (sens){
+						Affiche(sens);
+					}
+				}
+
+				window.onload = function(){
+					init();
+					afficheBoutons();
+					//if (svg.addEventListener){svg.addEventListener('DOMMouseScroll', Molette, false);}
+					//else{svg.onmousewheel =function(){Molette()};svg.onmousewheel = function(){Molette()};}
+				}
+				
+			</script>			
 </div>
 
 <?php
