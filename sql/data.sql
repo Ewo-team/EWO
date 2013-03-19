@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mer 05 Septembre 2012 à 17:36
+-- Généré le: Mar 19 Mars 2013 à 13:04
 -- Version du serveur: 5.5.23-log
 -- Version de PHP: 5.3.10
 
@@ -21,7 +21,7 @@ SET time_zone = "+00:00";
 -- Contenu de la table `action`
 --
 
-INSERT INTO `action` (`id`, `nom`, `description`, `cout`, `cercle_id`, `niv`, `race`, `grade`, `galon`, `zone`, `cible`, `lanceur`, `id_effet`, `type_cible`, `type_action`) VALUES
+INSERT IGNORE INTO `action` (`id`, `nom`, `description`, `cout`, `cercle_id`, `niv`, `race`, `grade`, `galon`, `zone`, `cible`, `lanceur`, `id_effet`, `type_cible`, `type_action`) VALUES
 (1, 'Attaquer', 'Attaque un personnage', 1, 0, 0, '1111', -2, 0, 0, 1, 0, '0:1', 'both', 'attaque'),
 (2, 'Sentrainer', 'Entrainement', 1, 0, 0, '1111', -2, 0, 0, 1, 1, '0:1', 'both', 'entrainement'),
 (3, 'Réparation', 'Action de réparation d''objets', 1, 0, 0, '1111', -2, 0, 0, 1, 0, '0:1', 'both', 'reparation'),
@@ -146,7 +146,7 @@ INSERT INTO `action` (`id`, `nom`, `description`, `cout`, `cercle_id`, `niv`, `r
 (134, 'Grenade à fragmentation', '-50 PV -4 DEF sur la perception', 2, 7, 4, '1000', -2, 0, -2, 0, 0, '0:143,172', 'choix', 'sort'),
 (135, 'Sur-Humain', '+20% Force sur la perception', 3, 7, 5, '1000', -2, 0, -2, 0, 0, '0:216', 'choix', 'sort'),
 (136, '[Désactivé] Transhumain', '4 PA + 1PA -50 PV -15 XP sur tout Althian !\r\nSur le lanceur ⇒ -50% PV -20 Def\r\n', 4, 7, 5, '0000', -2, 0, -3, 0, 0, '224,225:224,225,143,144,96', 'choix', 'sort'),
-(137, 'Armée de clones', 'Ramène des "alliés" plus très frais (voir Guide du Jeu)', 3, 7, 5, '1000', -2, 0, -1, 1, 1, '0:97', 'none', 'sort'),
+(137, '[Désactivé ] Armée de clones', 'Ramène des "alliés" plus très frais (voir Guide du Jeu)', 3, 7, 5, '0000', -2, 0, -1, 1, 1, '0:97', 'none', 'sort'),
 (138, 'Sur-armement', '+1 PA +50% Force +5 ATK -30% Récup''PV -5 DEF -10 XP sur la perception', 4, 7, 5, '1000', -2, 0, -2, 0, 0, '0:197,39,208,95,96,145', 'choix', 'sort'),
 (139, '/!\\ Canon nucléaire /!\\', '-120 PV -6 DEF sur tout Althian et sans distinction de cibles !', 4, 7, 5, '1000', -2, 0, -3, 0, 1, '0:209,174,35', 'both', 'sort'),
 (140, 'Aura de protection', '+10% DEF sur zone réduite', 2, 0, 0, '0000', 3, 2, -1, 0, 1, '0:5', 'allie', 'aura'),
@@ -167,13 +167,14 @@ INSERT INTO `action` (`id`, `nom`, `description`, `cout`, `cercle_id`, `niv`, `r
 (155, 'Motivation', '+30% Effet +40 PV sur une cible', 2, 4, 4, '0011', -2, 0, 0, 1, 1, '0:98,218', 'choix', 'sort'),
 (156, 'Dévouement', '35% des PV du Mage sont donnés à la cible', 3, 4, 4, '0011', -2, 0, 0, 1, 0, '0:210', 'both', 'sort'),
 (157, 'Félicité', '+50% Perception +10 DEF +20% Récup''PV -10 ATK -30% Force -10% Mouv sur la perception', 4, 4, 5, '0011', -2, 0, -2, 0, 0, '0:55,69,180,219,5,220', 'choix', 'sort'),
-(158, 'Test', 'Test', 1, 3, 5, '1111', -2, 0, -2, 1, 1, '0:0', 'both', 'sort');
+(158, 'Test', 'Test', 1, 3, 5, '1111', -2, 0, -2, 1, 1, '0:0', 'both', 'sort'),
+(159, '�APWAL', '', 1, 0, 5, '0000', -2, 0, 0, 1, 1, '0:226', 'both', 'sort');
 
 --
 -- Contenu de la table `camps`
 --
 
-INSERT INTO `camps` (`id`, `carte_id`, `nom`, `description`) VALUES
+INSERT IGNORE INTO `camps` (`id`, `carte_id`, `nom`, `description`) VALUES
 (1, 1, 'Humain', 'Humain'),
 (2, 1, 'Paria', 'Paria'),
 (3, 3, 'Ange', 'Ange'),
@@ -185,20 +186,20 @@ INSERT INTO `camps` (`id`, `carte_id`, `nom`, `description`) VALUES
 -- Contenu de la table `cartes`
 --
 
-INSERT INTO `cartes` (`id`, `nom`, `description`, `circ`, `infini`, `x_min`, `y_min`, `x_max`, `y_max`, `visible_x_min`, `visible_x_max`, `visible_y_min`, `visible_y_max`, `dla`, `nom_decors`) VALUES
-(1, 'Althian', 'Plan de la Terre', '11', '0000', -200, -200, 200, 200, -150, 150, -150, 150, 23, NULL),
-(2, 'Ciferis', 'Plan des enfers', '10', '0010', -50, -100, 50, 0, -50, 50, -100, 0, 23, NULL),
-(3, 'Celestia', 'Plan du paradis', '10', '0001', -50, 0, 50, 100, -50, 50, 0, 100, 23, NULL),
-(4, 'Prison', 'Prison pour les tricheurs', '00', '0000', -10, -10, 10, 10, -10, 10, -10, 10, 23, NULL),
-(5, '8eme enfer', 'Dernier etage des enfers', '00', '0000', -50, -50, 50, 50, -25, 25, -25, 25, 0.005, NULL),
-(6, '9ème Paradis', 'Résidence secondaire de Dix-Yeux', '11', '0000', -10, -10, 10, 10, 0, 0, 0, 0, 0.005, NULL),
-(255, 'Espace-Temps', 'L''Espace-Temps est le lieu de passage des mages du même nom, lors de la téléportation', '00', '0000', -100000, -100000, 100000, 100000, 0, 0, 0, 0, 23, NULL);
+INSERT IGNORE INTO `cartes` (`id`, `nom`, `description`, `circ`, `infini`, `x_min`, `y_min`, `x_max`, `y_max`, `visible_x_min`, `visible_x_max`, `visible_y_min`, `visible_y_max`, `dla`, `nom_decors`, `decors_defaut`) VALUES
+(1, 'Althian', 'Plan de la Terre', '11', '0000', -30, -30, 30, 30, -30, 30, -30, 30, 47, 'prevf2', 'eau'),
+(2, 'Ciferis', 'Plan des enfers', '10', '0010', -50, -100, 50, 0, -50, 50, -100, 0, 23, NULL, 'enfer'),
+(3, 'Celestia', 'Plan du paradis', '10', '0001', -50, 0, 50, 100, -50, 50, 0, 100, 23, NULL, 'paradis'),
+(4, 'Prison', 'Prison pour les tricheurs', '00', '0000', -10, -10, 10, 10, -10, 10, -10, 10, 23, NULL, NULL),
+(5, '8eme enfer', 'Dernier etage des enfers', '00', '0000', -50, -50, 50, 50, -25, 25, -25, 25, -5, NULL, NULL),
+(6, '9ème Paradis', 'Résidence secondaire de Dix-Yeux', '11', '0000', -10, -10, 10, 10, 0, 0, 0, 0, 0.005, NULL, NULL),
+(255, 'Espace-Temps', 'L''Espace-Temps est le lieu de passage des mages du même nom, lors de la téléportation', '00', '0000', -100000, -100000, 100000, 100000, 0, 0, 0, 0, 23, NULL, NULL);
 
 --
 -- Contenu de la table `case_artefact`
 --
 
-INSERT INTO `case_artefact` (`id`, `nom`, `description`, `image`, `pv_max`, `rarete`, `cout`, `poid`, `categorie_id`, `consom`) VALUES
+INSERT IGNORE INTO `case_artefact` (`id`, `nom`, `description`, `image`, `pv_max`, `rarete`, `cout`, `poid`, `categorie_id`, `consom`) VALUES
 (1, 'Essence', 'Essence obtenue en tuant des ail&eacute;s.', 'decors/artefacts/broad_sword.gif', '100', '50', '10', '1', 2, '1'),
 (2, 'Orbe Ang&eacute;lique', 'Orbe d''essence obtenue en tuant un Archange. L''artefact bouillonne de puissance, mais il est inutilisable en l''&eacute;tat...', 'decors/artefacts/broad_sword.gif', '10', '1', '1500', '11', 1, '1'),
 (3, 'Orbe D&eacute;moniaque', 'Orbe d''essence obtenue en tuant un Seigneur D&eacute;mon. L''artefact bouillonne de puissance, mais il est inutilisable en l''&eacute;tat...', 'decors/artefacts/broad_sword.gif', '10', '1', '32767', '12', 1, '1'),
@@ -220,7 +221,7 @@ INSERT INTO `case_artefact` (`id`, `nom`, `description`, `image`, `pv_max`, `rar
 -- Contenu de la table `case_objet_complexe`
 --
 
-INSERT INTO `case_objet_complexe` (`id`, `nom`, `description`, `pv_max`, `bloquant`, `reparable`, `images`, `taille_x`, `taille_y`, `categorie_id`) VALUES
+INSERT IGNORE INTO `case_objet_complexe` (`id`, `nom`, `description`, `pv_max`, `bloquant`, `reparable`, `images`, `taille_x`, `taille_y`, `categorie_id`) VALUES
 (1, 'Immeuble', 'Immeuble simple', '5000', 1, 1, 'decors/objets_complexe/Immeuble_2x2', '2', '2', 1),
 (2, 'Abysses', 'Abysses infranchissables', '-1', 1, 0, 'Abysses', '400', '1000000', 3),
 (3, 'Décors  Porte Paradis', 'Décors des portes du paradis', '-1', 0, 0, 'decors/objets_complexe/DPorteParadis', '7', '7', 0),
@@ -235,7 +236,7 @@ INSERT INTO `case_objet_complexe` (`id`, `nom`, `description`, `pv_max`, `bloqua
 -- Contenu de la table `case_objet_simple`
 --
 
-INSERT INTO `case_objet_simple` (`id`, `nom`, `description`, `bloquant`, `pv_max`, `poid`, `image`, `categorie_id`) VALUES
+INSERT IGNORE INTO `case_objet_simple` (`id`, `nom`, `description`, `bloquant`, `pv_max`, `poid`, `image`, `categorie_id`) VALUES
 (1, 'Caisse', 'Caisse sans doute videll', 1, '10', '0', 'decors/objets/caisse00.png', 1),
 (2, 'Arbre', 'Arbre des bois !', 1, '500', '0', 'decors/objets/arbre.gif', 1),
 (3, 'Escargot', '', 1, '50', '0', 'decors/objets/escargot.png', 3),
@@ -280,14 +281,14 @@ INSERT INTO `case_objet_simple` (`id`, `nom`, `description`, `bloquant`, `pv_max
 -- Contenu de la table `case_terrain`
 --
 
-INSERT INTO `case_terrain` (`id`, `nom`, `image`, `couleur`, `mouv`, `categorie_id`) VALUES
+INSERT IGNORE INTO `case_terrain` (`id`, `nom`, `image`, `couleur`, `mouv`, `categorie_id`) VALUES
 (17, 'Eau', 'decors/motifs/pattern_water.jpg', '73A9FA', 1, 4);
 
 --
 -- Contenu de la table `categorie_artefact`
 --
 
-INSERT INTO `categorie_artefact` (`id`, `nom`, `description`) VALUES
+INSERT IGNORE INTO `categorie_artefact` (`id`, `nom`, `description`) VALUES
 (1, 'Orbe', 'Toutes les orbes du jeux'),
 (2, 'Essence', 'Type d''essence'),
 (3, 'Epée', 'Toutes les épées'),
@@ -297,7 +298,7 @@ INSERT INTO `categorie_artefact` (`id`, `nom`, `description`) VALUES
 -- Contenu de la table `categorie_objet_complexe`
 --
 
-INSERT INTO `categorie_objet_complexe` (`id`, `nom`, `description`) VALUES
+INSERT IGNORE INTO `categorie_objet_complexe` (`id`, `nom`, `description`) VALUES
 (1, 'Vehicule', 'Tout type de vehicule'),
 (2, 'Immeuble', 'Tous type d''immeuble'),
 (3, 'Abysses', 'Abysses infranchissables');
@@ -306,7 +307,7 @@ INSERT INTO `categorie_objet_complexe` (`id`, `nom`, `description`) VALUES
 -- Contenu de la table `categorie_objet_simple`
 --
 
-INSERT INTO `categorie_objet_simple` (`id`, `nom`, `description`) VALUES
+INSERT IGNORE INTO `categorie_objet_simple` (`id`, `nom`, `description`) VALUES
 (1, 'Caisses', 'Les différentes caisse'),
 (2, 'Mur', 'Les différents type de mur'),
 (3, 'Animaux', ''),
@@ -319,7 +320,7 @@ INSERT INTO `categorie_objet_simple` (`id`, `nom`, `description`) VALUES
 -- Contenu de la table `categorie_terrain`
 --
 
-INSERT INTO `categorie_terrain` (`id`, `nom`, `description`) VALUES
+INSERT IGNORE INTO `categorie_terrain` (`id`, `nom`, `description`) VALUES
 (1, 'Herbe', 'Toutes les différentes composition d''herbe du damier'),
 (2, 'Beton', 'Les différents type de beton'),
 (3, 'Epée', 'Les différentes routes'),
@@ -332,40 +333,40 @@ INSERT INTO `categorie_terrain` (`id`, `nom`, `description`) VALUES
 -- Contenu de la table `classes`
 --
 
-INSERT INTO `classes` (`id`, `camps`, `position`, `titre`, `sub`, `description`) VALUES
-('11', 1, 1, 'Confrérie des Unionistes', '1ere Maison: Les Fédéralistes', ' '),
-('11', 3, 1, 'L''Ordre de Cristal', '1er Ciel: Les Tempérés', ' '),
-('11', 4, 1, 'L''Ordre des Envieux', '2ème Caveau: Les Luxurieux', ' '),
-('12', 1, 2, 'Confrérie des Unionistes', '2ème Maison: Les Absolutistes', ' '),
-('12', 3, 2, 'L''Ordre de Cristal', '3ème Ciel: Les Adorateurs', ' '),
-('12', 4, 2, 'L''Ordre des Envieux', '3ème Caveau: Les Gourmands', ' '),
-('13', 1, 3, 'Confrérie des Unionistes', '3ème Maison: Les Militaristes', ' '),
-('13', 3, 3, 'L''Ordre de Cristal', '7ème Ciel: Les Possessifs', ' '),
-('13', 4, 3, 'L''Ordre des Envieux', '4ème Caveau: Les Avares', ' '),
-('21', 1, 4, 'Confrérie des Nationalistes', '1ere Maison: Les Intégristes', ' '),
-('21', 3, 4, 'L''Ordre de Lumière', '2ème Ciel: Les Illuminati', ' '),
-('21', 4, 4, 'L''Ordre des Indus', '1er Caveau: Le Limbe', ' '),
-('22', 1, 5, 'Confrérie des Nationalistes', '2ème Maison: Les Loyalistes', ' '),
-('22', 3, 5, 'L''Ordre de Lumière', '5ème Ciel: Les Guerriers éclairés', ' '),
-('22', 4, 5, 'L''Ordre des Indus', '8ème Caveau: Les Fraudeurs', ' '),
-('23', 1, 6, 'Confrérie des Nationalistes', '3ème Maison: Les Alliés', ' '),
-('23', 3, 6, 'L''Ordre de Lumière', '8ème Ciel: Les Hérauts de Célestia', ' '),
-('23', 4, 6, 'L''Ordre des Indus', '9ème Caveau: Les Traîtres', ' '),
-('31', 1, 7, 'Confrérie des Indépendants', '1ère Maison: Les Pacifistes', ' '),
-('31', 3, 7, 'L''Ordre des Ombres', '4ème Ciel: Les Avisés', ' '),
-('31', 4, 7, 'L''Ordre des Ardents', '5ème Caveau: Les Colériques', ' '),
-('32', 1, 8, 'Confrérie des Indépendants', '2ème Maison: Les Neutres', ' '),
-('32', 3, 8, 'L''Ordre des Ombres', '6ème Ciel: Les Manipulateurs', ' '),
-('32', 4, 8, 'L''Ordre des Ardents', '6ème Caveau: Les Hérétiques', ' '),
-('33', 1, 9, 'Confrérie des Indépendants', '3ème Maison: Les Barbares', ' '),
-('33', 3, 9, 'L''Ordre des Ombres', '9ème Ciel: Les Cruels', ' '),
-('33', 4, 9, 'L''Ordre des Ardents', '7ème Caveau: Les Violents', ' ');
+INSERT IGNORE INTO `classes` (`Id`, `Camps`, `Position`, `Titre`, `Sub`, `Description`) VALUES
+('11', 1, 1, 'Confrérie des Unionistes', '1ere Maison: Les Fédéralistes', 'Croient en l''unité des hommes sous l''égide d''une fédération de pays.'),
+('11', 3, 1, 'L''Ordre de Cristal', '1er Ciel: Les Tempérés', 'Celui qui se ballade les mains dans les poches, mais qui fait son taf...'),
+('11', 4, 1, 'L''Ordre des Envieux', '2ème Caveau: Les Luxurieux', 'Démons des plaisirs charnels, ils n''hésitent pas à faire usage de leur corps et d''autres talents divers pour obtenir ce qu''ils veulent.'),
+('12', 1, 2, 'Confrérie des Unionistes', '2ème Maison: Les Absolutistes', 'Croient en l''union sous une seule et unique bannière commune imposée par un dirigeant unique.'),
+('12', 3, 2, 'L''Ordre de Cristal', '3ème Ciel: Les Adorateurs', 'Celui qui croit profondément en ce qu''il fait, en bien ou en mal. La race Céleste est toute puissante.'),
+('12', 4, 2, 'L''Ordre des Envieux', '3ème Caveau: Les Gourmands', 'Ils aiment les plaisirs de manière excessive et n''hésitent pas à outrepasser toutes les limites pour satisfaire leur moindre envie.'),
+('13', 1, 3, 'Confrérie des Unionistes', '3ème Maison: Les Militaristes', 'Pensent que seule l''armée et la force peuvent unir l''humanité.'),
+('13', 3, 3, 'L''Ordre de Cristal', '7ème Ciel: Les Possessifs', 'A moi ! A moi ! Mon précieuuux'),
+('13', 4, 3, 'L''Ordre des Envieux', '4ème Caveau: Les Avares', 'Égoïstes, ils refusent catégoriquement de se séparer de n''importe quoi leur appartenant. Ou ne leur appartenant pas...'),
+('21', 1, 4, 'Confrérie des Nationalistes', '1ere Maison: Les Intégristes', 'Pour eux, l''utilisation de la TeK'' ou de la religion est vraie et gage d''avenir pour l''Humanité.'),
+('21', 3, 4, 'L''Ordre de Lumière', '2ème Ciel: Les Illuminati', 'Celui qui cherche la vérité. Mais on peut aussi traduire cela par "les illuminés", soit ceux qui ne savent pas ce qu''ils font.'),
+('21', 4, 4, 'L''Ordre des Indus', '1er Caveau: Le Limbe', 'Il paraît que c''est le genre de démons qui n''est pas démoniaque. Mais ce n''est que ce que l''on voudrait bien nous faire croire...'),
+('22', 1, 5, 'Confrérie des Nationalistes', '2ème Maison: Les Loyalistes', 'Ceux-là préféreront mourir que d''abandonner leur patrie.'),
+('22', 3, 5, 'L''Ordre de Lumière', '5ème Ciel: Les Guerriers éclairés', 'Celui qui se bat pour l''honneur et l''intégrité, de sa race ou de lui-même ? A chacun son interprétation...'),
+('22', 4, 5, 'L''Ordre des Indus', '8ème Caveau: Les Fraudeurs', 'Rois de l''arnaque, ils vendent des assurances vie aux immortels, et détournent des tonneaux de bière. Il faut se méfier des Fraudeurs.'),
+('23', 1, 6, 'Confrérie des Nationalistes', '3ème Maison: Les Alliés', 'Aux grands maux, les grands moyens. Ceux-ci sauront s''allier pour défaire l''ennemi juré.'),
+('23', 3, 6, 'L''Ordre de Lumière', '8ème Ciel: Les Hérauts de Célestia', 'Celui qui bourrine pour la gloire du Très-Haut, ou pas, mais il bourrine pour de la gloire.'),
+('23', 4, 6, 'L''Ordre des Indus', '9ème Caveau: Les Traîtres', 'Ils n''hésitent pas à frapper dans le dos et désirent plus que tout devenir calife à la place du Calife. It''s not good.'),
+('31', 1, 7, 'Confrérie des Indépendants', '1ère Maison: Les Pacifistes', 'La guerre, ce n''est pas leur truc, à eux. Encore que, parfois, pour imposer la paix, il faut savoir... eh bien. Pacifier.'),
+('31', 3, 7, 'L''Ordre des Ombres', '4ème Ciel: Les Avisés', 'Celui qui cherche la vérité et la Justice, enfin, les siennes, souvent.'),
+('31', 4, 7, 'L''Ordre des Ardents', '5ème Caveau: Les Colériques', 'Ils ont le sang chaud, s''énervent à la moindre contrariété, et agissent souvent sous les coups de leurs émotions..'),
+('32', 1, 8, 'Confrérie des Indépendants', '2ème Maison: Les Neutres', 'Ceux-ci s''en foutent. En tous cas, c''est ce qu''ils disent.'),
+('32', 3, 8, 'L''Ordre des Ombres', '6ème Ciel: Les Manipulateurs', 'Celui qui est prêt à tout pour arriver à ses fins. Oui, ça y compris. Mais à chacun sa méthode...'),
+('32', 4, 8, 'L''Ordre des Ardents', '6ème Caveau: Les Hérétiques', 'Tout ce qui n''est pas permis les attire en général. Ils haïssent par dessus tout les Anges et la religion qu''ils inculquent aux humains.'),
+('33', 1, 9, 'Confrérie des Indépendants', '3ème Maison: Les Barbares', 'La violence est solution à tous problèmes pour les barbares. Même si certains d''entre eux sont parfaitement civilisés.'),
+('33', 3, 9, 'L''Ordre des Ombres', '9ème Ciel: Les Cruels', 'Celui qui fait souffrir pour son propre plaisir, parfois pour celui des autres. Mais souvent pour le sien.'),
+('33', 4, 9, 'L''Ordre des Ardents', '7ème Caveau: Les Violents', 'Ils frappent d''abord, et posent les questions ensuite. Quand ils posent des questions.');
 
 --
 -- Contenu de la table `effet`
 --
 
-INSERT INTO `effet` (`id`, `type_effet`, `effet`) VALUES
+INSERT IGNORE INTO `effet` (`id`, `type_effet`, `effet`) VALUES
 (198, 'alter_att', '-1'),
 (180, 'alter_att', '-10'),
 (50, 'alter_att', '-10%'),
@@ -471,6 +472,7 @@ INSERT INTO `effet` (`id`, `type_effet`, `effet`) VALUES
 (161, 'alter_pv', '-25'),
 (152, 'alter_pv', '-35'),
 (150, 'alter_pv', '-50'),
+(226, 'alter_pv', '10%'),
 (212, 'alter_recup_pv', '-10'),
 (29, 'alter_recup_pv', '-15'),
 (35, 'alter_recup_pv', '-20'),
@@ -592,32 +594,10 @@ INSERT INTO `effet` (`id`, `type_effet`, `effet`) VALUES
 (65, 'xp', '8');
 
 --
--- Contenu de la table `faction_alignement`
---
-
-INSERT INTO `faction_alignement` (`id`, `label`) VALUES
-(1, 'Loyalistes'),
-(2, 'Dévots'),
-(3, 'Libres penseurs'),
-(4, 'Rebelles'),
-(5, 'Traitres');
-
---
--- Contenu de la table `faction_types`
---
-
-INSERT INTO `faction_types` (`id`, `nom`) VALUES
-(1, 'Mineure'),
-(2, 'Majeure'),
-(3, 'Défense'),
-(4, 'Justice'),
-(5, 'Éducation');
-
---
 -- Contenu de la table `icone_galons`
 --
 
-INSERT INTO `icone_galons` (`id`, `grade_id`, `icone_url`) VALUES
+INSERT IGNORE INTO `icone_galons` (`id`, `grade_id`, `icone_url`) VALUES
 (1, 1, 'galons/grade1/galon1.png'),
 (2, 1, 'galons/grade1/galon2.png'),
 (3, 1, 'galons/grade1/galon3.png'),
@@ -642,7 +622,7 @@ INSERT INTO `icone_galons` (`id`, `grade_id`, `icone_url`) VALUES
 -- Contenu de la table `icone_persos`
 --
 
-INSERT INTO `icone_persos` (`id`, `camp_id`, `type`, `grade_id`, `sexe_id`, `xp_min`, `xp_max`, `icone_url`) VALUES
+INSERT IGNORE INTO `icone_persos` (`id`, `camp_id`, `type`, `grade_id`, `sexe_id`, `xp_min`, `xp_max`, `icone_url`) VALUES
 (1, 1, 3, -3, 1, -99999, 250, 'persos/humain_t3/Hero0.gif'),
 (2, 1, 3, -3, 1, 249, 500, 'persos/humain_t3/Hero1.gif'),
 (3, 1, 3, -3, 1, 499, 1000, 'persos/humain_t3/Hero2.gif'),
@@ -798,13 +778,14 @@ INSERT INTO `icone_persos` (`id`, `camp_id`, `type`, `grade_id`, `sexe_id`, `xp_
 (153, 0, 3, 0, 1, -1000, 99999, 'persos/perso/splinter.png'),
 (154, 0, 3, 0, 1, -1000, 999999, 'persos/perso/leonardo.png'),
 (155, 0, 3, 0, 1, -1000, 99999, 'persos/perso/michelangelo.png'),
-(156, 0, 3, 0, 1, -1000, 999999, 'persos/perso/donatello.png');
+(156, 0, 3, 0, 1, -1000, 999999, 'persos/perso/donatello.png'),
+(157, 0, 3, 5, 1, 0, 0, 'persos/perso/deyron.gif');
 
 --
 -- Contenu de la table `medailles_liste`
 --
 
-INSERT INTO `medailles_liste` (`id`, `nom`, `description`, `niveau`, `priorite`, `image`) VALUES
+INSERT IGNORE INTO `medailles_liste` (`id`, `nom`, `description`, `niveau`, `priorite`, `image`) VALUES
 (1, 'G4', 'A atteint le grade 4', 1, 1, 'g4'),
 (2, 'G5', 'A atteint le grade 5', 1, 8, 'g5'),
 (3, 'Très-Haut', 'Est ou à été(e) Très-Haut(e)', 1, 10, 'th'),
@@ -819,7 +800,7 @@ INSERT INTO `medailles_liste` (`id`, `nom`, `description`, `niveau`, `priorite`,
 -- Contenu de la table `races`
 --
 
-INSERT INTO `races` (`id`, `race_id`, `grade_id`, `camp_id`, `type`, `nom`, `description`, `color`) VALUES
+INSERT IGNORE INTO `races` (`id`, `race_id`, `grade_id`, `camp_id`, `type`, `nom`, `description`, `color`) VALUES
 (1, 1, -2, 1, 4, 'Humanité', 'Grade servant au nom de la race', '#638D19'),
 (2, 1, -1, 1, 4, 'Tricheur', 'Humain, de simple homme', '#E90086'),
 (3, 1, 0, 1, 4, 'Humain', 'Humain, de simple homme', '#638D19'),
@@ -911,7 +892,7 @@ INSERT INTO `races` (`id`, `race_id`, `grade_id`, `camp_id`, `type`, `nom`, `des
 -- Contenu de la table `sexe`
 --
 
-INSERT INTO `sexe` (`id`, `sexe`, `admin`) VALUES
+INSERT IGNORE INTO `sexe` (`id`, `sexe`, `admin`) VALUES
 (1, 'Masculin', 0),
 (2, 'Féminin', 0),
 (3, 'Autre', 0),

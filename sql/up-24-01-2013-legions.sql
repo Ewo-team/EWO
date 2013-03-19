@@ -1,5 +1,0 @@
-ALTER TABLE  `factions` ADD  `link1` VARCHAR( 255 ) NOT NULL ,
-ADD  `link2` VARCHAR( 255 ) NOT NULL ,
-ADD  `link3` VARCHAR( 255 ) NOT NULL ,
-ADD  `link4` VARCHAR( 255 ) NOT NULL ,
-ADD  `link5` VARCHAR( 255 ) NOT NULL

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mer 06 Février 2013 à 17:55
+-- Généré le: Mar 19 Mars 2013 à 13:01
 -- Version du serveur: 5.5.23-log
 -- Version de PHP: 5.3.10
 
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `at_log` (
   `compte` int(11) NOT NULL,
   `date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='table générique de log' AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='table générique de log' AUTO_INCREMENT=5542 ;
 
 -- --------------------------------------------------------
 
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `at_navigateur` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `descr` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=112 ;
 
 -- --------------------------------------------------------
 
@@ -242,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `bals` (
   KEY `FK_Bals_Corps` (`corps_id`),
   KEY `FK_Bals_Expediteur` (`perso_src_id`),
   KEY `FK_Bals_Destinataire` (`perso_dest_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Destinataires des BAL' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Destinataires des BAL' AUTO_INCREMENT=2682 ;
 
 -- --------------------------------------------------------
 
@@ -257,10 +257,10 @@ CREATE TABLE IF NOT EXISTS `bals_corps` (
   `titre` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `corps` mediumtext COLLATE utf8_unicode_ci NOT NULL,
   `liste_mats` mediumtext CHARACTER SET latin1 NOT NULL,
-  `liste` varchar(10) CHARACTER SET latin1 DEFAULT NULL,
+  `liste` varchar(30) CHARACTER SET latin1 DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IX_BalsCorps_Date` (`date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Corps des BAL' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Corps des BAL' AUTO_INCREMENT=464 ;
 
 -- --------------------------------------------------------
 
@@ -322,7 +322,7 @@ CREATE TABLE IF NOT EXISTS `bals_send` (
   PRIMARY KEY (`id`),
   KEY `FK_BalsSend_Persos` (`perso_src_id`),
   KEY `IX_BalsSend_Date` (`date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=456 ;
 
 -- --------------------------------------------------------
 
@@ -357,7 +357,7 @@ CREATE TABLE IF NOT EXISTS `camps` (
   `description` mediumtext COLLATE utf8_unicode_ci NOT NULL COMMENT 'Texte de description du camp',
   PRIMARY KEY (`id`),
   KEY `FK_Camps_Carte` (`carte_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
@@ -368,28 +368,28 @@ CREATE TABLE IF NOT EXISTS `camps` (
 DROP TABLE IF EXISTS `caracs`;
 CREATE TABLE IF NOT EXISTS `caracs` (
   `perso_id` int(10) unsigned NOT NULL COMMENT 'Identifiant du personnage',
-  `px` mediumint(9) NOT NULL COMMENT 'Exp',
-  `pi` mediumint(9) NOT NULL COMMENT 'Points d''investissement du perso',
-  `pv` mediumint(9) NOT NULL COMMENT 'PVs actuels du perso',
-  `niv_pv` smallint(5) unsigned NOT NULL,
-  `recup_pv` smallint(6) NOT NULL,
-  `malus_def` smallint(6) NOT NULL,
-  `niv_recup_pv` tinyint(3) unsigned NOT NULL,
-  `niv` tinyint(3) unsigned NOT NULL COMMENT 'niveau de magie',
+  `px` mediumint(9) NOT NULL DEFAULT '0' COMMENT 'Exp',
+  `pi` mediumint(9) NOT NULL DEFAULT '0' COMMENT 'Points d''investissement du perso',
+  `pv` mediumint(9) NOT NULL DEFAULT '0' COMMENT 'PVs actuels du perso',
+  `niv_pv` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `recup_pv` smallint(6) NOT NULL DEFAULT '0',
+  `malus_def` smallint(6) NOT NULL DEFAULT '0',
+  `niv_recup_pv` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `niv` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'niveau de magie',
   `cercle` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `mouv` mediumint(9) NOT NULL,
-  `niv_mouv` tinyint(3) unsigned NOT NULL,
-  `pa` float NOT NULL,
+  `mouv` mediumint(9) NOT NULL DEFAULT '0',
+  `niv_mouv` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `pa` float NOT NULL DEFAULT '0',
   `pa_dec` tinyint(4) NOT NULL DEFAULT '0',
-  `niv_pa` smallint(5) unsigned NOT NULL,
-  `des_attaque` tinyint(3) unsigned NOT NULL,
+  `niv_pa` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `des_attaque` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `maj_des` tinyint(1) NOT NULL DEFAULT '0',
   `maj_esq_mag` tinyint(4) NOT NULL DEFAULT '0',
-  `niv_des` smallint(5) unsigned NOT NULL,
-  `force` mediumint(9) NOT NULL,
-  `niv_force` smallint(5) unsigned NOT NULL,
-  `perception` mediumint(9) NOT NULL,
-  `niv_perception` smallint(5) unsigned NOT NULL,
+  `niv_des` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `force` mediumint(9) NOT NULL DEFAULT '1',
+  `niv_force` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `perception` mediumint(9) NOT NULL DEFAULT '1',
+  `niv_perception` smallint(5) unsigned NOT NULL DEFAULT '0',
   `res_mag` mediumint(9) NOT NULL DEFAULT '0',
   `esq_mag` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`perso_id`),
@@ -411,16 +411,16 @@ CREATE TABLE IF NOT EXISTS `caracs` (
 DROP TABLE IF EXISTS `caracs_alter`;
 CREATE TABLE IF NOT EXISTS `caracs_alter` (
   `perso_id` int(10) unsigned NOT NULL,
-  `alter_pa` mediumint(8) NOT NULL,
-  `alter_pv` mediumint(9) NOT NULL,
-  `alter_mouv` mediumint(8) NOT NULL,
-  `alter_def` mediumint(8) NOT NULL,
-  `alter_att` mediumint(8) NOT NULL,
-  `alter_recup_pv` mediumint(8) NOT NULL,
-  `alter_force` mediumint(8) NOT NULL,
-  `alter_perception` mediumint(8) NOT NULL,
-  `nb_desaffil` mediumint(8) NOT NULL,
-  `alter_niv_mag` mediumint(8) NOT NULL,
+  `alter_pa` mediumint(8) NOT NULL DEFAULT '0',
+  `alter_pv` mediumint(9) NOT NULL DEFAULT '0',
+  `alter_mouv` mediumint(8) NOT NULL DEFAULT '0',
+  `alter_def` mediumint(8) NOT NULL DEFAULT '0',
+  `alter_att` mediumint(8) NOT NULL DEFAULT '0',
+  `alter_recup_pv` mediumint(8) NOT NULL DEFAULT '0',
+  `alter_force` mediumint(8) NOT NULL DEFAULT '0',
+  `alter_perception` mediumint(8) NOT NULL DEFAULT '0',
+  `nb_desaffil` mediumint(8) NOT NULL DEFAULT '0',
+  `alter_niv_mag` mediumint(8) NOT NULL DEFAULT '0',
   `alter_effet` int(11) NOT NULL DEFAULT '0',
   `alter_res_mag` int(11) NOT NULL DEFAULT '0',
   `alter_esq_mag` int(11) NOT NULL DEFAULT '0',
@@ -581,7 +581,7 @@ CREATE TABLE IF NOT EXISTS `caracs_alter_mag` (
   KEY `IX_CaracsAlterMagie_ResMag` (`alter_res_mag`),
   KEY `IX_CaracsAlterMagie_EsqMag` (`alter_esq_mag`),
   KEY `IX_CaracsAlterMagie_Perso` (`perso_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=144 ;
 
 -- --------------------------------------------------------
 
@@ -634,8 +634,9 @@ CREATE TABLE IF NOT EXISTS `cartes` (
   `visible_y_max` mediumint(6) NOT NULL COMMENT 'Fin carte visible en X',
   `dla` float NOT NULL DEFAULT '23' COMMENT 'en heures',
   `nom_decors` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `decors_defaut` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=255 ;
 
 -- --------------------------------------------------------
 
@@ -657,7 +658,7 @@ CREATE TABLE IF NOT EXISTS `case_artefact` (
   `consom` varchar(1) COLLATE utf8_unicode_ci NOT NULL COMMENT '0 : ni consomable ni activable,1 : activable,2 : activ� en permanence,3 : consomable,4 : en cours de consomation',
   PRIMARY KEY (`id`),
   KEY `FK_CaseArtefact_CategorieArtefact` (`categorie_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
 
 -- --------------------------------------------------------
 
@@ -679,7 +680,7 @@ CREATE TABLE IF NOT EXISTS `case_objet_complexe` (
   `categorie_id` mediumint(8) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_CaseObjetComplexe_CategorieObjetComplexe` (`categorie_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 
@@ -699,7 +700,7 @@ CREATE TABLE IF NOT EXISTS `case_objet_simple` (
   `categorie_id` mediumint(8) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_CaseObjetSimple_CategorieObjetSimple` (`categorie_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=40 ;
 
 -- --------------------------------------------------------
 
@@ -717,7 +718,7 @@ CREATE TABLE IF NOT EXISTS `case_terrain` (
   `categorie_id` mediumint(8) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_CaseTerrain_CategorieTerrain` (`categorie_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=18 ;
 
 -- --------------------------------------------------------
 
@@ -731,7 +732,7 @@ CREATE TABLE IF NOT EXISTS `categorie_artefact` (
   `nom` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `description` tinytext COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -745,7 +746,7 @@ CREATE TABLE IF NOT EXISTS `categorie_objet_complexe` (
   `nom` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `description` tinytext COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -759,7 +760,7 @@ CREATE TABLE IF NOT EXISTS `categorie_objet_simple` (
   `nom` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `description` tinytext COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
 
 -- --------------------------------------------------------
 
@@ -773,7 +774,7 @@ CREATE TABLE IF NOT EXISTS `categorie_terrain` (
   `nom` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `description` tinytext COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
 
@@ -828,17 +829,20 @@ CREATE TABLE IF NOT EXISTS `classement_view` (
 --
 -- Structure de la table `classes`
 --
+
 DROP TABLE IF EXISTS `classes`;
 CREATE TABLE IF NOT EXISTS `classes` (
-  `id` varchar(2) NOT NULL,
-  `camps` tinyint(3) unsigned NOT NULL,
-  `position` tinyint(1) NOT NULL,
-  `titre` varchar(40) NOT NULL,
-  `sub` varchar(50) NOT NULL,
-  `description` varchar(250) NOT NULL DEFAULT ' ',
+  `Id` varchar(2) NOT NULL,
+  `Camps` tinyint(3) unsigned NOT NULL,
+  `Position` tinyint(1) NOT NULL,
+  `Titre` varchar(40) NOT NULL,
+  `Sub` varchar(50) NOT NULL,
+  `Description` varchar(250) NOT NULL DEFAULT '',
   PRIMARY KEY (`Id`,`Camps`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- --------------------------------------------------------
+
 --
 -- Structure de la table `damier_artefact`
 --
@@ -965,7 +969,7 @@ CREATE TABLE IF NOT EXISTS `damier_porte` (
   KEY `FK_DamierPorte_DamierSpawn` (`spawn_id`),
   KEY `FK_DamierPorte_PorteLiee` (`porte_liee_id`),
   KEY `FK_DamierPorte_DamierObjetComplexe` (`objet_lie`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -1026,6 +1030,24 @@ CREATE TABLE IF NOT EXISTS `effet` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `emails`
+--
+
+DROP TABLE IF EXISTS `emails`;
+CREATE TABLE IF NOT EXISTS `emails` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `hash_id` varchar(32) NOT NULL,
+  `date_send` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `to_email` text NOT NULL,
+  `title` text NOT NULL,
+  `message` text NOT NULL,
+  `headers` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=226 ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `evenement`
 --
 
@@ -1066,7 +1088,7 @@ CREATE TABLE IF NOT EXISTS `evenements` (
   KEY `id_src` (`id_perso_source`),
   KEY `id_dst` (`id_perso_desti`),
   KEY `id_ev` (`id_event`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4663 ;
 
 -- --------------------------------------------------------
 
@@ -1080,7 +1102,7 @@ CREATE TABLE IF NOT EXISTS `evenements_texte` (
   `texte` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `texte` (`texte`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -1122,7 +1144,7 @@ CREATE TABLE IF NOT EXISTS `factions` (
   `link5` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_Factions_Camps` (`race`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -1135,7 +1157,7 @@ CREATE TABLE IF NOT EXISTS `faction_alignement` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `label` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
 
@@ -1154,7 +1176,7 @@ CREATE TABLE IF NOT EXISTS `faction_grades` (
   PRIMARY KEY (`id`),
   KEY `FK_FactionGrade_Factions` (`faction_id`),
   KEY `IX_FactionGrades_GradeId` (`grade_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -1171,7 +1193,7 @@ CREATE TABLE IF NOT EXISTS `faction_membres` (
   PRIMARY KEY (`id`),
   KEY `FK_FactionMembres_Persos` (`perso_id`),
   KEY `FK_FactionMembres_Factions` (`faction_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -1184,7 +1206,7 @@ CREATE TABLE IF NOT EXISTS `faction_types` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
 
@@ -1213,7 +1235,7 @@ CREATE TABLE IF NOT EXISTS `icone_galons` (
   `grade_id` int(11) NOT NULL,
   `icone_url` tinytext COLLATE utf8_unicode_ci NOT NULL COMMENT 'URL du galon autiliser',
   KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=20 ;
 
 -- --------------------------------------------------------
 
@@ -1234,7 +1256,7 @@ CREATE TABLE IF NOT EXISTS `icone_persos` (
   KEY `id` (`id`),
   KEY `camp_id` (`camp_id`),
   KEY `FK_IconePersos_Sexe` (`sexe_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=158 ;
 
 -- --------------------------------------------------------
 
@@ -1253,7 +1275,7 @@ CREATE TABLE IF NOT EXISTS `inventaire` (
   PRIMARY KEY (`id`),
   KEY `FK_Inventaires_Persos` (`perso_id`),
   KEY `FK_Inventaires_CaseArtefact` (`case_artefact_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -1318,7 +1340,7 @@ CREATE TABLE IF NOT EXISTS `medailles_liste` (
   `priorite` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT 'la priorite d''affichage pour un même niveau de médaille',
   `image` varchar(30) COLLATE utf8_unicode_ci NOT NULL COMMENT 'indique une image à afficher',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 
@@ -1345,7 +1367,7 @@ CREATE TABLE IF NOT EXISTS `morgue` (
   PRIMARY KEY (`id`),
   KEY `id_perso` (`id_perso`),
   KEY `id_victime` (`mat_victime`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=45 ;
 
 -- --------------------------------------------------------
 
@@ -1402,13 +1424,14 @@ CREATE TABLE IF NOT EXISTS `persos` (
   `pnj` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '0 = pj, 1 = pnj',
   `mortel` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0 = immortel, 1 = mortel en vie, -1 = mortel décédé, 2 = mortel en attente de la première incarnation',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `NAME` (`nom`),
   KEY `IX_Persos_GradeId` (`grade_id`),
   KEY `IX_Persos_GalonId` (`galon_id`),
   KEY `FK_Persos_SuperieurId` (`superieur_id`),
   KEY `FK_Persos_UtilisateurId` (`utilisateur_id`),
   KEY `FK_Persos_RacesId` (`race_id`),
   KEY `FK_Persos_Sexe` (`sexe`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=359 ;
 
 -- --------------------------------------------------------
 
@@ -1478,7 +1501,7 @@ CREATE TABLE IF NOT EXISTS `races` (
   KEY `IX_Races_RaceId` (`race_id`),
   KEY `IX_Races_GradeId` (`grade_id`),
   KEY `FK_Races_Camps` (`camp_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=105 ;
 
 -- --------------------------------------------------------
 
@@ -1511,7 +1534,7 @@ CREATE TABLE IF NOT EXISTS `repertoire` (
   UNIQUE KEY `UU_Repertoire_PersoContact` (`perso_id`,`contact_id`),
   KEY `FK_Repertoire_Contact` (`contact_id`),
   KEY `FK_Repertoire_Persos` (`perso_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -1525,7 +1548,7 @@ CREATE TABLE IF NOT EXISTS `sexe` (
   `sexe` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `admin` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
 
@@ -1630,7 +1653,7 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   UNIQUE KEY `UU_Utilisateurs_Nom` (`nom`),
   UNIQUE KEY `UU_Utilisateurs_Email` (`email`(50)),
   KEY `IX_Utilisateurs_Passwd` (`passwd`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=189 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=104 ;
 
 -- --------------------------------------------------------
 
@@ -1714,7 +1737,7 @@ CREATE TABLE IF NOT EXISTS `wait_faction` (
   PRIMARY KEY (`id`),
   KEY `FK_WaitFaction_Persos` (`perso_id`),
   KEY `FK_WaitFaction_Factions` (`faction_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
