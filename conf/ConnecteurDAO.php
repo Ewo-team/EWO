@@ -55,13 +55,15 @@ use \PDO as PDO,
 			static $instances = array();
 
 			$class = get_called_class();
+			
+			$key = md5(SERVER_ROOT/$class);
 
-			if (isset($instances[$class][$base]) === false)
+			if (isset($instances[$key][$base]) === false)
 			{
-				$instances[$class][$base] = new $class($base);
+				$instances[$key][$base] = new $class($base);
 			}
 
-			return $instances[$class][$base];   
+			return $instances[$key][$base];   
 		} 
 	   
 	    /**
