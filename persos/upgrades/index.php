@@ -611,7 +611,7 @@ if(!isset($admin_mode) && ($affilie || $race<3)){
 			<!-- fin conteneur -->
 </div>
 <!-- Fin du coin -->	
-
+</div>
 <?php
 //-- Footer --
 include(SERVER_ROOT."/template/footer_new.php");

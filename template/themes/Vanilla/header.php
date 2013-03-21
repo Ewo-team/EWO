@@ -73,16 +73,15 @@ $_SESSION['utilisateur']['template_mage']=true;
 
 <meta name="google-site-verification" content="rZADXCyuEh8aaWXfEkxQxz4uSd_X0k7Ksfw0Td7gimQ" />
 
-<link rel="stylesheet" href="<?php echo SERVER_URL; ?>/css/normalize.css?v=<?php echo filemtime(SERVER_ROOT.'/css/normalize.css') ?>" type="text/css" />
+<link rel="stylesheet" href="<?php echo SERVER_URL; ?>/css/normalize.css" type="text/css" />
 
 <?php
 
-	echo '<link rel="stylesheet" href="'.SERVER_URL.$template_url.'/css/jquery-ui.css?v='.filemtime(SERVER_ROOT.$template_url.'/css/jquery-ui.css').'" type="text/css" />';
+	echo '<link rel="stylesheet" href="'.SERVER_URL.$template_url.'/css/jquery-ui.css" type="text/css" />';
 
-	//error_reporting(E_ALL);
         
     include(SERVER_ROOT.'/template/less/lessc.inc.php');
-    //try {
+    try {
         $less = new lessc();
 
         $less->addImportDir(SERVER_ROOT . $template_url.'/less');
@@ -95,25 +94,23 @@ $_SESSION['utilisateur']['template_mage']=true;
         ));
 
         
-        $less->compileFile(SERVER_ROOT . $template_url.'/less/ewo.less', SERVER_ROOT . $template_url.'/css/ewo_'.md5(SERVER_URL).'.css'); 
-        //$less->checkedCompile(SERVER_ROOT . $template_url.'/less/ewo.less', SERVER_ROOT . $template_url.'/css/ewo.css');    
-    //} catch (Exception $e) {
+        $less->checkedCompile(SERVER_ROOT . $template_url.'/less/ewo.less', SERVER_ROOT . $template_url.'/css/ewo_'.md5(SERVER_URL).'.css'); 
+       
+    } catch (Exception $e) {
         // Nothing to do here
-    //}
-    echo '<link rel="stylesheet" href="'. SERVER_URL . $template_url.'/css/ewo_'.md5(SERVER_URL).'.css?v='.filemtime( SERVER_ROOT . $template_url.'/css/ewo_'.md5(SERVER_URL).'.css').'" type="text/css" />' . PHP_EOL;
+    }
+    echo '<link rel="stylesheet" href="'. SERVER_URL . $template_url.'/css/ewo_'.md5(SERVER_URL).'.css" type="text/css" />' . PHP_EOL;
     
     // Fichiers CSS supplémentaires
     if(isset($css_files)) {
         $nom = md5($css_files . SERVER_URL);
         $array = explode(",", $css_files);
 
-        
-
-        //if(file_exists(SERVER_ROOT . $template_url.'/css/generate/'.$nom.'.css')) {
-       // $time_gen = filemtime(SERVER_ROOT . $template_url.'/css/generate/'.$nom.'.css');
-        //} else {
+        if(file_exists(SERVER_ROOT . $template_url.'/css/generate/'.$nom.'.css')) {
+			$time_gen = filemtime(SERVER_ROOT . $template_url.'/css/generate/'.$nom.'.css');
+        } else {
            $time_gen = 0; 
-        //}
+        }
         $compile = false;
         $import = '@import url(couleurs.less);';
 
@@ -130,21 +127,21 @@ $_SESSION['utilisateur']['template_mage']=true;
         }
         
         if($compile) {
-            //try {  
-            $compiled = $less->compile($import);
-            
-            if(substr(decoct( fileperms(SERVER_ROOT . $template_url.'/css/generate/') ), 2) != 777) {
-                chmod(SERVER_ROOT . $template_url.'/css/generate/', 777);
-            }
-            
-            file_put_contents(SERVER_ROOT . $template_url.'/css/generate/'.$nom.'.css', $compiled);
-            //} catch(Exception $e) {
+            try {  
+				$compiled = $less->compile($import);
+				
+				if(substr(decoct( fileperms(SERVER_ROOT . $template_url.'/css/generate/') ), 2) != 777) {
+					chmod(SERVER_ROOT . $template_url.'/css/generate/', 777);
+				}
+				
+				file_put_contents(SERVER_ROOT . $template_url.'/css/generate/'.$nom.'.css', $compiled);
+            } catch(Exception $e) {
                 // Nothing to do here
-            //}
+            }
             
         }
         
-        echo '<link rel="stylesheet" href="'.SERVER_URL . $template_url.'/css/generate/'.$nom.'.css?v='.filemtime(SERVER_ROOT.$template_url.'/css/generate/'.$nom.'.css').'" type="text/css" />' . PHP_EOL;        
+        echo '<link rel="stylesheet" href="'.SERVER_URL . $template_url.'/css/generate/'.$nom.'.css" type="text/css" />' . PHP_EOL;        
     }
 ?>
 

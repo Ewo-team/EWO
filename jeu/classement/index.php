@@ -228,7 +228,7 @@ if(isset($_POST['highlight'])) {
 
 				if(!is_numeric($_POST['search'])) {
 					$p = $persos->SelectPersoByName($_GET['search']);
-					$highlight = $p['id'];
+					$highlight = $p['id_personnage'];
 
 				}		
 				
@@ -242,7 +242,7 @@ if(isset($_POST['highlight'])) {
 				if(!is_numeric($_POST['search'])) {
 					$p = $persos->SelectPersoByName($_POST['search']);
 					if($p) {
-						$param['highlight'] = $p['id'];
+						$param['highlight'] = $p['id_personnage'];
 					}
 				}
 				$classement->cherchePositionMat($param['highlight']);

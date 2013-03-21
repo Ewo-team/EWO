@@ -260,6 +260,6 @@ if($_POST['desUp'] >0){
 
 if($new_pi != $perso_carac['pi'])
 	maj_carac($perso_id, "pi", $new_pi);
-echo "<script language='javascript' type='text/javascript' >document.location='upgrades.php'</script>";
+echo "<script language='javascript' type='text/javascript' >document.location='.'</script>";
 exit;
 ?>
