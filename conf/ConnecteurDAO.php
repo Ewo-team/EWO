@@ -56,7 +56,7 @@ use \PDO as PDO,
 
 			$class = get_called_class();
 			
-			$key = md5(SERVER_ROOT/$class);
+			$key = md5(SERVER_ROOT.'/'.$class);
 
 			if (isset($instances[$key][$base]) === false)
 			{
