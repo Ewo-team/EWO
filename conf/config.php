@@ -18,5 +18,3 @@ $protocol = (SSL == 1 || $inhttps) ? 'https' : 'http';
 
 define('SERVER_URL' , $protocol . '://' . WEB_DOMAIN . WEB_SUBFOLDER);
 define("SERVER_ROOT", substr(__DIR__, 0, -5));
-
-?>
