@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Eclipse gitignore
 .project
 .metadata
@@ -10,25 +9,13 @@
 
 #css compiled
 template/themes/*/css/generate
-
-# IIS7 (oui, je sais...)
-web.config
-=======
-# Eclipse gitignore
-.project
-.metadata
-.settings/
-.buildpath
-
-# Global
-/forum
-
-#css compiled
-template/themes/*/css/generate
+template/themes/*/css/ewo_*.css
 
 #GPS 
 jeu/carte/*.png
 
 #uploaded images for legions
 legions/blasons/*.png
->>>>>>> origin/dev-legions
+
+# IIS7 (oui, je sais...)
+web.config

@@ -207,12 +207,11 @@ if (isset($template_on)) {
             $menu['admin'][] = array('url' => SERVER_URL . '/admin/', 'nom' => 'Powa Pannel');
             //$menu['admin'][] = array('url' => SERVER_URL.'/admin/', 'nom' => 'Administration');
             if ($is_at) {
-                $menu['admin'][] = array('url' => '#', 'nom' => 'At');
+                $menu['admin'][] = array('url' => SERVER_URL .'/admin/antitriche/', 'nom' => 'At');
             }
         }
-
-        if ($is_at && !$is_anim) {
-            $menu['at'][] = array('url' => '#', 'nom' => 'At');
+		else if ($is_at) {
+            $menu['at'][] = array('url' => SERVER_URL .'/admin/antitriche/', 'nom' => 'At');
             //$menu['at'][] = array('url' => SERVER_URL.'/admin/antitriche', 'nom' => 'Administration');
         }
 
