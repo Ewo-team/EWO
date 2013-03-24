@@ -55,7 +55,7 @@
 					return false;
 				
 				//Log de l'action
-					$this->mATLogger->log(AT_LOG_PUNISH,'a puni $id->name violentement',$id);
+					$this->mATLogger->log(array(AT_LOG_PUNISH,'a puni $id->name violentement',$id));
 
 				//TODO
 				$idCompte	= 0; // id du compte rataché au perso

@@ -1,10 +1,11 @@
 <?php
 	include_once('ref.php.inc');
+	include('config.php.inc');
 
 	function view_log($at){
 		if(!isset($_SESSION['at_log_co_mach']) || $_SESSION['at_log_co_mach']+1800 <= time()){//On refresh toute les 30 minutes
 			$logger = $at->getATLogger();
-			$logger->log(0,'a utilis&eacte; l\'outil automatique par IP',null);
+			$logger->log(array(0,'a utilis&eacte; l\'outil automatique par IP',null));
 			$_SESSION['at_log_co_mach'] = time();
 		}
 	}
@@ -15,11 +16,21 @@
 		else
 			$p = $_GET['p'];
 			
-		$sql 	= 'SELECT SQL_CACHE COUNT(*) as nb FROM `at_log_connexion`;';
-		$search	= mysql_query($sql);
+		$sql 	= '
+			SELECT (COUNT(cookieId)/'.AT_RESULT_PAGE_COUNT.') as nb 
+			FROM (SELECT 
+				ac.cookieId as cookieId
+				FROM  `at_log_connexion` ac
+				INNER JOIN `at_log` al
+					ON (al.id = ac.id)
+				GROUP BY ac.cookieId	
+				HAVING COUNT(DISTINCT al.compte) > 1) as tbl
+			;
+		';
+		$search	= mysql_query($sql) or die(mysql_error());
 		$data	= mysql_fetch_object($search);
 		
-		$nbPage = ceil($data->nb/30);
+		$nbPage = ceil($data->nb);
 		if($p > $nbPage)
 			$p = $nbPage;
 			
@@ -53,69 +64,42 @@
 				'.$pages.'
 			</div>
 		';
-		
-		$r = $pages.'
-		<table>
+	
+		$r = '<table>
 			<tr>
-				<th width="10%">Machine</th>
+				<th width="10%">IP</th>
 				<th width="10%">Utilisateurs</th>
 			</tr>';
 			
 			$sql = '
 				SELECT
-				SQL_CACHE
-					c.cookieId 	as cookieId
-				FROM
-					`at_log_connexion` c	
-				INNER JOIN
-					`at_log` l
-				ON
-					l.id = c.id
-				HAVING
-					COUNT(l.compte) > 1
-				ORDER BY
-					c.cookieId ASC
-				LIMIT '.(($p-1)*30).',30
+					ac.cookieId as cookieId,
+					GROUP_CONCAT(DISTINCT u.nom) as names,
+					COUNT(DISTINCT u.nom) as count
+				FROM  `at_log_connexion` ac
+				INNER JOIN `at_log` al
+					ON (al.id = ac.id)
+				INNER JOIN `utilisateurs` u
+					ON (u.id = al.compte)
+				GROUP BY ac.cookieId
+				HAVING count > 1
+				LIMIT '.(($p-1)*AT_RESULT_PAGE_COUNT ).','.AT_RESULT_PAGE_COUNT .'
 			';
-			
-			$search = mysql_query($sql);
+			$search = mysql_query($sql) or die(mysql_error());
 			while($log = mysql_fetch_object($search)){
-				$sql = '
-					SELECT
-						u.nom	as name
-					FROM
-						`utilisateurs` u,
-						`at_log_connexion` c,
-						`at_log` l
-					WHERE
-						l.id = c.id AND
-						u.id = l.compte AND
-						c.cookieId = "'.$log->cookieId.'"
-					GROUP BY
-						u.id
-				';
-				$search2 = mysql_query($sql);
-				$l = array();
-				while($user = mysql_fetch_object($search2))
-					array_push($l,$user->name);
-				if(count($l) > 1){
 					$r .= '
 			<tr>
 				<td>'.$log->cookieId.'</td>
 				<td>
 					<ul style="margin : 0px;">';
-					foreach($l as $name)
+					foreach(explode(',', $log->names) as $name)
 						$r .= '
 						<li>'.stripslashes($name).'</li>';
 					$r .= '
 					</ul>
 			</tr>
 				';
-				}
-				
-				
 			}
-			
 			
 			$r .='
 		</table>'.$pages;

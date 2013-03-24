@@ -142,7 +142,7 @@
 		';
 		mysql_query($sql);
 		
-		$at->getATLogger()->log(AT_ACTION_AJOUTER,'a ajout&eacute; '.$data->name.' &agrave; l\'AT',$at->getId());
+		$at->getATLogger()->log(array(AT_ACTION_AJOUTER,'a ajout&eacute; '.$data->name.' &agrave; l\'AT',$at->getId()));
 		
 		return '<strong>Utilisateur ajouté</strong>';
 	}
@@ -174,7 +174,7 @@
 		$sql = 'DELETE FROM `at_members` WHERE id = '.$data->id;
 		mysql_query($sql);
 		
-		$at->getATLogger()->log(AT_ACTION_VIRER,'a supprim&eacute; '.$data->name.' de l\'AT',$at->getId());
+		$at->getATLogger()->log(array(AT_ACTION_VIRER,'a supprim&eacute; '.$data->name.' de l\'AT',$at->getId()));
 		
 		return 'Membre supprim&eacute;';
 	}
@@ -205,7 +205,7 @@
 		mysql_query($sql);
 		
 		
-		$at->getATLogger()->log(AT_ACTION_AJOUTER,'a modifi&eacute; les informations de '.$data->name.', passage au niveau '.$_POST['lvl'],$at->getId());
+		$at->getATLogger()->log(array(AT_ACTION_AJOUTER,'a modifi&eacute; les informations de '.$data->name.', passage au niveau '.$_POST['lvl'],$at->getId()));
 		
 		return 'Modification effectu&eacute;e';
 	}

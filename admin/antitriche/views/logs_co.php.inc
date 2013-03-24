@@ -1,10 +1,11 @@
 <?php
 	include_once('ref.php.inc');
-
+	require_once('config.php.inc');
+	
 	function view_log($at){
 		if(!isset($_SESSION['at_log_log_co']) || $_SESSION['at_log_log_co']+1800 <= time()){//On refresh toute les 30 minutes
 			$logger = $at->getATLogger();
-			$logger->log(0,'a regard&eacute; les logs de connexion',null);
+			$logger->log(array(0,'a regard&eacute; les logs de connexion',null));
 			$_SESSION['at_log_log_co'] = time();
 		}
 	}
@@ -82,7 +83,7 @@
 					ON (n.id = c.navigateur)
 				ORDER BY
 					l.date DESC
-				LIMIT '.(($p-1)*30).',30
+				LIMIT '.(($p-1)*AT_RESULT_PAGE_COUNT ).','.AT_RESULT_PAGE_COUNT .'
 			';
 			
 			$search = mysql_query($sql);

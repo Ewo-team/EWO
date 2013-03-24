@@ -31,8 +31,10 @@
 		 * message	: message (système de parsage des messages, voir le wiki pour plus d'info)
 		 * id		: id du compte qui subit l'action
 		 */
-		public function log($action,$message,$id){
-			
+		public function log($param){
+			$action = $param[0];
+			$message = $param[1];
+			$id = $param[2];
 			$last	= parent::log($this->mAt->getId());
 
 			$sql	= 'INSERT INTO `at_log_at` (id,action,message) VALUES('.$last.',\''.$action.'\',\''.addslashes($message).'\');';

@@ -1,10 +1,11 @@
 <?php
 	include_once('ref.php.inc');
+	include('config.php.inc');
 
 	function view_log($at){
 		if(!isset($_SESSION['at_log_co_ip']) || $_SESSION['at_log_co_ip']+1800 <= time()){//On refresh toute les 30 minutes
 			$logger = $at->getATLogger();
-			$logger->log(0,'a utilis&eacte; l\'outil automatique par IP',null);
+			$logger->log(array(0,'a utilis&eacte; l\'outil automatique par IP',null));
 			$_SESSION['at_log_co_ip'] = time();
 		}
 	}
@@ -15,11 +16,21 @@
 		else
 			$p = $_GET['p'];
 			
-		$sql 	= 'SELECT COUNT(*) as nb FROM `at_log_connexion`;';
-		$search	= mysql_query($sql);
+		$sql 	= '
+			SELECT (COUNT(ip)/'.AT_RESULT_PAGE_COUNT.') as nb 
+			FROM (SELECT 
+				ac.IP as ip
+				FROM  `at_log_connexion` ac
+				INNER JOIN `at_log` al
+					ON (al.id = ac.id)
+				GROUP BY ac.IP	
+				HAVING COUNT(DISTINCT al.compte) > 1) as tbl
+			;
+		';
+		$search	= mysql_query($sql) or die(mysql_error());
 		$data	= mysql_fetch_object($search);
 		
-		$nbPage = ceil($data->nb/30);
+		$nbPage = ceil($data->nb);
 		if($p > $nbPage)
 			$p = $nbPage;
 			
@@ -30,14 +41,13 @@
 		$e = $p + 7;
 		if($e > $nbPage)
 			$e = $nbPage;
-			
 		$d = round(($e - $s)/3);
-			
+		
 		$pages = '';	
 		for($i = $s;$i <= $e;++$i){
 			if($i < $p-ceil($d/2))
 				$c = 'redSection';
-			elseif($i > $p+ceil($d/2))
+			elseif($i >= $p+ceil($d/2))
 				$c = 'blueSection';
 			else
 				$c = 'greenSection';
@@ -63,59 +73,33 @@
 			
 			$sql = '
 				SELECT
-				SQL_CACHE
-					c.ip as ip
-				FROM
-					`at_log_connexion` c	
-				INNER JOIN
-					`at_log` l
-				ON
-					l.id = c.id
-				HAVING
-					COUNT(l.compte) > 1
-				ORDER BY
-					c.ip ASC
-				LIMIT '.(($p-1)*30).',30
+					ac.IP as ip,
+					GROUP_CONCAT(DISTINCT u.nom) as names,
+					COUNT(DISTINCT u.nom) as count
+				FROM  `at_log_connexion` ac
+				INNER JOIN `at_log` al
+					ON (al.id = ac.id)
+				INNER JOIN `utilisateurs` u
+					ON (u.id = al.compte)
+				GROUP BY ac.IP
+				HAVING count > 1
+				LIMIT '.(($p-1)*AT_RESULT_PAGE_COUNT ).','.AT_RESULT_PAGE_COUNT .'
 			';
-			
-			$search = mysql_query($sql);
+			$search = mysql_query($sql) or die(mysql_error());
 			while($log = mysql_fetch_object($search)){
-				$sql = '
-					SELECT
-						u.nom	as name
-					FROM
-						`utilisateurs` u,
-						`at_log_connexion` c,
-						`at_log` l
-					WHERE
-						l.id = c.id AND
-						u.id = l.compte AND
-						c.ip = "'.$log->ip.'"
-					GROUP BY
-						u.id
-				';
-				$search2 = mysql_query($sql);
-				$l = array();
-				while($user = mysql_fetch_object($search2))
-					array_push($l,$user->name);
-				if(count($l) > 1){
 					$r .= '
 			<tr>
 				<td>'.$log->ip.'</td>
 				<td>
 					<ul style="margin : 0px;">';
-					foreach($l as $name)
+					foreach(explode(',', $log->names) as $name)
 						$r .= '
 						<li>'.stripslashes($name).'</li>';
 					$r .= '
 					</ul>
 			</tr>
 				';
-				}
-				
-				
 			}
-			
 			
 			$r .='
 		</table>'.$pages;

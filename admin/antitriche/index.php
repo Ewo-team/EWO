@@ -3,7 +3,6 @@
 	require_once('views/menu.php.inc');
 	
 	
-	
 	if(!$at	= get())
 		echo 'Tu n\'as rien à faire ici petit con';// TODO gérer l'erreur
 		
