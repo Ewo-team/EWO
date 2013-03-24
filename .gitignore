@@ -10,6 +10,7 @@
 
 #css compiled
 template/themes/*/css/generate
+template/themes/*/css/ewo_*.css
 
 # IIS7 (oui, je sais...)
 web.config
