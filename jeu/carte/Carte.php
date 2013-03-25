@@ -85,7 +85,7 @@ class Carte {
 	}
 	
 	public function coord_y($y) {
-		return (($this->_y_max - $this->_y_min)-($y - $this->_x_min))*$this->_ratio_ver;
+		return (($this->_y_max - $this->_y_min)-($y - $this->_y_min))*$this->_ratio_ver;
 	}	
 	
 	public function AxeHorizontale($position) {
@@ -430,6 +430,14 @@ class SVG {
 
 				.fond_terre {
 				   fill:   rgb(170, 221, 170);
+				}
+				
+				.fond_ciferis {
+				   fill:   rgb(223, 170, 170);
+				}		
+
+				.fond_celestia {
+				   fill:   rgb(170, 170, 221);
 				}
 				
 				.humain {

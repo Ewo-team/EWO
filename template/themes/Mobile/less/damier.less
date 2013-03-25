@@ -1,0 +1,319 @@
+
+.haut_bulle{
+	background-image : url(../../images/infobulle/haut_bulle.png);
+	background-repeat : no-repeat;
+	width: 230px;
+	height: 19px;
+}
+.gauche_bulle{
+	padding-left:12px;
+	background-image : url(../../images/infobulle/fond_bulle.png);
+	background-repeat : repeat-y;
+	background-position : top left;
+	height:39px;
+	width:165px;
+}
+
+.img_bulle{
+	border:0px;
+	width:50px;
+	height:39px;
+}
+
+.middle_bulle{
+	width: 45px;
+}
+
+.centre_bulle{
+	background-image : url(../../images/infobulle/fond_bulle.png);
+	background-repeat : repeat-y;
+	padding-left:12px;
+	padding-right:20px;
+	width: 230px;
+}
+
+.droit_bulle{
+	background-image : url(../../images/infobulle/fond_bulle.png);
+	background-repeat : repeat-y;
+	background-position : top right;
+	height:39px;
+	width:20px;
+}
+
+.fond_bulle{
+	background-image : url(../../images/infobulle/fond_bulle.png);
+	background-repeat : repeat-y;
+	padding-left:20px;
+	width: 230px;
+}
+.bas_bulle{
+	background-image : url(../../images/infobulle/bas_bulle.png);
+	background-repeat : no-repeat;
+	width: 230px;
+	height: 19px;		
+}
+
+.damier_terre{
+	background:url(http://www.ewo-le-monde.com/images/decors/motifs/pattern_grass.jpg) no-repeat;
+	width:45px;
+	height:39px;
+}
+
+.damier_paradis{
+	background:url(http://www.ewo-le-monde.com/images/decors/motifs/pattern_water.jpg) no-repeat;
+	width:45px;
+	height:39px;
+}
+
+.damier_enfer{
+	background:url(http://www.ewo-le-monde.com/images/decors/motifs/pattern_beton.jpg) no-repeat;
+	width:45px;
+	height:39px;
+}
+/*
+.damier_case {
+	width:45px;
+	height:39px;
+	background-color:#e9e6c3;
+}
+
+.damier_hd {
+	width:45px;
+	height:39px;
+	background : url(../../images/coin_hd_damier.png) no-repeat;
+}
+
+.damier_hg {
+	width:45px;
+	height:39px;
+	background : url(../../images/coin_hg_damier.png) no-repeat;
+}
+
+.damier_bd {
+	width:45px;
+	height:39px;
+	background : url(../../images/coin_bd_damier.png) no-repeat 100% 100%;
+}
+
+.damier_bg {
+	width:45px;
+	height:39px;
+	background : url(../../images/coin_bg_damier.png) no-repeat 100% 100%;
+}
+*/
+.int_damier_hd {
+	-moz-border-radius-topright:10px;
+	-webkit-border-top-right-radius:10px;
+}
+
+.int_damier_hg {
+	-moz-border-radius-topleft:10px;
+	-webkit-border-top-left-radius:10px;
+}
+
+.int_damier_bd {
+	-moz-border-radius-bottomright:10px;
+	-webkit-border-bottom-right-radius:10px;
+}
+
+.int_damier_bg {
+	-moz-border-radius-bottomleft:10px;
+	-webkit-border-bottom-left-radius:10px;
+}
+
+/* Centrage du damier */
+
+.damier_corps{
+	margin-right: auto;
+	margin-left: auto;
+        background-color: @couleur2;
+        border: 1px solid @couleur3;
+        border-radius: 10px;
+}
+
+
+/*-- Grille du damier --*/
+.damier_grille{
+	border-style:solid;
+	border-width:1px;
+	border-color:@couleur5;
+        width: 45px;
+        height: 39px;
+}
+
+.damier_grille_perso{
+	border-style:solid;
+	border-width:1px;
+	border-color:#000000;
+}
+.damier_grille_perso_haut{
+	border-style:solid;
+	border-width:1px;
+	border-right-color:#E9E6C3;
+	border-bottom-color:#000000;
+}
+.damier_grille_perso_gauche{
+	border-style:solid;
+	border-width:1px;
+	border-right-color:#000000;
+	border-bottom-color:#E9E6C3;
+}
+
+/*-- Damier 2 --*/
+
+.case {
+	position:relative;
+	width:45px;
+	height:39px;
+}
+
+.deplacement:hover .fleche {
+    opacity: 0.5;
+}
+
+.damier_terrain {
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:45px;
+	height:39px;	
+	z-index:0;
+}
+
+.damier_porte {
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:45px;
+	height:39px;	
+	z-index:10;
+}
+
+.damier_objet_c {
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:45px;
+	height:39px;	
+	z-index:20;
+}
+
+.damier_bouclier {
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:45px;
+	height:39px;	
+	z-index:30;
+}
+
+.damier_objet {
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:45px;
+	height:39px;
+	z-index:40;
+}
+
+.damier_artefact {
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:45px;
+	height:39px;
+	z-index:50;
+}
+
+.damier_perso {
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:45px;
+	height:39px;
+	z-index:60;
+}
+
+.damier_galon {
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:45px;
+	height:39px;
+	z-index:70;
+	background-image: url(../../../../../images/galons/galons.gif);
+}
+
+.sprite_G1g0, .sprite_G1g1 { background-position: 0px 0px; }
+.sprite_G1g2 { background-position: 0px -33px; }
+.sprite_G1g3 { background-position: 0px -66px; }
+.sprite_G1g4 { background-position: 0px -99px; }
+
+.sprite_G2g0, .sprite_G2g1 { background-position: -45px 0px  }
+.sprite_G2g2 { background-position: -45px -33px; }
+.sprite_G2g3 { background-position: -45px -66px; }
+.sprite_G2g4 { background-position: -45px -99px; }
+
+.sprite_G3g0, .sprite_G3g1 { background-position: -90px 0px; }
+.sprite_G3g2 { background-position: -90px -33px; }
+.sprite_G3g3 { background-position: -90px -66px; }
+.sprite_G3g4 { background-position: -90px -99px; }
+
+.sprite_G4g0, .sprite_G4g1 { background-position: -135px 0px; }
+.sprite_G4g2 { background-position: -135px -33px; }
+.sprite_G4g3 { background-position: -135px -66px; }
+.sprite_G4g4 { background-position: -135px -99px; }
+
+.sprite_G5g0, .sprite_G5g1 { background-position: -180px 0px; }
+.sprite_G5g2 { background-position: -180px -33px; }
+.sprite_G5g3 { background-position: -180px -66px; }
+.sprite_G5g4 { background-position: -180px -99px; }
+
+.damier_bulle{
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:45px;
+	height:39px;
+	color:#000;
+	/*z-index:80; En dur directement dans le code decremente*/ 
+}
+
+/*--- Info bulle ---*/
+.bubulle{
+	width:45px;
+	height:39px;
+}
+
+.infobulle{
+	position:absolute;
+	display:none;
+	width:230px;
+	height:auto;
+	float:left;
+	margin-left: -167px; /* Position par rapport à la case ciblée */
+	margin-top: -57px; /* Position par rapport à la case ciblée */
+	z-index:1000;
+}
+
+.bubulle:hover >  .infobulle{
+	display:block;	
+	z-index:1000;
+}
+
+/* Style de l'infobulle pour son vérouillage */
+.infobulle_verouille{
+	position:absolute;
+	display:block;
+	width:230px;
+	height:auto;
+	float:left;
+	margin-left:-167px;		/* Position par rapport à la case ciblée */
+	margin-top:-57px;			/* Position par rapport à la case ciblée */
+	z-index:1000;
+}
+
+.form_infobulle {width:100%;}
+
+
+    
