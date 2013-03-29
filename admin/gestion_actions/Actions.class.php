@@ -1,7 +1,7 @@
 <?php
 
 require_once "../AdminDAO.php";
-
+use \admin\AdminDAO as AdminDAO;
 class Actions {
 	public $id = 'nouveau';
 	public $nom = array('');

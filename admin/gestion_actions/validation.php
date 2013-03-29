@@ -1,9 +1,9 @@
 <?php
-session_start();
 $root_url = "./../..";
 
 //-- Header --
-include($root_url."/conf/master.php");
+include __DIR__ . '/../../conf/master.php';
+include(SERVER_ROOT."/template/header_new.php");
 include ("Actions.class.php");
 include ("Effet.class.php");
 /*-- Connexion at ou admin requise --*/
