@@ -1,6 +1,7 @@
 <?php
-session_start(); 
 $root_url = "./../..";
+include __DIR__ . '/../../conf/master.php';
+include(SERVER_ROOT."/template/header_new.php");
 //-- Header --
 include($root_url."/conf/master.php");
 /*-- Connexion at ou admin requise --*/

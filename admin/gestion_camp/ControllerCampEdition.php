@@ -1,5 +1,4 @@
 <?php
-session_start(); 
 $root_url = "./../..";
 //-- Header --
 include($root_url."/conf/master.php");
