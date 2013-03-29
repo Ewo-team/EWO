@@ -143,21 +143,22 @@ use \conf\ConnecteurDAO as ConnecteurDAO;
 			$query = "INSERT INTO `action` (`id`, `nom`, `description`, `cout`, `cercle_id`, `niv`, `race`, `grade`, `galon`, `zone`, `cible`, `lanceur`, `id_effet`, `type_cible`, `type_action`) VALUES
 				('', :nom, :desc, :cout, :cercle, :niveau, :races, :grade, :galon, :zone, :cible, :lanceur, :effets, :typecible, :typeaction)";	
 			$stat = $this->prepare($query);
-			
-			$stat->bindParam(':nom', htmlspecialchars($nom), PDO::PARAM_STR);
-			$stat->bindParam(':desc', htmlspecialchars($desc), PDO::PARAM_STR);
-			$stat->bindParam(':cout', $cout, PDO::PARAM_INT);
-			$stat->bindParam(':cercle', $cercle, PDO::PARAM_INT);
-			$stat->bindParam(':niveau', $niveau, PDO::PARAM_INT);
-			$stat->bindParam(':races', $races, PDO::PARAM_STR);
-			$stat->bindParam(':grade', $grade, PDO::PARAM_INT);
-			$stat->bindParam(':galon', $galon, PDO::PARAM_INT);
-			$stat->bindParam(':zone', $zone, PDO::PARAM_INT);
-			$stat->bindParam(':cible', $cible, PDO::PARAM_INT);
-			$stat->bindParam(':lanceur', $lanceur, PDO::PARAM_INT);
-			$stat->bindParam(':effets', $effets, PDO::PARAM_STR);
-			$stat->bindParam(':typecible', $typecible, PDO::PARAM_STR);
-			$stat->bindParam(':typeaction', $typeaction, PDO::PARAM_STR);
+			$snom = htmlspecialchars($nom);
+			$sdesc = htmlspecialchars($desc);
+			$stat->bindParam(':nom', $snom, \PDO::PARAM_STR);
+			$stat->bindParam(':desc', $sdesc, \PDO::PARAM_STR);
+			$stat->bindParam(':cout', $cout, \PDO::PARAM_INT);
+			$stat->bindParam(':cercle', $cercle, \PDO::PARAM_INT);
+			$stat->bindParam(':niveau', $niveau, \PDO::PARAM_INT);
+			$stat->bindParam(':races', $races, \PDO::PARAM_STR);
+			$stat->bindParam(':grade', $grade, \PDO::PARAM_INT);
+			$stat->bindParam(':galon', $galon, \PDO::PARAM_INT);
+			$stat->bindParam(':zone', $zone, \PDO::PARAM_INT);
+			$stat->bindParam(':cible', $cible, \PDO::PARAM_INT);
+			$stat->bindParam(':lanceur', $lanceur, \PDO::PARAM_INT);
+			$stat->bindParam(':effets', $effets, \PDO::PARAM_STR);
+			$stat->bindParam(':typecible', $typecible, \PDO::PARAM_STR);
+			$stat->bindParam(':typeaction', $typeaction, \PDO::PARAM_STR);
 			
 			return $this->executePreparedStatement($stat);
 					

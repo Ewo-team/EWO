@@ -74,8 +74,7 @@ if(isset($_POST['flag'])) {
 	
 	if(array_key_exists('effet_type_lanceur',$effets)) {
 		$boucle = $effets['effet_type_lanceur'];
-
-		for($k = 0; $k < count($boucle); $k++) {
+		for($k = 1; $k < count($boucle); $k++) {
 		
 			if($effets['effet_type_lanceur'][$k] != 'nouveau') {
 				$type = $effets['effet_type_lanceur'][$k];

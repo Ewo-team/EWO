@@ -1,5 +1,7 @@
 <?php
 
+require_once "../AdminDAO.php";
+use \admin\AdminDAO as AdminDAO;
 
 class Effet {
 	public $type;
@@ -21,4 +23,3 @@ class Effet {
 	}
 }
 
-?>
