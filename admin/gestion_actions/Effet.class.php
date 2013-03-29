@@ -6,7 +6,7 @@ class Effet {
 	public $valeur;
 	
 	public function id() {
-		$conn = AdminDAO::getInstance();
+		$conn = \admin\AdminDAO::getInstance();
 		$id = $conn->SelectIdEffet($this->type, $this->valeur);
 		if(isset($id) && $id!=false) {
 			return $id['id'];
