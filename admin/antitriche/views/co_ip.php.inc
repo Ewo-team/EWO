@@ -96,7 +96,7 @@
 						$r .= '
 						<li>'.stripslashes($name).'</li>';
 					$r .= '
-					</ul>
+					</ul></td>
 			</tr>
 				';
 			}

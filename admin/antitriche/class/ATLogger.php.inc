@@ -48,7 +48,7 @@
 			$id = $param[2];
 			$last	= parent::log($this->mAt->getId());
 
-			$sql	= 'INSERT INTO `log_at` (id,action,message) VALUES('.$last.',\''.$action.'\',\''.addslashes($message).'\');';
+			$sql	= 'INSERT INTO `at_log_at` (id,action,message) VALUES('.$last.',\''.$action.'\',\''.addslashes($message).'\');';
 			if(!mysql_query($sql)){
 				//log de l'erreur
 				if(DEBUG)
