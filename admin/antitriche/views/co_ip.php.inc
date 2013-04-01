@@ -5,7 +5,7 @@
 	function view_log($at){
 		if(!isset($_SESSION['at_log_co_ip']) || $_SESSION['at_log_co_ip']+1800 <= time()){//On refresh toute les 30 minutes
 			$logger = $at->getATLogger();
-			$logger->log(array(0,'a utilis&eacte; l\'outil automatique par IP',null));
+			$logger->log(array(ATLogger::LOG_AUTO_IP,'a utilis&eacte; l\'outil automatique par IP',null));
 			$_SESSION['at_log_co_ip'] = time();
 		}
 	}
@@ -106,4 +106,3 @@
 		
 		return $r;
 	}
-?>

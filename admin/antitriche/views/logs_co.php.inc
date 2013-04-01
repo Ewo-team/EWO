@@ -5,7 +5,7 @@
 	function view_log($at){
 		if(!isset($_SESSION['at_log_log_co']) || $_SESSION['at_log_log_co']+1800 <= time()){//On refresh toute les 30 minutes
 			$logger = $at->getATLogger();
-			$logger->log(array(0,'a regard&eacute; les logs de connexion',null));
+			$logger->log(array(ATLogger::LOG_LOGS,'a regard&eacute; les logs de connexion',null));
 			$_SESSION['at_log_log_co'] = time();
 		}
 	}
@@ -106,4 +106,4 @@
 		return $r;
 	}
 	
-?>
+

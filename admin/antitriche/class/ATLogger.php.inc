@@ -11,17 +11,28 @@
 	require_once('Logger.php.inc');
 
 
-	define('AT_LOG_PUNISH',0);
+	
 	
 
 	class ATLogger extends at\Logger{
 	
 		private $mAt;
-	
+		
+		const LOG_AUTO_INTER_GEO	 	= 1;
+		const LOG_AUTO_INTER_ACTION	= 2;
+		const LOG_AUTO_IP			= 3;
+		const LOG_AUTO_COOKIE		= 4;
+		const LOG_COMPARE_IP			= 5;
+		const LOG_COMPARE_COOKIE		= 6;
+		const LOG_COMPARE_EVENTS		= 7;
+		const LOG_LOGS				= 8;
+		const LOG_PUNISH				= 9;
+		const LOG_ADMIN				= 10;
+		const LOG_LOGS_AT			= 11;
+		
 		/*
 		 * at	: un objet de type AT valide 
 		 */
-	
 		public function __construct($at){
 			$this->mAt	= $at;
 		}
@@ -37,7 +48,7 @@
 			$id = $param[2];
 			$last	= parent::log($this->mAt->getId());
 
-			$sql	= 'INSERT INTO `at_log_at` (id,action,message) VALUES('.$last.',\''.$action.'\',\''.addslashes($message).'\');';
+			$sql	= 'INSERT INTO `log_at` (id,action,message) VALUES('.$last.',\''.$action.'\',\''.addslashes($message).'\');';
 			if(!mysql_query($sql)){
 				//log de l'erreur
 				if(DEBUG)
@@ -47,4 +58,4 @@
 		}
 	
 	}
-?>
+

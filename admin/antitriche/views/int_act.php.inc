@@ -8,4 +8,4 @@
 	function content(){
 		return '';
 	}
-?>
+

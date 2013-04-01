@@ -4,7 +4,7 @@
 	function view_log($at){
 		if(!isset($_SESSION['at_log_log_at']) || $_SESSION['at_log_log_at']+1800 <= time()){
 			$logger = $at->getATLogger();
-			$logger->log(array(0,'a regard&eacute; les logs de l\'AT',null));
+			$logger->log(array(ATLogger::LOG_LOGS_AT,'a regard&eacute; les logs de l\'AT',null));
 			$_SESSION['at_log_log_at'] = time();
 		}
 	}
@@ -98,4 +98,4 @@
 		
 		return $r;
 	}
-?>
+
