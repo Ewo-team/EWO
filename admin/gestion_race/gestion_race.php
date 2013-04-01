@@ -1,12 +1,13 @@
 <?php
 //-- Header --
 $root_url = "./../..";
-include($root_url."/template/header_new.php");
+include __DIR__ . '/../../conf/master.php';
+include(SERVER_ROOT."/template/header_new.php");
 /*-- Connexion at ou admin requise --*/
 ControleAcces('admin',1);
 /*-----------------------------*/
 
-// Si la variable  $_SESSION['temp']['erreurs'] est définie, alors stocke sa valeur dans la variable $msg_error .
+// Si la variable  $_SESSION['temp']['erreurs'] est dï¿½finie, alors stocke sa valeur dans la variable $msg_error .
 if(isset($_SESSION['temp']['erreurs'])){
 	$msg_error = $_SESSION['temp']['erreurs'];
 	unset($_SESSION['temp']['erreurs']);
@@ -30,7 +31,7 @@ else{
 				</tr>
 				<?php		
 				$liste_race = mysql_query("SELECT * FROM races WHERE grade_id = -2");
-				// Affichage des camps de la base de données
+				// Affichage des camps de la base de donnï¿½es
 				while ($race = mysql_fetch_array($liste_race))
 				{
 				?>
@@ -41,7 +42,7 @@ else{
 					<td width="10%" align="right"><a href='ControllerRaceEdition.php?suppr_race=<?php echo $race['race_id']; ?>' onClick="return confirm('&Ecirc;tes vous s&ucirc;r de vouloir supprimer la race <?php echo $race["nom"] ?> ?')">Supprimer</a></td>
 				</tr>
 				<?php
-				// Affichage de la partie permettant l'édition au cas où c'est demandé.
+				// Affichage de la partie permettant l'ï¿½dition au cas oï¿½ c'est demandï¿½.
 				if(isset($_GET['edit_race']) && $_GET['edit_race'] == $race['race_id'])
 				{
 				?>
@@ -64,7 +65,7 @@ else{
 								</td>
 							</tr>
 							<tr>
-								<td align="left">Type de jeu (3 gros perso, 7 petites créas ou 0 pour parias) : </td>
+								<td align="left">Type de jeu (3 gros perso, 7 petites crï¿½as ou 0 pour parias) : </td>
 								<td align="right">
 									<input type="text" name="type" value="<?php echo $race['type']; ?>" />
 								</td>
@@ -74,10 +75,10 @@ else{
 								<td align="right">
 									<select name="id_camp">
 									<?php
-									// Affichage des différents choix pour les camps
+									// Affichage des diffï¿½rents choix pour les camps
 									$liste_camps = mysql_query("SELECT id,nom FROM camps");
 									
-									// Récupération des camps déjà enregistrés dans la base de données.
+									// Rï¿½cupï¿½ration des camps dï¿½jï¿½ enregistrï¿½s dans la base de donnï¿½es.
 									
 									while ($camp = mysql_fetch_array($liste_camps, MYSQL_NUM))
 									{
@@ -149,7 +150,7 @@ else{
 					</td>
 				</tr>
 				<tr>
-					<td align="left">Type de jeu (3 gros perso, 7 petites créas ou 0 pour parias) : </td>
+					<td align="left">Type de jeu (3 gros perso, 7 petites crï¿½as ou 0 pour parias) : </td>
 					<td align="right">
 						<input type="text" name="type" value="<?php echo $race['type']; ?>" />
 					</td>

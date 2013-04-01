@@ -48,7 +48,7 @@ use \conf\ConnecteurDAO as ConnecteurDAO;
                     $stat = $this->prepare($query);   
                     
                     foreach($tab as $value) {
-                        $stat->bindParam(':uid', $value, PDO::PARAM_INT);
+                        $stat->bindParam(':uid', $value, \PDO::PARAM_INT);
                         $this->executePreparedStatement($stat);
                     }
                 }
@@ -77,22 +77,22 @@ use \conf\ConnecteurDAO as ConnecteurDAO;
                     
                     foreach($tab as $value)
                     {
-                        $stat->bindParam(':pa', $value['pa'], PDO::PARAM_INT);
-                        $stat->bindParam(':pv', $value['pv'], PDO::PARAM_INT);
-                        $stat->bindParam(':mouv', $value['mouv'], PDO::PARAM_INT);
-                        $stat->bindParam(':def', $value['def'], PDO::PARAM_INT);
-                        $stat->bindParam(':att', $value['att'], PDO::PARAM_INT);
-                        $stat->bindParam(':recup', $value['recup'], PDO::PARAM_INT);
-                        $stat->bindParam(':force', $value['force'], PDO::PARAM_INT);
-                        $stat->bindParam(':percept', $value['percept'], PDO::PARAM_INT);
-                        $stat->bindParam(':nivmag', $value['nivmag'], PDO::PARAM_INT);
-                        $stat->bindParam(':resmag', $value['resmag'], PDO::PARAM_INT);
-                        $stat->bindParam(':esqmag', $value['esqmag'], PDO::PARAM_INT);
-                        $stat->bindParam(':resphy', $value['resphy'], PDO::PARAM_INT);
-                        $stat->bindParam(':nbtour', $value['nbtour'], PDO::PARAM_INT);
-                        $stat->bindParam(':cassable', $value['casse'], PDO::PARAM_INT);  
-                        $stat->bindParam(':dissipemort', $value['dissip'], PDO::PARAM_INT);  
-                        $stat->bindParam(':uid', $value['uid'], PDO::PARAM_INT);  
+                        $stat->bindParam(':pa', $value['pa'], \PDO::PARAM_INT);
+                        $stat->bindParam(':pv', $value['pv'], \PDO::PARAM_INT);
+                        $stat->bindParam(':mouv', $value['mouv'], \PDO::PARAM_INT);
+                        $stat->bindParam(':def', $value['def'], \PDO::PARAM_INT);
+                        $stat->bindParam(':att', $value['att'], \PDO::PARAM_INT);
+                        $stat->bindParam(':recup', $value['recup'], \PDO::PARAM_INT);
+                        $stat->bindParam(':force', $value['force'], \PDO::PARAM_INT);
+                        $stat->bindParam(':percept', $value['percept'], \PDO::PARAM_INT);
+                        $stat->bindParam(':nivmag', $value['nivmag'], \PDO::PARAM_INT);
+                        $stat->bindParam(':resmag', $value['resmag'], \PDO::PARAM_INT);
+                        $stat->bindParam(':esqmag', $value['esqmag'], \PDO::PARAM_INT);
+                        $stat->bindParam(':resphy', $value['resphy'], \PDO::PARAM_INT);
+                        $stat->bindParam(':nbtour', $value['nbtour'], \PDO::PARAM_INT);
+                        $stat->bindParam(':cassable', $value['casse'], \PDO::PARAM_INT);  
+                        $stat->bindParam(':dissipemort', $value['dissip'], \PDO::PARAM_INT);  
+                        $stat->bindParam(':uid', $value['uid'], \PDO::PARAM_INT);  
 
                         $this->executePreparedStatement($stat);
  
@@ -114,22 +114,22 @@ use \conf\ConnecteurDAO as ConnecteurDAO;
                     
                     $stat = $this->prepare($query);                    
                     
-                    $stat->bindParam(':pa', $tab['pa'], PDO::PARAM_INT);
-                    $stat->bindParam(':pv', $tab['pv'], PDO::PARAM_INT);
-                    $stat->bindParam(':mouv', $tab['mouv'], PDO::PARAM_INT);
-                    $stat->bindParam(':def', $tab['def'], PDO::PARAM_INT);
-                    $stat->bindParam(':att', $tab['att'], PDO::PARAM_INT);
-                    $stat->bindParam(':recup', $tab['recup'], PDO::PARAM_INT);
-                    $stat->bindParam(':force', $tab['force'], PDO::PARAM_INT);
-                    $stat->bindParam(':percept', $tab['percept'], PDO::PARAM_INT);
-                    $stat->bindParam(':nivmag', $tab['nivmag'], PDO::PARAM_INT);
-                    $stat->bindParam(':resmag', $tab['resmag'], PDO::PARAM_INT);
-                    $stat->bindParam(':esqmag', $tab['esqmag'], PDO::PARAM_INT);
-                    $stat->bindParam(':resphy', $tab['resphy'], PDO::PARAM_INT);
-                    $stat->bindParam(':nbtour', $tab['nbtour'], PDO::PARAM_INT);
-                    $stat->bindParam(':cassable', $tab['casse'], PDO::PARAM_INT);  
-                    $stat->bindParam(':dissipemort', $tab['dissip'], PDO::PARAM_INT);  
-                    $stat->bindParam(':perso', $perso_id, PDO::PARAM_INT);  
+                    $stat->bindParam(':pa', $tab['pa'], \PDO::PARAM_INT);
+                    $stat->bindParam(':pv', $tab['pv'], \PDO::PARAM_INT);
+                    $stat->bindParam(':mouv', $tab['mouv'], \PDO::PARAM_INT);
+                    $stat->bindParam(':def', $tab['def'], \PDO::PARAM_INT);
+                    $stat->bindParam(':att', $tab['att'], \PDO::PARAM_INT);
+                    $stat->bindParam(':recup', $tab['recup'], \PDO::PARAM_INT);
+                    $stat->bindParam(':force', $tab['force'], \PDO::PARAM_INT);
+                    $stat->bindParam(':percept', $tab['percept'], \PDO::PARAM_INT);
+                    $stat->bindParam(':nivmag', $tab['nivmag'], \PDO::PARAM_INT);
+                    $stat->bindParam(':resmag', $tab['resmag'], \PDO::PARAM_INT);
+                    $stat->bindParam(':esqmag', $tab['esqmag'], \PDO::PARAM_INT);
+                    $stat->bindParam(':resphy', $tab['resphy'], \PDO::PARAM_INT);
+                    $stat->bindParam(':nbtour', $tab['nbtour'], \PDO::PARAM_INT);
+                    $stat->bindParam(':cassable', $tab['casse'], \PDO::PARAM_INT);  
+                    $stat->bindParam(':dissipemort', $tab['dissip'], \PDO::PARAM_INT);  
+                    $stat->bindParam(':perso', $perso_id, \PDO::PARAM_INT);  
 
                     $this->executePreparedStatement($stat);
                     
@@ -143,21 +143,22 @@ use \conf\ConnecteurDAO as ConnecteurDAO;
 			$query = "INSERT INTO `action` (`id`, `nom`, `description`, `cout`, `cercle_id`, `niv`, `race`, `grade`, `galon`, `zone`, `cible`, `lanceur`, `id_effet`, `type_cible`, `type_action`) VALUES
 				('', :nom, :desc, :cout, :cercle, :niveau, :races, :grade, :galon, :zone, :cible, :lanceur, :effets, :typecible, :typeaction)";	
 			$stat = $this->prepare($query);
-			
-			$stat->bindParam(':nom', htmlspecialchars($nom), PDO::PARAM_STR);
-			$stat->bindParam(':desc', htmlspecialchars($desc), PDO::PARAM_STR);
-			$stat->bindParam(':cout', $cout, PDO::PARAM_INT);
-			$stat->bindParam(':cercle', $cercle, PDO::PARAM_INT);
-			$stat->bindParam(':niveau', $niveau, PDO::PARAM_INT);
-			$stat->bindParam(':races', $races, PDO::PARAM_STR);
-			$stat->bindParam(':grade', $grade, PDO::PARAM_INT);
-			$stat->bindParam(':galon', $galon, PDO::PARAM_INT);
-			$stat->bindParam(':zone', $zone, PDO::PARAM_INT);
-			$stat->bindParam(':cible', $cible, PDO::PARAM_INT);
-			$stat->bindParam(':lanceur', $lanceur, PDO::PARAM_INT);
-			$stat->bindParam(':effets', $effets, PDO::PARAM_STR);
-			$stat->bindParam(':typecible', $typecible, PDO::PARAM_STR);
-			$stat->bindParam(':typeaction', $typeaction, PDO::PARAM_STR);
+			$snom = htmlspecialchars($nom);
+			$sdesc = htmlspecialchars($desc);
+			$stat->bindParam(':nom', $snom, \PDO::PARAM_STR);
+			$stat->bindParam(':desc', $sdesc, \PDO::PARAM_STR);
+			$stat->bindParam(':cout', $cout, \PDO::PARAM_INT);
+			$stat->bindParam(':cercle', $cercle, \PDO::PARAM_INT);
+			$stat->bindParam(':niveau', $niveau, \PDO::PARAM_INT);
+			$stat->bindParam(':races', $races, \PDO::PARAM_STR);
+			$stat->bindParam(':grade', $grade, \PDO::PARAM_INT);
+			$stat->bindParam(':galon', $galon, \PDO::PARAM_INT);
+			$stat->bindParam(':zone', $zone, \PDO::PARAM_INT);
+			$stat->bindParam(':cible', $cible, \PDO::PARAM_INT);
+			$stat->bindParam(':lanceur', $lanceur, \PDO::PARAM_INT);
+			$stat->bindParam(':effets', $effets, \PDO::PARAM_STR);
+			$stat->bindParam(':typecible', $typecible, \PDO::PARAM_STR);
+			$stat->bindParam(':typeaction', $typeaction, \PDO::PARAM_STR);
 			
 			return $this->executePreparedStatement($stat);
 					
@@ -184,21 +185,21 @@ use \conf\ConnecteurDAO as ConnecteurDAO;
 			
 			$stat = $this->prepare($query);
 				
-			$stat->bindParam(':id', $id, PDO::PARAM_INT);
-			$stat->bindParam(':nom', $nom, PDO::PARAM_STR);
-			$stat->bindParam(':desc', $desc, PDO::PARAM_STR);
-			$stat->bindParam(':cout', $cout, PDO::PARAM_INT);
-			$stat->bindParam(':cercle', $cercle, PDO::PARAM_INT);
-			$stat->bindParam(':niveau', $niveau, PDO::PARAM_INT);
-			$stat->bindParam(':races', $races, PDO::PARAM_STR);
-			$stat->bindParam(':grade', $grade, PDO::PARAM_INT);
-			$stat->bindParam(':galon', $galon, PDO::PARAM_INT);
-			$stat->bindParam(':zone', $zone, PDO::PARAM_INT);
-			$stat->bindParam(':cible', $cible, PDO::PARAM_INT);
-			$stat->bindParam(':lanceur', $lanceur, PDO::PARAM_INT);
-			$stat->bindParam(':effets', $effets, PDO::PARAM_STR);
-			$stat->bindParam(':typecible', $typecible, PDO::PARAM_STR);
-			$stat->bindParam(':typeaction', $typeaction, PDO::PARAM_STR);
+			$stat->bindParam(':id', $id, \PDO::PARAM_INT);
+			$stat->bindParam(':nom', $nom, \PDO::PARAM_STR);
+			$stat->bindParam(':desc', $desc, \PDO::PARAM_STR);
+			$stat->bindParam(':cout', $cout, \PDO::PARAM_INT);
+			$stat->bindParam(':cercle', $cercle, \PDO::PARAM_INT);
+			$stat->bindParam(':niveau', $niveau, \PDO::PARAM_INT);
+			$stat->bindParam(':races', $races, \PDO::PARAM_STR);
+			$stat->bindParam(':grade', $grade, \PDO::PARAM_INT);
+			$stat->bindParam(':galon', $galon, \PDO::PARAM_INT);
+			$stat->bindParam(':zone', $zone, \PDO::PARAM_INT);
+			$stat->bindParam(':cible', $cible, \PDO::PARAM_INT);
+			$stat->bindParam(':lanceur', $lanceur, \PDO::PARAM_INT);
+			$stat->bindParam(':effets', $effets, \PDO::PARAM_STR);
+			$stat->bindParam(':typecible', $typecible, \PDO::PARAM_STR);
+			$stat->bindParam(':typeaction', $typeaction, \PDO::PARAM_STR);
 			
 			return $this->executePreparedStatement($stat);
 		}

@@ -1,7 +1,8 @@
 <?php
 //-- Header --
 $root_url = "./../..";
-include($root_url."/template/header_new.php");
+include __DIR__ . '/../../conf/master.php';
+include(SERVER_ROOT."/template/header_new.php");
 /*-- Connexion at ou admin requise --*/
 ControleAcces('admin',1);
 /*-----------------------------*/
@@ -101,7 +102,7 @@ Par d&eacute;faut les personnages ont l'ic&ocirc;ne du grade 0 (pondérée par l
 if (isset($_POST['race_id']))
 {
 $race_id = $_POST['race_id'];
-$races = "SELECT grade_id, race_id,nom FROM races WHERE race_id='$race_id' ORDER BY race_id ASC";							
+$races = "SELECT grade_id, camp_id,nom FROM races WHERE camp_id='$race_id' ORDER BY race_id ASC";							
 $resultat = mysql_query ($races) or die (mysql_error());
 while ($race = mysql_fetch_array ($resultat)){
 
@@ -109,7 +110,7 @@ while ($race = mysql_fetch_array ($resultat)){
 	
 	echo"<ul>";
 	
-	$icones = "SELECT*FROM icone_persos WHERE race_id = '".$race['race_id']."' AND grade_id = '".$race['grade_id']."' ORDER BY xp_min ASC";							
+	$icones = "SELECT*FROM icone_persos WHERE camp_id = '".$race['camp_id']."' AND grade_id = '".$race['grade_id']."' ORDER BY xp_min ASC";							
 	$result = mysql_query ($icones) or die (mysql_error());
 	while ($icone = mysql_fetch_array ($result)){
 		
@@ -140,7 +141,7 @@ while ($race = mysql_fetch_array ($resultat)){
 
 <?php	echo"<ul>";
 	
-	$icones = "SELECT*FROM icone_persos WHERE race_id = '0' ORDER BY id DESC";							
+	$icones = "SELECT*FROM icone_persos WHERE camp_id = '0' ORDER BY id DESC";							
 	$result = mysql_query ($icones) or die (mysql_error());
 	while ($icone = mysql_fetch_array ($result)){
 		

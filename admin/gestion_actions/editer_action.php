@@ -2,7 +2,8 @@
 //-- Header --
 $root_url = "./../..";
 
-include($root_url."/template/header_new.php");
+include __DIR__ . '/../../conf/master.php';
+include(SERVER_ROOT."/template/header_new.php");
 include ("Actions.class.php");
 include ("Effet.class.php");
 /*-- Connexion at ou admin requise --*/
@@ -158,7 +159,10 @@ function afficheListeEffets($type = 'nouveau', $ciblage = null) {
 			<option value="4"<?php if($action->cercle == 4) { echo ' selected'; } ?>>Cercle de la Quiètude</option>
 			<option value="5"<?php if($action->cercle == 5) { echo ' selected'; } ?>>Cercle de l'Effroi</option>
 			<option value="6"<?php if($action->cercle == 6) { echo ' selected'; } ?>>Cercle du Désespoir</option>
-			<option value="7"<?php if($action->cercle == 7) { echo ' selected'; } ?>>Technologie</option>
+			<!-- <option value="7"<?php if($action->cercle == 7) { echo ' selected'; } ?>>Technologie</option> --> 
+			<option value="7"<?php if($action->cercle == 8) { echo ' selected'; } ?>>Technologie : Sabotage</option>
+			<option value="7"<?php if($action->cercle == 9) { echo ' selected'; } ?>>Technologie : G&eacute;nie</option>
+			<option value="7"<?php if($action->cercle == 10) { echo ' selected'; } ?>>Technologie : Armement</option>
 			</select></td>
 		</tr>
 		<tr>

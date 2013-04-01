@@ -12,7 +12,7 @@ define('SSL', 0);
 define('WEB_DOMAIN', $_SERVER["HTTP_HOST"]);
 define('WEB_SUBFOLDER', '');
 
-$inhttps = ($_SERVER["HTTPS"] == 'on');
+$inhttps = ((key_exists('HTTPS', $_SERVER)) ?  $_SERVER["HTTPS"] == 'on' : false);
 
 $protocol = (SSL == 1 || $inhttps) ? 'https' : 'http';
 
