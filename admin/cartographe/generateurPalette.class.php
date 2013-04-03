@@ -46,6 +46,9 @@ class GenerateurPalette {
                 include('palette/' . $raw . '.php');
                 $liste_couleurs = array_keys($css);
                 $liste_couleurs[] = end($liste_couleurs) + 1;
+            } else {
+                $liste_couleurs = array();
+
             }
             
             $liste_images = $this->listerImages();

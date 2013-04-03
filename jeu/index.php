@@ -41,7 +41,7 @@ $rose = rose_damier($id_utilisateur);
 
 if (isset($_GET['perso_id'])) {
 	if (($_GET['perso_id'] <= $_SESSION['persos']['inc']) && ($_GET['perso_id'] >= 1)) {
-		$inc = mysql_real_escape_string($_GET['perso_id']);
+		$inc = filter_input(INPUT_GET, 'id_perso', FILTER_SANITIZE_NUMBER_INT);
 		$_SESSION['persos']['current_id'] = $_SESSION['persos']['id'][$inc];
 		$_SESSION['persos']['id'][0] = $inc;
 	} else {
@@ -139,7 +139,7 @@ if ($pos = mysql_fetch_array ($resultat)) {
     if (isset($_POST['respawn'])) {
             $choix_spawn = '';
             if (isset($_POST['cible_spawn']) && is_numeric($_POST['cible_spawn'])) {
-                    $choix_spawn=mysql_real_escape_string($_POST['cible_spawn']);
+                    $choix_spawn=filter_input(INPUT_POST, 'cible_spawn', FILTER_SANITIZE_STRING);
             }
             $pos = respawn($id, '', $choix_spawn);
 

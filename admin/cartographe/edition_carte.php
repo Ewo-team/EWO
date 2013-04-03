@@ -12,18 +12,50 @@ include('palette/'.$file.'.php');
 
 include('raw/'.$file.'_sav.php');
 
+$size = 60;
+
+if(isset($_GET['page_x'])) {
+    $page_x = $_GET['page_x'];
+} else {
+    $page_x = 0;
+}
+
+if(isset($_GET['page_y'])) {
+    $page_y = $_GET['page_y'];
+} else {
+    $page_y = 0;
+}
+
+$x_offset = ($page_x * $size) + $size;
+$y_offset = ($page_y * $size) + $size;
+
+echo "Positions: $x_min - $x_max, $y_min - $y_max";
+$x_max = min(($x_min + $x_offset), $x_max);
+$y_max = min(($y_min + $y_offset), $y_max);
+
+$y_min = max($y_min, $y_max - $size);
+$x_min = max($x_min, $x_max - $size);
+
 echo '<div id="head"><div class="liste_outils"><h3>Outil disponibles</h3><ul>';
 foreach($css as $id => $outil) {
-    echo '<li><div data-outilId="'.$id.'" class="'.$outil['nom'].'"></li>';
+    echo '<li><div data-outilId="'.$id.'" class="damier_'.$outil['nom'].'"></li>';
 }
-echo '</ul></div>';
+echo '</ul>';
 
+echo "Positions: X = $x_min - $x_max, Y = $y_min - $y_max";
+
+echo '</div>';
 reset($css);
 $first = current($css);
 
 echo '<div class="outil"><h3>Outil actuel</h3><div><span><img src="'.SERVER_URL.'/images/decors/motifs/'.$first['img'].'"></span>
     <input id="modeedition" type="checkbox">
-    <input type="button" id="sauver" value="sauver"></div></div></div>';
+    <input type="button" id="sauver" value="sauver"></div>
+        <a href="#" class="autosave" data-x="'.$page_x.'" data-y="'.($page_y + 1).'">Nord</a><br>
+        <a href="#" class="autosave" data-x="'.($page_x - 1).'" data-y="'.$page_y.'">Ouest</a> | 
+        <a href="#" class="autosave" data-x="'.($page_x + 1).'" data-y="'.$page_y.'">Est</a><br>
+        <a href="#" class="autosave" data-x="'.$page_x.'" data-y="'.($page_y - 1).'">Sud</a>
+    </div></div>';
 
 echo '<table cellspacing="0" cellpadding="0" border="0" width="'.(($y_max-$y_min)*45).'" height="'.(($x_max-$x_min)*39).'">';
 for($y = $y_max-1; $y >= $y_min; $y--) {
@@ -90,6 +122,16 @@ $(function(){
     $("#sauver").on("click", function() {
         sauver();
     })    
+
+    $(".autosave").on("click", function() {
+        var x = $(this).data("x");
+        var y = $(this).data("y");
+
+        sauver();
+
+        window.location.href = 'edition_carte.php?page_x=' + x + '&page_y=' + y;
+
+    })
     
     function sauver() {
         var texte = JSON.stringify(edition);

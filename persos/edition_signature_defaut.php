@@ -5,7 +5,7 @@ ControleAcces('utilisateur',1);
 
 if (isset($_POST['id_perso'])){
 
-$id_perso = mysql_real_escape_string($_POST['id_perso']);
+$id_perso = filter_input(INPUT_POST, 'id_perso', FILTER_SANITIZE_NUMBER_INT);
 $utilisateur_id = $_SESSION['utilisateur']['id'];
    
 	$sql="SELECT options FROM persos WHERE utilisateur_id = '$utilisateur_id' AND id = '$id_perso'";

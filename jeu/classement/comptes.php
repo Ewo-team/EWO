@@ -62,23 +62,23 @@ if (!empty($_POST['jour'])){
 switch($race) {
 	case 1 :
 		$type="humain";
-		$where_race = "AND persos.race_id=1";
+		$where_race = "AND races.camp_id=1";
 		break;
 	case 2 :
 		$type="paria";
-		$where_race = "AND persos.race_id=2";
+		$where_race = "AND races.camp_id=2";
 		break;
 	case 3 :
 		$type="ang&eacute;lique";
-		$where_race = "AND persos.race_id=3";
+		$where_race = "AND races.camp_id=3";
 		break;
 	case 4 :
 		$type="d&eacute;moniaque";
-		$where_race = "AND persos.race_id=4";
+		$where_race = "AND races.camp_id=4";
 		break;
 	case -1 :
 		$type="ang&eacute;monique";
-		$where_race = "AND (persos.race_id=3 OR persos.race_id=4)";
+		$where_race = "AND (races.camp_id=3 OR races.camp_id=4)";
 		break;
 	default :
 		$type="toutes races";
@@ -117,11 +117,11 @@ switch($race) {
 			
 		?>
 		<div align="center">
-		<?php 	echo "<a href='".SERVER_URL."/classement/comptes.php?jour=".$time_m."&nb_jours=$nb_jours'><= </a>";
+		<?php 	echo "<a href='".SERVER_URL."/jeu/classement/comptes.php?jour=".$time_m."&nb_jours=$nb_jours'><= </a>";
 				echo $time;
 				$now = date('d-m-Y',time());
 				if ($time_p <= $now)
-					echo "<a href='".SERVER_URL."/classement/comptes.php?jour=".$time_p."&nb_jours=$nb_jours'> =></a><br/>";
+					echo "<a href='".SERVER_URL."/jeu/classement/comptes.php?jour=".$time_p."&nb_jours=$nb_jours'> =></a><br/>";
 		?>				
 		</div>
 				
@@ -132,14 +132,14 @@ switch($race) {
 <ul>Les Démons ont :
 <br />
 	<?php
-		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND p1.race_id=4", "AND p2.race_id=4", "", "");
+		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND r1.camp_id=4", "AND r2.camp_id=4", "", "");
 		$nb_kill  = mysql_fetch_array($resultat);
 		$nb_kill  = $nb_kill[0];
 		$nb_demons= $nb_kill;
 		?>
 	<li> Affectueusement lynché <b><?php echo $nb_kill ?></b> des leurs.</li>
 	<?php
-		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND p1.race_id=4", "AND p2.race_id=3", "", "");
+		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND r1.camp_id=4", "AND r2.camp_id=3", "", "");
 		$nb_kill  = mysql_fetch_array($resultat);
 		$nb_kill  = $nb_kill[0];
 		$nb_anges = $nb_kill;
@@ -150,7 +150,7 @@ switch($race) {
 		?>	
 	<li> Finalement fait la peau à <b><?php echo $nb_kill ?></b> Ailés.</li>
 	<?php
-		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND p1.race_id=4", "AND p2.race_id=1", "", "");
+		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND r1.camp_id=4", "AND r2.camp_id=1", "", "");
 		$nb_kill  = mysql_fetch_array($resultat);
 		$nb_kill  = $nb_kill[0];
 		$nb_humains= $nb_kill;
@@ -166,14 +166,14 @@ Au total les Démons ont ingénieusement étripé <b><?php echo $nb_kill ?></b> 
 <ul>Les Anges ont : 
 <br />
 	<?php
-		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND p1.race_id=3", "AND p2.race_id=4", "", "");
+		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND r1.camp_id=3", "AND r2.camp_id=4", "", "");
 		$nb_kill  = mysql_fetch_array($resultat);
 		$nb_kill  = $nb_kill[0];
 		$nb_demons= $nb_kill;
 		?>	
 	<li>Amicalement crevé <b><?php echo $nb_kill ?></b> Démons.</li>
 	<?php
-		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND p1.race_id=3", "AND p2.race_id=3", "", "");
+		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND r1.camp_id=3", "AND r2.camp_id=3", "", "");
 		$nb_kill  = mysql_fetch_array($resultat);
 		$nb_kill  = $nb_kill[0];
 		$nb_anges= $nb_kill;
@@ -184,7 +184,7 @@ Au total les Démons ont ingénieusement étripé <b><?php echo $nb_kill ?></b> 
 		?>	
 	<li>Finalement fait la peau à <b><?php echo $nb_kill ?></b> Ailés.</li>
 	<?php
-		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND p1.race_id=3", "AND p2.race_id=1", "", "");
+		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND r1.camp_id=3", "AND r2.camp_id=1", "", "");
 		$nb_kill  = mysql_fetch_array($resultat);
 		$nb_kill  = $nb_kill[0];
 		$nb_humains= $nb_kill;
@@ -200,14 +200,14 @@ Au total les Anges ont frénétiquement étrillé <b><?php echo $nb_kill ?></b> 
 <ul>Les Humains ont : 
 <br />
 	<?php
-		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND p1.race_id=1", "AND p2.race_id=4", "", "");
+		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND r1.camp_id=1", "AND r2.camp_id=4", "", "");
 		$nb_kill  = mysql_fetch_array($resultat);
 		$nb_kill  = $nb_kill[0];
 		$nb_demons= $nb_kill;
 		?>	
 	<li>convenablement réglé le compte de <b><?php echo $nb_kill ?></b> Démons.</li>
 	<?php
-		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND p1.race_id=1", "AND p2.race_id=3", "", "");
+		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND r1.camp_id=1", "AND r2.camp_id=3", "", "");
 		$nb_kill  = mysql_fetch_array($resultat);
 		$nb_kill  = $nb_kill[0];
 		$nb_anges= $nb_kill;
@@ -218,7 +218,7 @@ Au total les Anges ont frénétiquement étrillé <b><?php echo $nb_kill ?></b> 
 		?>
 	<li>bouté hors d'Althian <b><?php echo $nb_kill ?></b> Ailés.</li>
 	<?php
-		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND p1.race_id=1", "AND p2.race_id=1", "", "");
+		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND r1.camp_id=1", "AND r2.camp_id=1", "", "");
 		$nb_kill  = mysql_fetch_array($resultat);
 		$nb_kill  = $nb_kill[0];
 		$nb_humains= $nb_kill;
@@ -234,14 +234,14 @@ Au total les Humains ont fièrement décimé <b><?php echo $nb_kill ?></b> perso
 <ul>Les Ailés ont : 
 <br />
 	<?php
-		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND (p1.race_id=3 OR p1.race_id=4)", "AND p2.race_id=4", "", "");
+		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND (r1.camp_id=3 OR r1.camp_id=4)", "AND r2.camp_id=4", "", "");
 		$nb_kill  = mysql_fetch_array($resultat);
 		$nb_kill  = $nb_kill[0];
 		$nb_demons= $nb_kill;
 		?>	
 	<li>savaté <b><?php echo $nb_kill ?></b> Démons.<br/></li>	
 	<?php
-		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND (p1.race_id=3 OR p1.race_id=4)", "AND p2.race_id=3", "", "");
+		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND (r1.camp_id=3 OR r1.camp_id=4)", "AND r2.camp_id=3", "", "");
 		$nb_kill  = mysql_fetch_array($resultat);
 		$nb_kill  = $nb_kill[0];
 		$nb_anges= $nb_kill;
@@ -252,7 +252,7 @@ Au total les Humains ont fièrement décimé <b><?php echo $nb_kill ?></b> perso
 		?>
 	<li>se sont jovialement infligé <b><?php echo $nb_kill ?></b> pertes.<br/></li>
 	<?php
-		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND (p1.race_id=3 OR p1.race_id=4)", "AND p2.race_id=1", "", "");
+		$resultat = getKillCount("", $time, $nb_jours, $croissant, "AND (r1.camp_id=3 OR r1.camp_id=4)", "AND r2.camp_id=1", "", "");
 		$nb_kill  = mysql_fetch_array($resultat);
 		$nb_kill  = $nb_kill[0];
 		$nb_humains= $nb_kill;

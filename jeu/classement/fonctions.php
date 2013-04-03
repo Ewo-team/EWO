@@ -87,8 +87,12 @@ function getKillCount($idPerso="", $depuisJour="", $nbJours=0, $asc="DESC",
           				FROM morgue 
           					LEFT JOIN persos p1
           						ON p1.id = morgue.id_perso
+          					LEFT JOIN races r1
+          						ON (p1.race_id = r1.race_id AND r1.grade_id = -2)	
 							LEFT JOIN persos p2
 								ON p2.id = morgue.mat_victime
+          					LEFT JOIN races r2
+          						ON (p2.race_id = r2.race_id AND r2.grade_id = -2)									
           							WHERE ($where_perso	(morgue.date>='$JourProf') AND (morgue.date<'$Jour') 
 											$where_killer_race 
 											$where_killed_race

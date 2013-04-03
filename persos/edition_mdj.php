@@ -6,9 +6,9 @@ ControleAcces('utilisateur',1);
 
 if ((isset($_POST['mdj'])) AND (isset($_POST['id_perso']))){
 
-$id_perso = mysql_real_escape_string($_POST['id_perso']);
+$id_perso = filter_input(INPUT_POST, 'id_perso', FILTER_SANITIZE_NUMBER_INT);
 
-$mdj = mysql_real_escape_string($_POST['mdj']);
+$mdj = filter_input(INPUT_POST, 'mdj', FILTER_SANITIZE_STRING);
 $mdj = htmlspecialchars($mdj);
 
 $utilisateur_id = $_SESSION['utilisateur']['id'];

@@ -62,7 +62,7 @@ if(!isset($_POST['mat']) || (!isset($_POST['message']) && !isset($_POST['id'])))
 	if(isset($_POST['id']) && $_POST['id'] != 0) {
 		$id = (is_numeric($_POST['id'])) ? $_POST['id'] : 1;
 	} else {
-		$message = mysql_real_escape_string($_POST['message']);
+		$message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING);
 		$sql = "INSERT INTO evenements_texte(id, texte) VALUES ('','$message')";
 		mysql_query($sql);
 		$id = mysql_insert_id();
