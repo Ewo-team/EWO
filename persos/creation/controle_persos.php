@@ -2,6 +2,18 @@
 
 function controleCreationPerso($utilisateur_id) {
 
+
+
+	if(ControleAcces('anim', 0)) {
+		return array(
+			'camp' => null,
+			'peutCreer' => true,
+			'creationT3' => true,
+			'creationT4' => true,
+			'texte' => 'Mode Admin',
+			'admin' => true);
+	}
+
 	$sql = "SELECT camps.nom as nom, races.camp_id, races.type FROM persos, races, camps WHERE (persos.race_id = races.race_id AND races.grade_id = -2) AND (races.camp_id = camps.id) AND persos.utilisateur_id = $utilisateur_id";
 	$resultat = mysql_query ($sql) or die (mysql_error());
 
@@ -93,6 +105,7 @@ function controleCreationPerso($utilisateur_id) {
 		'peutCreer' => $peutCreer,
 		'creationT3' => $creationT3,
 		'creationT4' => $creationT4,
-		'texte' => $texte);
+		'texte' => $texte,
+		'admin' => false);
 }
 ?>

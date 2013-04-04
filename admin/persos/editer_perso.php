@@ -21,13 +21,12 @@ $ok = 1;
 
 if ($ok == 1){
 
-if(isset($pseudo)) {
+if(!empty($pseudo)) {
     $info = "SELECT*FROM persos WHERE nom = '$pseudo'";																							
     $resultat = mysql_query ($info) or die (mysql_error());
     $infos = mysql_fetch_array ($resultat); 
     $id = $infos['id'];
 } else {  
-    
     //-- Info personnages
     $info = "SELECT*FROM persos WHERE id = '$id'";																							
     $resultat = mysql_query ($info) or die (mysql_error());
@@ -91,7 +90,7 @@ $mortel = ($infos['mortel'] == 1) ? 'checked' : '';
 <tr>
 	<td></td><td>
 		<form name='utilisateur' action="edition_perso.php" method="post">
-			<b>Id de l'utilisateur de <?php echo $infos['nom']; ?> (<?php echo $utilisateur['nom'] ;?>) :</b><br />
+			<b>Id de l'utilisateur de <?php echo $infos['nom']; ?> (<a href="../utilisateurs/editer_utilisateur.php?id=<?php echo $infos['utilisateur_id']; ?>"><?php echo $utilisateur['nom'] ;?></a>) :</b><br />
 		  	<input name="utilisateur_id" type="text" value='<?php echo $infos['utilisateur_id']; ?>' />
 			<input name="id_perso" type="hidden" value='<?php echo $id; ?>' />
 			<input type="submit" value="Modifier" class="bouton" />
@@ -102,11 +101,10 @@ $mortel = ($infos['mortel'] == 1) ? 'checked' : '';
 <tr>
 	<td></td><td>
 		<form name='utilisateur' action="edition_perso.php" method="post">
-			<b>Attributs</b><br />
+			<b>PNJ</b><br />
                         <input name="id_perso" type="hidden" value='<?php echo $id; ?>' />
                         <input name="change_attribute" type="hidden" value='1' />
-                        PNJ : <input name="pnj" type="checkbox" value="pnj" <?php echo $pnj; ?>/><br />
-                        Mortel : <input name="mortel" type="checkbox" value="mortel" <?php echo $mortel; ?>/><br />
+                        <input name="pnj" type="checkbox" value="pnj" <?php echo $pnj; ?>/><br />
 			<input type="submit" value="Modifier" class="bouton" />
 		</form>
 	</td><td></td>

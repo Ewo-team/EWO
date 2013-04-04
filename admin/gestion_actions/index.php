@@ -132,7 +132,7 @@ echo '<tr>
 
 $js->addLib('jquery.tablesorter.min');
 $js->addLib('jquery.tablesorter.pager');
-$js->addScript('admin/tablesorter');
+$js->addScript('admin/tablesorter.actions');
         
 
 //-- Footer --

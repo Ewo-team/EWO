@@ -35,19 +35,19 @@ if(ControleAcces('admin',0)) {
 <h3>Gestion active</h3>
 <ul>
     <li><a href="<?php echo SERVER_URL.'/admin/persos/creation_perso.php'; ?>">Création de personnage</a></li>
-    <li><a href="<?php echo SERVER_URL.'/event/eventperso.php'; ?>">Evenements d'animation</a></li>
+    <li><a href="<?php echo SERVER_URL.'/persos/event/ajouter_event.php'; ?>">Evenements d'animation</a></li>
     <li><a href="<?php echo SERVER_URL.'/legion/index.php?p=3'; ?>">Gestion des Légions</a></li>   
 	<li><a href="<?php echo SERVER_URL.'/admin/persos/liste_pnj.php'; ?>">Liste des PNJ</a></li>
 <?php if($admin) { ?>    <li><a href="<?php echo SERVER_URL.'/admin/utilisateurs/'; ?>">Editer utilisateur</a></li>
     <li><a href="<?php echo SERVER_URL.'/admin/persos/'; ?>">Editer personnage</a></li>
-    <li><a href="<?php echo SERVER_URL.'/editeur/'; ?>">Editeur de carte (ancien)</a></li>
-    <li><a href="<?php echo SERVER_URL.'/carte/generateur.php'; ?>">Generateur de carte</a></li><?php } ?>
+    <!--<li><a href="<?php echo SERVER_URL.'/editeur/'; ?>">Editeur de carte (ancien)</a></li>
+    <li><a href="<?php echo SERVER_URL.'/carte/generateur.php'; ?>">Generateur de carte</a></li>--><?php } ?>
 </ul>
 
 <h3>Informations</h3>
 <ul>
     <li><a href="<?php echo SERVER_URL.'/news/liste_news.php'; ?>">Gestion des news</a></li>
-    <li><a href="<?php echo SERVER_URL.'/statistique/stats_grades.php'; ?>">Répartition des grades/galons</a></li>
+    <li><a href="<?php echo SERVER_URL.'/jeu/statistique/stats_grades.php'; ?>">Répartition des grades/galons</a></li>
 <?php if($admin) { ?>    <li><a href="<?php echo SERVER_URL.'/admin/persos/ewolution.php'; ?>">Simulateur d'ewolution</a></li>
     <li><a href="<?php echo SERVER_URL.'/admin/newsletter/'; ?>">Newsletter</a></li>
     <li><a href="<?php echo SERVER_URL.'/admin/logs/liste_logs.php'; ?>">Logs des actions</a></li><?php } ?>

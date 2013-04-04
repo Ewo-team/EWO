@@ -117,9 +117,9 @@ class messagerieDAO extends ConnecteurDAO {
 	 * met a jour le statut du tag de la bal
 	 */
 	public function UpdateFlag($id, $flag) {
-		$sql = "UPDATE bals SET flag_favori = ? WHERE id=?";
+		$sql = "UPDATE bals SET flag_favori = :flag WHERE id=:id";
 		$this->prepare($sql);
-		return $this->executePreparedStatement(null, array($id,$flag));	
+		return $this->executePreparedStatement(null, array(':id' => $id, ':flag' => $flag));	
 		//return $this->exec($sql);
 	}
 	
@@ -127,9 +127,9 @@ class messagerieDAO extends ConnecteurDAO {
 	 * met a jour le statut de lecture des bals en fonction de la table
 	 */
 	public function UpdateLu($id, $exp) {
-		$sql = "UPDATE bals SET flag_lu = '1' WHERE id=? AND perso_dest_id = ?";
+		$sql = "UPDATE bals SET flag_lu = '1' WHERE id=:id AND perso_dest_id = :exp";
 		$this->prepare($sql);
-		return $this->executePreparedStatement(null, array($id,$exp));			
+		return $this->executePreparedStatement(null, array(':id' => $id, ':exp' => $exp));			
 		//return $this->exec($sql);
 	}	
 	
@@ -137,9 +137,9 @@ class messagerieDAO extends ConnecteurDAO {
 	 * met a jour le statut de lecture des bals en fonction de la table
 	 */	
 	public function UpdateArchive($id, $exp) {
-		$sql = "UPDATE bals SET flag_archive = '1' WHERE id=? AND perso_dest_id = ?";
+		$sql = "UPDATE bals SET flag_archive = '1' WHERE id=:id AND perso_dest_id = :exp";
 		$this->prepare($sql);
-		return $this->executePreparedStatement(null, array($id,$exp));					
+		return $this->executePreparedStatement(null, array(':id' => $id, ':exp' => $exp));					
 		//return $this->exec($sql);
 	}	
 

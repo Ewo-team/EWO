@@ -1,17 +1,17 @@
 jQuery(document).ready(function(){
-    if (localStorage) {
+    if (sessionStorage != null) {
         var nomMessagerie = $("#mat_perso").val();
 
-        // Si y'a des donn�es dans LocalStorage, les ajouter � la page
+        // Si y'a des données dans sessionStorage, les ajouter à la page
         loadMessage(nomMessagerie);
     }
 });
 
 jQuery(window).unload(function() {
-    if (localStorage) {
+    if (sessionStorage != null) {
         var nomMessagerie = $("#mat_perso").val();
 		
-        // Enregistrer les donn�es dans LocalStorage (si y'en a. Si vide, supprimer LocalStorage)
+        // Enregistrer les données dans sessionStorage (si y'en a. Si vide, supprimer sessionStorage)
         saveMessage(nomMessagerie);
     }
 });
@@ -21,24 +21,28 @@ function saveMessage(nom) {
 
     var textfield = $("#cke_contents_text > iframe")[0].contentDocument.body.innerHTML;
 	
-    // Pour tester si il y a du contenu, on r�cup�re la valeur du formulaire, et supprime les espaces avant et apr�s
+    // Pour tester si il y a du contenu, on récupère la valeur du formulaire, et supprime les espaces avant et après
     if(textfield.replace(/<[^>]*>/g,"") != "")
     {
-        // Si il y a des donn�es dans le formulaire, on les sauves dans LocalStorage
-        localStorage[nom] = textfield;
+        // Si il y a des données dans le formulaire, on les sauves dans sessionStorage
+        sessionStorage[nom] = textfield;
     } else {
-        // Sinon, on efface la cl� de LocalStorage
-        localStorage.removeItem(nom);
+        // Sinon, on efface la clé de sessionStorage
+        sessionStorage.removeItem(nom);
     }
 }
 
 function loadMessage(nom) {
     try {
-        $("#text").val(localStorage[nom]);
+        $("#text").val(sessionStorage[nom]);
     } catch(e) {
-    // Probl�me, on ne le remonte pas
+    // Problème, on ne le remonte pas
     }
 
+}
+
+function emptyForm() {
+    $("#text").val("");
 }
 
 jQuery(document).ready( function() {
@@ -294,7 +298,8 @@ function bal_send() {
                 $("#form-ok").append("<b>Message remis à tous les destinataires</b>");
                 $("#mat").removeClass("form-erreur");
                 $("#titre").removeClass("form-erreur");
-                $("#text").removeClass("form-erreur");			
+                $("#text").removeClass("form-erreur");	
+                emptyForm();		
             } else if(data == 'erreur') {
                 $("#form-ok").empty();
                 $("#form-form").show();
