@@ -1,4 +1,7 @@
 <?php
+<?php
+	header('location:../persos/liste_persos.php');
+	exit;
 
 require_once __DIR__ . '/../../conf/master.php';
 

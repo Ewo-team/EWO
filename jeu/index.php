@@ -41,7 +41,7 @@ $rose = rose_damier($id_utilisateur);
 
 if (isset($_GET['perso_id'])) {
 	if (($_GET['perso_id'] <= $_SESSION['persos']['inc']) && ($_GET['perso_id'] >= 1)) {
-		$inc = filter_input(INPUT_GET, 'id_perso', FILTER_SANITIZE_NUMBER_INT);
+		$inc = filter_input(INPUT_GET, 'perso_id', FILTER_SANITIZE_NUMBER_INT);
 		$_SESSION['persos']['current_id'] = $_SESSION['persos']['id'][$inc];
 		$_SESSION['persos']['id'][0] = $inc;
 	} else {

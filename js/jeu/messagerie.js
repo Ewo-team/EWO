@@ -36,7 +36,7 @@ function loadMessage(nom) {
     try {
         $("#text").val(sessionStorage[nom]);
     } catch(e) {
-    // Problème, on ne le remonte pas
+        // Problème, on ne le remonte pas
     }
 
 }

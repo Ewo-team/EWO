@@ -1493,7 +1493,8 @@ function maj_pos($inc, $caracs) {
 		$pos_y_perso = $_SESSION['persos']['pos_y'][$inc];
 		$carte_pos = $_SESSION['persos']['carte'][$inc];
 
-		$mouv = recup_carac($perso_id, array("mouv"));
+		$mouv = recup_carac($perso_id, array("mouv", "pv"));
+		$pv = $mouv["pv"]; // Ok c'est étrange ce truc. en même temps je vois pas l'intéret de récupérer des caracs ici ET d'en passer par la fonction, mais soit
 
 		$race = $_SESSION['persos']['race'][$inc];
 
@@ -1618,23 +1619,44 @@ function maj_pos($inc, $caracs) {
 
 						if ($deplacement_reussi) {
 							
-							//$case = getCaseDecors($carte_pos, $pos_x_perso, $pos_y_perso);
+							$case = getCaseDecors($carte_pos, $pos_x_perso, $pos_y_perso);
 							
 							$cout_pv = 0;
 							
-							if(isset($case['degats'])) {
+							if(isset($case['pv'])) {
 								
-								$cout_pv = $case['degats'];	
-								
+								$cout_pv = $case['pv'];	
+
+								$case['degats_event'] = 'faille'; // FIX
+
 								if(isset($case['degats_event'])) {		
 									$ix = $case['degats_event'];
-									
-									$events = SPECIAL_EVENT::$INDEX;
-									$em = new \persos\eventManager\eventManager();
-									$ev1 = $em->createEvent('special');
-									$ev1->setSource($perso_id, 'perso');
-									$ev1->infos->addPublicInfo('m',$events[$ix]);
+
+									$events = \persos\eventManager\SPECIAL_EVENT::$INDEX;
+
+									if($pv - $cout_pv <= 0) {
+										// BOOM! Headshot!
+
+										$texte = (isset($events['mort_' . $ix])) ? $events['mort_' . $ix] : $events['mort_generique'];
+
+										$em = new \persos\eventManager\eventManager();
+										$ev1 = $em->createEvent('special');
+										$ev1->setSource($perso_id, 'perso');
+										$ev1->infos->addPublicInfo('m',$texte);
+
+									} else {
+										// Il est pas mort (dommage)
+
+										$texte = (isset($events[$ix])) ? $events[$ix] : $events['degats_generique'];
+
+										$em = new \persos\eventManager\eventManager();
+										$ev1 = $em->createEvent('special');
+										$ev1->setSource($perso_id, 'perso');
+										$ev1->infos->addPublicInfo('m',$texte);										
+									}								
 								}
+
+	
 							}					
 
 							$sql = "UPDATE caracs SET `mouv`=`mouv` - ".$cout.", `pv`=`pv` - ".$cout_pv."

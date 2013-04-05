@@ -10,7 +10,7 @@ namespace jeu\affiliation;
 
     $sups = Superieurs::getAvailableSup($_SESSION['persos']['camp'][$id]);
 
-    include('../../../persos/fonctions.php');
+    include(SERVER_ROOT . '/persos/fonctions.php');
     
     $xp = recup_carac($_GET ['mat'], array('px'));
     $xp = $xp[0];

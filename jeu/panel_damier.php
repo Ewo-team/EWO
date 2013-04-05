@@ -126,13 +126,13 @@ echo '<table class="damier_corps" CELLPADDING="0" CELLSPACING="0" border="0">';
                                             if($width == $offset + 1) {
                                                 if($height == $offset) {
                                                     $deplacement = 'droite';
-                                                    $liendeplacement = 'deplacement.php?persoid='.$id.'&dep23=1';
+                                                    $liendeplacement = 'deplacement.php?perso_id='.$id.'&dep23=1';
                                                 }elseif($height == $offset + 1) {                                                    
                                                     $deplacement = 'hautdroite';
-                                                    $liendeplacement = 'deplacement.php?persoid='.$id.'&dep13=1';
+                                                    $liendeplacement = 'deplacement.php?perso_id='.$id.'&dep13=1';
                                                 }elseif($height == $offset - 1) {       
                                                     $deplacement = 'basdroite';
-                                                    $liendeplacement = 'deplacement.php?persoid='.$id.'&dep33=1';
+                                                    $liendeplacement = 'deplacement.php?perso_id='.$id.'&dep33=1';
                                                 }
 
                                             }
@@ -140,24 +140,24 @@ echo '<table class="damier_corps" CELLPADDING="0" CELLSPACING="0" border="0">';
                                             if($width == $offset - 1) {
                                                 if($height == $offset) {
                                                     $deplacement = 'gauche';
-                                                    $liendeplacement = 'deplacement.php?persoid='.$id.'&dep21=1';
+                                                    $liendeplacement = 'deplacement.php?perso_id='.$id.'&dep21=1';
                                                 }elseif($height == $offset + 1) {   
                                                     $deplacement = 'hautgauche';
-                                                    $liendeplacement = 'deplacement.php?persoid='.$id.'&dep11=1';
+                                                    $liendeplacement = 'deplacement.php?perso_id='.$id.'&dep11=1';
                                                 }elseif($height == $offset - 1) {       
                                                     $deplacement = 'basgauche';
-                                                    $liendeplacement = 'deplacement.php?persoid='.$id.'&dep31=1';
+                                                    $liendeplacement = 'deplacement.php?perso_id='.$id.'&dep31=1';
                                                 }
                                             }
 
                                             if($width == $offset && $height == $offset + 1) {
                                                 $deplacement = 'haut';
-                                                $liendeplacement = 'deplacement.php?persoid='.$id.'&dep12=1';
+                                                $liendeplacement = 'deplacement.php?perso_id='.$id.'&dep12=1';
                                             }
 
                                             if($width == $offset && $height == $offset - 1) {
                                                 $deplacement = 'bas';
-                                                $liendeplacement = 'deplacement.php?persoid='.$id.'&dep32=1';
+                                                $liendeplacement = 'deplacement.php?perso_id='.$id.'&dep32=1';
                                             }
                                         }
 
@@ -174,13 +174,22 @@ echo '<table class="damier_corps" CELLPADDING="0" CELLSPACING="0" border="0">';
 					}*/
 					
 					$get_plan = ($decors_default != null) ? $decors_default : 'terre';
-					
+					$$coutMouv = null;
+
 					if($decors) {
 						$case = $decors->getCase($pos_x_case,$pos_y_case);
 						
 						if($case) {
 							//var_dump($case); exit;
 							$get_plan = $case['nom'];
+
+							if(isset($case["mouv"])) {
+								$coutMouv = $case["mouv"];
+							}
+
+							if(isset($case["block"])) {
+								$deplacement = null;
+							}							
 							//$get_plan = $case;
 						}
 					}					

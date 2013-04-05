@@ -32,19 +32,14 @@ else $droit4=0;
 $droits = $droit1.$droit2.$droit3.$droit4;
 
 $options = mysql_real_escape_string($_POST['options']);
-$telephone = mysql_real_escape_string($_POST['telephone']);
-$sms = mysql_real_escape_string($_POST['sms']);
 
 //------- Requête de mise à jour -----
 if (isset($_POST['nom'])){
 	mysql_query("UPDATE utilisateurs 
 					SET nom = '$nom', 
 						email ='$mail', 
-						jabberid = '$jabberid', 
 						droits = '$droits', 
-						options = '$options', 
-						telephone = '$telephone', 
-						sms = '$sms'  
+						options = '$options' 
 					WHERE id = '$id_utilisateur'
 				") or die (mysql_error());			
 }

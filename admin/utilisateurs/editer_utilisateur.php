@@ -43,7 +43,7 @@ $ban_jours = '';
 
 <div align='center' id='contact'>
 <h2>Edition de <i><?php echo $infos['nom']; ?></i></h2>
-<p>[ <a href='liste_utilisateurs.php'>Retour</a> ]</p>
+<p>[ <a href='../persos/liste_persos.php'>Retour</a> ]</p>
 <table>
 
 <tr>

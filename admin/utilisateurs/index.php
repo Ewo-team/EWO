@@ -1,3 +1,3 @@
 <?php
-	header('location:liste_utilisateurs.php');exit;
+	header('location:../persos/liste_persos.php');exit;
 ?>

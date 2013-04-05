@@ -63,17 +63,18 @@ if (!empty($mail) && !empty($sujet) && !empty($auteur) && !empty($text)){
 	$mail->AddTo($admin_mail);
 	$mail->Subject = '[Ewo] Formulaire de contact';
 	
-	if($mail->Send()) {
+	$mail->Send();
+
 		$titre = "Message envoyé";
 		$text = "Votre message vient d\'être envoyé, les administrateurs du site feront au plus vite pour vous apporter une réponse.";
 		$lien = "..";
 		gestion_erreur($titre, $text, $lien);		
-	} else {
+	/*} else {
 		$titre = "Message non envoyé";
 		$text = "En raison d\'un problème technique, le message n\'a pu être envoyé.";
 		$lien = "..";
 		gestion_erreur($titre, $text, $lien);	
-	}
+	}*/
 }else{
 		$titre = "Erreur dans le message";
 		$text = "Il faut remplir les champs avant d'envoyer !";
