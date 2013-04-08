@@ -14,6 +14,10 @@ namespace jeu\classement;
 class ClassementListeDAO extends ClassementDAO {
 	
 	public function prepareClassement() {
+
+		$this->_cptraces = $this->_nbraces;
+
+
 		// début de la requête
 		$this->_select = 'SELECT * ';
 				
@@ -41,11 +45,13 @@ class ClassementListeDAO extends ClassementDAO {
 		if($this->_type === ClassementDAO::FAMILLE) {
 			$this->_where .= 'type = 7 AND ';
 		}				
-			
+
 		// races
 		$separateur = false;
-		if($this->_nbraces != 4) {
+		if($this->_cptraces != 4) {
 		
+			$this->_where .= '( ';
+
 			if($this->_ange===1) {
 				$this->_where .= 'camp=3 ';
 				$separateur = true;
@@ -71,7 +77,7 @@ class ClassementListeDAO extends ClassementDAO {
 				$this->_where .= 'camp=2 ';
 			}
 
-			$this->_where .= 'AND ';
+			$this->_where .= ') AND ';
 		} 
 		
 		// On prépare la date

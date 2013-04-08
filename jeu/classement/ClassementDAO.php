@@ -62,6 +62,7 @@ abstract class ClassementDAO extends ConnecteurDAO {
 	protected $_demon = 1;
 	protected $_paria = 1;
 	protected $_nbraces = 4;
+	protected $_cptraces = 4;
 	
 	protected $_grade = 0;
 	protected $_galon = 0;
@@ -90,7 +91,7 @@ abstract class ClassementDAO extends ConnecteurDAO {
 		parent::__construct($base);
 		//$this->prepareClassement();
 		$this->archiveClassement();
-		$this->first_date = mktime(0,0,0,2,11,2011);	
+		$this->first_date = mktime(0,0,0,3,13,2013);	
 	}
 	
 	protected function archiveClassement() {
@@ -206,8 +207,8 @@ abstract class ClassementDAO extends ConnecteurDAO {
 	*/	
 	protected function separateur(&$sql, &$separateur) {
 		if($separateur == true) {
-			$this->_nbraces--;
-			$compte = $this->_nbraces;
+			$this->_cptraces--;
+			$compte = $this->_cptraces;
 			
 			if($compte>0) {
 				$sql .= 'OR ';

@@ -174,7 +174,7 @@ echo '<table class="damier_corps" CELLPADDING="0" CELLSPACING="0" border="0">';
 					}*/
 					
 					$get_plan = ($decors_default != null) ? $decors_default : 'terre';
-					$$coutMouv = null;
+					$coutMouv = null;
 
 					if($decors) {
 						$case = $decors->getCase($pos_x_case,$pos_y_case);
@@ -188,7 +188,7 @@ echo '<table class="damier_corps" CELLPADDING="0" CELLSPACING="0" border="0">';
 							}
 
 							if(isset($case["block"])) {
-								$deplacement = null;
+								//$deplacement = null;
 							}							
 							//$get_plan = $case;
 						}

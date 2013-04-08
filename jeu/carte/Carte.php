@@ -223,12 +223,12 @@ class Carte {
 								$this->coord_x($viseur['x']+0.5), 
 								$this->coord_y($viseur['y']-0.5) + 15);									
 		
-		$res .= SVG::cercle($this->coord_x($viseur['x']+0.5), $this->coord_y($viseur['y']-0.5), 20, array('id' => $viseur['nom']));
+		$res .= SVG::cercle($this->coord_x($viseur['x']+0.5), $this->coord_y($viseur['y']-0.5), 20, array('id' => md5($viseur['nom'])));
 
 		if(($this->coord_y($viseur['y']-0.5) - 20) < 3) {
-			$this->_popup[] = array($this->coord_x($viseur['x']+0.5), $this->coord_y($viseur['y']-0.5) + 30, $viseur['nom'], $viseur['nom']);
+			$this->_popup[] = array($this->coord_x($viseur['x']+0.5), $this->coord_y($viseur['y']-0.5) + 30, md5($viseur['nom']), $viseur['nom']);
 		} else {
-			$this->_popup[] = array($this->coord_x($viseur['x']+0.5), $this->coord_y($viseur['y']-0.5) - 20, $viseur['nom'], $viseur['nom']);
+			$this->_popup[] = array($this->coord_x($viseur['x']+0.5), $this->coord_y($viseur['y']-0.5) - 20, md5($viseur['nom']), $viseur['nom']);
 		}
 		
 		return $res;

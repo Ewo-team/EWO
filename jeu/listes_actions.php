@@ -434,6 +434,7 @@ if($liste_objet_simple['case']['inc']>0){
                 }
         }
     }
+
 ?>
 
 <script language="javascript">
@@ -1179,6 +1180,8 @@ if($nb_att || $nb_ent){
 
         /*     * ** Génération de la liste des sorts *** */
 
+
+	$debugcpt = 0;
     if ($nb_sort || $nb_sort_zone) {
         echo "<optgroup label='Magie'>";
 
@@ -1189,22 +1192,26 @@ if($nb_att || $nb_ent){
         while ($cpt_sort || $cpt_sort_zone) {
 
             // Détermination du niveau de sort en cours pour n'afficher que les sorts de ce niveau
-            $niveau = max(isset($sort['niv'][$cpt_sort]) ? $sort['niv'][$cpt_sort] : 0, isset($sort_zone['niv'][$cpt_sort_zone]) ? $sort['niv'][$cpt_sort_zone] : 0);
+            $niveau = max(isset($sort['niv'][$cpt_sort]) ? $sort['niv'][$cpt_sort] : 0, isset($sort_zone['niv'][$cpt_sort_zone]) ? $sort_zone['niv'][$cpt_sort_zone] : 0);
 
             echo "<optgroup label='Niveau " . $niveau . "'>";
 
             if (isset($sort['niv'][$cpt_sort]) && $sort['niv'][$cpt_sort] == $niveau) {
-                while (isset($sort['niv'][$cpt_sort]) && $sort['niv'][$cpt_sort] == $niveau) {
+
+                while (isset($sort['niv'][$cpt_sort]) && $sort['niv'][$cpt_sort] == $niveau) {          	
                     echo "<option value=" . $sort['id'][$cpt_sort] . ">" . $sort['nom'][$cpt_sort] . " (cible)</option>";
-                    $cpt_sort--;
+                    $cpt_sort--;                                     
                 }
+
             }
 
             if (isset($sort_zone['niv'][$cpt_sort_zone]) && $sort_zone['niv'][$cpt_sort_zone] == $niveau) {
+
                 while (isset($sort_zone['niv'][$cpt_sort_zone]) && $sort_zone['niv'][$cpt_sort_zone] == $niveau) {
                     echo "<option value=" . $sort_zone['id'][$cpt_sort_zone] . ">" . $sort_zone['nom'][$cpt_sort_zone] . " (zone)</option>";
                     $cpt_sort_zone--;
                 }
+
             }
             echo "</optgroup>";
         }
@@ -1213,7 +1220,7 @@ if($nb_att || $nb_ent){
     }
     /*     * ** Fin de la génération de la liste des sorts *** */
 
-	
+
 if($nb_aura){
 	echo "<optgroup label='Auras cibl&eacute;s'>";
 	}
