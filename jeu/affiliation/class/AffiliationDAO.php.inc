@@ -73,8 +73,8 @@ use \persos\eventManager\eventManager as eventManager;
          */
         protected function getSupFromCamp($camp){
             $r = array();
-            if ($camp == 1)
-                $query = '(r.camp_id = 3 || r.camp_id = 4)';
+            if ($camp == 1) // pas de sup pour les verts
+                return array();
             else if ($camp == 3 || $camp == 4 )
                 $query = 'r.camp_id = '.$camp;
             else

@@ -36,14 +36,14 @@ switch($race){
 					<img usemap="#rose" src="./../images/cartes/roses/rose_<?php echo $race_im; ?>.png" border=0 width=150 height=150>
 					<map name="rose" id="rose">
 					   <area shape="circle" alt="Centre"coords="74,73,12" href="#"/>
-					   <area shape="poly" alt="Nord-Ouest" coords="60,41,23,23,43,60,74,73" href="deplacement.php?perso_id=<?php echo $inc; ?>&dep11=1" />
-					   <area shape="poly" alt="Nord" coords="75,5,89,41,75,73,60,41" href="deplacement.php?perso_id=<?php echo $inc; ?>&dep12=1" />
-					   <area shape="poly" alt="Nord-Est" coords="89,41,126,23,107,60,75,73" href="deplacement.php?perso_id=<?php echo $inc; ?>&dep13=1" />
-					   <area shape="poly" alt="Ouest" coords="42,60,5,74,42,88,75,74" href="deplacement.php?perso_id=<?php echo $inc; ?>&dep21=1" />
-					   <area shape="poly" alt="Est" coords="108,88,144,74,104,59,75,73" href="deplacement.php?perso_id=<?php echo $inc; ?>&dep23=1" />
-					   <area shape="poly" alt="Sud-Ouest" coords="42,88,25,125,61,106,75,74" href="deplacement.php?perso_id=<?php echo $inc; ?>&dep31=1" />
-					   <area shape="poly" alt="Sud" coords="61,107,75,144,90,107,75,74" href="deplacement.php?perso_id=<?php echo $inc; ?>&dep32=1" />
-					   <area shape="poly" alt="Sud-Est" coords="90,107,125,125,108,89,75,73" href="deplacement.php?perso_id=<?php echo $inc; ?>&dep33=1" />
+					   <area shape="poly" alt="Nord-Ouest" coords="60,41,23,23,43,60,74,73" href="deplacement.php?persoid=<?php echo $id;?>&dep11=1" />
+					   <area shape="poly" alt="Nord" coords="75,5,89,41,75,73,60,41" href="deplacement.php?persoid=<?php echo $id;?>&dep12=1" />
+					   <area shape="poly" alt="Nord-Est" coords="89,41,126,23,107,60,75,73" href="deplacement.php?persoid=<?php echo $id;?>&dep13=1" />
+					   <area shape="poly" alt="Ouest" coords="42,60,5,74,42,88,75,74" href="deplacement.php?persoid=<?php echo $id;?>&dep21=1" />
+					   <area shape="poly" alt="Est" coords="108,88,144,74,104,59,75,73" href="deplacement.php?persoid=<?php echo $id;?>&dep23=1" />
+					   <area shape="poly" alt="Sud-Ouest" coords="42,88,25,125,61,106,75,74" href="deplacement.php?persoid=<?php echo $id;?>&dep31=1" />
+					   <area shape="poly" alt="Sud" coords="61,107,75,144,90,107,75,74" href="deplacement.php?persoid=<?php echo $id;?>&dep32=1" />
+					   <area shape="poly" alt="Sud-Est" coords="90,107,125,125,108,89,75,73" href="deplacement.php?persoid=<?php echo $id;?>&dep33=1" />
 					</map>
 				</td>
 			</tr>
