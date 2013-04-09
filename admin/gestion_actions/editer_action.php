@@ -160,9 +160,9 @@ function afficheListeEffets($type = 'nouveau', $ciblage = null) {
 			<option value="5"<?php if($action->cercle == 5) { echo ' selected'; } ?>>Cercle de l'Effroi</option>
 			<option value="6"<?php if($action->cercle == 6) { echo ' selected'; } ?>>Cercle du Désespoir</option>
 			<!-- <option value="7"<?php if($action->cercle == 7) { echo ' selected'; } ?>>Technologie</option> --> 
-			<option value="7"<?php if($action->cercle == 8) { echo ' selected'; } ?>>Technologie : Sabotage</option>
-			<option value="7"<?php if($action->cercle == 9) { echo ' selected'; } ?>>Technologie : G&eacute;nie</option>
-			<option value="7"<?php if($action->cercle == 10) { echo ' selected'; } ?>>Technologie : Armement</option>
+			<option value="8"<?php if($action->cercle == 8) { echo ' selected'; } ?>>Technologie : Sabotage</option>
+			<option value="9"<?php if($action->cercle == 9) { echo ' selected'; } ?>>Technologie : G&eacute;nie</option>
+			<option value="10"<?php if($action->cercle == 10) { echo ' selected'; } ?>>Technologie : Armement</option>
 			</select></td>
 		</tr>
 		<tr>

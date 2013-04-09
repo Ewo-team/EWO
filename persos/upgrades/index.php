@@ -285,9 +285,15 @@ if(!isset($admin_mode) && ($affilie || $race<3)){
 					case 6 : 
 						$cercle="Cercle du Désespoir";
 						break;				
-					case 7 : 
-						$cercle="Cercle Technologique";
+					case 8 : 
+						$cercle="Technologie : Sabotage";
+						break;
+					case 9 :
+						$cercle="Technologie : G&eacute;nie";
 						break;				
+					case 10 : 
+						$cercle="Technologie : Armement";
+						break;
 					}
 				echo $cercle;
 				}
@@ -304,11 +310,15 @@ if(!isset($admin_mode) && ($affilie || $race<3)){
 						<option value="5">Cercle de l\'Effroi</option>';
 					if($race==1 && $techno_ok)
 					echo '
-						<option value="7">Cercle technologique</option>';
+						<option value="8">Technologie : Sabotage</option>
+						<option value="9">Technologie : G&eacute;nie</option>
+						<option value="10">Technologie : Armement</option>';
 				}
 				else if($race==1 && $techno_ok){
 				echo'
-						<option value="7">Cercle technologique</option>';
+						<option value="8">Technologie : Sabotage</option>
+						<option value="9">Technologie : G&eacute;nie</option>
+						<option value="10">Technologie : Armement</option>';
 				
 					}
 				else echo '
