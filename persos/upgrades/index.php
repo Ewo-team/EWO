@@ -52,13 +52,6 @@ if(!isset($admin_mode)){
 
 $donnees = calcul_caracs_no_alter($perso_id);
 
-if(isset($_POST['choix_cercle']) && isset($_POST['cercle']) && $affilie && !$donnees['cercle']) {
-	maj_carac($perso_id, "cercle", $_POST['cercle']);
-	if(is_numeric($_POST['cercle'])) {
-		$donnees['cercle'] = $_POST['cercle'];
-	}
-}
-
 $caracs = caracs_base($race, $grade);
 $bonus['pv'] = bonus_galon('pv', $race, $grade, $galon);
 $bonus['force'] = bonus_galon('force', $race, $grade, $galon);
@@ -97,12 +90,28 @@ if($race==1) {
 								INNER JOIN persos ON persos.id=caracs.perso_id
 								WHERE persos.utilisateur_id=$utilisateur_id ")or die(mysql_error());
 	while($rep_cercle = mysql_fetch_array($reponse)) {
-		if($rep_cercle['cercle']==7)
+		if($rep_cercle['cercle']==8 || $rep_cercle['cercle']==9 || $rep_cercle['cercle']==10)
 			$count++;
 	}
 	$techno_ok=($count<2)?true:false;
 	$cercle_ok=($count==2)?true:false;
 }
+
+
+if(isset($_POST['choix_cercle']) && isset($_POST['cercle'])) {
+	if($race==1){
+		if($_POST['choix_cercle'] > 7 && $_POST['choix_cercle'] < 11 && $techno_ok)
+			maj_carac($perso_id, "cercle", $_POST['cercle']);
+	}
+	else if($_POST['choix_cercle'] > 0 && $_POST['choix_cercle'] < 7 && $affilie && !$donnees['cercle']){
+		maj_carac($perso_id, "cercle", $_POST['cercle']);
+	}
+	if(is_numeric($_POST['cercle'])) {
+		$donnees['cercle'] = $_POST['cercle'];
+	}
+}
+
+
 ?>
 <div align='center'>
 <?php
