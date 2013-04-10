@@ -99,12 +99,24 @@ if($race==1 || $race == 9) {
 	$cercle_ok = false;
 }
 
+$select_cercle_ok = true;
+if($affilie && ($race == 7 || $race == 8)) {
+		$reponse = mysql_query('SELECT COUNT(c.cercle) as nb FROM caracs c
+				INNER JOIN persos p ON p.id=c.perso_id
+				WHERE
+				p.utilisateur_id='.$utilisateur_id.' AND
+				p.race_id = '.$race.' AND
+				(c.cercle IS NOT NULL AND c.cercle != 0);')or die(mysql_error());
+		$rep_cercle = mysql_fetch_array($reponse);
+		$select_cercle_ok = $rep_cercle['nb'] == 0;
+}
+
 if(isset($_POST['choix_cercle']) && isset($_POST['cercle']) && is_numeric($_POST['cercle'])) {
 	if($race==1 || $race == 9){
 		if($_POST['cercle'] > 7 && $_POST['cercle'] < 11 && $techno_ok)
 			maj_carac($perso_id, "cercle", $_POST['cercle']);
 	}
-	else if($_POST['choix_cercle'] > 0 && $_POST['choix_cercle'] < 7 && $affilie && !$donnees['cercle']){
+	else if( $_POST['cercle'] > 0 && $_POST['cercle'] < 7 && $affilie && !$donnees['cercle'] && $rep_cercle){
 		maj_carac($perso_id, "cercle", $_POST['cercle']);
 	}
 	if(is_numeric($_POST['cercle'])) {
@@ -371,6 +383,7 @@ switch($donnees['cercle']){
 		<input type="submit" name="choix_cercle" value="Choisir le cercle" />
 		</form>';
 				if($race!=2 && $affilie){
+					if($select_cercle_ok)
 					echo $select_first.'
 		<option value="1">Cercle de Feu</option>
 		<option value="2">Cercle de Glace</option>
