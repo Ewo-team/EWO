@@ -30,10 +30,42 @@ $js->addScript('konami/katawa');
             </div>
     </div>
 	<div id="zone_mid_right">
-		<b>Message du jour</b>
-		<blockquote cite="<?php echo SERVER_URL; ?>/persos/event/id=131"><p>Zut! Je voulais lui faire<br />le coup du<br />&quot;Touché!&quot;<br />mais il est tombé comme<br />une larve. Dommage...</p></blockquote>
-		<a href="<?php echo SERVER_URL; ?>/persos/event/?id=131">StratiX</a>
-	</div>	
+		<b>Message du jour</b><?php
+
+        $dao = \conf\ConnecteurDAO::getInstance();
+
+        $i = rand(0,184);
+        $query = "SELECT persos.id as id, persos.nom AS pseudo, persos_mdj.message AS msg
+                    FROM persos_mdj, persos
+                    WHERE persos.id = persos_mdj.perso_id
+                    ORDER BY persos_mdj.date DESC
+                    LIMIT $i , 15";
+
+        $liste = array();
+
+        $stat = $dao->query($query);
+
+        $result = $dao->fetchAll($stat);
+
+
+        foreach ($result as $ligne) {
+            if(trim($ligne["msg"]) != "") {
+                if(!stripos($ligne["msg"], "hrp")) {
+                    $liste[] = $ligne;
+                }
+            }
+        }
+
+        if(count($liste) > 0) {
+            // On a plusieurs mdj elligibles
+            shuffle($liste);
+            reset($liste);
+            $ligne = current($liste);
+        }
+
+		echo '<blockquote cite="'.SERVER_URL.'/persos/event/id='.$ligne['id'].'"><p>'.$ligne['msg'].'</p></blockquote>
+		<a href="'.SERVER_URL.'/persos/event/?id='.$ligne['id'].'">'.$ligne['pseudo'].'</a>';
+	?></div>	
     <div id="zone_mid_left">
         <div id="carousel"><ul>
         <?php
