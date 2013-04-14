@@ -25,12 +25,12 @@ include(SERVER_ROOT."/template/header_new.php");
 if (isset($_SESSION['utilisateur']['id'])){
 	$pseudo = $_SESSION['utilisateur']['nom'];
 }else{
-	$pseudo = "Ewotux";
+	$pseudo = "EWO_guest" . time(); 
 	echo "<p>Pour changer de pseudo, taper la commande /nick 'votre pseudo'</p>";
 }
 ?>
 <iframe width="960" height="500" scrolling="no" frameborder="0"
- src="http://embed.mibbit.com/?server=irc.iiens.net&channel=%23ewohrp&nick=<?php echo $pseudo; ?>">
+ src="http://embed.mibbit.com/?server=irc.iiens.net&channel=%23ewo,%23aiwo&nick=<?php echo $pseudo; ?>">
 </iframe>
 </div>
 

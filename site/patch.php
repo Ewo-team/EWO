@@ -5,11 +5,10 @@ namespace site;
 /**
  * Patchnote
  *
- * Embed un script irc
  *
- * @author Simonet Fabrice <aigleblanc@ewo.fr>
+ * @author Léo Maradan
  * @version 1.0
- * @package site\chat
+ * @package site
  */
 
 //-- Header --
