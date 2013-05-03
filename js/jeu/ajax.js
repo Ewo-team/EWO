@@ -102,11 +102,11 @@ function hideshow(button,div){
 */
 function edition_click_mdj(id){
 	if(edit_area == 0){
-		var text = $("#"+id).text();
+		var text = $("#"+id).html();
 		if (text == '-Mdj-'){
 			textarea = '';
 		}else{
-			textarea = text;
+			textarea = text.replace(/<br>/g,' ');
 		}
 		$("#"+id+"_p").html("<textarea id='"+id+"' name='valeur' class='form_infobulle' rows=6>"+textarea+"</textarea><br /><input type='button' value='Ok' onclick=\"edition_get_mdj('"+id+"');\"/>");
 		edit_area = 1;
