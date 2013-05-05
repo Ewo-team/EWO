@@ -67,7 +67,7 @@ $rq = '
 	DELETE
 	FROM `evenements`
 	WHERE
-		`type_ev` = "attaque" AND
+		(`type_ev` = "attaque" OR type_ev` = "sort") AND
 		`result` != 5 AND
 		`date_ev` <= NOW() - INTERVAL '.$conf[Wordz::ACSHUNS].' DAY;';
 $nb = $sql->exec($rq);
