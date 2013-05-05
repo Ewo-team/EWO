@@ -21,6 +21,6 @@ $conf = array(
 	Wordz::MESAGEZ_RECEIVD	=> 60,
 	Wordz::MOUVEMENTS 		=> 30,
 	Wordz::ACSHUNS 		=> 60,
-	Wordz::ANTI_CHEAT 		=> 30,
+	Wordz::ANTI_CHEAT 		=> 120,
 	Wordz::ADMINISTRASHUN	=> 120
 );
