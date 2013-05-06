@@ -14,7 +14,7 @@ class grade extends formatter{
 	
         private function getText($gradeInitial, $gradeFinal) {
             $text = "";
-            if ($gradeInitial > $gradeFinal) {
+            if ($gradeInitial < $gradeFinal) {
                     $text = "vient d'obtenir le grade $gradeFinal.";
             } else {
                     $text = "a fait le con, a perdu son grade $gradeInitial et se retrouve avec un pauvre grade $gradeFinal.";
