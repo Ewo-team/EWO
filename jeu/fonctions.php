@@ -173,7 +173,7 @@ function pentm($perso_pentm, $cible_pentm, $perso_xp, $cible_xp, $distance_pourc
 	$perso_rang += ajuste_rang($perso_grade);
 	$cible_rang += ajuste_rang($cible_grade);
 
-	$pentm = 80 + $perso_pentm - $cible_pentm) / 2; // Différence de valeur basique
+	$pentm = 80 + ($perso_pentm - $cible_pentm) / 2; // Différence de valeur basique
 
 	$pentm += \conf\Helpers::minmax((($perso_rang - $cible_rang) * 2), -40, 40);	// différence de rang
 

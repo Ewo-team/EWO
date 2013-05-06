@@ -34,6 +34,7 @@ $_SESSION['esquive']['somme_rang'] = 0;
 $_SESSION['esquive']['table_rang'] = array();
 $_SESSION['mort']['somme_rang'] = 0;
 $_SESSION['mort']['table_rang'] = array();
+$_SESSION['score_pentm'] = null;
 
 //recup des infos perso
 $perso_id     		= $_SESSION['persos']['current_id'];
@@ -721,6 +722,8 @@ if(isset($action_id)){
 
 
 					$pentm = pentm($perso_pentm, $cible_pentm, $caracs['px'], $cible_caracs['xp'], $dist);
+
+					$_SESSION['score_pentm'] = $pentm;
 
 					$reussite_pentm = ($pentm <= lance_ndp(1, 100));
 
