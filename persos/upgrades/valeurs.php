@@ -3,7 +3,7 @@
 		$coutPvBase      = 80;
 		$coutRecupPvBase = 150;
 		$coutMouvBase    = 140;
-		$coutForceBase   = 80;
+		$coutForceBase   = 70;
 		$coutNvMagBase   = 100;
 			$addNvMag    = 200;//Valeur à ajouter au cout précédent
 		$coutPercBase    = 140;

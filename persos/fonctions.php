@@ -409,6 +409,9 @@ switch($type){
 		if ($grade >=0)
 			$caracs = array ("pa"=>2, "pv"=>200, "recup_pv"=>5,"mouv"=>6,"pa"=>2,"des"=>9,"force"=>20,"perception"=>5, "magie"=>0, "res_mag"=>0);
 		}
+
+// patch récupération des humains                
+                
 return $caracs;
 }
 

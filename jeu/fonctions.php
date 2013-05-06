@@ -2876,15 +2876,19 @@ function activ_tour($id, $force_activ=false) {
 			$alter_pv = $alter_pv - 10;
 
 		$alter_recup_pv = $caracs_alter_affil['alter_recup_pv'] ;
-		if ($sup_id==0) {
+		if ($sup_id==0 && ($camp==3 || $camp==4)) {
 			if ($alter_recup_pv < 0) {
-				if ($alter_recup_pv == -5) {
-					$alter_recup_pv = 0;
-				} else	$alter_recup_pv = $alter_recup_pv + 10;
+                            if ($alter_recup_pv == -5) {
+                                    $alter_recup_pv = 0;
+                            } else {	
+                                $alter_recup_pv = $alter_recup_pv + 10;                             
+                            }
 			} elseif ($alter_recup_pv > 0) {
-				if ($alter_recup_pv == 5) {
-					$alter_recup_pv = 0;
-				} else	$alter_recup_pv = $alter_recup_pv - 10;
+                            if ($alter_recup_pv == 5) {
+                                    $alter_recup_pv = 0;
+                            } else	{
+                                $alter_recup_pv = $alter_recup_pv - 10;
+                            }
 			}
 		} else {
 			if ($alter_recup_pv < 5) {
@@ -2892,17 +2896,23 @@ function activ_tour($id, $force_activ=false) {
 					$alter_recup_pv = -5;
 				} elseif ($alter_recup_pv == 0) {
 					$alter_recup_pv = 5;
-				} else $alter_recup_pv = $alter_recup_pv + 10;
-			} elseif ($alter_recup_pv > 5)
+				} else {
+                                    $alter_recup_pv = $alter_recup_pv + 10;
+                                }
+			} elseif ($alter_recup_pv > 5) {
 				if ($alter_recup_pv == 10) {
 					$alter_recup_pv = 5;
-				} else	$alter_recup_pv = $alter_recup_pv - 10;
+				} else	{
+                                    $alter_recup_pv = $alter_recup_pv - 10;
+                                }
+                        }
 		}
 		$alter_niv_mag = $caracs_alter_affil['alter_niv_mag'] ;
-		if ($alter_niv_mag < 0)
+		if ($alter_niv_mag < 0) {
 			$alter_niv_mag = $alter_niv_mag + 1;
-		elseif ($alter_niv_mag > 0)
+                } elseif ($alter_niv_mag > 0) {
 			$alter_niv_mag = $alter_niv_mag - 1;
+                }
 
 		$alter_mouv = $caracs_alter_affil['alter_mouv'] ;
 		if ($alter_mouv < 0)
