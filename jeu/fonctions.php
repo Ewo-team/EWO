@@ -173,9 +173,21 @@ function pentm($perso_pentm, $cible_pentm, $perso_xp, $cible_xp, $distance_pourc
 	$perso_rang += ajuste_rang($perso_grade);
 	$cible_rang += ajuste_rang($cible_grade);
 
-	$pentm = 80 + ($perso_pentm - $cible_pentm) / 2; // Différence de valeur basique
+	echo "calcule pentm rang perso: $perso_rang ";
+	echo "calcule pentm rang cible: $cible_rang ";
+
+	echo "calcule pentm perso pentm: $perso_pentm ";
+	echo "calcule pentm cible pentm: $cible_pentm ";
+
+	$pentm = (80 + $perso_pentm - $cible_pentm) / 2; // Différence de valeur basique
+
+	echo "calcule pentm 1: $pentm ";
+
 
 	$pentm += \conf\Helpers::minmax((($perso_rang - $cible_rang) * 2), -40, 40);	// différence de rang
+
+	echo "calcule pentm 2: $pentm ";
+	echo "calcule pentm distance: $distance_pourcentage ";
 
 	// distance entre les cases
 	if($distance_pourcentage < 4) {
@@ -188,6 +200,8 @@ function pentm($perso_pentm, $cible_pentm, $perso_xp, $cible_xp, $distance_pourc
 		// cible éloignée
 		$pentm -= 20;
 	}
+
+	echo "calcule pentm 3: $pentm ";
 
 	// on retourne la valeur de pentm, avec des bornes (minimum 5%, maximum 95%)
 	return \conf\Helpers::minmax($pentm, 5, 95);

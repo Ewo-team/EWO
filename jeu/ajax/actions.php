@@ -721,11 +721,19 @@ if(isset($action_id)){
 					$dist = calcule_pentm_distance($distance, $caracs['perception']);
 
 
-					$pentm = pentm($perso_pentm, $cible_pentm, $caracs['px'], $cible_caracs['xp'], $dist);
+					$pentm = pentm($perso_pentm, $cible_pentm, $caracs['px'], $cible_caracs['px'], $dist);
 
 					$_SESSION['score_pentm'] = $pentm;
 
-					$reussite_pentm = ($pentm <= lance_ndp(1, 100));
+					$des = lance_ndp(1, 100);
+
+
+					$reussite_pentm = ($pentm <= $des);
+
+					echo "PenTM : cible => $cible_pentm, perso => $perso_pentm, distance = $distance, dist => $dist, perso xp => ".$caracs['px'].", cible xp => ".$cible_caracs['px'].", pentm => $pentm, des => $des, reussite => $reussite_pentm";
+
+					
+					
 
 					/*echo "cible_pentm: $cible_pentm, ";
 					echo "perso_pentm: $perso_pentm, ";
@@ -738,7 +746,7 @@ if(isset($action_id)){
 
 					$esquive_auto = false;
 					//$esquive    = (esquive_sort($caracs['px'], $grade_perso, $cible_caracs['px'], $cible_info['grade_id'], $esquive_auto, $cible_caracs['esq_mag']) || !$reussite);
-					if(!$reussite) {
+					if(!$reussite_pentm) {
 						$esquive = false;
 					} else {
 						$esquive = true;
