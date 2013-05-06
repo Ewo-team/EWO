@@ -22,13 +22,13 @@ if (isset($pagetype)) {
 
 <!-- Start footer -->
 <div id='<?php echo $footer; ?>' <?php echo $width_content_jeu; ?>>
-			<p>Personne ne va lire ce texte</p>
-			<?php /*
+			<p>EWO v1.0.5</p>
+			<?php if(false) {
 				$fin = getmicrotime();
 				$page_time = round($fin-$debut, 3);
-				echo "Page générée en ".$page_time." secondes.</p><br />"; */
-				//include(SERVER_ROOT.'/jeu/stat_time.php');
-			?>
+				echo "Page générée en ".$page_time." secondes.</p><br />";
+				include(SERVER_ROOT.'/jeu/stat_time.php');
+			} ?>
 </div>
 <?php 
 

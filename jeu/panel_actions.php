@@ -65,7 +65,7 @@ if($time >= ($datechangement + 3600*11)){
         include 'listes_actions.php';
 ?>
 	<div class="maj_ok" style="display:none" id="fonction_des">Force d'attaque mise &agrave; jour</div>
-	<div class="maj_ok" style="display:none" id="fonction_esq_mag">Esquive TechnoMagique mise &agrave; jour</div>
+	<!--<div class="maj_ok" style="display:none" id="fonction_esq_mag">Esquive TechnoMagique mise &agrave; jour</div>-->
 	<form method='post' name='gestion_des'>
 	<table width='100%'>	
                 <tr>
@@ -84,19 +84,19 @@ if($time >= ($datechangement + 3600*11)){
                     <td style="text-align: right"><input name='maj_des' type='button' value='+' class='bouton' onClick='des_moins();' /></td>
                     <td><input name='maj_des' type='button' value='++' class='bouton' onClick='des_min();'  /></td>
                 </tr>                 
-		<tr>
+		<!--<tr>
                     <td colspan="4" align='center'><u>Esquive TechnoMagique</u></td>
-                </tr>    
+                </tr>   
                 <tr>   
                     <td colspan='4' align='center'><?php if(!$maj_esq_mag || $maj_esq_mag==3){
 				echo "Défense maximale"; 
 				} else {
 				echo "Défense nulle"; 				
 					}?></td>
-		</tr>
+		</tr>--> 
 		<tr>
-                        <td colspan='2' align='center'><input <?php echo $disabled; ?> id='modifier_des' name='modifier_des' type='button' value='Modifier les dés' class='bouton' onClick='des_modifier( <?php echo $perso_id; ?>,<?php echo $caracs_max['des']; ?>, document.gestion_des.des_attaque.value);' /></td>
-			<td colspan='2' align='center'><input <?php echo $esq_disabled; ?> id='modifier_esq_mag' name='modifier_esq_mag' type='button' value="Modifier l'Esq. TM" class='bouton' onClick='esq_mag_modifier( <?php echo $perso_id; ?>);' /><?php echo $temps_esquivemagique; ?></td>
+                        <td colspan='4' align='center'><input <?php echo $disabled; ?> id='modifier_des' name='modifier_des' type='button' value='Modifier les dés' class='bouton' onClick='des_modifier( <?php echo $perso_id; ?>,<?php echo $caracs_max['des']; ?>, document.gestion_des.des_attaque.value);' /></td>
+			<!--<td colspan='2' align='center'><input <?php echo $esq_disabled; ?> id='modifier_esq_mag' name='modifier_esq_mag' type='button' value="Modifier l'Esq. TM" class='bouton' onClick='esq_mag_modifier( <?php echo $perso_id; ?>);' /><?php echo $temps_esquivemagique; ?></td>-->
 		</tr>	
 	 </table>
 	 </form>

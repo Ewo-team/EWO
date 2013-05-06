@@ -24,6 +24,14 @@ function recup_carte_info($plan) {
 }
 //fonction de calcule de distance entre deux objets d'un même plan
 function distance($objet1, $objet2, $plan) {
+
+	$distances = distances($objet1, $objet2, $plan);
+
+	return max($distances['x'], $distances['y']);
+}
+
+//fonction de calcule de distance entre deux objets d'un même plan, et retourne les deux distances
+function distances($objet1, $objet2, $plan) {
 	$plan	= recup_carte_info($plan);
 	$x_min	= $plan['x_min'];
 	$x_max	= $plan['x_max'];
@@ -45,7 +53,7 @@ function distance($objet1, $objet2, $plan) {
 	}
 	else $dist_y = abs($objet1['pos_y']-$objet2['pos_y']);
 
-	return max($dist_x, $dist_y);
+	return array('x' => $dist_x, 'y' => $dist_y);
 }
 
 
@@ -140,6 +148,52 @@ function esquive_sort($perso_xp, $perso_grade, $cible_xp, $cible_grade, $esquive
 	} else return false;
 }
 
+// Calcule la PenTM d'un perso
+function calcule_pentm($perso_grade, $perso_niveau) {
+	return 40 + (5*$perso_grade) + (5*$perso_niveau);
+}
+
+// Calcule le pourcentage de distance entre le perso et la cible
+function calcule_pentm_distance($distance, $perception)
+{
+	$dist_max = sqrt(($perception*$perception)+($perception*$perception));
+
+	$x = $distance['x'];
+	$y = $distance['y'];;
+	$dist_cible = sqrt(($x*$x)+($y*$y));
+
+	return round(($dist_cible / $dist_max) * 10);
+}
+
+function pentm($perso_pentm, $cible_pentm, $perso_xp, $cible_xp, $distance_pourcentage) {
+
+	$perso_rang = calcul_rang($perso_xp);
+	$cible_rang = calcul_rang($cible_xp);
+
+	$perso_rang += ajuste_rang($perso_grade);
+	$cible_rang += ajuste_rang($cible_grade);
+
+	$pentm = 80 + $perso_pentm - $cible_pentm) / 2; // Différence de valeur basique
+
+	$pentm += \conf\Helpers::minmax((($perso_rang - $cible_rang) * 2), -40, 40);	// différence de rang
+
+	// distance entre les cases
+	if($distance_pourcentage < 4) {
+		// cible proche
+		$pentm += 20;
+	} else if($distance_pourcentage < 6) {
+		// cible moyenne
+		// pas de changement de pentm
+	} else {
+		// cible éloignée
+		$pentm -= 20;
+	}
+
+	// on retourne la valeur de pentm, avec des bornes (minimum 5%, maximum 95%)
+	return \conf\Helpers::minmax($pentm, 5, 95);
+	
+
+}
 
 // Fonction de calcul et mise à jour d'xp
 // calcul_xp(cibleur, ciblé, type, réussite ou non)
@@ -3107,7 +3161,7 @@ function gainxp($nbpa,$action,$param = null) {
 		$calculxp = $gain[$action]['cap_max'];
 	}
 
-	if(isset($gain[$action]['modulation_pa'])) {
+	if(isset($gain[$action]['modulation_pa']) && $gain[$action]['modulation_pa'] == true) {
 		
 		$calculxp = ($calculxp / $nbpa) * 2;
 		

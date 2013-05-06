@@ -643,7 +643,7 @@ if(isset($action_id)){
 			$_SESSION['esquive']['mat'][$inci] = $cible['id'][$inci];
 			$_SESSION['esquive']['type'][$inci] = $cible['type'][$inci];
 
-
+			$reussite_pentm = true;
 
 			//si l'effet s'applique sur un persos on recupere ses caracs
 			//si ce n'est pas un perso c'est un objet l'absence d'esquive est donc systematique
@@ -709,8 +709,37 @@ if(isset($action_id)){
 					// Calcul de l'esquive, vaut 1 si reussite =0
 					//echo "Warning esquive sort<br/>";
 
-					$esquive_auto = ($maj_esq_mag==1 || $maj_esq_mag==2);
-					$esquive    = (esquive_sort($caracs['px'], $grade_perso, $cible_caracs['px'], $cible_info['grade_id'], $esquive_auto, $cible_caracs['esq_mag']) || !$reussite);
+					/*********
+					  Penetration TM
+					 *********/
+					$cible_pentm = calcule_pentm($cible_info['grade_id'], $cible_caracs['niv']);
+					$perso_pentm = calcule_pentm($grade_perso, $caracs['niv']);
+
+					$distance = distances($cible_pos, array('pos_x' => $pos_x_perso, 'pos_y' => $pos_y_perso), $_SESSION['persos']['carte'][$id]);
+
+					$dist = calcule_pentm_distance($distance, $caracs['perception']);
+
+
+					$pentm = pentm($perso_pentm, $cible_pentm, $caracs['px'], $cible_caracs['xp'], $dist);
+
+					$reussite_pentm = ($pentm <= lance_ndp(1, 100));
+
+					/*echo "cible_pentm: $cible_pentm, ";
+					echo "perso_pentm: $perso_pentm, ";
+					echo "pentm: $pentm, ";
+					echo "reussite_pentm: $reussite_pentm, ";
+
+					/*********
+					  Fin PenTM
+					 *********/
+
+					$esquive_auto = false;
+					//$esquive    = (esquive_sort($caracs['px'], $grade_perso, $cible_caracs['px'], $cible_info['grade_id'], $esquive_auto, $cible_caracs['esq_mag']) || !$reussite);
+					if(!$reussite) {
+						$esquive = false;
+					} else {
+						$esquive = true;
+					}
 
 					$_SESSION['esquive']['somme_rang']+=calcul_rang($cible_caracs['px']);
 					$_SESSION['esquive']['table_rang'][] = calcul_rang($cible_caracs['px']);
@@ -721,10 +750,22 @@ if(isset($action_id)){
 
 					// }
 					// echo (100*$somme/15000);
+
+					// Pourquoi y'a un 2ème test ? aucune idée...
 					if($cible2_id!='' && $cible2_type=='persos'){
-						$esquive_auto2 = ($maj_esq_mag2==1 || $maj_esq_mag2==2);
-						$esquive    = $esquive || (esquive_sort($caracs['px'], $grade_perso, $cible_caracs['px'], $cible_info['grade_id'], $esquive_auto2) || !$reussite);
+						//$esquive_auto2 = false;
+						//$esquive    = $esquive || (esquive_sort($caracs['px'], $grade_perso, $cible_caracs['px'], $cible_info['grade_id'], $esquive_auto2) || !$reussite);
+
+						if(!$esquive_auto2 || !$reussite) {
+							$esquive = false;
+						} else {
+							$esquive = !$reussite_pentm;
+						}
+						
+
 						$_SESSION['esquive']['val'][2] = $esquive;
+
+
 					}
 
 				}elseif($action_info['type_action']=='aura'){
@@ -734,16 +775,17 @@ if(isset($action_id)){
 				}else {
 					$esquive=0;
 				}
-				$rtm = ($maj_esq_mag==1 || $maj_esq_mag==2) ? 0 : $cible_res_mag;
+				$rtm = $cible_res_mag;
+
 			}
 			//sinon l'absence d'esquive est systématique
 			else {
 				$esquive=0;
-
-				// La RTM est a 0
 				$rtm = 0;
 			}
 
+
+			$rtm = $reussite_pentm;
 
 			//Mise en session de l'esquive
 			$_SESSION['esquive']['val'][$inci] = $esquive;
@@ -831,7 +873,7 @@ if(isset($action_id)){
                                             }
                                         }
 
-					applique_effet($tbl_effets, $effets_cible[$incj], array($cible['id'][$inci], $cible['type'][$inci], $action_info['type_action']), null, $rtm);
+					applique_effet($tbl_effets, $effets_cible[$incj], array($cible['id'][$inci], $cible['type'][$inci], $action_info['type_action']), null, $reussite_pentm);
 					$incj++;
 				}
 
