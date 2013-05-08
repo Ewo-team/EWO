@@ -19,12 +19,12 @@ include(SERVER_ROOT . "/jeu/fonctions.php");
 // Paramètres de connexion à la base de données
 $ewo_bdd = bdd_connect('ewo');
 
-$ratio_hori = 5;
+$ratio_hori = 10;
 if(isset($_GET['hori'])) {
 	$ratio_hori = $_GET['hori'];
 }
 
-$ratio_vert = 3;
+$ratio_vert = 6;
 if(isset($_GET['vert'])) {
 	$ratio_vert = $_GET['vert'];
 }
@@ -78,15 +78,21 @@ echo $carte->Fond(null, $image_encoded);
 
 echo $carte->Compile();
 
-echo $carte->AxeHorizontale(45);
-echo $carte->AxeHorizontale(15);
-echo $carte->AxeHorizontale(-15);
-echo $carte->AxeHorizontale(-45);
+echo $carte->AxeHorizontale(75);
+echo $carte->AxeHorizontale(50);
+echo $carte->AxeHorizontale(25);
+echo $carte->AxeHorizontale(0);
+echo $carte->AxeHorizontale(-25);
+echo $carte->AxeHorizontale(-50);
+echo $carte->AxeHorizontale(-75);
 
-echo $carte->AxeVerticale(45);
-echo $carte->AxeVerticale(15);
-echo $carte->AxeVerticale(-15);
-echo $carte->AxeVerticale(-45);
+echo $carte->AxeVerticale(75);
+echo $carte->AxeVerticale(50);
+echo $carte->AxeVerticale(25);
+echo $carte->AxeVerticale(0);
+echo $carte->AxeVerticale(-25);
+echo $carte->AxeVerticale(-50);
+echo $carte->AxeVerticale(-75);
 
 echo $carte->Footer();
 

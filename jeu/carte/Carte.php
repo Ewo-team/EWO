@@ -266,7 +266,7 @@ class Carte {
 	public function PrintBouclier($id) {
 		$bouclier = $this->_boucliers[$id];
 		
-		$this->_popup[] = array($this->coord_x($bouclier['x']+0.5), $this->coord_y($viseur['y']-0.5) - 35, 'bouclier_'.$id, 'Bouclier');		
+		$this->_popup[] = array($this->coord_x($bouclier['x']+0.5), $this->coord_y($bouclier['y']-0.5) - 35, 'bouclier_'.$id, 'Bouclier');		
 		
 		return SVG::rectangle($this->coord_x($bouclier['x']),$this->coord_y($bouclier['y']),
 								$this->_ratio_ver*$bouclier['taille'], $this->_ratio_hor*$bouclier['taille'], 

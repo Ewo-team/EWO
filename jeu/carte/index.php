@@ -89,7 +89,7 @@ $js->addScript('carte');
 			<div class='centrage'>
 				<div id="boutons"></div>
 				<div id="map">
-					<embed id="emb" style="left:0;top:0;" type="image/svg+xml" src="svg_althian.php?hori=10&vert=6"></embed>
+					<embed id="emb" style="left:0;top:0;" type="image/svg+xml" src="svg_althian.php?hori=5&vert=3"></embed>
 				</div>
 			</div>
 			
