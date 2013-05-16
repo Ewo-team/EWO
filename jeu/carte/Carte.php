@@ -164,7 +164,8 @@ class Carte {
 			$retour .= $this->PrintPerso($id,true);
 			//$retour .= '</g>';
 		}
-		$retour .= '</g>';
+		if($retour != '')
+			$retour .= '</g>';
 		
 		// Boucliers
 		$retour .= '<g class="bouclier">';
