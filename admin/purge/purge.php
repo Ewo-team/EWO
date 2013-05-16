@@ -44,7 +44,8 @@ $rq = '
 		FROM `bals_send`
 		WHERE
 			`date` <= NOW() - INTERVAL '.$conf[Wordz::MESAGEZ_RECEIVD].' DAY
-	);';
+	)
+	AND flag_archive = 0;';
 $nb = $sql->exec($rq);
 echo '<li><strong style="color:green;">MESSAGEZ RECEIVD OK (',$nb,')</strong</li>';
 
