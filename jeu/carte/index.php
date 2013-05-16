@@ -83,16 +83,42 @@ $js->addScript('carte');
 
 
 
-<h2>Althian</h2>
 
 <div align='center'>
-			<div class='centrage'>
-				<div id="boutons"></div>
-				<div id="map">
-					<embed id="emb" style="left:0;top:0;" type="image/svg+xml" src="svg_althian.php?hori=5&vert=3"></embed>
-				</div>
-			</div>
-			
+
+<h2>Althian</h2>
+
+<div class='centrage'>
+	<div id="boutons"></div>
+	<div id="map">
+		<embed id="emb" style="left:0;top:0;" type="image/svg+xml" src="svg_althian.php?hori=5&vert=3"></embed>
+	</div>
+</div>
+		
+<?php 
+if(isset($_SESSION['persos']) && $_SESSION['persos']['inc'] > 0 && in_array(3, $_SESSION['persos']['carte'])){
+?>	
+<h2>C&eacute;lestia</h2>
+<div class='centrage'>
+	<div id="boutons"></div>
+	<div id="map">
+		<embed id="emb" style="left:0;top:0;" type="image/svg+xml" src="svg_celestia.php?hori=5&vert=3"></embed>
+	</div>
+</div>
+<?php 
+}
+if(isset($_SESSION['persos']) && $_SESSION['persos']['inc'] > 0 && in_array(2, $_SESSION['persos']['carte'])){
+?>
+<h2>Ciferis</h2>
+<div class='centrage'>
+	<div id="boutons"></div>
+	<div id="map">
+		<embed id="emb" style="left:0;top:0;" type="image/svg+xml" src="svg_ciferis.php?hori=5&vert=3"></embed>
+	</div>
+</div>
+<?php 
+}
+?>
 			
 			<script>
 				getElementsByClassName = function(cl) {
