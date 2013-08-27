@@ -958,7 +958,7 @@ function grade_kill($perso_id, $cible_id, $perso_race, $cible_race, $perso_type,
 		if($perso_type == 7 || $cible_type == 7) {
 			$gain = 15;
 		} else {
-			$gain = 100;
+			$gain = 35;
 		}
 
 		// laisse 1% de chance de gain si on tue un G4/G5
