@@ -17,8 +17,12 @@ if(isset($_POST['submit'])){
     if(is_numeric($victime_id))
     	nvTraitre($victime_id);
 }
-
-$resultat = recup_pot_traitre($perso_id, $time_m);
+$pk = 0;
+foreach($_SESSION['persos']['id'] as $k => $v){
+	if($v == $_GET['mat'])
+		$pk = $k;
+}
+$resultat = recup_pot_traitre($_GET['mat'], $_SESSION['persos']['camp'][$pk], $time_m);
 ?>
 <table align='center' id="tab_classement" border="1px;" style="border-collapse: collapse;" width="90%">
     <tr>
@@ -70,7 +74,7 @@ while ($event = mysql_fetch_array($resultat)) {
         }
 
         echo "<tr class='$color winner$n'>";
-        echo "<td align='center'><img src='../images/$url' alt='avatar'/><br/>" . $nom . " [<a href='". SERVER_URL ."/persos/event/?id=$id_victime'>$id_victime</a>]</td>";
+        echo "<td align='center'><img src='../../images/$url' alt='avatar'/><br/>" . $nom . " [<a href='". SERVER_URL ."/persos/event/?id=$id_victime'>$id_victime</a>]</td>";
         echo "<td align='center'>$date_event</td>";
         echo '<td align="center">
                 <form name="traitre" action="index.php?p=',$_GET['p'],'&amp;mat=',$_GET['mat'],'&amp;s=',$_GET['s'],'"

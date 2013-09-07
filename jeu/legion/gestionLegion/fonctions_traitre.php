@@ -11,7 +11,7 @@ namespace jeu\legion;
 
 //use legions\LegionDAO as LegionDAO;
 
-function recup_pot_traitre($tueur_id, $depuis="") {
+function recup_pot_traitre($tueur_id, $camp, $depuis="") {
 
     $sql = LegionDAO::getInstance();
     $query = 'SELECT factions.id AS id
@@ -32,7 +32,7 @@ function recup_pot_traitre($tueur_id, $depuis="") {
 
     if ($depuis == "")
         $depuis = '0000-00-00 00:00:00';
-
+	
    $sql = 'SELECT morgue.mat_victime, morgue.id_perso, morgue.date, morgue.nom_victime
 			FROM morgue
                             JOIN persos p1
@@ -40,15 +40,15 @@ function recup_pot_traitre($tueur_id, $depuis="") {
                             JOIN persos p2
                                 ON p2.id = morgue.mat_victime AND p2.grade_id != -3
                             JOIN races r1
-                                ON r1.id = p1.race_id
+                                ON r1.race_id = p1.race_id
                             JOIN races r2
-                                ON r2.id = p2.race_id
+                                ON r2.race_id = p2.race_id
                         WHERE ((('.$faction_id.') OR p1.grade_id >= 3 AND p1.galon_id >= 2) AND
                             (morgue.date>="'.$depuis.'") AND
-                            r1.camp_id=r2.camp_id)
+                            r1.camp_id=r2.camp_id) AND
+                            r2.camp_id = '.$camp.'
                         GROUP BY morgue.mat_victime';
-   
-    $resultat = mysql_query($sql) or die('<pre>'.$sql .'</pre><br />' .mysql_error());
+    $resultat = mysql_query($sql) or die(mysql_error());
     return $resultat;
 }
 
