@@ -9,7 +9,7 @@ namespace jeu\legion;
  * @version 1.0
  */
 
-use legions\LegionDAO as LegionDAO;
+//use legions\LegionDAO as LegionDAO;
 
 function recup_pot_traitre($tueur_id, $depuis="") {
 
@@ -19,14 +19,16 @@ function recup_pot_traitre($tueur_id, $depuis="") {
 			LEFT JOIN persos ON persos.id = '.$tueur_id.'
 				WHERE factions.race=persos.race_id AND factions.type=4';
     $stmt = $sql->query($query);
-
+	echo '<pre>';
     $faction_id = '';
     while($result = $sql->fetch($stmt,\PDO::FETCH_OBJ)){
         if ($faction_id == '')
-            $faction_id = $result->id;
+            $faction_id = 'p1.faction_id = '.$result->id;
         else
             $faction_id .= ' OR p1.faction_id = ' . $result->id;
     }
+    if($faction_id == '')
+    	$faction_id = '1 = 1';
 
     if ($depuis == "")
         $depuis = '0000-00-00 00:00:00';
@@ -41,12 +43,12 @@ function recup_pot_traitre($tueur_id, $depuis="") {
                                 ON r1.id = p1.race_id
                             JOIN races r2
                                 ON r2.id = p2.race_id
-                        WHERE (((p1.faction_id = '.$faction_id.') OR p1.grade_id >= 3 AND p1.galon_id >= 2) AND
+                        WHERE ((('.$faction_id.') OR p1.grade_id >= 3 AND p1.galon_id >= 2) AND
                             (morgue.date>="'.$depuis.'") AND
                             r1.camp_id=r2.camp_id)
                         GROUP BY morgue.mat_victime';
    
-    $resultat = mysql_query($sql) or die(mysql_error());
+    $resultat = mysql_query($sql) or die('<pre>'.$sql .'</pre><br />' .mysql_error());
     return $resultat;
 }
 
