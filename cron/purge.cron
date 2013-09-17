@@ -1,0 +1,5 @@
+<?php
+
+define('SUPER_CRON', 1);
+
+include '../admin/purge/purge.php';
