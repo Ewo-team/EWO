@@ -359,7 +359,7 @@ switch($type){
 		*/
 		if ($grade == -1)
 			$caracs = array ("pa"=>1, "pv"=>1, "recup_pv"=>1,"mouv"=>1,"pa"=>1,"des"=>1,"force"=>1,"perception"=>1, "magie"=>0, "res_mag"=>0);
-		if ($grade >=0 && $grade < 4)
+		if ($grade >=0 && $grade < 4 || $grade == -3)
 			$caracs = array ("pa"=>2, "pv"=>80, "recup_pv"=>20,"mouv"=>6,"pa"=>2,"des"=>7,"force"=>10,"perception"=>4, "magie"=>0, "res_mag"=>0);
 		if ($grade == 4)
 			$caracs = array ("pv"=>120, "recup_pv"=>20,"mouv"=>6,"pa"=>2.3,"des"=>9,"force"=>15,"perception"=>4, "magie"=>0, "res_mag"=>0);
@@ -369,7 +369,7 @@ switch($type){
 	case 4 :
 		if ($grade == -1)
 			$caracs = array ("pv"=>1, "recup_pv"=>1,"mouv"=>1,"pa"=>1,"des"=>1,"force"=>1,"perception"=>1, "magie"=>0, "res_mag"=>0);
-		if ($grade >=0 && $grade < 4)
+		if ($grade >=0 && $grade < 4 || $grade == -3)
 			$caracs = array ("pv"=>100, "recup_pv"=>10,"mouv"=>6,"pa"=>1.5,"des"=>9,"force"=>10,"perception"=>5, "magie"=>0, "res_mag"=>0);
 		if ($grade == 4)
 			$caracs = array ("pv"=>150, "recup_pv"=>10,"mouv"=>6,"pa"=>1.8,"des"=>11,"force"=>13,"perception"=>5, "magie"=>0, "res_mag"=>0);
@@ -396,7 +396,7 @@ switch($type){
 		*/
 		if ($grade == -1)
 			$caracs = array ("pa"=>1, "pv"=>1, "recup_pv"=>1,"mouv"=>1,"pa"=>1,"des"=>1,"force"=>1,"perception"=>1, "magie"=>0, "res_mag"=>0);
-		if ($grade >=0)
+		if ($grade >=0  && $grade < 4 || $grade == -3)
 			$caracs = array ("pa"=>2, "pv"=>200, "recup_pv"=>5,"mouv"=>6,"pa"=>2,"des"=>9,"force"=>20,"perception"=>5, "magie"=>0, "res_mag"=>0);
 		if ($grade == 4)
 			$caracs = array ("pv"=>350, "recup_pv"=>5,"mouv"=>6,"pa"=>2.1,"des"=>11,"force"=>25,"perception"=>6, "magie"=>0, "res_mag"=>0);
@@ -409,6 +409,9 @@ switch($type){
 		if ($grade >=0)
 			$caracs = array ("pa"=>2, "pv"=>200, "recup_pv"=>5,"mouv"=>6,"pa"=>2,"des"=>9,"force"=>20,"perception"=>5, "magie"=>0, "res_mag"=>0);
 		}
+
+// patch récupération des humains                
+                
 return $caracs;
 }
 

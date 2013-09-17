@@ -62,9 +62,16 @@ if($type='action'){
 			$info .="Guard Damage inflig&eacute;s : ".$_SESSION['GD']['deg']."<br/>";
 
 		unset($_SESSION['GD']);
+
+
 	}else{
   	  //if($type_action=="attaque"){$event_Attaque->addEvent('cible','objet');}
   }
+
+	if(isset($_SESSION['score_pentm'])) {
+		$info .="P&eacute;n&eacute;tration TechnoMagique : ".round($_SESSION['score_pentm'])."%<br/>";
+		unset($_SESSION['score_pentm']);
+	}  
 
 	if(isset($_SESSION['esquive']['nb']) && $reussite){
 		$esquive=0;

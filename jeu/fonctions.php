@@ -24,6 +24,14 @@ function recup_carte_info($plan) {
 }
 //fonction de calcule de distance entre deux objets d'un même plan
 function distance($objet1, $objet2, $plan) {
+
+	$distances = distances($objet1, $objet2, $plan);
+
+	return max($distances['x'], $distances['y']);
+}
+
+//fonction de calcule de distance entre deux objets d'un même plan, et retourne les deux distances
+function distances($objet1, $objet2, $plan) {
 	$plan	= recup_carte_info($plan);
 	$x_min	= $plan['x_min'];
 	$x_max	= $plan['x_max'];
@@ -45,7 +53,7 @@ function distance($objet1, $objet2, $plan) {
 	}
 	else $dist_y = abs($objet1['pos_y']-$objet2['pos_y']);
 
-	return max($dist_x, $dist_y);
+	return array('x' => $dist_x, 'y' => $dist_y);
 }
 
 
@@ -140,6 +148,66 @@ function esquive_sort($perso_xp, $perso_grade, $cible_xp, $cible_grade, $esquive
 	} else return false;
 }
 
+// Calcule la PenTM d'un perso
+function calcule_pentm($perso_grade, $perso_niveau) {
+	return 40 + (5*$perso_grade) + (5*$perso_niveau);
+}
+
+// Calcule le pourcentage de distance entre le perso et la cible
+function calcule_pentm_distance($distance, $perception)
+{
+	$dist_max = sqrt(($perception*$perception)+($perception*$perception));
+
+	$x = $distance['x'];
+	$y = $distance['y'];;
+	$dist_cible = sqrt(($x*$x)+($y*$y));
+
+	return round(($dist_cible / $dist_max) * 10);
+}
+
+function pentm($perso_pentm, $cible_pentm, $perso_xp, $cible_xp, $distance_pourcentage) {
+
+	$perso_rang = calcul_rang($perso_xp);
+	$cible_rang = calcul_rang($cible_xp);
+
+	$perso_rang += ajuste_rang($perso_grade);
+	$cible_rang += ajuste_rang($cible_grade);
+
+	echo "calcule pentm rang perso: $perso_rang ";
+	echo "calcule pentm rang cible: $cible_rang ";
+
+	echo "calcule pentm perso pentm: $perso_pentm ";
+	echo "calcule pentm cible pentm: $cible_pentm ";
+
+	$pentm = (80 + $perso_pentm - $cible_pentm) / 2; // Différence de valeur basique
+
+	echo "calcule pentm 1: $pentm ";
+
+
+	$pentm += \conf\Helpers::minmax((($perso_rang - $cible_rang) * 2), -40, 40);	// différence de rang
+
+	echo "calcule pentm 2: $pentm ";
+	echo "calcule pentm distance: $distance_pourcentage ";
+
+	// distance entre les cases
+	if($distance_pourcentage < 4) {
+		// cible proche
+		$pentm += 20;
+	} else if($distance_pourcentage < 6) {
+		// cible moyenne
+		// pas de changement de pentm
+	} else {
+		// cible éloignée
+		$pentm -= 20;
+	}
+
+	echo "calcule pentm 3: $pentm ";
+
+	// on retourne la valeur de pentm, avec des bornes (minimum 5%, maximum 95%)
+	return \conf\Helpers::minmax($pentm, 5, 95);
+	
+
+}
 
 // Fonction de calcul et mise à jour d'xp
 // calcul_xp(cibleur, ciblé, type, réussite ou non)
@@ -1368,7 +1436,7 @@ function respawn($id, $type='', $cible_spawn='') {
 		//Les humain peuvent choisir de tenter de respawn
 		//dans une zone précise sur terre, dans ce cas
 		//leur probabilité de le faire augmente.
-		/*case 1 :
+		case 1 :
 			$ok=false;
 			while (!$ok) {
 				$sql = '
@@ -1433,7 +1501,7 @@ function respawn($id, $type='', $cible_spawn='') {
 			//n'importe où, mais à plus de 15 case
 			//d'un autre de leurs persos.
 			break;
-*/
+
 		default :
 			$sql="SELECT damier_spawn.id AS id FROM damier_spawn
 				INNER JOIN camps ON camps.carte_id = damier_spawn.carte_id
@@ -2808,15 +2876,19 @@ function activ_tour($id, $force_activ=false) {
 			$alter_pv = $alter_pv - 10;
 
 		$alter_recup_pv = $caracs_alter_affil['alter_recup_pv'] ;
-		if ($sup_id==0) {
+		if ($sup_id==0 && ($camp==3 || $camp==4)) {
 			if ($alter_recup_pv < 0) {
-				if ($alter_recup_pv == -5) {
-					$alter_recup_pv = 0;
-				} else	$alter_recup_pv = $alter_recup_pv + 10;
+                            if ($alter_recup_pv == -5) {
+                                    $alter_recup_pv = 0;
+                            } else {	
+                                $alter_recup_pv = $alter_recup_pv + 10;                             
+                            }
 			} elseif ($alter_recup_pv > 0) {
-				if ($alter_recup_pv == 5) {
-					$alter_recup_pv = 0;
-				} else	$alter_recup_pv = $alter_recup_pv - 10;
+                            if ($alter_recup_pv == 5) {
+                                    $alter_recup_pv = 0;
+                            } else	{
+                                $alter_recup_pv = $alter_recup_pv - 10;
+                            }
 			}
 		} else {
 			if ($alter_recup_pv < 5) {
@@ -2824,17 +2896,23 @@ function activ_tour($id, $force_activ=false) {
 					$alter_recup_pv = -5;
 				} elseif ($alter_recup_pv == 0) {
 					$alter_recup_pv = 5;
-				} else $alter_recup_pv = $alter_recup_pv + 10;
-			} elseif ($alter_recup_pv > 5)
+				} else {
+                                    $alter_recup_pv = $alter_recup_pv + 10;
+                                }
+			} elseif ($alter_recup_pv > 5) {
 				if ($alter_recup_pv == 10) {
 					$alter_recup_pv = 5;
-				} else	$alter_recup_pv = $alter_recup_pv - 10;
+				} else	{
+                                    $alter_recup_pv = $alter_recup_pv - 10;
+                                }
+                        }
 		}
 		$alter_niv_mag = $caracs_alter_affil['alter_niv_mag'] ;
-		if ($alter_niv_mag < 0)
+		if ($alter_niv_mag < 0) {
 			$alter_niv_mag = $alter_niv_mag + 1;
-		elseif ($alter_niv_mag > 0)
+                } elseif ($alter_niv_mag > 0) {
 			$alter_niv_mag = $alter_niv_mag - 1;
+                }
 
 		$alter_mouv = $caracs_alter_affil['alter_mouv'] ;
 		if ($alter_mouv < 0)
@@ -3107,7 +3185,7 @@ function gainxp($nbpa,$action,$param = null) {
 		$calculxp = $gain[$action]['cap_max'];
 	}
 
-	if(isset($gain[$action]['modulation_pa'])) {
+	if(isset($gain[$action]['modulation_pa']) && $gain[$action]['modulation_pa'] == true) {
 		
 		$calculxp = ($calculxp / $nbpa) * 2;
 		

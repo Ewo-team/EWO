@@ -48,27 +48,32 @@ $_SESSION['utilisateur']['template_mage']=true;
 <meta name="msapplication-TileColor" content="#FFFFCC">
 <meta name="msapplication-navbutton-color" content="#FFFFCC">
 
-<meta name="msapplication-TileImage" content="<?php echo SERVER_URL; ?>/images/site/apple-touch-icon-114x114-precomposed.png">
+<meta name="msapplication-TileImage" content="<?php echo SERVER_URL; ?>/images/site/application144.png">
 
 <!-- OpenGraph (fb) -->
-<meta property="og:image" content="<?php echo SERVER_URL; ?>/images/site/apple-touch-icon-114x114-precomposed.png">
+<meta property="og:fb:admins" content=" 133422406821604">
+<meta property="og:title" content="Eternal War One">
+<meta property="og:type" content="game">
+<meta property="og:url" content="<?php echo SERVER_URL; ?>">
+<meta property="og:image" content="<?php echo SERVER_URL; ?>/images/site/application114.png">
+<meta property="og:site_name" content="Eternal War One">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@EwoLeMonde">
-<meta name="twitter:image" content="<?php echo SERVER_URL; ?>/images/site/apple-touch-icon-72x72-precomposed.png">
+<meta name="twitter:image" content="<?php echo SERVER_URL; ?>/images/site/application72.png">
 
 <!-- Apple Touch Icon -->
 <!-- For third-generation iPad with high-resolution Retina display: -->
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://www.ewo.fr/img/apple-touch-icon-144x144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo SERVER_URL; ?>/images/site/application144.png">
 <!-- For iPhone with high-resolution Retina display: -->
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://www.ewo.fr/img/apple-touch-icon-114x114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo SERVER_URL; ?>/images/site/application114.png">
 <!-- For first- and second-generation iPad: -->
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://www.ewo.fr/img/apple-touch-icon-72x72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo SERVER_URL; ?>/images/site/application72.png">
 <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
-<link rel="apple-touch-icon-precomposed" sizes="57x57" href="http://www.ewo.fr/img/apple-touch-icon-57x57-precomposed.png">		
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="<?php echo SERVER_URL; ?>/images/site/application57.png">		
 <!-- Fallback -->
-<link rel="apple-touch-icon-precomposed" href="http://www.ewo.fr/img/apple-touch-icon-precomposed.png">		
+<link rel="apple-touch-icon-precomposed" href="<?php echo SERVER_URL; ?>/images/site/application.png">		
 
 
 <meta name="google-site-verification" content="rZADXCyuEh8aaWXfEkxQxz4uSd_X0k7Ksfw0Td7gimQ" />

@@ -69,6 +69,10 @@ class Helpers {
 	  }
 		return $password;
 	}
+
+	public static function minmax($value, $min, $max) {
+		return max($min, min(intval($value), $max));
+	}
 }
 
 ?>

@@ -83,7 +83,7 @@ $coutDes     = (1 +0.1*$donnees['niv_des'])*$coutDesBase;
 
 $techno_ok = true;
 $cercle_ok = false;
-
+$t4_already_mago = false;
 if($race==1 || $race == 9) {
 	if($race == 1){
 		$reponse = mysql_query('SELECT COUNT(c.cercle) as nb FROM caracs c
@@ -94,12 +94,14 @@ if($race==1 || $race == 9) {
 				(c.cercle IS NOT NULL AND c.cercle != 0);')or die(mysql_error());
 		$rep_cercle = mysql_fetch_array($reponse);
 		$techno_ok &= $rep_cercle['nb'] == 0;
+		$t4_already_mago = !$techno_ok;
 	}
 	$techno_ok &= $donnees['px'] > 99;
 	$cercle_ok = false;
 }
 
 $select_cercle_ok = true;
+$rep_cercle = false;
 if($affilie && ($race == 7 || $race == 8)) {
 		$reponse = mysql_query('SELECT COUNT(c.cercle) as nb FROM caracs c
 				INNER JOIN persos p ON p.id=c.perso_id
@@ -109,7 +111,10 @@ if($affilie && ($race == 7 || $race == 8)) {
 				(c.cercle IS NOT NULL AND c.cercle != 0);')or die(mysql_error());
 		$rep_cercle = mysql_fetch_array($reponse);
 		$select_cercle_ok = $rep_cercle['nb'] == 0;
+		$t4_already_mago = !$select_cercle_ok;
 }
+else if($affilie && ($race == 3 || $race == 4))
+	$rep_cercle = true;
 
 if(isset($_POST['choix_cercle']) && isset($_POST['cercle']) && is_numeric($_POST['cercle'])) {
 	if($race==1 || $race == 9){
@@ -123,7 +128,6 @@ if(isset($_POST['choix_cercle']) && isset($_POST['cercle']) && is_numeric($_POST
 		$donnees['cercle'] = $_POST['cercle'];
 	}
 }
-
 
 ?>
 <div align='center'>
@@ -399,10 +403,16 @@ switch($donnees['cercle']){
 		<option value="10">Technologie : Armement</option>'.$select_end;
 
 					}
-					else
+					else if(($race == 2 || $race == 11) && $donnees['px'])
 						echo $select_first.'
 		<option value="6">Cercle du Désespoir</option>'.$select_end;
-
+			if($t4_already_mago){
+				echo '<tr>
+		<td class="jeu_upgrades" colspan="6" style="text-align:center;padding : 5px;">
+			<strong>Un de vos autres T4 est d&eacute;j&agrave; un technomage</strong>
+		</td>
+		</tr>';
+				}
 		}
 		echo '
 		</td>

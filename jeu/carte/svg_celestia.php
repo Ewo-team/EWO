@@ -3,7 +3,7 @@
 namespace jeu\carte;
 
 /**
- * Carte de la terre
+ * Carte de cÃ©lestia
  *
  * @version 1.0
  * @package carte
@@ -16,7 +16,7 @@ require_once __DIR__ . "/../../conf/master.php";
 
 include(SERVER_ROOT . "/persos/fonctions.php");
 include(SERVER_ROOT . "/jeu/fonctions.php");
-// Paramètres de connexion à la base de données
+// Paramï¿½tres de connexion ï¿½ la base de donnï¿½es
 $ewo_bdd = bdd_connect('ewo');
 
 $ratio_hori = 5;
@@ -54,7 +54,7 @@ if($encache) {
 	$carte = Carte::deserializer($data, $conn);
 
 } else {
-	// La carte n'est pas en cache, on la recréer et la place en cache
+	// La carte n'est pas en cache, on la recrï¿½er et la place en cache
 	$carte->Persos();	
 	$carte->Boucliers();	
 	$carte->Portes();
@@ -66,7 +66,7 @@ if($encache) {
 }
 
 
-// Les viseurs sont ajouté après la mise en cache
+// Les viseurs sont ajoutï¿½ aprï¿½s la mise en cache
 $carte->Viseurs($_SESSION['persos']);
 
 // Affichage de la carte
@@ -87,4 +87,3 @@ echo $carte->AxeVerticale(25);
 echo $carte->Footer();
 
 mysql_close($ewo_bdd);
-?>

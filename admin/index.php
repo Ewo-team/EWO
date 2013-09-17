@@ -41,7 +41,7 @@ if(ControleAcces('admin',0)) {
 <?php if($admin) { ?>    <li><a href="<?php echo SERVER_URL.'/admin/utilisateurs/'; ?>">Editer utilisateur</a></li>
     <li><a href="<?php echo SERVER_URL.'/admin/persos/'; ?>">Editer personnage</a></li>
     <!--<li><a href="<?php echo SERVER_URL.'/editeur/'; ?>">Editeur de carte (ancien)</a></li>
-    <li><a href="<?php echo SERVER_URL.'/carte/generateur.php'; ?>">Generateur de carte</a></li>--><?php } ?>
+    <li><a href="<?php echo SERVER_URL.'/admin/cartographe/'; ?>">Generateur de carte</a></li>--><?php } ?>
 </ul>
 
 <h3>Informations</h3>
@@ -50,6 +50,7 @@ if(ControleAcces('admin',0)) {
     <li><a href="<?php echo SERVER_URL.'/jeu/statistique/stats_grades.php'; ?>">Répartition des grades/galons</a></li>
 <?php if($admin) { ?>    <li><a href="<?php echo SERVER_URL.'/admin/persos/ewolution.php'; ?>">Simulateur d'ewolution</a></li>
     <li><a href="<?php echo SERVER_URL.'/admin/newsletter/'; ?>">Newsletter</a></li>
+    <li><a href="<?php echo SERVER_URL.'/admin/statistiques/browser.php'; ?>">Statistiques des navigateurs</a></li>
     <li><a href="<?php echo SERVER_URL.'/admin/logs/liste_logs.php'; ?>">Logs des actions</a></li><?php } ?>
 </ul>
 <?php
