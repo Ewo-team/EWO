@@ -20,7 +20,7 @@ namespace jeu\legion;
         const LISTE_ENNEMIS         = 7;
         const PASSER_TRAITRE        = 8;
         const GERER_INFOS           = 9;
-        const LISTE_NOOBS           	= 10;
+        const LISTE_NOOBS           = 10;
 
         public static $droits = array('gererChef', 'gererBrasDroit', 'gererMembre', 'gererGrade',
                 'gererInvitation', 'gererBal', 'utiliserGPS', 'voirInfos', 'listNoobs');
@@ -52,13 +52,11 @@ namespace jeu\legion;
                 if($ac == LegionDroits::LISTE_NOOBS && $this->legion->getType() != 5)
                 	return false;
                 //Justice
-                if($ac == LegionDroits::PASSER_TRAITRE &&
-                        !(
-                            $this->legion->getType() == 4 &&
-                            $_SESSION['persos']['grade'][$this->perso_id] >= 3 &&
-                            $_SESSION['persos']['galon'][$this->perso_id] >= 2
-                        )
-                    )
+                if($ac == LegionDroits::PASSER_TRAITRE &&   		
+                	$this->legion->getType() != 4 &&
+                	$_SESSION['persos']['grade'][$this->perso_id] < 3 &&
+                 	$_SESSION['persos']['galon'][$this->perso_id] <= 2
+           		)
                     return false;
                 if(array_key_exists($ac,self::$actions)){
                     foreach(self::$actions[$ac] as $r){
@@ -81,7 +79,6 @@ namespace jeu\legion;
                 $factory 	= new ManagerFactory();
                 $legions	= $factory->get(LegionConfig::$bddId[$_SESSION['persos']['camp'][$id]]);
                 $legion 	= $legions->getLegions($_SESSION['persos']['faction']['id'][$id]);
-
                 $droitManager 	= new DroitManager($_SESSION['persos']['faction']['droits'][$id]);
 
                 return new LegionDroits($droitManager, $legion, $id);
@@ -122,11 +119,11 @@ namespace jeu\legion;
                 ),
             LegionDroits :: LISTE_ENNEMIS
                 => array(
-                    LegionDroits :: $droits[6]
+                    LegionDroits :: $droits[7]
                 ),
             LegionDroits :: PASSER_TRAITRE
                 => array(
-                    LegionDroits :: $droits[6]
+                    LegionDroits :: $droits[7]
                 ),
             LegionDroits :: GERER_INFOS
                 => array(
@@ -134,7 +131,7 @@ namespace jeu\legion;
                 ),
     		LegionDroits :: LISTE_NOOBS   
 	    		=> array(
-	    				LegionDroits :: $droits[6]
+	    				LegionDroits :: $droits[7]
 	    		)
     );
 

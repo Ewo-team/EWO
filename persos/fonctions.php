@@ -870,12 +870,8 @@ function change_race_grade_galon($id_perso, $new_race = NULL, $new_grade = NULL,
 	}	
 	
 	renew_caracs($id_perso, $new_race, $new_grade);
-
-	mysql_query("UPDATE persos SET grade_id = $new_grade
-					WHERE id = $id_perso") or die (mysql_error());
-	mysql_query("UPDATE persos SET race_id = $new_race
-					WHERE id = $id_perso") or die (mysql_error());
-	mysql_query("UPDATE persos SET galon_id = $new_galon
+	
+	mysql_query("UPDATE persos SET grade_id = $new_grade, race_id = $new_race, galon_id = $new_galon
 					WHERE id = $id_perso") or die (mysql_error());					
 					
 	include_once (SERVER_ROOT . '/lib/forum/ewo_forum.php');
@@ -986,6 +982,7 @@ function grade_kill($perso_id, $cible_id, $perso_race, $cible_race, $perso_type,
 
 
 		if($gain>=lance_ndp(1,100)){
+			echo 'ok';
 			change_race_grade($perso_id, $perso_race, $perso_grade + 1);
 			change_galon($perso_id,max(1, $perso_galon-2));
 
