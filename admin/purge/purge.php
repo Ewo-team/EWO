@@ -32,7 +32,6 @@ $rq = '
 		`date` <= NOW() - INTERVAL '.$conf[Wordz::MESAGEZ_SENDD].' DAY;';
 $nb = $sql->exec($rq);
 echo '<li><strong style="color:green;">MESSAGEZ SENDD OK (',$nb,')</strong</li>';
-
 /**
  * DELETE RECEIVD MESAGEZ
  */
@@ -41,7 +40,7 @@ $rq = '
 	FROM `bals`
 	WHERE corps_id IN (
 		SELECT id
-		FROM `bals_send`
+		FROM `bals_corps`
 		WHERE
 			`date` <= NOW() - INTERVAL '.$conf[Wordz::MESAGEZ_RECEIVD].' DAY
 	)
@@ -68,7 +67,7 @@ $rq = '
 	DELETE
 	FROM `evenements`
 	WHERE
-		(`type_ev` = "attaque" OR type_ev` = "sort") AND
+		(`type_ev` = "attaque" OR `type_ev` = "sort") AND
 		`result` != 5 AND
 		`date_ev` <= NOW() - INTERVAL '.$conf[Wordz::ACSHUNS].' DAY;';
 $nb = $sql->exec($rq);
