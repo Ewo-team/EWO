@@ -10,12 +10,14 @@
  * @version 1.0
  */
 
-require_once __DIR__ . '/../../conf/master.php';
 require_once __DIR__ .'/config.php.inc';
 
-if(!ControleAcces('admin;at',0)){
-	 header('Location: index.php');
-	die();
+if(!isset(SUPER_CRON)){
+	require_once __DIR__ . '/../../conf/master.php';
+	if(!ControleAcces('admin;at',0)){
+		 header('Location: index.php');
+		die();
+	}
 }
 
 echo '<ul>';

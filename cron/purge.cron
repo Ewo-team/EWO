@@ -2,4 +2,4 @@
 
 define('SUPER_CRON', 1);
 
-include '../admin/purge/purge.php';
+include __DIR__ . '/../admin/purge/purge.php';
