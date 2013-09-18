@@ -1,5 +1,7 @@
 <?php
 
 define('SUPER_CRON', 1);
+define("SERVER_ROOT", substr(__DIR__, 0, -5));
 
+include __DIR__ . '/../conf/autoloader.php';
 include __DIR__ . '/../admin/purge/purge.php';
