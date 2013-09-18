@@ -1,5 +1,7 @@
 <?php
 
+use jeu\affiliation\Superieurs;
+
 /**
  * DIS MODULE PURGEZ DEPRECATD DATA FRUM TEH DATA BASE.
  * ALL U HAS 2 DO 2 CHANGE SOMETHIN IZ 2 CONFIGURE TEH SCRIPT IN DA CONFIG.FP.INC FILE.
@@ -12,7 +14,7 @@
 
 require_once __DIR__ .'/config.php.inc';
 
-if(!isset(SUPER_CRON)){
+if(!defined('SUPER_CRON')){
 	require_once __DIR__ . '/../../conf/master.php';
 	if(!ControleAcces('admin;at',0)){
 		 header('Location: index.php');
