@@ -33,8 +33,9 @@ class XpCalculator{
 		else
 			$amortissementEsquiveDef = Config::AMMORTISSEMENT_ESQUIVE;
 		if($atq->getCamps() == $action->planCamps){
-			if(!$atq->getLegionType() == Actor::LEGION_DEFENSE)
+			if(!$atq->getLegionType() == Actor::LEGION_DEFENSE){
 				$amortissementPlan = Config::AMMORTISSEMENT_PLAN;
+			}
 		}
 		else if($atq->getCamps() == $def->getCamps() && !$atq->getLegionType() == Actor::LEGION_JUSTICE)
 			$amortissementCopain = Config::AMMORTISSEMENT_COPAIN;

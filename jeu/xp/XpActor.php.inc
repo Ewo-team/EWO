@@ -44,10 +44,7 @@ class XpActor {
 	protected function setPa($pa){
 		//TODO : handle grades and galons
 		$this->_pa = $pa;
-		if($this->_type == 4)
-			$this->_rationPa = 1.5/$this->_pa;
-		else
-			$this->_rationPa = 2/$this->_pa;
+		$this->_rationPa = 2/$this->_pa;
 	}
 	
 	public function getCamps(){
