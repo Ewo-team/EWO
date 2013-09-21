@@ -64,6 +64,17 @@ class XpTest extends PHPUnit_Framework_TestCase{
 		$this->assertContains($res->xpDef, array(-4,-5));
 	}
 	
+	/**
+	 * @dataProvider provider
+	 * @covers jeu\xp\XpCalculator::getXp
+	 */
+	public function testCa6($actors, $actions){
+		$this->assertTrue(true);
+		$res = XpCalculator::getXp($actors[1], $actors[6], $actions[3]);
+		$this->assertContains($res->xpAtq, array(5,6));
+		$this->assertContains($res->xpDef, array(1,2));
+	}
+	
 	public function provider(){
 		return array(
 			array(
