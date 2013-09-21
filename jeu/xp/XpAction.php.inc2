@@ -11,12 +11,12 @@ class XpAction {
 	public $cout;
 	public $mort; /* bool */
 	public $esquive; /*bool*/
-	public $plan;
+	public $planCamps;
 	
-	public function __construct($cout, $mort, $esquive, $plan){
-		$this->cout 	= $cout;
-		$this->mort		= $mort;
-		$this->esquive	= $esquive;
-		$this->plan		= $plan;
+	public function __construct($cout, $mort, $esquive, $planCamps){
+		$this->cout 		= $cout;
+		$this->mort			= $mort;
+		$this->esquive		= $esquive;
+		$this->planCamps	= $planCamps;
 	}
 }
