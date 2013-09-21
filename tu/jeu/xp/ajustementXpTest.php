@@ -38,18 +38,36 @@ class XpAjustementTest extends PHPUnit_Framework_TestCase{
 	/**
 	 * @covers jeu\xp\XpCalculator::ajustXp
 	 */
-	public function testDecimalNegativ(){
+	public function testDecimalNegativ_2_8(){
 		$v = -2.8;
 		$rm = 0;
 		$rp = 0;
 		$t = 1000;
 		for($i = 0; $i < $t;++$i){
 			$c = XpCalculator::ajustXp($v);
-			if($c == floor($v))
+			if($c == ceil($v))
 				++$rm;
 			else
 				++$rp;
 		}
 		$this->assertEquals(8,round(10*$rp/$t));
+	}
+	
+	/**
+	 * @covers jeu\xp\XpCalculator::ajustXp
+	 */
+	public function testDecimalNegativ_4_05(){
+		$v = -4.05;
+		$rm = 0;
+		$rp = 0;
+		$t = 1000;
+		for($i = 0; $i < $t;++$i){
+			$c = XpCalculator::ajustXp($v);
+			if($c == ceil($v))
+				++$rm;
+			else
+				++$rp;
+		}
+		$this->assertEquals(1,round(10*$rp/$t));
 	}
 }

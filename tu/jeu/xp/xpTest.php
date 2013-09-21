@@ -28,7 +28,7 @@ class XpTest extends PHPUnit_Framework_TestCase{
 		$this->assertTrue(true);
 		$res = XpCalculator::getXp($actors[1], $actors[6], $actions[0]);
 		$this->assertContains($res->xpAtq, array(Config::XP_BASE_LANCEUR, Config::XP_BASE_LANCEUR+1));
-		$this->assertEquals($res->xpDef, 1);
+		$this->assertContains($res->xpDef, array(1,2));
 	}
 	
 	/**
@@ -40,6 +40,17 @@ class XpTest extends PHPUnit_Framework_TestCase{
 		$res = XpCalculator::getXp($actors[1], $actors[6], $actions[1]);
  		$this->assertContains($res->xpAtq, array(2,3));
 		$this->assertEquals($res->xpDef, Config::XP_BASE_RECEVEUR);
+	}
+	
+	/**
+	 * @dataProvider provider
+	 * @covers jeu\xp\XpCalculator::getXp
+	 */
+	public function testCas4($actors, $actions){
+		$this->assertTrue(true);
+		$res = XpCalculator::getXp($actors[1], $actors[6], $actions[2]);
+		$this->assertContains($res->xpAtq, array(10,11));
+		$this->assertContains($res->xpDef, array(-4,-5));
 	}
 	
 	public function provider(){
@@ -59,7 +70,8 @@ class XpTest extends PHPUnit_Framework_TestCase{
 				),
 				'actions' => array(
 					new XpAction(1, false, false, 0),
-					new XpAction(1, false, true, 0)
+					new XpAction(1, false, true, 0),
+					new XpAction(1, true, false, 0)
 				)
 			)
 		);

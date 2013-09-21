@@ -44,6 +44,7 @@ class XpCalculator{
 		$xpAtq = max(1, (Config::XP_BASE_LANCEUR - $ecartRang)*$facteurMortAtq*$amortissementEsquiveAtq*
 				$amortissementPlan * $amortissementCopain* $atq->getRatioPA());
 		$xpDef = max(1, (Config::XP_BASE_RECEVEUR + $ecartRang) * $amortissementEsquiveDef) + ($ecartRang - 3.5)*$facteurMortDef;
+		
 		return new XpAtqDef(XpCalculator::ajustXp($xpAtq),
 				XpCalculator::ajustXp($xpDef)
 		);	
@@ -55,18 +56,23 @@ class XpCalculator{
 	 * @return number
 	 */
 	public static function ajustXp($xp){
+		$a = $xp == -4.05;
 		$xp = round($xp, 1);
-
 		if($xp && floor($xp) != $xp){
-			if($xp > 0)
+			if($xp > 0){
  				$v = 10*($xp - floor($xp));
-			else
+				$xp = floor($xp);
+			}
+			else{
 				$v = -10*($xp - ceil($xp));
-
-			$xp = floor($xp);
+				$xp = ceil($xp);
+			}
 			$r = mt_rand(0, 9);
 			if($r <= $v){
+				if($xp > 0)
 					$xp +=  1;
+				else
+					$xp -= 1;
 			}
 		}
 		return $xp;
