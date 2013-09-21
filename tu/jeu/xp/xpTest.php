@@ -12,6 +12,7 @@ class XpTest extends PHPUnit_Framework_TestCase{
 	/**
 	 * @dataProvider provider
 	 * @covers jeu\xp\XpCalculator::getXp
+	 * @group JEU\
 	 */
 	public function testCas1($actors, $actions){
 		$res = XpCalculator::getXp($actors[1], $actors[6], $actions[0]);
@@ -22,6 +23,7 @@ class XpTest extends PHPUnit_Framework_TestCase{
 	/**
 	 * @dataProvider provider
 	 * @covers jeu\xp\XpCalculator::getXp
+	 * @group JEU\
 	 */
 	public function testCas2($actors, $actions){
 		$res = XpCalculator::getXp($actors[1], $actors[6], $actions[0]);
@@ -32,6 +34,7 @@ class XpTest extends PHPUnit_Framework_TestCase{
 	/**
 	 * @dataProvider provider
 	 * @covers jeu\xp\XpCalculator::getXp
+	 * @group JEU\
 	 */
 	public function testCas3($actors, $actions){
 		$res = XpCalculator::getXp($actors[1], $actors[6], $actions[1]);
@@ -42,6 +45,7 @@ class XpTest extends PHPUnit_Framework_TestCase{
 	/**
 	 * @dataProvider provider
 	 * @covers jeu\xp\XpCalculator::getXp
+	 * @group JEU\
 	 */
 	public function testCas4($actors, $actions){
 		$res = XpCalculator::getXp($actors[1], $actors[6], $actions[2]);
@@ -52,6 +56,7 @@ class XpTest extends PHPUnit_Framework_TestCase{
 	/**
 	 * @dataProvider provider
 	 * @covers jeu\xp\XpCalculator::getXp
+	 * @group JEU\
 	 */
 	public function testCas5($actors, $actions){
 		$res = XpCalculator::getXp($actors[1], $actors[6], $actions[2]);
@@ -62,6 +67,7 @@ class XpTest extends PHPUnit_Framework_TestCase{
 	/**
 	 * @dataProvider provider
 	 * @covers jeu\xp\XpCalculator::getXp
+	 * @group JEU\
 	 */
 	public function testCas6($actors, $actions){
 		$res = XpCalculator::getXp($actors[1], $actors[6], $actions[3]);
@@ -72,6 +78,7 @@ class XpTest extends PHPUnit_Framework_TestCase{
 	/**
 	 * @dataProvider provider
 	 * @covers jeu\xp\XpCalculator::getXp
+	 * @group JEU\XP
 	 */
 	public function testCas7($actors, $actions){
 		$res = XpCalculator::getXp($actors[4], $actors[6], $actions[3]);

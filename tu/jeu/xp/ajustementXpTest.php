@@ -10,6 +10,7 @@ class XpAjustementTest extends PHPUnit_Framework_TestCase{
 	
 	/**
 	 * @covers jeu\xp\XpCalculator::ajustXp
+	 * @group JEU\
 	 */
 	public function testBase(){
 		for($i = 0; $i < 500;++$i){
@@ -20,6 +21,7 @@ class XpAjustementTest extends PHPUnit_Framework_TestCase{
 	
 	/**
 	 * @covers jeu\xp\XpCalculator::ajustXp
+	 * @group JEU\
 	 */
 	public function testDecimalPositiv(){
 		$v = 2.8;
@@ -37,6 +39,7 @@ class XpAjustementTest extends PHPUnit_Framework_TestCase{
 
 	/**
 	 * @covers jeu\xp\XpCalculator::ajustXp
+	 * @group JEU\
 	 */
 	public function testDecimalNegativ_2_8(){
 		$v = -2.8;
@@ -55,6 +58,7 @@ class XpAjustementTest extends PHPUnit_Framework_TestCase{
 	
 	/**
 	 * @covers jeu\xp\XpCalculator::ajustXp
+	 * @group JEU\
 	 */
 	public function testDecimalNegativ_4_05(){
 		$v = -4.05;
