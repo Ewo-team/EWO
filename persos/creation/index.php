@@ -33,15 +33,15 @@ $tableau = $dao->fetchAll_assoc();
         $table[4] = array();      
 
         for ($i = 0; $i < count($tableau); $i++) {
-            $kcamp = $tableau[$i]['Camps'];
-            $table[$kcamp][0][] = $tableau[$i]['Titre'];
-            $key = $tableau[$i]['Titre'] . ', ' . $tableau[$i]['Sub'];
-            $value = $tableau[$i]['Id'];
+            $kcamp = $tableau[$i]['camps'];
+            $table[$kcamp][0][] = $tableau[$i]['titre'];
+            $key = $tableau[$i]['titre'] . ', ' . $tableau[$i]['sub'];
+            $value = $tableau[$i]['id'];
             
             $liste[$kcamp][$key] = $value;
             
-            $table[$kcamp][1][] = $tableau[$i]['Sub'];
-            $table[$kcamp][2][] = $tableau[$i]['Description'];
+            $table[$kcamp][1][] = $tableau[$i]['sub'];
+            $table[$kcamp][2][] = $tableau[$i]['description'];
         }
 
 $js->AddScript('creation');

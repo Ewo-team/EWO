@@ -15,9 +15,9 @@ if(isset($_SESSION['cartographe']['raw'])) {
 
         foreach($css as $couleur => $array) {
             $lignecss = '.damier_'.$array['nom'].' {
-                background-image: url(../../../images/decors/motifs/'.$array['img'].')';
+                background-image: url(../../..'.WEB_SUBFOLDER.'/images/decors/motifs/'.$array['img'].')';
                 if(isset($array['back'])) {
-                    $lignecss .= PHP_EOL . ', url(../../../images/decors/motifs/'.$array['back'].')';
+                    $lignecss .= PHP_EOL . ', url(../../..'.WEB_SUBFOLDER.'/images/decors/motifs/'.$array['back'].')';
                 }
                 $lignecss .= ';
                 width: 45px;

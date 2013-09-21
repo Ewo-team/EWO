@@ -121,7 +121,7 @@ use \PDO as PDO,
 				$this->_statement = $this->_conn->query($query);
 				return $this->_statement;
 			} catch (Exception $e) {
-				trigger_error("Une erreur à été générée dans la base de données", E_USER_ERROR);
+				trigger_error("Une erreur à été générée dans la base de données : ".$e->getMessage(), E_USER_ERROR);
 				// Inscription de l'erreur dans un fichier log ? $e->getMessage();
 			}
 		}
@@ -150,7 +150,7 @@ use \PDO as PDO,
 			try {
 				return $this->_conn->exec($query);
 			} catch (Exception $e) {
-				trigger_error("Une erreur à été générée dans la base de données", E_USER_ERROR);
+				trigger_error("Une erreur à été générée dans la base de données: ".$e->getMessage(), E_USER_ERROR);
 				// Inscription de l'erreur dans un fichier log ? $e->getMessage();
 			}				
 		}		

@@ -129,10 +129,10 @@ include_once(SERVER_ROOT."/persos/creation/controle_persos.php");
 
 	
 	
-    $include_forum = true;
-    include (SERVER_ROOT . '/lib/forum/ewo_forum.php');
+//     $include_forum = true;
+//     include (SERVER_ROOT . '/lib/forum/ewo_forum.php');
     
-    $forum = new EwoForum($utilisateur_id);
+//     $forum = new EwoForum($utilisateur_id);
     
     $perso1 = new persos\creation\CreationPerso();
 
@@ -147,60 +147,60 @@ include_once(SERVER_ROOT."/persos/creation/controle_persos.php");
 
     $perso1->Save();
 
-    $forum->createPerso($perso1->Nom, $_SESSION['utilisateur']['mail'], $_SESSION['utilisateur']['passwd']);
+//     $forum->createPerso($perso1->Nom, $_SESSION['utilisateur']['mail'], $_SESSION['utilisateur']['passwd']);
 		
-    $forum->setRaceGrade($perso1->Nom, $perso1->Camp, 0, 1);
+//     $forum->setRaceGrade($perso1->Nom, $perso1->Camp, 0, 1);
 	
-	$forum->setMatricule($perso2->Nom, $perso1->Mat);   
+// 	$forum->setMatricule($perso2->Nom, $perso1->Mat);   
 
-    if($gameplay == 'T4') {
-        $perso2 = new persos\creation\CreationPerso();
-        $perso3 = new persos\creation\CreationPerso();
-        $perso4 = new persos\creation\CreationPerso();
+//     if($gameplay == 'T4') {
+//         $perso2 = new persos\creation\CreationPerso();
+//         $perso3 = new persos\creation\CreationPerso();
+//         $perso4 = new persos\creation\CreationPerso();
 
-        $perso2->Nom = $_POST['nom2'];
-        $perso2->Sexe = $_POST['sexe2'];
+//         $perso2->Nom = $_POST['nom2'];
+//         $perso2->Sexe = $_POST['sexe2'];
 
-        $perso3->Nom = $_POST['nom3'];
-        $perso3->Sexe = $_POST['sexe3'];
+//         $perso3->Nom = $_POST['nom3'];
+//         $perso3->Sexe = $_POST['sexe3'];
 
-        $perso4->Nom = $_POST['nom4'];
-        $perso4->Sexe = $_POST['sexe4'];    
+//         $perso4->Nom = $_POST['nom4'];
+//         $perso4->Sexe = $_POST['sexe4'];    
 
-        $perso2->Race = $race;
-        $perso2->UtilisateurId = $utilisateur_id;
-        $perso2->Gameplay = $gameplay;
+//         $perso2->Race = $race;
+//         $perso2->UtilisateurId = $utilisateur_id;
+//         $perso2->Gameplay = $gameplay;
 
-        $perso3->Race = $race;
-        $perso3->UtilisateurId = $utilisateur_id;
-        $perso3->Gameplay = $gameplay;
+//         $perso3->Race = $race;
+//         $perso3->UtilisateurId = $utilisateur_id;
+//         $perso3->Gameplay = $gameplay;
 
-        $perso4->Race = $race;
-        $perso4->UtilisateurId = $utilisateur_id;
-        $perso4->Gameplay = $gameplay;    
+//         $perso4->Race = $race;
+//         $perso4->UtilisateurId = $utilisateur_id;
+//         $perso4->Gameplay = $gameplay;    
 		
-		$perso2->Classe = $_POST['choixclasse2' . $race];
-		$perso3->Classe = $_POST['choixclasse3' . $race];
-		$perso4->Classe = $_POST['choixclasse4' . $race];		
+// 		$perso2->Classe = $_POST['choixclasse2' . $race];
+// 		$perso3->Classe = $_POST['choixclasse3' . $race];
+// 		$perso4->Classe = $_POST['choixclasse4' . $race];		
 		
-        $perso2->Save();    
-        $perso3->Save();   
-        $perso4->Save();   
+//         $perso2->Save();    
+//         $perso3->Save();   
+//         $perso4->Save();   
         
-        $forum->createPerso($perso2->Nom, $_SESSION['utilisateur']['mail'], $_SESSION['utilisateur']['passwd']);        
-        $forum->createPerso($perso3->Nom, $_SESSION['utilisateur']['mail'], $_SESSION['utilisateur']['passwd']);
-        $forum->createPerso($perso4->Nom, $_SESSION['utilisateur']['mail'], $_SESSION['utilisateur']['passwd']);
+//         $forum->createPerso($perso2->Nom, $_SESSION['utilisateur']['mail'], $_SESSION['utilisateur']['passwd']);        
+//         $forum->createPerso($perso3->Nom, $_SESSION['utilisateur']['mail'], $_SESSION['utilisateur']['passwd']);
+//         $forum->createPerso($perso4->Nom, $_SESSION['utilisateur']['mail'], $_SESSION['utilisateur']['passwd']);
 
-        $forum->setRaceGrade($perso2->Nom, $perso2->Camp, 0, 1);        
-        $forum->setRaceGrade($perso3->Nom, $perso3->Camp, 0, 1);   
-        $forum->setRaceGrade($perso4->Nom, $perso4->Camp, 0, 1);           
+//         $forum->setRaceGrade($perso2->Nom, $perso2->Camp, 0, 1);        
+//         $forum->setRaceGrade($perso3->Nom, $perso3->Camp, 0, 1);   
+//         $forum->setRaceGrade($perso4->Nom, $perso4->Camp, 0, 1);           
 		
-		$forum->setMatricule($perso2->Nom, $perso2->Mat);        
-        $forum->setMatricule($perso3->Nom, $perso3->Mat);   
-        $forum->setMatricule($perso4->Nom, $perso4->Mat);   
-    }
+// 		$forum->setMatricule($perso2->Nom, $perso2->Mat);        
+//         $forum->setMatricule($perso3->Nom, $perso3->Mat);   
+//         $forum->setMatricule($perso4->Nom, $perso4->Mat);   
+//     }
 
-    $forum->lierComptes($_SESSION['utilisateur']['mail']);
+//     $forum->lierComptes($_SESSION['utilisateur']['mail']);
 
    /* $_SESSION['temp']['perso_nom'] = $perso_nom;
     $_SESSION['temp']['perso_race'] = $perso_race;

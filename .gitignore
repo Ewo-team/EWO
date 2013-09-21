@@ -19,3 +19,7 @@ legions/blasons/*.png
 
 # IIS7 (oui, je sais...)
 web.config
+
+# logs
+
+tu/report/

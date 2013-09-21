@@ -295,4 +295,6 @@ if(isset($_SESSION['score'])){
 $info .= '<script>refresh_carac();</script>';
 
 echo $info;
-?>
+	echo "info : ";
+	var_dump( $_SESSION['error_grade']);
+	

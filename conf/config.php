@@ -10,7 +10,7 @@ define('SSL', 0);
 
 
 define('WEB_DOMAIN', $_SERVER["HTTP_HOST"]);
-define('WEB_SUBFOLDER', '');
+define('WEB_SUBFOLDER', '/ewo');
 
 $inhttps = ((key_exists('HTTPS', $_SERVER)) ?  $_SERVER["HTTPS"] == 'on' : false);
 

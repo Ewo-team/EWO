@@ -36,12 +36,12 @@ function bdd_connect($bdd){
 function info_connect($i){
 	if ($i == "ewo"){
 		$conf['serveur'] = "localhost";
-		$conf['user'] = "ewo";
+		$conf['user'] = "root";
 		$conf['pass'] = "";
 		$conf['bdd'] = "ewo";
 	}elseif($i == "forum"){
 		$conf['serveur'] = "localhost";
-		$conf['user'] = "ewo";
+		$conf['user'] = "root";
 		$conf['pass'] = "";
 		$conf['bdd'] = "ewo_forum";
 	}elseif($i == "blog"){
