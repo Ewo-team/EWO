@@ -36,16 +36,18 @@ class XpActor {
 		$this->_rangXp		= $rangXp;
 		$this->_camp		= $camp;
 		$this->_legionType	= $legionType;
+		$this->_type 		= $type;
 		
 		$this->setPa($pa);
 	}
 	
 	protected function setPa($pa){
+		//TODO : handle grades and galons
 		$this->_pa = $pa;
 		if($this->_type == 4)
-			$this->_rationPa = $this->_pa/1.5;
+			$this->_rationPa = 1.5/$this->_pa;
 		else
-			$this->_rationPa = $this->_pa/2;
+			$this->_rationPa = 2/$this->_pa;
 	}
 	
 	public function getCamps(){
