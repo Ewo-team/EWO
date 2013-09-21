@@ -38,7 +38,7 @@ class XpTest extends PHPUnit_Framework_TestCase{
 	public function testCas3($actors, $actions){
 		$this->assertTrue(true);
 		$res = XpCalculator::getXp($actors[1], $actors[6], $actions[1]);
- 		$this->assertEquals($res->xpAtq, 2);
+ 		$this->assertContains($res->xpAtq, array(2,3);
 		$this->assertEquals($res->xpDef, Config::XP_BASE_RECEVEUR);
 	}
 	
