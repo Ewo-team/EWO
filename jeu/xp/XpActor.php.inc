@@ -62,4 +62,8 @@ class XpActor {
 	public function getRatioPA(){
 		return $this->_rationPa;
 	}
+	
+	public function getMat(){
+		return $this->_mat;
+	}
 }

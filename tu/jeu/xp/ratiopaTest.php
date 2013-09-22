@@ -9,7 +9,7 @@ class RatiopaTest extends PHPUnit_Framework_TestCase{
 	/**
 	 * @covers jeu\xp\XpActor::getRatioPA
 	 * @dataProvider provider
-	 * @group JEU\
+	 * @group JEU\XP
 	 */
 	public function testBase($actor, $value){
 		$this->assertEquals($actor->getRatioPA(), $value);

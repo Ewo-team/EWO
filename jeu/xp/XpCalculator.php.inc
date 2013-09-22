@@ -51,6 +51,28 @@ class XpCalculator{
 		);	
 	}
 	
+	public static function getXpZone(Actor $atq, array $cibles, Action $action){
+		$xpAtq = 0;
+		$xpDef = array();
+		$nb = count($cibles);
+		if($nb == 0){
+			$r 		= XpCalculator::getXp($atq, new Actor(-1, $atq->getRang() - Config::ECART_AUTRES_ACTION,1,0,1,0), $action);
+			$xpAtq 	= $r->xpAtq;
+			$xpDef[-1]	= $r->xpDef;
+		}
+		else{
+			foreach($cibles as $cible){
+				if($cible->getMat() != $atq->getMat()){
+					$r 		= XpCalculator::getXp($atq, $cible, $action);
+					$xpAtq 	+= $r->xpAtq;
+					$xpDef[$cible->getMat()] = $r->xpDef;
+				}
+			}
+			$xpAtq /= $nb;
+		}
+		return new XpAtqDef($xpAtq, $xpDef);
+	}
+	
 	/**
 	 * Permet d'ajouter l'xp lorsque le compte n'est pas rond (la virgurle est retranscrite par une probabilité d'avoir +1/-1 xp
 	 * @param unknown $xp

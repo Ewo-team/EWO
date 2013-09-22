@@ -47,7 +47,7 @@ class XpTest extends PHPUnit_Framework_TestCase{
 	 * @covers jeu\xp\XpCalculator::getXp
 	 * @group JEU\
 	 */
-	public function testCas4($actors, $actions){
+	public function testCas4_kill($actors, $actions){
 		$res = XpCalculator::getXp($actors[1], $actors[6], $actions[2]);
 		$this->assertContains($res->xpAtq, array(10,11));
 		$this->assertContains($res->xpDef, array(-4,-5));
@@ -58,7 +58,7 @@ class XpTest extends PHPUnit_Framework_TestCase{
 	 * @covers jeu\xp\XpCalculator::getXp
 	 * @group JEU\
 	 */
-	public function testCas5($actors, $actions){
+	public function testCas5_actionDodged($actors, $actions){
 		$res = XpCalculator::getXp($actors[1], $actors[6], $actions[2]);
 		$this->assertContains($res->xpAtq, array(10,11));
 		$this->assertContains($res->xpDef, array(-4,-5));
@@ -69,7 +69,7 @@ class XpTest extends PHPUnit_Framework_TestCase{
 	 * @covers jeu\xp\XpCalculator::getXp
 	 * @group JEU\
 	 */
-	public function testCas6($actors, $actions){
+	public function testCas6_T1TargetFriend($actors, $actions){
 		$res = XpCalculator::getXp($actors[1], $actors[6], $actions[3]);
 		$this->assertContains($res->xpAtq, array(5,6));
 		$this->assertContains($res->xpDef, array(1,2));
@@ -80,10 +80,32 @@ class XpTest extends PHPUnit_Framework_TestCase{
 	 * @covers jeu\xp\XpCalculator::getXp
 	 * @group JEU\XP
 	 */
-	public function testCas7($actors, $actions){
+	public function testCas7_targetHitFriend($actors, $actions){
 		$res = XpCalculator::getXp($actors[4], $actors[6], $actions[3]);
 		$this->assertEquals($res->xpAtq, 7);
 		$this->assertContains($res->xpDef, array(1,2));
+	}
+	
+	/**
+	 * @dataProvider provider
+	 * @covers jeu\xp\XpCalculator::getXpZone
+	 * @group JEU\XP
+	 */
+	public function testCas8_multitargets($actors, $actions){
+		$res = XpCalculator::getXpZone($actors[5], array($actors[6],$actors[7]), $actions[0]);
+ 		$this->assertEquals($res->xpAtq, 5);
+ 		$this->assertContains($res->xpDef[6], array(2,3));
+ 		$this->assertEquals($res->xpDef[7], 1);
+	}
+	
+	/**
+	 * @dataProvider provider
+	 * @covers jeu\xp\XpCalculator::getXpZone
+	 * @group JEU\XP
+	 */
+	public function testCas9_multitargets_empty($actors, $actions){
+		$res = XpCalculator::getXpZone($actors[5], array(), $actions[0]);
+		$this->assertEquals($res->xpAtq, 5);
 	}
 	
 	public function provider(){
