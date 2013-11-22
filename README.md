@@ -12,3 +12,4 @@ HOW TO Install
 SQL files is on the directory sql/
 2: configure
 Configure somes options in conf/master.php and conf/connect.conf.php
+
