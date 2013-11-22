@@ -37,7 +37,7 @@ function info_connect($i){
 	if ($i == "ewo"){
 		$conf['serveur'] = "localhost";
 		$conf['user'] = "ewo";
-		$conf['pass'] = "";
+		$conf['pass'] = "h7NJ5tQn7WqQjx9b";
 		$conf['bdd'] = "ewo";
 	}elseif($i == "forum"){
 		$conf['serveur'] = "localhost";

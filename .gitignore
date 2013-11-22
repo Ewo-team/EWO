@@ -19,3 +19,6 @@ legions/blasons/*.png
 
 # IIS7 (oui, je sais...)
 web.config
+
+# config files
+conf/connect.conf.php
