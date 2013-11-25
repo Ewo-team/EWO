@@ -27,7 +27,7 @@ function bdd_connect($bdd){
 	return $connect;
 }
 
-/**h7NJ5tQn7WqQjx9b
+/**
  * Info de connexion pour les bases de données
  *
  * Rajouter autant de configuration que voulue ^^
